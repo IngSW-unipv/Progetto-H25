@@ -1,0 +1,74 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\geometry{a4paper, margin=1in}
+
+% Definizione di colori personalizzati
+\definecolor{titlecolor}{RGB}{13, 82, 149}  % Blu scuro
+\definecolor{sectioncolor}{RGB}{28, 69, 136} % Blu scuro più chiaro 
+\definecolor{textcolor}{RGB}{0, 0, 0}    
+
+
+% Aumento dell'interlinea
+\setstretch{1.5}
+
+% Personalizzazione dell'intestazione
+\pagestyle{fancy}
+\fancyhf{} % Cancella intestazioni e piè di pagina predefiniti
+\fancyhead[L]{} % Lascia vuota la parte sinistra dell'intestazione
+\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} % Logo in alto a destra
+\fancyfoot[R]{\thepage} % Aggiunge il numero di pagina al centro del piè di pagina
+
+% Personalizzazione dello stile del titolo e delle sezioni
+\title{\textcolor{titlecolor}{\Huge \textbf{ Documento di Visione - AGA}}}
+\author{}
+\date{}
+
+\renewcommand{\normalsize}{\fontsize{14pt}{16pt}\selectfont}
+\renewcommand{\large}{\fontsize{20pt}{24pt}\selectfont}
+\renewcommand{\Large}{\fontsize{20pt}{24pt}\selectfont}
+\renewcommand{\LARGE}{\fontsize{20pt}{24pt}\selectfont}
+\renewcommand{\Huge}{\fontsize{24pt}{28pt}\selectfont}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textcolor{sectioncolor}{Introduzione}}
+\textcolor{textcolor}{
+Questo documento definisce la visione per lo sviluppo di un software scalabile per la gestione di eventi privati su invito, progettato per ottimizzare e automatizzare tutti i processi correlati all'organizzazione di eventi. Il sistema mira a fornire un'interfaccia intuitiva e user-friendly per gli organizzatori, il personale operativo e i clienti, garantendo al contempo sicurezza, affidabilità e scalabilità per eventi con una capacità massima di 1.500 partecipanti.
+}
+
+\section*{\textcolor{sectioncolor}{Organizzatore}}
+\textcolor{textcolor}{
+Il sistema permette agli organizzatori di accedere tramite un’interfaccia di login sicura utilizzando email e password criptate. Una volta autenticato, l’organizzatore ha la possibilità di creare nuovi eventi inserendo dettagli specifici come nome, data, orari e luogo, assicurandosi che non vi siano altri eventi programmati nello stesso mese. Inoltre, l’organizzatore può aggiungere una lista di invitanti che non pagano il biglietto e che a loro volta possono invitare un numero massimo di persone. Il sistema verifica la validità dei dati inseriti e notifica l’organizzatore in caso di errori.
+}
+
+\section*{\textcolor{sectioncolor}{Invitante}}
+\textcolor{textcolor}{
+Sotto invito dell’organizzatore, l'invitante può richiedere il proprio biglietto attraverso un’interfaccia di login basata sul proprio codice fiscale. Il sistema permette di aggiungere un numero massimo di inviti su concessione dell’organizzatore, con inviti pagati dall’invitante e nominali. Gli inviti possono essere stampati o inviati via email, garantendo che ogni invito sia unico.
+}
+
+\section*{\textcolor{sectioncolor}{Banco}}
+\textcolor{textcolor}{
+Esistono due tipi di banco: ingresso e guardaroba. All'ingresso, lo staff utilizza il sistema per leggere i QR code e accertare l'identità dei partecipanti. Una volta verificata l’identità, il sistema registra la presenza nel database e invalida il QR code per prevenire usi ripetuti. Al guardaroba, gli oggetti personali vengono registrati con un posto unico e incrementale. La registrazione include descrizioni per evitare errori e rispetta limiti di spazio.
+}
+
+\section*{\textcolor{sectioncolor}{Gestione Scorte}}
+\textcolor{textcolor}{
+Il sistema consente agli organizzatori di monitorare e gestire le scorte per ogni evento. Lo staff può aggiornare il magazzino e consultare le quantità disponibili di cibo, ghiaccio e alcol. Le scorte sono visualizzabili in tempo reale, garantendo un monitoraggio preciso e aggiornamenti tempestivi. Inoltre, il sistema consente di impostare una timeline del servizio per coordinare le attività.
+}
+
+\section*{\textcolor{sectioncolor}{Ulteriori Specifiche}}
+\textcolor{textcolor}{
+Il sistema deve gestire almeno 100 accessi simultanei al minuto durante i picchi, garantendo stabilità e sicurezza. Le password sono criptate e i pagamenti avvengono tramite protocolli sicuri. I QR code sono generati in modo univoco per prevenire frodi. La scalabilità del sistema supporta eventi fino a 1.500 partecipanti, con un database MySQL centralizzato. La documentazione tecnica è fornita in italiano o inglese, con aggiornamenti programmati comunicati agli utenti almeno 48 ore prima.
+}
+
+\end{document}
