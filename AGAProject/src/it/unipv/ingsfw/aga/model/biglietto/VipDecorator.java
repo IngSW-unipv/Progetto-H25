@@ -1,7 +1,7 @@
 package it.unipv.ingsfw.aga.model.biglietto;
 
 public class VipDecorator extends AbstractDecorator {
-    public VipDecorator(IBiglietto biglietto) {
+    public VipDecorator(Stampabile biglietto) {
         super(biglietto);
     }
 

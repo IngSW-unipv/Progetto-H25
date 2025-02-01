@@ -1,9 +1,9 @@
 package it.unipv.ingsfw.aga.model.biglietto;
 
-public class AbstractDecorator implements IBiglietto {
-    private IBiglietto biglietto;
+public class AbstractDecorator implements Stampabile {
+    private Stampabile biglietto;
 
-    public AbstractDecorator(IBiglietto biglietto) {
+    public AbstractDecorator(Stampabile biglietto) {
         this.biglietto = biglietto;
     }
 
