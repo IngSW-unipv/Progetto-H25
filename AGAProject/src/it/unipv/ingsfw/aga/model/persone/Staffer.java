@@ -1,4 +1,4 @@
-package it.unipv.ingsfw.aga.model.staff;
+package it.unipv.ingsfw.aga.model.persone;
 
 public class Staffer extends Persona {
     private final String password;
