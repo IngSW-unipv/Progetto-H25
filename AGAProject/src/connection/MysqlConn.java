@@ -1,3 +1,4 @@
+package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -5,14 +6,14 @@ import java.sql.SQLException;
 
 
 class MysqlCon{  
-	public static Connection starConnection(Connection conn, String database){  
+	public static Connection startConnection(Connection conn, String database){  
 		String DbDriver=null;
 		String DbURL=null;
 		String username=null;
 		String password=null;
 	
 		DbDriver="com.mysql.jdbc.Driver";
-		DbURL="jdbc:mysql://localhost:3306/dbproject";
+		DbURL="jdbc:mysql://localhost:3306/dbproject?serverTimezone=UTC";
 		username="root";
 		password="tessore";
 		

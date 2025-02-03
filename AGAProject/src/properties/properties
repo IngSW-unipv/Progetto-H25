@@ -1,0 +1,4 @@
+ DBDRIVER = "com.mysql.jdbc.Driver"
+DBURL = "jdbc:mysql://localhost:3306/dbproject";
+db_usn=root
+db_psw=tessore

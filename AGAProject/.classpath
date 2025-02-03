@@ -5,7 +5,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="src/mysql-connector-java-8.0.19 (1).jar"/>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="annotationpath" value="/AGAProgect/src/mysql-connector-java-8.0.19 (2).jar"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ginev/Downloads/mysql-connector-java-8.0.19 (2).jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
