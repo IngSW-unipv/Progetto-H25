@@ -1,4 +1,4 @@
-package it.unipv.ingsfw.aga.model.exceptions;
+package it.unipv.ingsfw.aga.exceptions;
 
 public class AlreadyUsedException extends Exception {
     // Costruttore con un messaggio di errore

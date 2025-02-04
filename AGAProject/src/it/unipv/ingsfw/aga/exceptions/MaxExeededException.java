@@ -1,4 +1,4 @@
-package it.unipv.ingsfw.aga.model.exceptions;
+package it.unipv.ingsfw.aga.exceptions;
 
 public class MaxExeededException extends Exception {
     public MaxExeededException(String message) {
