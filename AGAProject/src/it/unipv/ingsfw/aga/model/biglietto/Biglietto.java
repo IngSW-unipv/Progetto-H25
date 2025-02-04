@@ -1,7 +1,7 @@
 package it.unipv.ingsfw.aga.model.biglietto;
 
 import it.unipv.ingsfw.aga.model.evento.Evento;
-import it.unipv.ingsfw.aga.model.exceptions.AlreadyUsedException;
+import it.unipv.ingsfw.aga.exceptions.AlreadyUsedException;
 import it.unipv.ingsfw.aga.model.persone.Persona;
 
 public class Biglietto implements Stampabile {
