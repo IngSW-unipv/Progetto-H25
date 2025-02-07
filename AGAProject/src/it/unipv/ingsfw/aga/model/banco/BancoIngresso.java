@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.Scanner;
+
 
 
 
@@ -44,9 +44,7 @@ public class BancoIngresso extends Banco {
         System.err.println("Errore: " + e.getMessage());
         e.printStackTrace();
     }finally {
-            if (conn != null && !conn.isClosed()) { //CONTROLLA DALLE SUE SLIDES
-                conn.close();
-            }
+          //chiusura connessione
         }
         System.out.println("Validating QR code at entrance banco: " + getNumeroBanco());
     return true;
@@ -82,9 +80,7 @@ public class BancoIngresso extends Banco {
         e.printStackTrace();
     }
         finally {
-            if (conn != null && !conn.isClosed()) { //CONTROLLA DALLE SUE SLIDES
-                conn.close();
-            }
+            //chiusura connessione
         }
         return false;
 }

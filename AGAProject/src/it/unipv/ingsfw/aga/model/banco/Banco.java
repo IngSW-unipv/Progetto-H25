@@ -1,15 +1,16 @@
 package it.unipv.ingsfw.aga.model.banco;
-import java.util.Scanner;
+
+import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.QrReadingStrategy;
 
 public abstract class Banco {
     private int numeroBanco;
+    private QrReadingStrategy qrStrategy; // Aggiunta strategia
 
     public Banco(int numeroBanco) {
         this.numeroBanco = numeroBanco;
     }
-    //Implementare con Evento il progressivo di banco
 
-    // Getter for numeroBanco
+    // Getter per numeroBanco
     public int getNumeroBanco() {
         return numeroBanco;
     }
@@ -18,22 +19,21 @@ public abstract class Banco {
         this.numeroBanco = numeroBanco;
     }
 
+    // Setter per impostare la strategia di lettura QR
+    public void setQrStrategy(QrReadingStrategy qrStrategy) {
+        this.qrStrategy = qrStrategy;
+    }
+
     public abstract boolean validateQr(QrCode qr);
 
-    //  method to read QR code
+    // Metodo aggiornato per leggere il QR tramite la strategia impostata
     public QrCode readQR() {
-        // Implementation for reading QR codes at the entrance
-        QrCode qr = new QrCode();
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Inserisci il valore per la query:");
-            String input = scanner.nextLine();
-            qr.setId(input);
-        } catch (Exception e) {
-            System.err.println("Errore: " + e.getMessage());
-            e.printStackTrace();
+        if (qrStrategy == null) {
+            throw new IllegalStateException("QR Strategy non impostata.");
         }
+        QrCode qr = qrStrategy.readQR();
         System.out.println("Reading QR code at entrance banco: " + getNumeroBanco());
-        // Logic for validating and processing the QR code goes here
+        // Ulteriori logiche di elaborazione del QR possono essere aggiunte qui
         return qr;
     }
 }
