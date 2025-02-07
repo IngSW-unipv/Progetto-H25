@@ -1,5 +1,4 @@
 package it.unipv.ingsfw.aga.model.banco;
-import it.unipv.ingsfw.aga.model.banco.QrCode;
 import java.util.Scanner;
 
 public abstract class Banco {

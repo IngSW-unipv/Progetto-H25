@@ -64,7 +64,7 @@ public class BancoGuardaroba extends Banco {
             // Imposta i parametri della query
             stmt.setInt(1, gruccia);
             stmt.setInt(2, this.getNumeroBanco());// Imposta il valore del booleano a false
-            stmt.setString(3, qr.getCode());
+            stmt.setString(3, readQR().getId());
 
             // Esegue l'aggiornamento
             int rowsUpdated = stmt.executeUpdate();
@@ -83,9 +83,7 @@ public class BancoGuardaroba extends Banco {
             e.printStackTrace();
         }
         finally {
-            if (conn != null && !conn.isClosed()) { //CONTROLLA DALLE SUE SLIDES
-                conn.close();
-            }
+             //chiusura connessione
         }
         return true;
     }
@@ -99,7 +97,7 @@ public class BancoGuardaroba extends Banco {
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement stmt = conn.prepareStatement(query)) {
             // Imposta il valore del parametro nella query
-            stmt.setString(1, qr.getCode());
+            stmt.setString(1, readQR().getId());
 
             // Esegue la query
             ResultSet rs = stmt.executeQuery();
@@ -117,12 +115,10 @@ public class BancoGuardaroba extends Banco {
             System.err.println("Errore: " + e.getMessage());
             e.printStackTrace();
         }finally {
-            if (conn != null && !conn.isClosed()) { //CONTROLLA DALLE SUE SLIDES
-                conn.close();
+            //chiusura connessione
             }
-        }
-        System.out.println("Validating QR code at entrance banco: " + getNumeroBanco());
-                return true;
+        System.out.println("Reading QR code at entrance banco guardaroba: " + getNumeroBanco());
+        return true;
 
     }
     }
