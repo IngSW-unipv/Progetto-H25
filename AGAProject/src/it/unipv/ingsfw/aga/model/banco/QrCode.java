@@ -8,6 +8,9 @@ public class QrCode {
     public QrCode() {
         this.id = generateRandomId();
     }
+    public QrCode(String id) {
+        this.id = id;
+    }
 
     public String getId() {
         return id;
@@ -16,6 +19,7 @@ public class QrCode {
     public void setId(String id) {
         this.id = id;
     }
+
     private String generateRandomId() {
         return UUID.randomUUID().toString();
     }

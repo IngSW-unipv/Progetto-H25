@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 
 
-public class KeyboardQrReadingStrategy implements QrReadingStrategy {
+public class KeyboardQrReadingStrategy implements IQrReadingStrategy {
     @Override
-    public QrCode readQR() {
+    public QrCode readQR()  {
         QrCode qr = new QrCode();
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Inserisci il valore per la query:");

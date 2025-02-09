@@ -21,6 +21,7 @@ public class BancoIngresso extends Banco {
         String username = "utente"; // Cambia "utente"
         String password = "password"; // Cambia "password"
         String query = "SELECT * FROM biglietti WHERE id = ?";  //migliora per SQL INJECTIONS
+        
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -61,7 +62,7 @@ public class BancoIngresso extends Banco {
 
             // Imposta i parametri della query
             stmt.setBoolean(1, false); // Imposta il valore del booleano a false
-            stmt.setString(2, readQR().getId());
+            stmt.setString(2, qr.getId());
 
             // Esegue l'aggiornamento
             int rowsUpdated = stmt.executeUpdate();
@@ -90,8 +91,12 @@ public class BancoIngresso extends Banco {
         return false;
     }
 
-
+    public boolean accesso(){
+        QrCode qr = readQR();
+        return validateQr(qr);
     }
+
+}
 
 
 

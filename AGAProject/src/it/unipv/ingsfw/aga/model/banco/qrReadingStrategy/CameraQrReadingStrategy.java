@@ -2,7 +2,7 @@ package it.unipv.ingsfw.aga.model.banco.qrReadingStrategy;
 
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 
-public class CameraQrReadingStrategy implements QrReadingStrategy {
+public class CameraQrReadingStrategy implements IQrReadingStrategy {
     @Override
     public QrCode readQR() {
         QrCode qr = new QrCode();
