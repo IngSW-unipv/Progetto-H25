@@ -1,1 +1,1 @@
-## Software per Gestione Eventi Privati su Invito
+## Software per Gestione di Eventi Privati su Invito
