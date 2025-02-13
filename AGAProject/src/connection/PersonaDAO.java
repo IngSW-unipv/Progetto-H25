@@ -6,12 +6,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
-public class DaoPersona {
+public class PersonaDAO implements IPersonaDao {
 	private Connection conn;
 	//private String schema; tolto ripetitivo difficile adattivita
 	
 	
-	public DaoPersona() {
+	public PersonaDAO() {
 		super();
 		//this.schema = "PROVA";
 	}
@@ -139,7 +139,7 @@ public class DaoPersona {
 	
 	
 	public static void main(String []args) {
-		DaoPersona persona=new DaoPersona();
+		PersonaDAO persona=new PersonaDAO();
 		persona.selectCFNomeCognome();
 		persona.selectStaffCFNomeCognome();
 	}

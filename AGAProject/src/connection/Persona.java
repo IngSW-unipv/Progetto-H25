@@ -45,6 +45,30 @@ public class Persona {
         this.email = email;
     }
     
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password=password;
+    }
+    
+    public boolean getStaff() {
+    	return this.staff;
+    }
+    
+    public void setStaff(boolean staff) {
+    	this.staff=staff;
+    }
+    
+    public boolean getOrganizzatore() {
+    	return this.organizzatore;
+    }
+    
+    public void setOrganizzatore(boolean organizzatore) {
+    	this.organizzatore=organizzatore;
+    }
+    
     public String toString() {
         return "CF: "+CF+", Nome: "+ nome+", Cognome: "+cognome;
     }
