@@ -7,16 +7,19 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 
+
 public class DBConnection {
 	
 	private static final String PROPERTYDBDRIVER = "DBDRIVER";
 	private static final String PROPERTYDBURL = "DBURL";
 	private static final String PROPERTYNAME = "db_usn"; 
 	private static final String PROPERTYPSW = "db_psw"; 
+	private static final String PROPERTYSCHEMA = "schema"; 
 	private static String username;
 	private static String password;
 	private static String dbDriver;
 	private static String dbURL;
+	private static String schema;
 	private static DBConnection conn;
 	
 	private static void init() {
@@ -27,6 +30,7 @@ public class DBConnection {
 			password=p.getProperty(PROPERTYPSW);
 			dbDriver =p.getProperty(PROPERTYDBDRIVER);
 			dbURL =p.getProperty(PROPERTYDBURL);
+			schema =p.getProperty(PROPERTYSCHEMA);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -34,55 +38,54 @@ public class DBConnection {
 	}
 	
 	
-	public static Connection startConnection(Connection conn, String schema)
+	//APERTURA CONNESSIONE
+	public static Connection startConnection(Connection conn)
 	{
 		init();
-		System.out.println(dbURL);
-	
-		
 		
 		if ( isOpen(conn) )
 			closeConnection(conn);
 	
 		try 
 		{
-			
+			//schema è il nome del mio db -> scelto di mettere in properties 
 			dbURL=String.format(dbURL,schema); 
-		//	System.out.println(dbURL);
+			//sistema il file properties 
 			Class.forName(dbDriver);
 			
-			conn = DriverManager.getConnection(dbURL, username, password);// Apertura connessione
+			//APERTURA CONNESSIONE
+			conn = DriverManager.getConnection(dbURL, username, password);
+			//System.out.println("Connessione al DB: "+dbURL);
 
 		}
 		catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
+			System.out.println("Errore connessione al DB");
 			e.printStackTrace();
 			return null;
 		}
 		return conn;
 	}
 
-	public static boolean isOpen(Connection conn)
-	{
+	
+	//CONTROLLO CONNESSIONE APERTA
+	public static boolean isOpen(Connection conn){
 		if (conn == null)
 			return false;
 		else
 			return true;
 	}
 
-	public static Connection closeConnection(Connection conn)
-	{
+	
+	//CHIUSURA CONNESSIONE
+	public static Connection closeConnection(Connection conn){
 		if ( !isOpen(conn) )
 			return null;
-		try 
-		{
-
+		try {
 			conn.close();
 			conn = null;
 		} 
-		catch (SQLException e) 
-		{
+		catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
