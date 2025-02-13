@@ -33,7 +33,7 @@ public class BancoIngresso extends Banco {
 
             // Elabora i risultati
             while (rs.next()) {
-                if (rs.getBoolean("Stato")) {invalidateQr(qr); System.out.println("Biglietto valido"); break;} else { qrCodeinvalido();};
+                if (rs.getBoolean("Stato")) {invalidateQr(qr); System.out.println("Biglietto valido"); break;} else { qrCodeinvalido(); break;}
             }
 
 
