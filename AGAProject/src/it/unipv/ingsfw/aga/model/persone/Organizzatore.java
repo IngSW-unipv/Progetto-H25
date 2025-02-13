@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Organizzatore extends Persona{
-    private Map<LocalDate, Evento> eventi = new HashMap<>();
+    private Map<LocalDate, Evento> eventi = new HashMap<>();    //non necessario
     private String password;
 
     public Organizzatore(String nome, String cognome, String email) {
