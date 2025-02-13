@@ -9,6 +9,16 @@ public class Persona {
 	private boolean staff;
 	private boolean organizzatore;
 	
+	public Persona(Persona p) {
+		super();
+		this.CF=p.getCF();
+		this.cognome=p.getCognome();
+		this.nome=p.getNome();
+		this.email=p.getEmail();
+		this.password=p.getPassword();
+		this.staff=p.getStaff();
+		this.organizzatore=p.getOrganizzatore();
+	}
 	
 	public Persona(String CF, String nome, String cognome, String email, String password, boolean staff, boolean organizzatore) {
 		super();
@@ -19,6 +29,14 @@ public class Persona {
 		this.password=password;
 		this.staff=staff;
 		this.organizzatore=organizzatore;
+	}
+	
+	public String getCF() {
+		return CF;
+	}
+	
+	public void setCF(String CF) {
+		this.CF=CF;
 	}
 	
 	public String getNome() {
