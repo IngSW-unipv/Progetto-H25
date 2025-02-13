@@ -19,7 +19,9 @@ public abstract class Banco {
     public void setNumeroBanco(int numeroBanco) {
         this.numeroBanco = numeroBanco;
     }
-
+    public IQrReadingStrategy getQrStrategy() {
+        return qrStrategy;
+    }
     // Setter per impostare la strategia di lettura QR
     public void setQrStrategy(IQrReadingStrategy qrStrategy) {
         this.qrStrategy = qrStrategy;
