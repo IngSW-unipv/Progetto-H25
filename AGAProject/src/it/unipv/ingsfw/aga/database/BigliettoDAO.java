@@ -15,7 +15,7 @@ public class BigliettoDAO implements IBigliettoDAO {
     }
 
     private static final String INSERISCI_BIGLIETTO_SQL =
-            "INSERT INTO biglietti (nome, cognome, email, numBiglietto, idEvento)) VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO biglietti (nome, cognome, email, numBiglietto, dataEvento)) VALUES (?, ?, ?, ?, ?)";
 
     @Override
     public void aggiungiBiglietto(Biglietto biglietto) throws SQLException {
@@ -24,7 +24,7 @@ public class BigliettoDAO implements IBigliettoDAO {
             stmt.setString(1, biglietto.getEmail());
             stmt.setString(2, biglietto.getNome());
             stmt.setString(3, biglietto.getCognome());
-            stmt.setString(4, biglietto.getIdEvento());
+            stmt.setString(4, String.valueOf(biglietto.getDataEvento()));
             stmt.setString(5, biglietto.getQRCodeId());
 
             stmt.executeUpdate();

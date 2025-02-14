@@ -1,25 +1,28 @@
 package it.unipv.ingsfw.aga.model.biglietto;
 
 import it.unipv.ingsfw.aga.model.banco.QrCode;
-import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.model.persone.Persona;
+
+import java.util.Date;
 
 public class Biglietto {
+    private Persona creatoreBiglietto;
     private final String nome;
     private final String cognome;
     private final String email;
     private final int numBiglietto;
-    private final String idEvento;
+    private final Date dataEvento;
     private final QrCode codeQR;
     private boolean accessoEffettuato = false;
     private boolean guardarobaEffettuato = false;
 
     // Costruttore accessibile solo al package
-    Biglietto(String nome, String cognome, String email, int numBiglietto, String idEvento) {
+    Biglietto(String nome, String cognome, String email, int numBiglietto, Date dataEvento) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.numBiglietto = numBiglietto;
-        this.idEvento = idEvento;
+        this.dataEvento = dataEvento;
         this.codeQR = new QrCode();
     }
     public String getNome() {
@@ -34,8 +37,8 @@ public class Biglietto {
     public int getNumBiglietto() {
         return numBiglietto;
     }
-    public String getIdEvento() {
-        return idEvento;
+    public Date getDataEvento() {
+        return dataEvento;
     }
     public QrCode getQRcode() {
         return codeQR;
