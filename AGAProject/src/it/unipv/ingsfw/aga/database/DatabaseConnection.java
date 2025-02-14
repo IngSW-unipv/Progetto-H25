@@ -22,5 +22,4 @@ public class DatabaseConnection {
     public static void main(String[] args) {
         connect(); // Testa la connessione
     }
-    //funziona in locale non se in remoto
 }
