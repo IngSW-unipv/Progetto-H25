@@ -3,12 +3,14 @@ package it.unipv.ingsfw.aga.model.evento;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.biglietto.BigliettoFactory;
+import it.unipv.ingsfw.aga.model.persone.Persona;
 import it.unipv.ingsfw.aga.model.persone.PersonaFactory;
 
 import java.util.Date;
 import java.util.UUID;
 
 public class Evento {
+    private final String organizzatore;
     private final Date data;
     private String location;
     private int maxPartecipanti;
@@ -16,7 +18,8 @@ public class Evento {
     private int numBiglietto = 0;
     private boolean venditeAperte;
 
-    public Evento(Date data, String location, int maxPartecipanti) throws MaxExeededException {
+    public Evento(String organizzatore, Date data, String location, int maxPartecipanti) throws MaxExeededException {
+        this.organizzatore = organizzatore;
         this.data = data;
         this.location = location;
         if (maxPartecipanti < 0) {
@@ -29,7 +32,9 @@ public class Evento {
         this.idEvento = UUID.randomUUID().toString();  //idee su alternative per avere un identificatore univoco?
         this.venditeAperte = false;
     }
-
+    public String getOrganizzatore() {
+        return organizzatore;
+    }
     public Date getData() {
         return data;
     }
@@ -83,14 +88,14 @@ public class Evento {
         }
     }
 
-    public Biglietto aggiungiBiglietto(String nome, String cognome, String email, String numEvento, boolean staffer) {
+    public Biglietto aggiungiBiglietto(String codiceFiscale, String nome, String cognome, String email, Date data, boolean staffer) {
         if (staffer) {
             numBiglietto++;
-            PersonaFactory.creaPersona("staffer", nome, cognome, email);
-            return BigliettoFactory.creaBiglietto(nome, cognome, email, numBiglietto, numEvento);
+            PersonaFactory.creaPersona("staffer", codiceFiscale, nome, cognome, email, null);
+            return BigliettoFactory.creaBiglietto(nome, cognome, email, numBiglietto, getData());
         } else {
             numBiglietto++;
-            return BigliettoFactory.creaBiglietto(nome, cognome, email, numBiglietto, numEvento);
+            return BigliettoFactory.creaBiglietto(nome, cognome, email, numBiglietto, getData());
         }
     }
     @Override
@@ -98,6 +103,7 @@ public class Evento {
         return "[Evento]\n" +
                 "Tipo: Standard\n" +
                 "Data: " + getData() + "\n" +
-                "Location: " + getLocation() + "\n";
+                "Location: " + getLocation() + "\n" +
+                "Organizzatore: " + getOrganizzatore() + "\n";
     }
 }

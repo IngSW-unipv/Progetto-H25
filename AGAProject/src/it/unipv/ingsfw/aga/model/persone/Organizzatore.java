@@ -13,9 +13,9 @@ import java.util.Date;
 public class Organizzatore extends Persona{
     private String password;
 
-    public Organizzatore(String nome, String cognome, String email) {
-        super(nome, cognome, email);
-        this.password = "changeme";
+    public Organizzatore(String codiceFiscale, String nome, String cognome, String email, String password) {
+        super(codiceFiscale, nome, cognome, email);
+        this.password = password;
     }
 
     public String getPassword() {
@@ -25,14 +25,13 @@ public class Organizzatore extends Persona{
     public void setPassword(String password) {
         this.password = password;
     }
-    @Override
-    public Evento creaEvento(String tipoEvento, Date data, String location, int maxPartecipanti) throws MaxExeededException {
+    public Evento creaEvento(String organizzatoreCF, String tipoEvento, Date data, String location, int maxPartecipanti) throws MaxExeededException {
         if(maxPartecipanti < 0){
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
         }else if(maxPartecipanti > 1500){
             throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + data + " è stato superato");
         }else{
-            return EventoFactory.creaEvento(tipoEvento, data, location, maxPartecipanti);
+            return EventoFactory.creaEvento(tipoEvento, getCodiceFiscale(), data, location, maxPartecipanti);
         }
     }
     @Override
