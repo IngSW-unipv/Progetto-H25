@@ -1,81 +1,68 @@
 package it.unipv.ingsfw.aga.model.biglietto;
 
+import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.evento.Evento;
-import it.unipv.ingsfw.aga.exceptions.AlreadyUsedException;
-import it.unipv.ingsfw.aga.model.persone.Persona;
 
-public class Biglietto implements Stampabile {
-    private String id;
-    private Evento evento;
-    private Persona invitato;
-    private double prezzo;
-    private boolean pagato;
-    private boolean staff;
-    private boolean ingressoEffettuato;
-    private boolean guardarobaUsato;
+public class Biglietto {
+    private final String nome;
+    private final String cognome;
+    private final String email;
+    private final int numBiglietto;
+    private final String idEvento;
+    private final QrCode codeQR;
+    private boolean accessoEffettuato = false;
+    private boolean guardarobaEffettuato = false;
 
-    public Biglietto(Evento evento, Persona invitato, double prezzo) {
-        this.id = "QRcode Unico"; //TODO: Implementare un generatore di QRcode unico
-        this.evento = evento;
-        this.invitato = invitato;
-        this.prezzo = prezzo;
-        this.staff = false;
-        this.pagato = false;
-        this.ingressoEffettuato = false;
-        this.guardarobaUsato = false;
+    // Costruttore accessibile solo al package
+    Biglietto(String nome, String cognome, String email, int numBiglietto, String idEvento) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.numBiglietto = numBiglietto;
+        this.idEvento = idEvento;
+        this.codeQR = new QrCode();
+    }
+    public String getNome() {
+        return nome;
+    }
+    public String getCognome() {
+        return cognome;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public int getNumBiglietto() {
+        return numBiglietto;
+    }
+    public String getIdEvento() {
+        return idEvento;
+    }
+    public QrCode getQRcode() {
+        return codeQR;
+    }
+    public String getQRCodeId() {
+        return codeQR.getId();
+    }
+    public boolean isAccessoEffettuato() {
+        return accessoEffettuato;
     }
 
-    public String getId() {
-        return id;
+    public void setAccessoEffettuato(boolean accessoEffettuato) {
+        this.accessoEffettuato = accessoEffettuato;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public boolean isGuardarobaEffettuato() {
+        return guardarobaEffettuato;
     }
 
-    public Persona getInvitato() {
-        return invitato;
+    public void setGuardarobaEffettuato(boolean guardarobaEffettuato) {
+        this.guardarobaEffettuato = guardarobaEffettuato;
     }
-
-    public double getPrezzo() {
-        return prezzo;
-    }
-
-    public void setPrezzo(double prezzo) {
-        this.prezzo = prezzo;
-    }
-
-    public boolean isPagato() {
-        return pagato;
-    }
-
-    public void setPagato(){
-        this.pagato = true;
-    }
-
-    public boolean isStaff(){
-        return staff;
-    }
-
-    public void setIngressoEffettuato() throws AlreadyUsedException {
-        if(ingressoEffettuato) {
-            throw new AlreadyUsedException("Il biglietto con ID " + id + " è già stato utilizzato.");
-        }
-        this.ingressoEffettuato = true;
-    }
-
-    public void setGuardarobaUsato() throws AlreadyUsedException {
-        if(guardarobaUsato){
-            throw new AlreadyUsedException("E' già stato deposto un oggetto al guardaroba con ID " + id);
-        }
-        this.guardarobaUsato = true;
-    }
-
-    public String stampaBiglietto() {
-        return "Biglietto\n" +
-                "id ='" + id + '\'' +
-                "\nEvento = " + evento.getData() +
-                "\nPersona = " + invitato.getEmail() +
-                "\nTipo: Standard";
+    @Override
+    public String toString() {
+        return "[Biglietto]\n" +
+                "Tipo: Standard\n" +
+                "Proprietario: " + getNome() + " " + getCognome() + " " + getEmail() + "\n" +
+                "QrCode: " + getQRCodeId() + "\n";
     }
 }
