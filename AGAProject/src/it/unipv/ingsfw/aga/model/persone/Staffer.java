@@ -1,6 +1,12 @@
 package it.unipv.ingsfw.aga.model.persone;
 
-public class Staffer extends Invitato{
+import it.unipv.ingsfw.aga.exceptions.PermissionDeniedException;
+import it.unipv.ingsfw.aga.model.banco.QrCode;
+import it.unipv.ingsfw.aga.model.banco.QrReadingStrategyFactory;
+import it.unipv.ingsfw.aga.model.banco.Type;
+import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
+
+public class Staffer extends Persona{
     private String password;
 
     public Staffer(String nome, String cognome, String email) {
@@ -16,16 +22,20 @@ public class Staffer extends Invitato{
         return password;
     }
 
-    public void checkIngresso(){
-        //TODO
+    @Override
+    public void checkIngresso(Type type, QrCode qrCode){
+        IQrReadingStrategy readingStrategy = QrReadingStrategyFactory.getQrReadingStrategy(type);
+        readingStrategy.readQR();
     }
-
-    public void checkGuardaroba(){
-        //TODO
+    @Override
+    public void checkGuardaroba(Type type, QrCode qrCode){
+        IQrReadingStrategy readingStrategy = QrReadingStrategyFactory.getQrReadingStrategy(type);
+        readingStrategy.readQR();
     }
-
-    public Invitato creaInvitato(String nome, String cognome, String email){
-        return new Invitato(nome, cognome, email);
-        //TODO limite aggiunte
+    public String toString() {
+        return "[Persona]\n" +
+                "Tipo: Staffer\n" +
+                "Nome" + getNome() + getCognome() + "\n" +
+                "Email: " + getEmail() + "\n";
     }
 }
