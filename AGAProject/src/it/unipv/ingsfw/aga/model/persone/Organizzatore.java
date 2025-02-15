@@ -25,7 +25,8 @@ public class Organizzatore extends Persona{
     public void setPassword(String password) {
         this.password = password;
     }
-    public Evento creaEvento(String organizzatoreCF, String tipoEvento, Date data, String location, int maxPartecipanti) throws MaxExeededException {
+    
+    /*public Evento creaEvento(String organizzatoreCF, String tipoEvento, Date data, String location, int maxPartecipanti) throws MaxExeededException {
         if(maxPartecipanti < 0){
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
         }else if(maxPartecipanti > 1500){
@@ -33,7 +34,7 @@ public class Organizzatore extends Persona{
         }else{
             return EventoFactory.creaEvento(tipoEvento, getCodiceFiscale(), data, location, maxPartecipanti);
         }
-    }
+    }*/
     
     @Override
     public void checkIngresso(Type type, QrCode qrCode){

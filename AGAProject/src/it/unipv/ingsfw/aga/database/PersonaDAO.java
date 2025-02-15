@@ -32,8 +32,7 @@ public class PersonaDAO implements IPersonaDao {
 		Persona p;
 		boolean org;
 
-		try
-		{
+		try{
 			st1 = conn.createStatement();
 			String query="SELECT * from persona ;";
 			rs1=st1.executeQuery(query);
@@ -49,7 +48,9 @@ public class PersonaDAO implements IPersonaDao {
 
 				result.add(p);
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 
 		DBConnection.closeConnection(conn);
 		return result;
@@ -85,7 +86,9 @@ public class PersonaDAO implements IPersonaDao {
 					result.add(p);
 					//System.out.println(p.toString());
 				}
-			}catch (Exception e){e.printStackTrace();}
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 	
 			DBConnection.closeConnection(conn);
 			return result;
@@ -101,8 +104,7 @@ public class PersonaDAO implements IPersonaDao {
 		Statement st1;
 		ResultSet rs1;
 
-		try
-		{
+		try{
 			st1 = conn.createStatement();
 			String query="SELECT * from persona where organizzatore='0';";
 			rs1=st1.executeQuery(query);
@@ -114,7 +116,9 @@ public class PersonaDAO implements IPersonaDao {
 				result.add(p);
 				//System.out.println(p.toString());
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 
 		DBConnection.closeConnection(conn);
 		return result;
@@ -130,8 +134,7 @@ public class PersonaDAO implements IPersonaDao {
 		Statement st1;
 		ResultSet rs1;
 
-		try
-		{
+		try{
 			st1 = conn.createStatement();
 			String query="SELECT * from persona where organizzatore='1';";
 			rs1=st1.executeQuery(query);
@@ -143,7 +146,9 @@ public class PersonaDAO implements IPersonaDao {
 				result.add(p);
 				//System.out.println(p.toString());
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 
 		DBConnection.closeConnection(conn);
 		return result;
@@ -153,19 +158,20 @@ public class PersonaDAO implements IPersonaDao {
 	//AGGIUNGI ORGANIZZATORE
 	public void addOrganizzatore (Organizzatore persona){
 			
-			conn=DBConnection.startConnection(conn);
-			Statement st1;
-			
-			try
-			{
-				st1 = conn.createStatement();
-				String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
-						"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
-						+"'"+1+"');";
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
+					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
+					+"'"+1+"');";
 			st1.executeUpdate(query);
-	
-		}catch (Exception e){e.printStackTrace();}
-	
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 		DBConnection.closeConnection(conn);
 	}
 	
@@ -176,15 +182,16 @@ public class PersonaDAO implements IPersonaDao {
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
 		
-		try
-		{
+		try{
 			st1 = conn.createStatement();
 			String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
 					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
 					+"'"+0+"');";
 			st1.executeUpdate(query);
 	
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	
 		DBConnection.closeConnection(conn);
 	}
@@ -199,8 +206,7 @@ public class PersonaDAO implements IPersonaDao {
 		ResultSet rs1;
 		Persona p;
 
-		try
-		{
+		try{
 			st1 = conn.createStatement();
 			String query="SELECT * from persona where CF=\""+persona.getCodiceFiscale()+"\";";
 			rs1=st1.executeQuery(query);
@@ -215,11 +221,9 @@ public class PersonaDAO implements IPersonaDao {
 			return p;
 							
 		}catch (Exception e){
-			e.printStackTrace(); 
-			
+			//e.printStackTrace(); 
 			DBConnection.closeConnection(conn);
-			return p=new Persona("00000", null, null, null);//nessun cf corrispondente trovato
-			
+			return p=new Persona("00000", null, null, null);//nessun cf corrispondente trovato	
 		}		
 	}
 
