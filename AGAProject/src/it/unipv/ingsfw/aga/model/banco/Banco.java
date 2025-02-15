@@ -2,7 +2,7 @@ package it.unipv.ingsfw.aga.model.banco;
 
 import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 
-public abstract class Banco {
+public class Banco {
     private int numeroBanco;
     private IQrReadingStrategy qrStrategy; // Aggiunta strategia
 
@@ -27,7 +27,7 @@ public abstract class Banco {
         this.qrStrategy = qrStrategy;
     }
 
-    public abstract boolean validateQr(QrCode qr); 
+    public boolean validateQr(QrCode qr){return false;};
     
     public QrCode readQR() {
         if (qrStrategy == null) {
