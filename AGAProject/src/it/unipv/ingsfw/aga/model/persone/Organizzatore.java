@@ -17,7 +17,7 @@ public class Organizzatore extends Persona{
         super(codiceFiscale, nome, cognome, email);
         this.password = password;
     }
-
+   
     public String getPassword() {
         return password;
     }
@@ -34,16 +34,19 @@ public class Organizzatore extends Persona{
             return EventoFactory.creaEvento(tipoEvento, getCodiceFiscale(), data, location, maxPartecipanti);
         }
     }
+    
     @Override
     public void checkIngresso(Type type, QrCode qrCode){
         IQrReadingStrategy readingStrategy = QrReadingStrategyFactory.getQrReadingStrategy(type);
         readingStrategy.readQR();
     }
+    
     @Override
     public void checkGuardaroba(Type type, QrCode qrCode){
         IQrReadingStrategy readingStrategy = QrReadingStrategyFactory.getQrReadingStrategy(type);
         readingStrategy.readQR();
     }
+    
     @Override
     public String toString() {
         return "[Persona]\n" +

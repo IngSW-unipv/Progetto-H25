@@ -13,6 +13,12 @@ public class Evento {
 		this.capacita=capacita;
 	}
 	
+	public Evento(Evento evento) {
+		this.data=evento.getData();
+		this.luogo=evento.getLuogo();
+		this.capacita=evento.getCapacita();
+	}
+	
 	public Date getData() {
 		return data;
 	}

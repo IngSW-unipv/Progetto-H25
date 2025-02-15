@@ -7,12 +7,18 @@ import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 
 public class Staffer extends Persona{
     private String password;
-    private int limiteInviti;
+    //private int limiteInviti;
 
     public Staffer(String codiceFiscale, String nome, String cognome, String email) {
         super(codiceFiscale, nome, cognome, email);
-        this.limiteInviti = 5;
+        //this.limiteInviti = 5;
         this.password = "changeme";
+    }
+    
+    public Staffer(String codiceFiscale, String nome, String cognome, String email, String password) {
+        super(codiceFiscale, nome, cognome, email);
+        //this.limiteInviti = 5;
+        this.password = password;//per il db se no non riesco a prelevare tutti i dati
     }
 
     public void setPassword(String password){
@@ -36,6 +42,7 @@ public class Staffer extends Persona{
         readingStrategy.readQR();
     }
 
+    @Override
     public String toString() {
         return "[Persona]\n" +
                 "Tipo: Staffer\n" +

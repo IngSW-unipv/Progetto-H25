@@ -1,9 +1,14 @@
-package connection;
+package it.unipv.ingsfw.aga.database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import it.unipv.ingsfw.aga.model.persone.*;
+import connection.BancoGuardaroba;
+import connection.BancoIngresso;
+import connection.DBConnection;
 
 
 public class PersonaDAO implements IPersonaDao {
@@ -13,7 +18,6 @@ public class PersonaDAO implements IPersonaDao {
 	
 	public PersonaDAO() {
 		super();
-		//this.schema = "PROVA";
 	}
 	
 	
@@ -25,6 +29,8 @@ public class PersonaDAO implements IPersonaDao {
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
 		ResultSet rs1;
+		Persona p;
+		boolean org;
 
 		try
 		{
@@ -33,13 +39,15 @@ public class PersonaDAO implements IPersonaDao {
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next()){
-				Persona p=new Persona(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
-						rs1.getString(5),rs1.getBoolean(6),rs1.getBoolean(7));
+				
+				org=rs1.getBoolean(6);
+				if(org)
+					p=new Organizzatore(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+						rs1.getString(5));
+				else p=new Staffer(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+						rs1.getString(5));
 
 				result.add(p);
-				System.out.println("CF: "+rs1.getString(1)+", Nome: "+ rs1.getString(2)+", Cognome: "+rs1.getString(3)
-						+", Email: "+rs1.getString(4)+", Password: "+rs1.getString(5)+"Staff: "+rs1.getBoolean(6)
-						+", Organizzatore: "+rs1.getBoolean(7));
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -48,7 +56,7 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//PRINT CF NOME E COGNOME
+	//PRINT CF NOME E COGNOME E TIPO
 	public ArrayList<Persona> selectCFNomeCognome (){
 			
 			ArrayList<Persona> result = new ArrayList<>();
@@ -56,7 +64,9 @@ public class PersonaDAO implements IPersonaDao {
 			conn=DBConnection.startConnection(conn);
 			Statement st1;
 			ResultSet rs1;
-	
+			Persona p;
+			boolean org;
+			
 			try
 			{
 				st1 = conn.createStatement();
@@ -64,11 +74,16 @@ public class PersonaDAO implements IPersonaDao {
 				rs1=st1.executeQuery(query);
 	
 				while(rs1.next()){
-					Persona p=new Persona(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
-							rs1.getString(5),rs1.getBoolean(6),rs1.getBoolean(7));
+					
+					org=rs1.getBoolean(6);
+					if(org)
+						p=new Organizzatore(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+							rs1.getString(5));
+					else p=new Staffer(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+							rs1.getString(5));
 	
 					result.add(p);
-					System.out.println(p.toString());
+					//System.out.println(p.toString());
 				}
 			}catch (Exception e){e.printStackTrace();}
 	
@@ -89,16 +104,15 @@ public class PersonaDAO implements IPersonaDao {
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from persona ;";
+			String query="SELECT * from persona where organizzatore='0';";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next()){
-				Persona p=new Persona(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
-						rs1.getString(5),rs1.getBoolean(6),rs1.getBoolean(7));
+				Persona p=new Staffer(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+						rs1.getString(5));
 
 				result.add(p);
-				if(rs1.getBoolean(6))
-					System.out.println(p.toString());
+				//System.out.println(p.toString());
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -123,12 +137,11 @@ public class PersonaDAO implements IPersonaDao {
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next()){
-				Persona p=new Persona(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
-						rs1.getString(5),rs1.getBoolean(6),rs1.getBoolean(7));
+				Persona p=new Organizzatore(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+						rs1.getString(5));
 
 				result.add(p);
-				if(rs1.getBoolean(7))
-					System.out.println(p.toString());
+				//System.out.println(p.toString());
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -137,21 +150,18 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//AGGIUNGI PERSONA
-	public void addPersona (Persona persona){
+	//AGGIUNGI ORGANIZZATORE
+	public void addOrganizzatore (Organizzatore persona){
 			
 			conn=DBConnection.startConnection(conn);
 			Statement st1;
 			
-			int staff=persona.getStaff()? 1 : 0;
-			int organizzatore=persona.getOrganizzatore()? 1 : 0;
-	
 			try
 			{
 				st1 = conn.createStatement();
-				String query="INSERT INTO PERSONA VALUES(\""+persona.getCF()+"\","+"\""+persona.getNome()+"\","+
+				String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
 						"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
-						+"'"+staff+"','"+organizzatore+"');";
+						+"'"+1+"');";
 			st1.executeUpdate(query);
 	
 		}catch (Exception e){e.printStackTrace();}
@@ -160,32 +170,55 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//SEARCH BY CF
+	//AGGIUNGI STAFFER
+	public void addStaffer (Staffer persona){
+		
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		
+		try
+		{
+			st1 = conn.createStatement();
+			String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
+					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
+					+"'"+0+"');";
+			st1.executeUpdate(query);
+	
+		}catch (Exception e){e.printStackTrace();}
+	
+		DBConnection.closeConnection(conn);
+	}
+
+	
+	
+	//SEARCH BY CF (SIA ORGANIZZATORI CHE STAFFER)
 	public Persona searchByCF (Persona persona){
 		
-		Persona p=new Persona("0000",null,null,null,null,false,false);
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
 		ResultSet rs1;
+		Persona p;
 
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from persona where CF=\""+persona.getCF()+"\";";
+			String query="SELECT * from persona where CF=\""+persona.getCodiceFiscale()+"\";";
 			rs1=st1.executeQuery(query);
 
 			rs1.next();
-			Persona p1=new Persona(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
-						rs1.getString(5),rs1.getBoolean(6),rs1.getBoolean(7));
+			if(rs1.getBoolean(6))
+				p=new Organizzatore(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+						rs1.getString(5));
+			else p=new Staffer(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+					rs1.getString(5));
 			DBConnection.closeConnection(conn);
-			return p1;
-				
-			
+			return p;
+							
 		}catch (Exception e){
 			e.printStackTrace(); 
 			
 			DBConnection.closeConnection(conn);
-			return p;
+			return p=new Persona("00000", null, null, null);//nessun cf corrispondente trovato
 			
 		}		
 	}
@@ -194,12 +227,17 @@ public class PersonaDAO implements IPersonaDao {
 	
 	public static void main(String []args) {
 		PersonaDAO persona=new PersonaDAO();
-		persona.selectOrganizzatoreCFNomeCognome();
-		//persona.selectStaffCFNomeCognome();
-		//Persona persona1=new Persona("256-26-5863","fabrizio","amicis","unipv@","",false,false);
-		//persona.addPersona(persona1);
-		Persona p=new Persona("256-26-5863",null,null,null,null,false,false);
-		Persona a=new Persona(persona.searchByCF(p));
+		ArrayList<Persona> result = persona.selectOrganizzatoreCFNomeCognome();
+		for(int i=0;i<result.size();i++)
+			System.out.println(result.get(i));
+		Persona p=new Persona("292-71-9542",null,null,null);
+		Persona a;
+		try {
+			a=(Organizzatore)persona.searchByCF(p);
+		}
+		catch(Exception e) {
+			a=(Staffer)persona.searchByCF(p);
+		}
 		System.out.println(a.toString());
 	}
 	

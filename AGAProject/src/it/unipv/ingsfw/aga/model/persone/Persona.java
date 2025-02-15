@@ -14,13 +14,21 @@ public class Persona {
     private String nome;
     private String cognome;
     private String email;
-
+    
     public Persona(String codiceFiscale, String nome, String cognome, String email) {
         this.codiceFiscale = codiceFiscale;
         this.nome=  nome;
         this.cognome = cognome;
         this.email = email;
     }
+    
+    public Persona(Persona p) {
+        this.codiceFiscale = p.getCodiceFiscale();
+        this.nome=  p.getNome();
+        this.cognome = p.getCognome();
+        this.email = p.getEmail();
+    }
+    
 
     public String getCodiceFiscale() {
         return codiceFiscale;
@@ -52,11 +60,11 @@ public class Persona {
     public void checkGuardaroba(Type type, QrCode qrCode){
         throw new PermissionDeniedException();
     }
-    @Override
+   
     public String toString() {
         return "[Persona]\n" +
                 "Tipo: Nessuno\n" +
-                "Nome" + nome + cognome + "\n" +
+                "Nome: " + nome+" " + cognome + "\n" +
                 "Email: " + email + "\n";
     }
 }
