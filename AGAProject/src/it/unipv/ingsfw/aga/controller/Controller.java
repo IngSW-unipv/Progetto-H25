@@ -1,6 +1,9 @@
 package it.unipv.ingsfw.aga.controller;
 
 import it.unipv.ingsfw.aga.model.Model;
+import it.unipv.ingsfw.aga.model.banco.BancoIngresso;
+import it.unipv.ingsfw.aga.model.banco.BancoIngressoFactory;
+import it.unipv.ingsfw.aga.model.banco.BancoGuardarobaFactory;
 import it.unipv.ingsfw.aga.view.LoginPage;
 import it.unipv.ingsfw.aga.view.MainPage;
 import it.unipv.ingsfw.aga.view.Navbar;
@@ -118,14 +121,8 @@ public class Controller {
 
         mainPage.getEntranceButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(containerPanel, "entrance");
-            }
-        });
 
-        entrancePage.getVerifyButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String code = entrancePage.getVerificationCode();
-                JOptionPane.showMessageDialog(null, "Codice di ingresso verificato: " + code);
+                cardLayout.show(containerPanel, "entrance");
             }
         });
 
@@ -135,9 +132,27 @@ public class Controller {
             }
         });
 
+        entrancePage.getVerifyButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Recupera il codice inserito dall'utente
+                String code = entrancePage.getVerificationCode();
+
+                // Supponendo che il model abbia già un'istanza di BancoIngresso,
+                // chiama il metodo accesso() passando il codice
+                boolean isValid = BancoIngressoFactory.getInstance(0).accesso(code); // chi crea questo banco??
+
+                if (isValid) {
+                    JOptionPane.showMessageDialog(null, "Biglietto valido!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Biglietto non valido o già convalidato!");
+                }
+            }
+        });
+
         cloakroomPage.getDeliverButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
+                boolean isValid = BancoGuardarobaFactory.getInstance(0).consegnaCapo(code);
                 JOptionPane.showMessageDialog(null, "Oggetto consegnato: " + code);
             }
         });
@@ -145,6 +160,7 @@ public class Controller {
         cloakroomPage.getReturnButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
+                boolean isValid = BancoGuardarobaFactory.getInstance(0).restituzioneCapo(code);
                 JOptionPane.showMessageDialog(null, "Oggetto restituito: " + code);
             }
         });

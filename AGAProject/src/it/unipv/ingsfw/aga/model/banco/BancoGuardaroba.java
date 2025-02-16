@@ -45,8 +45,24 @@ public class BancoGuardaroba extends Banco {
         }
     }
 
+    public boolean consegnaCapo(String code) {
+        QrCode qr = readQR(code);
+        this. grucceAssegnate += 1;
+        if (this.grucceAssegnate < this.maxGrucce) {
+            return assegnaGruccia(qr, this.grucceAssegnate);
+        }else {
+            System.out.println("Grucce terminate");
+            return false;
+        }
+    }
+
     public boolean restituzioneCapo(){
         QrCode qr = readQR();
+        return validateQr(qr);
+    }
+
+    public boolean restituzioneCapo(String code){
+        QrCode qr = readQR(code);
         return validateQr(qr);
     }
 

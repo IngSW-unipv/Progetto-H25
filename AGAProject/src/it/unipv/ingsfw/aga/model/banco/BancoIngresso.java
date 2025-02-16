@@ -83,7 +83,7 @@ public class BancoIngresso extends Banco {
         finally {
             //chiusura connessione
         }
-        return false;
+        return true; //TODO: inserire l'esito della verifica
 }
 
     public boolean qrCodeinvalido(){
@@ -93,6 +93,11 @@ public class BancoIngresso extends Banco {
 
     public boolean accesso(){
         QrCode qr = readQR();
+        return validateQr(qr);
+    }
+
+    public boolean accesso(String code){
+        QrCode qr = readQR(code);
         return validateQr(qr);
     }
 

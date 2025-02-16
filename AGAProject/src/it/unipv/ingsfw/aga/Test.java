@@ -1,6 +1,6 @@
 package it.unipv.ingsfw.aga;
 
-import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
+/*import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Persona;
@@ -25,3 +25,4 @@ public class Test {
         System.out.println(b3.toString());
     }
 }
+*/

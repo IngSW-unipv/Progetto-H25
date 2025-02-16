@@ -8,7 +8,7 @@ public class Banco {
 
     public Banco(int numeroBanco) {
         this.numeroBanco = numeroBanco;
-        this.qrStrategy = QrReadingStrategyFactory.getQrReadingStrategy(Type.KEYBOARD);
+        this.qrStrategy = QrReadingStrategyFactory.getQrReadingStrategy(Type.GUI);
     }
 
     // Getter per numeroBanco
@@ -34,6 +34,15 @@ public class Banco {
             throw new IllegalStateException("QR Strategy non impostata.");
         }
         QrCode qr = qrStrategy.readQR();
+        System.out.println("Reading QR code at entrance banco: " + getNumeroBanco());
+        return qr;
+    }
+
+    public QrCode readQR(String code) {
+        if (qrStrategy == null) {
+            throw new IllegalStateException("QR Strategy non impostata.");
+        }
+        QrCode qr = qrStrategy.readQR(code);
         System.out.println("Reading QR code at entrance banco: " + getNumeroBanco());
         return qr;
     }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 
 public class KeyboardQrReadingStrategy implements IQrReadingStrategy {
+
     @Override
     public QrCode readQR()  {
         QrCode qr = new QrCode();
@@ -18,5 +19,10 @@ public class KeyboardQrReadingStrategy implements IQrReadingStrategy {
             e.printStackTrace();
         }
         return qr;
+    }
+    @Override
+    public QrCode readQR(String code){
+        System.out.println("Strategia di lettura QrCode errata");
+        return new QrCode(code);
     }
 }
