@@ -6,8 +6,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ingsfw.aga.model.persone.*;
-import connection.BancoGuardaroba;
-import connection.BancoIngresso;
 import connection.DBConnection;
 
 
@@ -21,7 +19,7 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//PRINT DI TUTTE LE PERSONE CON TUTTI I DATI
+	//SELECT DI TUTTE LE PERSONE CON TUTTI I DATI
 	public ArrayList<Persona> selectAll (){
 		
 		ArrayList<Persona> result = new ArrayList<>();
@@ -57,7 +55,7 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//PRINT CF NOME E COGNOME E TIPO
+	//SELECT CF NOME E COGNOME E TIPO
 	public ArrayList<Persona> selectCFNomeCognome (){
 			
 			ArrayList<Persona> result = new ArrayList<>();
@@ -95,7 +93,7 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//PRINT LO STAFF CF NOME COGNOME 
+	//SELECT LO STAFF CF NOME COGNOME 
 	public ArrayList<Persona> selectStaffCFNomeCognome (){
 		
 		ArrayList<Persona> result = new ArrayList<>();
@@ -125,7 +123,7 @@ public class PersonaDAO implements IPersonaDao {
 	}
 	
 	
-	//PRINT GLI ORGANIZZATORI CF NOME COGNOME 
+	//SELECT GLI ORGANIZZATORI CF NOME COGNOME 
 	public ArrayList<Persona> selectOrganizzatoreCFNomeCognome (){
 		
 		ArrayList<Persona> result = new ArrayList<>();
@@ -223,7 +221,7 @@ public class PersonaDAO implements IPersonaDao {
 		}catch (Exception e){
 			//e.printStackTrace(); 
 			DBConnection.closeConnection(conn);
-			return p=new Persona("00000", null, null, null);//nessun cf corrispondente trovato	
+			return p=new Persona();//nessun cf corrispondente trovato	
 		}		
 	}
 

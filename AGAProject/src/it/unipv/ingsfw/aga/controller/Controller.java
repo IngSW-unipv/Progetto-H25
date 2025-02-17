@@ -8,6 +8,7 @@ import it.unipv.ingsfw.aga.view.LoginPage;
 import it.unipv.ingsfw.aga.view.MainPage;
 import it.unipv.ingsfw.aga.view.Navbar;
 import it.unipv.ingsfw.aga.view.AddGuestPage;
+import it.unipv.ingsfw.aga.view.AddEventPage;
 import it.unipv.ingsfw.aga.view.EntrancePage;
 import it.unipv.ingsfw.aga.view.CloakroomPage;
 import it.unipv.ingsfw.aga.view.RegisterPage;
@@ -21,9 +22,10 @@ public class Controller {
     private LoginPage loginPage;
     private MainPage mainPage;
     private AddGuestPage addGuestPage;
+    private AddEventPage addEventPage;
     private EntrancePage entrancePage;
     private CloakroomPage cloakroomPage;
-    private RegisterPage registerPage; // Pagina di registrazione
+    private RegisterPage registerPage;
     private CardLayout cardLayout;
     private JPanel containerPanel;
     private Navbar navbar;
@@ -35,12 +37,13 @@ public class Controller {
         frame.setSize(400, 400);
         model = new Model();
         loginPage = new LoginPage();
-        registerPage = new RegisterPage(); // Crea la pagina di registrazione
         cardLayout = new CardLayout();
         containerPanel = new JPanel(cardLayout);
 
+        registerPage = new RegisterPage(cardLayout, containerPanel);
         mainPage = new MainPage(cardLayout, containerPanel);
         addGuestPage = new AddGuestPage(cardLayout, containerPanel);
+        addEventPage = new AddEventPage(cardLayout, containerPanel);
         entrancePage = new EntrancePage(cardLayout, containerPanel);
         cloakroomPage = new CloakroomPage(cardLayout, containerPanel);
         navbar = new Navbar(cardLayout, containerPanel);
@@ -48,10 +51,12 @@ public class Controller {
         containerPanel.add(loginPage, "login");
         containerPanel.add(mainPage, "main");
         containerPanel.add(addGuestPage, "addGuest");
+        containerPanel.add(addEventPage, "addEvent");
         containerPanel.add(entrancePage, "entrance");
         containerPanel.add(cloakroomPage, "cloakroom");
-        containerPanel.add(registerPage, "register"); // Aggiungi la pagina di registrazione
+        containerPanel.add(registerPage, "register");
 
+        // ActionListener per il login
         loginPage.getLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
@@ -66,50 +71,48 @@ public class Controller {
                     JOptionPane.showMessageDialog(null, "Login fallito!");
                 }
             }
-        });
-
-        loginPage.getRegisterButton().addActionListener(new ActionListener() {
+        }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String username = loginPage.getUsername();
+                String password = loginPage.getPassword();
                 cardLayout.show(containerPanel, "register");
             }
         });
 
-        registerPage.getSubmitButton().addActionListener(new ActionListener() {
+        /*// ActionListener per il bottone "Aggiungi Evento" (pagina principale)
+       mainPage.getAddEventButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = registerPage.getUsername();
-                String password = registerPage.getPassword();
-                String email = registerPage.getEmail();
-
-                boolean success = true;
-                if (success) {
-                    JOptionPane.showMessageDialog(null, "Registrazione completata con successo!");
-                    cardLayout.show(containerPanel, "login"); // Torna alla pagina di login
-                } else {
-                    JOptionPane.showMessageDialog(null, "Errore nella registrazione. Riprova.");
-                }
+                cardLayout.show(containerPanel, "addEvent");
             }
-        });
+        });*/ //TODO: Gestire l'accesso alla pagina aggiungi evento
 
-        // ActionListener per il bottone "Add Guest"
+        // ActionListener per il bottone "Aggiungi Invitato"
         mainPage.getAddGuestButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(containerPanel, "addGuest");
             }
         });
 
-        // ActionListener per il bottone "Home" (Navbar)
-        navbar.getHomeButton().addActionListener(new ActionListener() {
+        // ActionListener per il bottone "Invia" nella pagina AddEvent
+        addEventPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(containerPanel, "main");
+                String date = addEventPage.getEventDate();
+                String location = addEventPage.getEventLocation();
+                String capacityStr = addEventPage.getEventCapacity();
+
+                try {
+                    int capacity = Integer.parseInt(capacityStr); // Converte la capienza in int
+                    // Fai qualcosa con i dati (ad esempio salva l'evento nel modello)
+                    JOptionPane.showMessageDialog(null, "Evento aggiunto con successo!");
+                    // Torna alla pagina principale dopo aver aggiunto l'evento
+                    cardLayout.show(containerPanel, "main");
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Capienza non valida. Inserisci un numero intero.");
+                }
             }
         });
 
-        navbar.getLogoutButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(containerPanel, "login");
-            }
-        });
-
+        // ActionListener per il bottone "Invia" nella pagina AddGuest
         addGuestPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = addGuestPage.getGuestName();
@@ -119,19 +122,35 @@ public class Controller {
             }
         });
 
+        // ActionListener per il bottone "Home" nella navbar
+        navbar.getHomeButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(containerPanel, "main");
+            }
+        });
+
+        // ActionListener per il bottone "Logout" nella navbar
+        navbar.getLogoutButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(containerPanel, "login");
+            }
+        });
+
+        // ActionListener per il bottone "Entrata" nella pagina principale
         mainPage.getEntranceButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 cardLayout.show(containerPanel, "entrance");
             }
         });
 
+        // ActionListener per il bottone "Guardaroba" nella pagina principale
         mainPage.getCloakroomButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(containerPanel, "cloakroom");
             }
         });
 
+        // ActionListener per il bottone "Verifica" nella pagina Entrata
         entrancePage.getVerifyButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Recupera il codice inserito dall'utente
@@ -149,6 +168,7 @@ public class Controller {
             }
         });
 
+        // ActionListener per il bottone "Consegna" nella pagina Guardaroba
         cloakroomPage.getDeliverButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
@@ -157,6 +177,7 @@ public class Controller {
             }
         });
 
+        // ActionListener per il bottone "Restituzione" nella pagina Guardaroba
         cloakroomPage.getReturnButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();

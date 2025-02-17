@@ -2,17 +2,22 @@ package it.unipv.ingsfw.aga.view;
 
 import javax.swing.*;
 import java.awt.*;
+import it.unipv.ingsfw.aga.view.Navbar;
+
 
 public class RegisterPage extends JPanel {
     private JTextField usernameField, emailField;
     private JPasswordField passwordField;
     private JButton submitButton;
+    private Navbar navbar;
 
-    public RegisterPage() {
-        setLayout(new GridLayout(4, 2, 10, 10));
+    public RegisterPage(CardLayout cardLayout, JPanel containerPanel) {
+        setLayout(new BorderLayout());
+        navbar = new Navbar(cardLayout, containerPanel);
+        add(navbar, BorderLayout.NORTH);
 
-        // Dimensione uniforme per i campi di input
-        // Dimension textFieldSize = new Dimension(200, 30);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2, 10, 10));
 
         JLabel usernameLabel = new JLabel("Username:");
         usernameField = new JTextField();
@@ -38,16 +43,18 @@ public class RegisterPage extends JPanel {
         submitButton.setForeground(Color.BLACK);
 
 
-        add(usernameLabel);
-        add(usernameField);
-        add(passwordLabel);
-        add(passwordField);
-        add(emailLabel);
-        add(emailField);
-        add(new JLabel()); // Empty space
-        add(submitButton);
-    }
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(emailLabel);
+        panel.add(emailField);
+        panel.add(new JLabel()); // Empty space
+        panel.add(submitButton);
 
+        add(panel, BorderLayout.CENTER);
+
+    }
     public String getUsername() {
         return usernameField.getText();
     }
