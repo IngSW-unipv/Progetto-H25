@@ -3,10 +3,10 @@ package it.unipv.ingsfw.aga.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+//import java.text.ParseException;
+//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+//import java.util.Date;
 
 import it.unipv.ingsfw.aga.model.banco.*;
 import it.unipv.ingsfw.aga.model.evento.Evento;
@@ -14,7 +14,7 @@ import connection.DBConnection;
 
 
 
-public class BancoDAO {
+public class BancoDAO implements IBancoDAO{
 	private Connection conn;
 	
 

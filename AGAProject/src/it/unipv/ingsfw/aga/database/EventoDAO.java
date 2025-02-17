@@ -26,23 +26,23 @@ public class EventoDAO implements IEventoDAO {
 	//PRINT TUTTI I DATI DELL'EVENTO
 	public ArrayList<Evento> selectAll (){
 			
-			ArrayList<Evento> result = new ArrayList<>();
-			
-			conn=DBConnection.startConnection(conn);
-			Statement st1;
-			ResultSet rs1;
-			Evento ev;
-	
-			try{
-				st1 = conn.createStatement();
-				String query="SELECT * from evento ";
+		ArrayList<Evento> result = new ArrayList<>();
+		
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		Evento ev;
+
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * from evento ";
 			rs1=st1.executeQuery(query);
 	
 			while(rs1.next()){
 				ev=new Evento(rs1.getDate(1), rs1.getString(2),rs1.getInt(3),rs1.getBoolean(4));
 	
 				result.add(ev);
-				//System.out.println(ev.toString());
+					//System.out.println(ev.toString());
 			}
 		}catch (Exception e){
 			e.printStackTrace();}

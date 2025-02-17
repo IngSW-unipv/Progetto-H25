@@ -1,10 +1,16 @@
 package it.unipv.ingsfw.aga.database;
 
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
+import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.model.persone.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import connection.DBConnection;
 
 public class BigliettoDAO implements IBigliettoDAO {
 
@@ -29,6 +35,15 @@ public class BigliettoDAO implements IBigliettoDAO {
 
             stmt.executeUpdate();
         }
+    }
+    
+    //SELECT PERSONA
+    public void getPersona(Biglietto biglietto) {
+    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		Persona persona;
     }
 }
 
