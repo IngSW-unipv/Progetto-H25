@@ -6,8 +6,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ingsfw.aga.model.persone.*;
-import connection.BancoGuardaroba;
-import connection.BancoIngresso;
 import connection.DBConnection;
 
 
