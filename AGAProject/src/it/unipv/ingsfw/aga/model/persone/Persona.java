@@ -15,6 +15,13 @@ public class Persona {
     private String cognome;
     private String email;
     
+    public Persona() {
+    	nome=null;
+    	codiceFiscale="nullo";
+    	cognome=null;
+    	email=null;
+    }
+    
     public Persona(String codiceFiscale, String nome, String cognome, String email) {
         this.codiceFiscale = codiceFiscale;
         this.nome=  nome;

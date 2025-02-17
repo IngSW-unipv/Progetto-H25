@@ -114,7 +114,6 @@ public class EventoDAO implements IEventoDAO {
 				
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
-		ResultSet rs1;
 	
 		try{
 			st1 = conn.createStatement();

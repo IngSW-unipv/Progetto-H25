@@ -29,6 +29,16 @@ public class Biglietto {
         this.codeQR = new QrCode();
     }
     
+    public Biglietto(QrCode codeQR) {
+        this.persona = null;
+        this.evento=null;
+        this.codeQR = new QrCode();
+    }
+    
+    public Persona getCreatoreBiglietto() {
+    	return creatoreBiglietto;
+    }
+    
     public String getNome() {
         return persona.getNome();
     }
