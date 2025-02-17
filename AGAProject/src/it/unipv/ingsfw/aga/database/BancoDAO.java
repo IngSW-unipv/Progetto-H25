@@ -1,4 +1,4 @@
-package connection;
+package it.unipv.ingsfw.aga.database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,6 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import it.unipv.ingsfw.aga.model.banco.*;
+import it.unipv.ingsfw.aga.model.evento.Evento;
+import connection.DBConnection;
 
 
 
@@ -29,6 +33,7 @@ public class BancoDAO {
 		Statement st1;
 		ResultSet rs1;
 		Banco b;
+		Evento dataEvento;
 	
 		try{
 			st1 = conn.createStatement();
@@ -36,12 +41,11 @@ public class BancoDAO {
 			rs1=st1.executeQuery(query);
 	
 			while(rs1.next()){
-				Evento evento=new Evento(rs1.getDate(4), null,0);//farlo col search by data
+				dataEvento=new Evento(rs1.getDate(4), null,0,false);//farlo col search by data
 				boolean ing=rs1.getBoolean(2);
 				if(ing)
-					b=new BancoIngresso(rs1.getInt(1),evento);
-				else b=new BancoGuardaroba(rs1.getInt(1),evento,10,10);
-				
+					b=new BancoIngresso(rs1.getInt(1),dataEvento);
+				else b=new BancoGuardaroba(rs1.getInt(1),rs1.getInt(5),dataEvento);
 	
 				result.add(b);
 				System.out.println(b.toString());

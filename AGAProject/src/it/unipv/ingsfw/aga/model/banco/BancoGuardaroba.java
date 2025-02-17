@@ -1,19 +1,20 @@
 package it.unipv.ingsfw.aga.model.banco;
 import java.sql.*;
+import it.unipv.ingsfw.aga.model.evento.Evento;
 
 
 public class BancoGuardaroba extends Banco {
     private int maxGrucce;
     private int grucceAssegnate;
 
-    public BancoGuardaroba(int numeroBanco) {
-        super(numeroBanco);
+    public BancoGuardaroba(int numeroBanco, Evento evento) {
+        super(numeroBanco, evento);
         this.maxGrucce = 1000;
         this.grucceAssegnate = 0;
     }
 
-    public BancoGuardaroba(int numeroBanco, int maxGrucce) {
-        super(numeroBanco);
+    public BancoGuardaroba(int numeroBanco, int maxGrucce, Evento evento) {
+        super(numeroBanco, evento);
         this.maxGrucce = maxGrucce;
         this.grucceAssegnate = 0;
     }
@@ -101,6 +102,7 @@ public class BancoGuardaroba extends Banco {
         }
         return true;
     }
+    
     @Override
     public boolean validateQr(QrCode qr){
         String url = "jdbc:mysql://localhost:3306/nome_database"; // Cambia "nome_database"
@@ -133,6 +135,16 @@ public class BancoGuardaroba extends Banco {
             }
         System.out.println("Reading QR code at entrance banco guardaroba: " + getNumeroBanco());
         return true;
-
     }
+    
+    @Override
+    public String toString() {
+    	return "[Banco]\n" +
+                "Tipo: Guardaroba\n" +
+                "Numero banco: " + getNumeroBanco() +"\n" +
+                "Evento: " + getDataEvento() + "\n";
     }
+    
+    
+    
+ }

@@ -1,19 +1,27 @@
-package it.unipv.ingsfw.aga.model.banco;
+package it.unipv.ingsfw.aga.model.banco;//ALBERTO
 
 import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
+import it.unipv.ingsfw.aga.model.evento.Evento;
+import java.util.Date;
 
 public class Banco {
     private int numeroBanco;
+    private Evento evento;
     private IQrReadingStrategy qrStrategy; // Aggiunta strategia
 
-    public Banco(int numeroBanco) {
+    public Banco(int numeroBanco, Evento evento) {
         this.numeroBanco = numeroBanco;
+        this.evento=evento;
         this.qrStrategy = QrReadingStrategyFactory.getQrReadingStrategy(Type.GUI);
     }
 
     // Getter per numeroBanco
     public int getNumeroBanco() {
         return numeroBanco;
+    }
+    
+    public Date getDataEvento() {
+    	return evento.getData();
     }
 
     public void setNumeroBanco(int numeroBanco) {
@@ -45,6 +53,16 @@ public class Banco {
         QrCode qr = qrStrategy.readQR(code);
         System.out.println("Reading QR code at entrance banco: " + getNumeroBanco());
         return qr;
+    }
+    
+    public String printEvento() {
+    	return evento.toString();
+    }
+    
+    public String toString() {
+    	return "[Banco]\n" +
+                "Numero banco " + getNumeroBanco() +"\n" +
+                "Evento: " + getDataEvento() + "\n";
     }
 
 }
