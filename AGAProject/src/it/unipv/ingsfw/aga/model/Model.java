@@ -7,7 +7,7 @@ public class Model {
     }
 
     public int getStaffFlag(String username) {
-        if (username.equals("admin")) {
+        if (username.equals("")) {
             return 1;
         }
         return 0;
