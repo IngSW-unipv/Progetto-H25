@@ -14,6 +14,12 @@ public class Banco {
         this.evento=evento;
         this.qrStrategy = QrReadingStrategyFactory.getQrReadingStrategy(Type.GUI);
     }
+    
+    public Banco(int numeroBanco) {
+        this.numeroBanco = numeroBanco;
+        this.evento=null;
+        this.qrStrategy = QrReadingStrategyFactory.getQrReadingStrategy(Type.GUI);
+    }
 
     // Getter per numeroBanco
     public int getNumeroBanco() {

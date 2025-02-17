@@ -10,8 +10,13 @@ import it.unipv.ingsfw.aga.model.evento.Evento;
 
 
 public class BancoIngresso extends Banco {
+	
     public BancoIngresso(int numeroBanco, Evento evento) {
         super(numeroBanco, evento);
+    }
+    
+    public BancoIngresso(int numeroBanco) {
+        super(numeroBanco);
     }
 
 

@@ -4,9 +4,9 @@ import it.unipv.ingsfw.aga.model.evento.Evento;
 public class BancoIngressoFactory {
     private static BancoIngresso instance;
 
-    public static BancoIngresso getInstance(int numeroBanco, Evento evento) {
+    public static BancoIngresso getInstance(int numeroBanco) {
         if (instance == null) {
-            instance = new BancoIngresso(numeroBanco, evento);
+            instance = new BancoIngresso(numeroBanco);
         }
         return instance;
     }

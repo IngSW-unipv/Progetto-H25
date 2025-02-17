@@ -18,6 +18,12 @@ public class BancoGuardaroba extends Banco {
         this.maxGrucce = maxGrucce;
         this.grucceAssegnate = 0;
     }
+    
+    public BancoGuardaroba(int numeroBanco) {
+        super(numeroBanco, null);
+        this.maxGrucce = maxGrucce;
+        //this.grucceAssegnate = 0;??
+    }
 
     public int getMaxGrucce() {
         return maxGrucce;
