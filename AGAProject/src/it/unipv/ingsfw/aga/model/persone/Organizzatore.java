@@ -52,7 +52,7 @@ public class Organizzatore extends Persona{
     public String toString() {
         return "[Persona]\n" +
                 "Tipo: Organizzatore\n" +
-                "Nome: " + getNome() + " " + getCognome() + "\n" +
+                "Nome: " + getNome() + " Cognome: " + getCognome() + "\n" +
                 "Email: " + getEmail() + "\n";
     }
 }

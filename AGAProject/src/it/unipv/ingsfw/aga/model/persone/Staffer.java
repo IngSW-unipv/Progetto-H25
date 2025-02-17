@@ -46,7 +46,7 @@ public class Staffer extends Persona{
     public String toString() {
         return "[Persona]\n" +
                 "Tipo: Staffer\n" +
-                "Nome" + getNome() + getCognome() + "\n" +
+                "Nome: " + getNome() +" Cognome: "+ getCognome() + "\n" +
                 "Email: " + getEmail() + "\n";
     }
 }

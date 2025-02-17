@@ -71,7 +71,7 @@ public class Persona {
     public String toString() {
         return "[Persona]\n" +
                 "Tipo: Nessuno\n" +
-                "Nome: " + nome+" " + cognome + "\n" +
+                "Nome: " + nome+" Cognome: " + cognome + "\n" +
                 "Email: " + email + "\n";
     }
 }

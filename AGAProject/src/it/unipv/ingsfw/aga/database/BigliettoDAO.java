@@ -53,12 +53,14 @@ public class BigliettoDAO implements IBigliettoDAO {
 			rs1=st1.executeQuery(query);
 	
 			rs1.next();
-			persona=new Persona(rs1.getString(1), null, null, null);
+			persona=new Persona(rs1.getString(3), null, null, null);
+			
 			PersonaDAO p=new PersonaDAO();
 			persona=p.searchByCF(persona);
-			//System.out.println(ev.toString());
+			
 			DBConnection.closeConnection(conn);
 			return persona;
+			
 		}catch (Exception e){
 			e.printStackTrace();
 			persona=new Persona();
@@ -70,10 +72,10 @@ public class BigliettoDAO implements IBigliettoDAO {
     public static void main(String []args) {
 		BigliettoDAO b=new BigliettoDAO();
 		Persona a;
-		//QrCode codeQR= new QrCode();
-		//Biglietto i=new Biglietto()
-		//a=b.getPersona();
-		//System.out.println(a.toString());
+		QrCode codeQR=new QrCode("1b4b76e0-3c14-46b9-9685-e11b6c12e084");
+		Biglietto i=new Biglietto(codeQR);
+		a=b.getPersona(i);
+		System.out.println(a.toString());
 		//COME PASSO DA QR A STRING?
 	}
 	

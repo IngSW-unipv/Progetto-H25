@@ -32,7 +32,7 @@ public class Biglietto {
     public Biglietto(QrCode codeQR) {
         this.persona = null;
         this.evento=null;
-        this.codeQR = new QrCode();
+        this.codeQR = codeQR;
     }
     
     public Persona getCreatoreBiglietto() {
@@ -53,10 +53,6 @@ public class Biglietto {
     
     public Date getDataEvento() {
         return evento.getData();
-    }
-    
-    public QrCode getQRcode() {
-        return codeQR;
     }
     
     public String getQRCodeId() {
