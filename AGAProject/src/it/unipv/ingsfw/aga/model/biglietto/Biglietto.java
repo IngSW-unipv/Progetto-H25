@@ -15,6 +15,7 @@ public class Biglietto {
     private QrCode codeQR;
     private boolean accessoEffettuato = false;
     private int numeroGruccia=0;
+    private String descrizioneGruccia="";
 
     
     public Biglietto(Persona creatoreBiglietto, String nome, String cognome, String email, QrCode codeQR, Evento evento,
@@ -41,6 +42,13 @@ public class Biglietto {
     public Biglietto(QrCode codeQR) {
         this.creatoreBiglietto= null;
         this.evento=null;
+        this.codeQR = codeQR;
+    }
+    
+    public Biglietto(QrCode codeQR, boolean accessoEffettuato) {
+        this.creatoreBiglietto= null;
+        this.evento=null;
+        this.accessoEffettuato=accessoEffettuato;
         this.codeQR = codeQR;
     }
     
@@ -80,8 +88,12 @@ public class Biglietto {
         return codeQR.getId();
     }
     
-    public boolean isAccessoEffettuato() {
+    public boolean getAccessoEffettuato() {
         return accessoEffettuato;
+    }
+    
+    public String getCodiceFiscaleCreatore() {
+    	return creatoreBiglietto.getCodiceFiscale();
     }
 
     public void setAccessoEffettuato(boolean accessoEffettuato) {
@@ -94,6 +106,10 @@ public class Biglietto {
 
     public void setNumeroGruccia(int numeroGruccia) {
         this.numeroGruccia=numeroGruccia;
+    }
+    
+    public String getDescrizioneGruccia() {
+    	return descrizioneGruccia;
     }
     
     @Override

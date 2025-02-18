@@ -22,7 +22,7 @@ public class BigliettoDAO implements IBigliettoDAO {
         super();
     }
 
-    private static final String INSERISCI_BIGLIETTO_SQL =
+    /*private static final String INSERISCI_BIGLIETTO_SQL =
             "INSERT INTO biglietti (nome, cognome, email, numBiglietto, dataEvento)) VALUES (?, ?, ?, ?, ?)";
 
     @Override
@@ -37,10 +37,11 @@ public class BigliettoDAO implements IBigliettoDAO {
 
             stmt.executeUpdate();
         }
-    }
+    }*/
+    
     
     //TROVA CREATORE DAL BIGLIETTO
-    public Persona getPersona(Biglietto biglietto) {
+    public Persona getCreatoreBiglietto(Biglietto biglietto) {
     	
     	conn=DBConnection.startConnection(conn);
 		Statement st1;
@@ -69,13 +70,57 @@ public class BigliettoDAO implements IBigliettoDAO {
 		}
     }
     
+    
+    //CREA BIGLIETTO
+	 public void creaBiglietto(Biglietto biglietto) {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="INSERT INTO BIGLIETTO VALUES(\""+biglietto.getQRCodeId()+"\", '"+biglietto.getAccessoEffettuato()+
+					"', \""+biglietto.getCodiceFiscaleCreatore()+"\", '"+biglietto.getDataEvento()+"' ,"+biglietto.getNumeroGruccia()+
+					", \""+biglietto.getDescrizioneGruccia()+"\", \""+biglietto.getNome()+"\", \""+	biglietto.getCognome()+
+					"\", \""+biglietto.getEmail()+"\");";
+			st1.executeUpdate(query);
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);			
+	}
+	 
+	 
+	 //SET STATO BIGLIETTO
+	 public void setStatoBiglietto(Biglietto biglietto) {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		int b;//nel db boolean =1 o 0
+		if(biglietto.getAccessoEffettuato())b=1;
+		else b=0;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="UPDATE BIGLIETTO SET STATO='"+b+"' WHERE ID=\""+biglietto.getQRCodeId()+"\";";
+			st1.executeUpdate(query);
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);			
+	}
+    
+    
     public static void main(String []args) {
 		BigliettoDAO b=new BigliettoDAO();
 		Persona a;
 		QrCode codeQR=new QrCode("1b4b76e0-3c14-46b9-9685-e11b6c12e084");
-		Biglietto i=new Biglietto(codeQR);
-		a=b.getPersona(i);
-		System.out.println(a.toString());
+		Biglietto i=new Biglietto(codeQR,false);
+		b.setStatoBiglietto(i);
+		//a=b.getCreatoreBiglietto(i);
+		//System.out.println(a.toString());
 	}
 	
 
