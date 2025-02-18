@@ -9,7 +9,7 @@ public interface IEventoDAO {
 	public ArrayList<Evento> selectByLuogo (String luogo);
 	public Evento searchByData (Evento data);
 	public void addEvento (Evento evento);
-	public void changeData (Evento evento, Evento nuovaData);//modificare query problema
+	
 		
 	
 }

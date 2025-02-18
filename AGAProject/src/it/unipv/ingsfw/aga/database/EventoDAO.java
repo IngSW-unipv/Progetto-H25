@@ -82,7 +82,7 @@ public class EventoDAO implements IEventoDAO {
 	}
 	
 	
-	//PRINT BY DATA
+	//SERCH BY DATA
 	public Evento searchByData (Evento data){
 					
 		conn=DBConnection.startConnection(conn);
@@ -128,8 +128,8 @@ public class EventoDAO implements IEventoDAO {
 		DBConnection.closeConnection(conn);
 	}
 	
-	
-	public void changeData (Evento evento, Evento nuovaData){
+	//NON APPLICABILE PER CHIAVE ESTERNA -> FINAL
+	/*public void changeData (Evento evento, Evento nuovaData){
 		
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
@@ -149,7 +149,7 @@ public class EventoDAO implements IEventoDAO {
 		}
 	
 		DBConnection.closeConnection(conn);
-	}
+	}*/
 	
 	
 	

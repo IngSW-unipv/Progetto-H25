@@ -8,29 +8,38 @@ import java.util.Date;
 
 public class Biglietto {
     private Persona creatoreBiglietto;
-    private Persona persona;
+    private String nome;
+    private String cognome;
+    private String email;
     private Evento evento;
     private QrCode codeQR;
     private boolean accessoEffettuato = false;
-    private boolean guardarobaEffettuato = false;
+    private int numeroGruccia=0;
 
     
-    public Biglietto(Persona persona, QrCode codeQR, Evento evento,boolean accessoEffettuato, boolean guardarobaEffettuato) {
-        this.persona = persona;
+    public Biglietto(Persona creatoreBiglietto, String nome, String cognome, String email, QrCode codeQR, Evento evento,
+    		boolean accessoEffettuato, int numeroGruccia) {
+        this.creatoreBiglietto = creatoreBiglietto;
         this.evento=evento;
         this.accessoEffettuato=accessoEffettuato;
-        this.guardarobaEffettuato=guardarobaEffettuato;
+        this.numeroGruccia=numeroGruccia;
         this.codeQR = codeQR;
+        this.nome=nome;
+        this.cognome=cognome;
+        this.email=email;
     }
     
-    public Biglietto(Persona persona, Evento evento) {
-        this.persona = persona;
+    public Biglietto(Persona creatoreBiglietto, String nome, String cognome, String email, Evento evento) {
+        this.creatoreBiglietto = creatoreBiglietto;
+        this.nome=nome;
+        this.cognome=cognome;
+        this.email=email;
         this.evento=evento;
         this.codeQR = new QrCode();
     }
     
     public Biglietto(QrCode codeQR) {
-        this.persona = null;
+        this.creatoreBiglietto= null;
         this.evento=null;
         this.codeQR = codeQR;
     }
@@ -39,16 +48,28 @@ public class Biglietto {
     	return creatoreBiglietto;
     }
     
+    public String getNomeCreatore() {
+        return creatoreBiglietto.getNome();
+    }
+    
+    public String getCognomeCreatore() {
+        return creatoreBiglietto.getCognome();
+    }
+    
+    public String getEmailCreatore() {
+        return creatoreBiglietto.getEmail();
+    }
+    
     public String getNome() {
-        return persona.getNome();
+        return nome;
     }
     
     public String getCognome() {
-        return persona.getCognome();
+        return cognome;
     }
     
     public String getEmail() {
-        return persona.getEmail();
+        return email;
     }
     
     public Date getDataEvento() {
@@ -67,19 +88,20 @@ public class Biglietto {
         this.accessoEffettuato = accessoEffettuato;
     }
 
-    public boolean isGuardarobaEffettuato() {
-        return guardarobaEffettuato;
+    public int getNumeroGruccia() {
+        return numeroGruccia;
     }
 
-    public void setGuardarobaEffettuato(boolean guardarobaEffettuato) {
-        this.guardarobaEffettuato = guardarobaEffettuato;
+    public void setNumeroGruccia(int numeroGruccia) {
+        this.numeroGruccia=numeroGruccia;
     }
     
     @Override
     public String toString() {
         return "[Biglietto]\n" +
                 "Tipo: Standard\n" +
-                "Proprietario: " + getNome() + " " + getCognome() + " " + getEmail() + "\n" +
-                "QrCode: " + getQRCodeId() + "\n";
+                "Nome: " + getNome() + " Cognome: " + getCognome() + " Email: " + getEmail() + "\n" +
+                "QrCode: " + getQRCodeId() + "\n"+
+                "Proprietario: " +getNomeCreatore() + " Cognome: " + getCognomeCreatore() + " Email: " + getEmailCreatore() + "\n" ;
     }
 }

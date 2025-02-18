@@ -39,7 +39,7 @@ public class BigliettoDAO implements IBigliettoDAO {
         }
     }
     
-    //TROVA PERSONA DAL BIGLIETTO
+    //TROVA CREATORE DAL BIGLIETTO
     public Persona getPersona(Biglietto biglietto) {
     	
     	conn=DBConnection.startConnection(conn);
@@ -76,7 +76,6 @@ public class BigliettoDAO implements IBigliettoDAO {
 		Biglietto i=new Biglietto(codeQR);
 		a=b.getPersona(i);
 		System.out.println(a.toString());
-		//COME PASSO DA QR A STRING?
 	}
 	
 

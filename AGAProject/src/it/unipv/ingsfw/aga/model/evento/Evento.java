@@ -13,13 +13,20 @@ import java.util.UUID;
 public class Evento {
     //private final String organizzatore;
 	//private Organizzatore organizzatore;
-    private Date data;
+    private final Date data;
     private String location;
     private int maxPartecipanti;
     //private String idEvento;
     //private int numBiglietto = 0;
     private boolean venditeAperte; 
 
+    public Evento(Date data, String location, int maxPartecipanti)  {
+    	this.data=data;
+    	this.location=location;
+    	this.maxPartecipanti=maxPartecipanti;
+    }
+    
+    //COSTRUTTORE UTILE PER IL DAO
     public Evento(Date data, String location, int maxPartecipanti, boolean venditeAperte)  {
     	this.data=data;
     	this.location=location;
@@ -57,9 +64,9 @@ public class Evento {
         return data;
     }
     
-    public void setData(Evento nuovaData) {
-    	EventoDAO d=new EventoDAO();
-    	d.changeData(this, nuovaData);    	
+    public void setData(Evento nuovaData) {//NON SI PUO FARE PER CHIAVE ESTERNA
+    	//EventoDAO d=new EventoDAO();
+    	//d.changeData(this, nuovaData);    	
     }
 
     public String getLocation() {
