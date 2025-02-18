@@ -12,6 +12,9 @@ import it.unipv.ingsfw.aga.view.AddEventPage;
 import it.unipv.ingsfw.aga.view.EntrancePage;
 import it.unipv.ingsfw.aga.view.CloakroomPage;
 import it.unipv.ingsfw.aga.view.RegisterPage;
+import it.unipv.ingsfw.aga.view.ListaInvitatiPage;
+import it.unipv.ingsfw.aga.view.EventsPage;
+import it.unipv.ingsfw.aga.view.AggiungiStaffPage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,6 +29,10 @@ public class Controller {
     private EntrancePage entrancePage;
     private CloakroomPage cloakroomPage;
     private RegisterPage registerPage;
+    private ListaInvitatiPage listaInvitatiPage;
+    private EventsPage eventsPage;
+    private AggiungiStaffPage aggiungiStaffPage;
+
     private CardLayout cardLayout;
     private JPanel containerPanel;
     private Navbar navbar;
@@ -46,6 +53,10 @@ public class Controller {
         addEventPage = new AddEventPage(cardLayout, containerPanel);
         entrancePage = new EntrancePage(cardLayout, containerPanel);
         cloakroomPage = new CloakroomPage(cardLayout, containerPanel);
+        listaInvitatiPage = new ListaInvitatiPage(cardLayout, containerPanel);
+        eventsPage = new EventsPage(cardLayout, containerPanel);
+        aggiungiStaffPage = new AggiungiStaffPage(cardLayout, containerPanel);
+
         navbar = new Navbar(cardLayout, containerPanel);
 
         containerPanel.add(loginPage, "login");
@@ -55,6 +66,9 @@ public class Controller {
         containerPanel.add(entrancePage, "entrance");
         containerPanel.add(cloakroomPage, "cloakroom");
         containerPanel.add(registerPage, "register");
+        containerPanel.add(listaInvitatiPage, "listaInvitati");
+        containerPanel.add(eventsPage, "events");
+        containerPanel.add(aggiungiStaffPage, "aggiungiStaff");
 
         // ActionListener per il login
         loginPage.getLoginButton().addActionListener(new ActionListener() {
@@ -64,6 +78,7 @@ public class Controller {
                 if (model.checkLogin(username, password)) {
                     if (model.getStaffFlag(username) == 1) {
                         cardLayout.show(containerPanel, "main");
+                        mainPage.setRolePermissions((model.getStaffFlag(username) == 0)); //TODO: TO BE ADAPTED true if organizer false if staff
                     } else {
                         JOptionPane.showMessageDialog(null, "Non sei autorizzato ad accedere come staff.");
                     }
@@ -79,12 +94,6 @@ public class Controller {
             }
         });
 
-        /*// ActionListener per il bottone "Aggiungi Evento" (pagina principale)
-       mainPage.getAddEventButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(containerPanel, "addEvent");
-            }
-        });*/ //TODO: Gestire l'accesso alla pagina aggiungi evento
 
         // ActionListener per il bottone "Aggiungi Invitato"
         mainPage.getAddGuestButton().addActionListener(new ActionListener() {
@@ -150,6 +159,32 @@ public class Controller {
             }
         });
 
+        // Listener per il pulsante "Modifica Vendite"
+        mainPage.getModificaVenditeButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Azioni per modificare le vendite //TODO: collega con DB
+                cardLayout.show(containerPanel, "modificaVendite"); // Esempio: mostra il pannello dedicato
+            }
+        });
+
+        // Listener per il pulsante "Aggiungi Staff"
+        mainPage.getAggiungiStaffButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(containerPanel, "aggiungiStaff");
+            }
+        });
+
+        // Listener per il pulsante "Vedi Invitati"
+        mainPage.getVediInvitatiButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Azioni per visualizzare gli invitati
+                cardLayout.show(containerPanel, "listaInvitati"); // Esempio: mostra il pannello con la lista degli invitati
+            }
+        });
+
+
+        // TODO: aggiungere la navigazione alle pagine "ListaInvitatiPage" "AggiungiStaff"
+
         // ActionListener per il bottone "Verifica" nella pagina Entrata
         entrancePage.getVerifyButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -158,7 +193,7 @@ public class Controller {
 
                 // Supponendo che il model abbia già un'istanza di BancoIngresso,
                 // chiama il metodo accesso() passando il codice
-                boolean isValid = BancoIngressoFactory.getInstance(0).accesso(code); // chi crea questo banco??
+                boolean isValid = true; // BancoIngressoFactory.getInstance(0).accesso(code);  //TODO: G. ha modificato il factory
 
                 if (isValid) {
                     JOptionPane.showMessageDialog(null, "Biglietto valido!");
@@ -185,6 +220,18 @@ public class Controller {
                 JOptionPane.showMessageDialog(null, "Oggetto restituito: " + code);
             }
         });
+
+        aggiungiStaffPage.getSubmitButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = aggiungiStaffPage.getUsername();
+                String password = aggiungiStaffPage.getPassword();
+                String email = aggiungiStaffPage.getEmail();
+                // TODO: Logica per aggiungere lo staff al modello
+                JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
+                cardLayout.show(containerPanel, "main");
+            }
+        });
+
     }
 
     public JPanel getContainerPanel() {
