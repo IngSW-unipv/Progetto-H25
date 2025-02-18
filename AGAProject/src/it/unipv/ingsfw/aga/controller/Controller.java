@@ -46,7 +46,7 @@ public class Controller {
         loginPage = new LoginPage();
         cardLayout = new CardLayout();
         containerPanel = new JPanel(cardLayout);
-
+        navbar = new Navbar(cardLayout,containerPanel);
         registerPage = new RegisterPage(cardLayout, containerPanel);
         mainPage = new MainPage(cardLayout, containerPanel);
         addGuestPage = new AddGuestPage(cardLayout, containerPanel);
@@ -57,7 +57,6 @@ public class Controller {
         eventsPage = new EventsPage(cardLayout, containerPanel);
         aggiungiStaffPage = new AggiungiStaffPage(cardLayout, containerPanel);
 
-        navbar = new Navbar(cardLayout, containerPanel);
 
         containerPanel.add(loginPage, "login");
         containerPanel.add(mainPage, "main");
@@ -78,7 +77,7 @@ public class Controller {
                 if (model.checkLogin(username, password)) {
                     if (model.getStaffFlag(username) == 1) {
                         cardLayout.show(containerPanel, "main");
-                        mainPage.setRolePermissions((model.getStaffFlag(username) == 0)); //TODO: TO BE ADAPTED true if organizer false if staff
+                        mainPage.setRolePermissions((model.getStaffFlag(username) == 1)); //TODO: TO BE ADAPTED true if organizer false if staff
                     } else {
                         JOptionPane.showMessageDialog(null, "Non sei autorizzato ad accedere come staff.");
                     }
@@ -128,20 +127,6 @@ public class Controller {
                 String email = addGuestPage.getGuestEmail();
                 String phone = addGuestPage.getGuestPhone();
                 JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
-            }
-        });
-
-        // ActionListener per il bottone "Home" nella navbar
-        navbar.getHomeButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(containerPanel, "main");
-            }
-        });
-
-        // ActionListener per il bottone "Logout" nella navbar
-        navbar.getLogoutButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(containerPanel, "login");
             }
         });
 

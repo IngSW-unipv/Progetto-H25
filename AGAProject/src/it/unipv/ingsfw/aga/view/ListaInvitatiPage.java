@@ -13,21 +13,23 @@ public class ListaInvitatiPage extends JPanel {
         navbar = new Navbar(cardLayout, containerPanel);
         add(navbar, BorderLayout.NORTH);
 
-        // Titolo
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Lista invitati");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(titleLabel, BorderLayout.NORTH);
+        panel.add(titleLabel, BorderLayout.NORTH);
 
         // Panello scorrevole per gli invitati
         guestsPanel = new JPanel();
         guestsPanel.setLayout(new BoxLayout(guestsPanel, BoxLayout.Y_AXIS)); // Layout verticale
         JScrollPane scrollPane = new JScrollPane(guestsPanel);
-        add(scrollPane, BorderLayout.CENTER);
+        panel.add(scrollPane, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
     }
 
     // Metodo vuoto per aggiornare la lista degli invitati
     public void updateGuestsList() {
-        // Metodo per aggiungere gli invitati al pannello scrollabile
+        // Metodo per aggiungere gli invitati al pannello scrollabile //TODO
     }
 }
