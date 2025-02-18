@@ -39,7 +39,7 @@ public class BigliettoDAO implements IBigliettoDAO {
         }
     }
     
-    //SELECT PERSONA
+    //TROVA PERSONA DAL BIGLIETTO
     public Persona getPersona(Biglietto biglietto) {
     	
     	conn=DBConnection.startConnection(conn);
