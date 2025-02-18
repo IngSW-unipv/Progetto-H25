@@ -2,9 +2,13 @@ package it.unipv.ingsfw.aga.model.biglietto;
 
 import java.util.Date;
 
+import it.unipv.ingsfw.aga.model.banco.QrCode;
+import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.model.persone.Persona;
+
 public class BigliettoFactory {
-    public static Biglietto creaBiglietto(String nome, String cognome, String email, int numBiglietto, Date dataEvento) {
-        return new Biglietto(nome, cognome, email, numBiglietto, dataEvento);
+    public static Biglietto creaBiglietto(Persona persona, QrCode codeQR, Evento evento,boolean accessoEffettuato, boolean guardarobaEffettuato) {
+        return new Biglietto(persona,codeQR, evento,accessoEffettuato, guardarobaEffettuato);
     }
 }
 
