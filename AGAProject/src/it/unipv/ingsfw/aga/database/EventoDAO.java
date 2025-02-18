@@ -97,6 +97,7 @@ public class EventoDAO implements IEventoDAO {
 		
 			rs1.next();
 			ev=new Evento(rs1.getDate(1), rs1.getString(2),rs1.getInt(3),rs1.getBoolean(4));	
+			DBConnection.closeConnection(conn);
 			return ev;
 		
 		}catch (Exception e){
@@ -117,12 +118,14 @@ public class EventoDAO implements IEventoDAO {
 	
 		try{
 			st1 = conn.createStatement();
-			String query="INSERT INTO EVENTO VALUES('"+evento.getData()+"',\""+evento.getLocation()+"\","+evento.getMaxPartecipanti()+");";
+			String query="INSERT INTO EVENTO VALUES('"+evento.getData()+"',\""+evento.getLocation()+"\","+evento.getMaxPartecipanti()+",'"
+			+evento.getVenditeAperte()+"');";
 			st1.executeUpdate(query);
 	
 		}catch (Exception e){
 			//e.printStackTrace();
 			System.out.println("Impossibile aggiungerlo data già occupata");
+			DBConnection.closeConnection(conn);
 		}
 	
 		DBConnection.closeConnection(conn);
@@ -152,12 +155,61 @@ public class EventoDAO implements IEventoDAO {
 	}*/
 	
 	
+	//SET VENDITE APERTE BY DATA
+	public void setVenditeAperte (Evento evento){
+		
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		int b;//nel db boolean =1 o 0
+		if(evento.getVenditeAperte())b=1;
+		else b=0;
+	
+		try{
+			st1 = conn.createStatement();
+			String query="UPDATE EVENTO SET VENDITEAPERTE='"+b +"' WHERE DATA='"+evento.getData()+"';";
+			st1.executeUpdate(query);
+	
+		}catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Impossibile: evento non trovato");
+			DBConnection.closeConnection(conn);
+		}
+	}
+	
+	
+	//GET VENDITE APERTE BY DATA
+	public boolean getVenditeAperte (Evento evento){
+		
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		boolean b;
+	
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * FROM EVENTO WHERE DATA='"+evento.getData()+"'";
+			rs1=st1.executeQuery(query);
+			
+			rs1.next();
+			b=rs1.getBoolean(4);
+			DBConnection.closeConnection(conn);
+			return b;
+	
+		}catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Impossibile: evento non trovato");
+			DBConnection.closeConnection(conn);
+			return false;
+		}
+	}
+	
+	
 	
 	public static void main(String []args) throws ParseException {
 		EventoDAO persona=new EventoDAO();
 		//persona.selectAll();
 		String string = "2022-06-22";
-		String string2 = "2022-06-23";
+		
 		 
 		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		 Date parsed = format.parse(string);
@@ -168,15 +220,12 @@ public class EventoDAO implements IEventoDAO {
 		/*System.out.println(sql);
 		 persona.selectByData(sql);*/
 		Evento e=new Evento(sql,"milano",130,false);
-		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
-		Date parsed2 = format2.parse(string2);
-		java.sql.Date sql2 = new java.sql.Date(parsed2.getTime());
-		Evento nd=new Evento(sql2,null,0,false);
-		//e.setData(nd);
-		//Evento a=new Evento (persona.searchByData(nd));
-		///System.out.println(a);
+		boolean b=persona.getVenditeAperte(e);
+		System.out.println(b);
+		Evento e1=new Evento(sql,"milano",130,true);
+		persona.setVenditeAperte(e1);
 		
-		//persona.addEvento(e);
+		
 	}
 
 }

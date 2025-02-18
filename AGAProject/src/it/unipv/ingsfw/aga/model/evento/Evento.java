@@ -81,6 +81,7 @@ public class Evento {
         return maxPartecipanti;
     }
     
+    //DAL DAO
     public boolean getVenditeAperte() {
     	return venditeAperte;
     }
