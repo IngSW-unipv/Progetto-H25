@@ -40,7 +40,7 @@ public class PersistenceFacade {
 	public void setStatoBiglietto (String codeQR, boolean stato) {
 		try {
 			Biglietto biglietto=new Biglietto(codeQR, stato);
-			iBigliettoDAO.setStatoBiglietto(biglietto);//iMovieDao.getMovie(id);se
+			iBigliettoDAO.setStatoBiglietto(biglietto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -92,7 +92,14 @@ public class PersistenceFacade {
 			iPersonaDAO.addOrganizzatore(organizzatore);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
+
+		// TODO: CAMBIO STATO VENDITA BIGLIETTI
+		// TODO: GETSTATOVENDITE
+		// TODO:GETGRUCCIA
+		// TODO: SETGRUCCIA
+		// TODO:
+		// TODO:
 	}
 	
 	

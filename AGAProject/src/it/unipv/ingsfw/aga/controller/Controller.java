@@ -39,6 +39,7 @@ public class Controller implements EventSelectionListener {
         containerPanel = new JPanel(cardLayout);
         navbar = new Navbar(cardLayout, containerPanel);
         loginPage = new LoginPage();
+
         registerPage = new RegisterPage(cardLayout, containerPanel);
         mainPage = new MainPage(cardLayout, containerPanel);
         addGuestPage = new AddGuestPage(cardLayout, containerPanel);
@@ -81,19 +82,19 @@ public class Controller implements EventSelectionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Login fallito!");
             }*/
-            if(persistence.login(username, password)==0) {
-            	cardLayout.show(containerPanel, "main");
+            if(true){//persistence.login(username, password)==0) {    //TODO: impostare try - catch
+            	cardLayout.show(containerPanel, "events");
             	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
             	}
             else if(persistence.login(username, password)==1) {
-            	cardLayout.show(containerPanel, "main");
+            	cardLayout.show(containerPanel, "events");
             	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
             	}
             else JOptionPane.showMessageDialog(null, "Login fallito!");
         });
     }
 
-    // Metodo per caricare gli eventi e aggiungerli alla EventsPage
+    // Metodo per caricare gli eventi e aggiungerli alla EventsPage  //TODO: prendili dal db
     private void loadEvents() {
         String[] eventNames = {"Evento 1", "Evento 2", "Evento 3"}; // Eventi fittizi
         for (String eventName : eventNames) {
@@ -107,11 +108,11 @@ public class Controller implements EventSelectionListener {
         System.out.println("Hai selezionato: " + eventName);
         // Mostra la pagina principale
         cardLayout.show(containerPanel, "main");
-        loginPage.getLoginButton().addActionListener(new ActionListener() {
+        /*loginPage.getLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
                 String password = loginPage.getPassword();
-                if(persistence.login(username, password)==0) {
+                if(persistence.login(username, password)==0) {  //PERCHééééééééé
                 	cardLayout.show(containerPanel, "main");
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
                 	}
@@ -120,19 +121,20 @@ public class Controller implements EventSelectionListener {
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
                 	}
                 else JOptionPane.showMessageDialog(null, "Login fallito!");
-                	
+
                 /*if (model.checkLogin(username, password)) {
                     if (model.getStaffFlag(username) == 1) {
                         cardLayout.show(containerPanel, "main");
-                        mainPage.setRolePermissions((model.getStaffFlag(username) == 1)); //TODO: TO BE ADAPTED true if organizer false if staff
+                        mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
                     } else {
                         JOptionPane.showMessageDialog(null, "Non sei autorizzato ad accedere come staff.");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Login fallito!");
-                }*/
+                }
             }
-        }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
+        });*/
+        loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
                 String password = loginPage.getPassword();
@@ -195,7 +197,8 @@ public class Controller implements EventSelectionListener {
         mainPage.getModificaVenditeButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Azioni per modificare le vendite //TODO: collega con DB
-                cardLayout.show(containerPanel, "modificaVendite"); // Esempio: mostra il pannello dedicato
+                JOptionPane.showMessageDialog(null, "Stato delle vendite modificato");
+                //cardLayout.show(containerPanel, "modificaVendite"); // Esempio: mostra il pannello dedicato
             }
         });
 
