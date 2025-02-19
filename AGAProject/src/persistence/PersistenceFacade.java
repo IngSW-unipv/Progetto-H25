@@ -56,7 +56,7 @@ public class PersistenceFacade {
 	}
 	
 	//VERIFICA LOGIN
-	public int login (String email, String password) {
+	public int login (String email, String password){
 		int result=0;
 		//RETURN 1=STAFFER
 		//RETURN 2=ORGANIZZATORE
@@ -76,11 +76,13 @@ public class PersistenceFacade {
 			}
 			
 		}catch(Exception e) {
-			e.printStackTrace(); 
+			//e.printStackTrace(); 
+			result=0;//LOGIN CON CREDENZIALI VUOTE
 		}
-		return result;//=0 NON E' STAFFER/ORGANIZZATORE/CREDENZIALI SBAGLIATE
-			
+		return result;//=0 NON E' STAFFER/ORGANIZZATORE/CREDENZIALI SBAGLIATE	
 	}
+	
+	//REGISTRAZIONE ? COSA REGISTRO CON REGISTAZIONE STAFF O ORGANIZZATORE
 	
 	
 	
