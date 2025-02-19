@@ -82,11 +82,11 @@ public class Controller implements EventSelectionListener {
                 JOptionPane.showMessageDialog(null, "Login fallito!");
             }*/
             if(persistence.login(username, password)==0) {
-            	cardLayout.show(containerPanel, "main");
+            	cardLayout.show(containerPanel, "events");
             	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
             	}
             else if(persistence.login(username, password)==1) {
-            	cardLayout.show(containerPanel, "main");
+            	cardLayout.show(containerPanel, "events");
             	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
             	}
             else JOptionPane.showMessageDialog(null, "Login fallito!");
