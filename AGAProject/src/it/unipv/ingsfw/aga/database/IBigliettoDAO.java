@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 public interface IBigliettoDAO {
    // void aggiungiBiglietto(Biglietto biglietto) throws SQLException;
-	public Persona getCreatoreBiglietto(Biglietto biglietto);
+	
 	public void creaBiglietto(Biglietto biglietto);
+	public Persona getCreatoreBiglietto(Biglietto biglietto);
 	public void setStatoBiglietto(Biglietto biglietto);
 }

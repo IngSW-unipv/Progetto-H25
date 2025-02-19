@@ -45,11 +45,12 @@ public class Biglietto {
         this.codeQR = codeQR;
     }
     
-    public Biglietto(QrCode codeQR, boolean accessoEffettuato) {
+    public Biglietto(String codeQR, boolean accessoEffettuato) {
         this.creatoreBiglietto= null;
         this.evento=null;
         this.accessoEffettuato=accessoEffettuato;
-        this.codeQR = codeQR;
+        QrCode code=new QrCode(codeQR);
+        this.codeQR = code;
     }
     
     public Persona getCreatoreBiglietto() {

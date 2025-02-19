@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.unipv.ingsfw.aga.model.persone.*;
 
 
-public interface IPersonaDao {
+public interface IPersonaDAO {
 	public ArrayList<Persona> selectAll();
 	public ArrayList<Persona> selectCFNomeCognome();
 	public ArrayList<Persona> selectStaffCFNomeCognome();

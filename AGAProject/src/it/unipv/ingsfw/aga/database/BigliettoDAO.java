@@ -116,8 +116,8 @@ public class BigliettoDAO implements IBigliettoDAO {
     public static void main(String []args) {
 		BigliettoDAO b=new BigliettoDAO();
 		Persona a;
-		QrCode codeQR=new QrCode("1b4b76e0-3c14-46b9-9685-e11b6c12e084");
-		Biglietto i=new Biglietto(codeQR,false);
+		String code="1b4b76e0-3c14-46b9-9685-e11b6c12e084";
+		Biglietto i=new Biglietto(code,false);
 		b.setStatoBiglietto(i);
 		//a=b.getCreatoreBiglietto(i);
 		//System.out.println(a.toString());

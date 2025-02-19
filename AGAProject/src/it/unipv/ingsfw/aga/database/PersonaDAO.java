@@ -9,7 +9,7 @@ import it.unipv.ingsfw.aga.model.persone.*;
 import connection.DBConnection;
 
 
-public class PersonaDAO implements IPersonaDao {
+public class PersonaDAO implements IPersonaDAO {
 	private Connection conn;
 	//private String schema; tolto ripetitivo difficile adattivita
 	
