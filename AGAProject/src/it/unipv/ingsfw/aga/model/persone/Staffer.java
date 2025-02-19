@@ -1,5 +1,6 @@
 package it.unipv.ingsfw.aga.model.persone;
 
+
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.banco.QrReadingStrategyFactory;
 import it.unipv.ingsfw.aga.model.banco.Type;
@@ -20,11 +21,17 @@ public class Staffer extends Persona{
         //this.limiteInviti = 5;
         this.password = password;//per il db se no non riesco a prelevare tutti i dati
     }
+    
+    /*public Staffer(String email, String password) {
+        super(null,null,null,email);
+        this.password =password;
+    }*/
 
     public void setPassword(String password){
         this.password = password;
     }
 
+    @Override
     public String getPassword(){
         return password;
     }

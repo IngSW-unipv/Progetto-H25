@@ -36,6 +36,16 @@ public class Persona {
         this.email = p.getEmail();
     }
     
+    public Persona(String email) {
+        this.codiceFiscale =null;
+        this.nome= null;
+        this.cognome = null;
+        this.email = email;
+    }
+    
+    public String getPassword() {
+    	return null;
+    }
 
     public String getCodiceFiscale() {
         return codiceFiscale;
