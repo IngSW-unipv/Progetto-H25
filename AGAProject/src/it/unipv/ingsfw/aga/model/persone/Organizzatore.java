@@ -18,6 +18,7 @@ public class Organizzatore extends Persona{
         this.password = password;
     }
    
+    @Override
     public String getPassword() {
         return password;
     }

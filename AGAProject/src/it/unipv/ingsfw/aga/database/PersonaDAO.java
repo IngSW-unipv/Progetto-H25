@@ -226,6 +226,35 @@ public class PersonaDAO implements IPersonaDAO {
 	}
 
 	
+	//SEARCH BY EMAIL -> LOGIN
+	public Persona login (Persona persona){
+			
+			conn=DBConnection.startConnection(conn);
+			Statement st1;
+			ResultSet rs1;
+			Persona p;
+	
+			try{
+				st1 = conn.createStatement();
+				String query="SELECT * from persona where EMAIL=\""+persona.getEmail()+"\";";
+				rs1=st1.executeQuery(query);
+		
+				rs1.next();
+				if(rs1.getBoolean(6))
+					p=new Organizzatore(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+							rs1.getString(5));
+				else p=new Staffer(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4), 
+						rs1.getString(5));
+				DBConnection.closeConnection(conn);
+				return p;
+							
+		}catch (Exception e){
+			//e.printStackTrace(); 
+			DBConnection.closeConnection(conn);
+			return p=new Persona();//nessun cf corrispondente trovato	
+		}		
+	}
+	
 	
 	public static void main(String []args) {
 		PersonaDAO persona=new PersonaDAO();
