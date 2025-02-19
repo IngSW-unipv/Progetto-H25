@@ -3,9 +3,11 @@ package it.unipv.ingsfw.aga.controller;
 import persistence.PersistenceFacade;
 import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
-
+import it.unipv.ingsfw.aga.model.banco.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Controller implements EventSelectionListener {
 
@@ -44,7 +46,7 @@ public class Controller implements EventSelectionListener {
         entrancePage = new EntrancePage(cardLayout, containerPanel);
         cloakroomPage = new CloakroomPage(cardLayout, containerPanel);
         listaInvitatiPage = new ListaInvitatiPage(cardLayout, containerPanel);
-        eventsPage = new EventsPage(cardLayout, containerPanel);  // Senza il controller come argomento
+        eventsPage = new EventsPage(cardLayout, containerPanel);
         aggiungiStaffPage = new AggiungiStaffPage(cardLayout, containerPanel);
 
         containerPanel.add(loginPage, "login");
@@ -161,7 +163,7 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 String name = addGuestPage.getGuestName();
                 String email = addGuestPage.getGuestEmail();
-                String phone = addGuestPage.getGuestPhone();
+                String surname = addGuestPage.getGuestSurname();
                 JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
             }
         });
