@@ -1,5 +1,6 @@
 package it.unipv.ingsfw.aga.controller;
 
+import persistence.PersistenceFacade;
 import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.model.banco.BancoIngresso;
 import it.unipv.ingsfw.aga.model.banco.BancoIngressoFactory;
@@ -21,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller {
+	private PersistenceFacade persistence;
     private Model model;
     private LoginPage loginPage;
     private MainPage mainPage;
@@ -39,6 +41,7 @@ public class Controller {
     private JFrame frame;
 
     public Controller() {
+    	persistence= new PersistenceFacade();
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -74,7 +77,17 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
                 String password = loginPage.getPassword();
-                if (model.checkLogin(username, password)) {
+                if(persistence.login(username, password)==1) {
+                	cardLayout.show(containerPanel, "main");
+                	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
+                	}
+                else if(persistence.login(username, password)==2) {
+                	cardLayout.show(containerPanel, "main");
+                	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
+                	}
+                else JOptionPane.showMessageDialog(null, "Login fallito!");
+                	
+                /*if (model.checkLogin(username, password)) {
                     if (model.getStaffFlag(username) == 1) {
                         cardLayout.show(containerPanel, "main");
                         mainPage.setRolePermissions((model.getStaffFlag(username) == 1)); //TODO: TO BE ADAPTED true if organizer false if staff
@@ -83,7 +96,7 @@ public class Controller {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Login fallito!");
-                }
+                }*/
             }
         }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

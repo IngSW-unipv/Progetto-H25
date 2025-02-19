@@ -2,6 +2,7 @@ package it.unipv.ingsfw.aga.view;
 
 import javax.swing.*;
 import java.awt.*;
+import persistence.PersistenceFacade;
 
 public class LoginPage extends JPanel {
     private JTextField usernameField;
@@ -78,4 +79,5 @@ public class LoginPage extends JPanel {
     public JButton getRegisterButton() {
         return registerButton;
     }
+    
 }
