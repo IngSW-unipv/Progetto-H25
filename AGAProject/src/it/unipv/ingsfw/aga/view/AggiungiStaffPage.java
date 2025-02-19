@@ -33,10 +33,12 @@ public class AggiungiStaffPage extends JPanel {
         emailField.setFont(new Font("Arial", Font.PLAIN, 14));
         emailField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        submitButton = new JButton("Aggiungi");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        submitButton = new JButton("Invia");
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
         submitButton.setBackground(Color.lightGray);
         submitButton.setForeground(Color.BLACK);
+        buttonPanel.add(submitButton);
 
         panel.add(usernameLabel);
         panel.add(usernameField);

@@ -5,7 +5,7 @@ import java.awt.*;
 import it.unipv.ingsfw.aga.view.Navbar;
 
 public class AddGuestPage extends JPanel {
-    private JTextField guestNameField, guestEmailField, guestPhoneField;
+    private JTextField guestNameField,guestSurnameField,guestEmailField;
     private JButton submitButton;
     private Navbar navbar;
 
@@ -27,19 +27,19 @@ public class AddGuestPage extends JPanel {
         panel.add(new JLabel("Nome:"));
         panel.add(guestNameField);
 
+        guestSurnameField = new JTextField();
+        guestSurnameField.setFont(new Font("Arial", Font.BOLD, 14));
+        // guestPhoneField.setPreferredSize(textFieldSize);
+        guestSurnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        panel.add(new JLabel("Cognome:"));
+        panel.add(guestSurnameField);
+
         guestEmailField = new JTextField();
         guestEmailField.setFont(new Font("Arial", Font.BOLD, 14));
         // guestEmailField.setPreferredSize(textFieldSize);
         guestEmailField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.add(new JLabel("Email:"));
         panel.add(guestEmailField);
-
-        guestPhoneField = new JTextField();
-        guestPhoneField.setFont(new Font("Arial", Font.BOLD, 14));
-        // guestPhoneField.setPreferredSize(textFieldSize);
-        guestPhoneField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panel.add(new JLabel("Telefono:"));
-        panel.add(guestPhoneField);
 
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -68,7 +68,7 @@ public class AddGuestPage extends JPanel {
         return guestEmailField.getText();
     }
 
-    public String getGuestPhone() {
-        return guestPhoneField.getText();
+    public String getGuestSurname() {
+        return guestSurnameField.getText();
     }
 }
