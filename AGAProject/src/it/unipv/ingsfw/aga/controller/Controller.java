@@ -76,11 +76,20 @@ public class Controller implements EventSelectionListener {
         loginPage.getLoginButton().addActionListener(e -> {
             String username = loginPage.getUsername();
             String password = loginPage.getPassword();
-            if (model.checkLogin(username, password)) {
+            /*if (model.checkLogin(username, password)) {
                 cardLayout.show(containerPanel, "events");
             } else {
                 JOptionPane.showMessageDialog(null, "Login fallito!");
-            }
+            }*/
+            if(persistence.login(username, password)==0) {
+            	cardLayout.show(containerPanel, "main");
+            	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
+            	}
+            else if(persistence.login(username, password)==1) {
+            	cardLayout.show(containerPanel, "main");
+            	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
+            	}
+            else JOptionPane.showMessageDialog(null, "Login fallito!");
         });
     }
 
