@@ -77,11 +77,11 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
                 String password = loginPage.getPassword();
-                if(persistence.login(username, password)==1) {
+                if(persistence.login(username, password)==0) {
                 	cardLayout.show(containerPanel, "main");
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
                 	}
-                else if(persistence.login(username, password)==2) {
+                else if(persistence.login(username, password)==1) {
                 	cardLayout.show(containerPanel, "main");
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
                 	}
@@ -188,6 +188,7 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 // Recupera il codice inserito dall'utente
                 String code = entrancePage.getVerificationCode();
+                
 
                 // Supponendo che il model abbia già un'istanza di BancoIngresso,
                 // chiama il metodo accesso() passando il codice

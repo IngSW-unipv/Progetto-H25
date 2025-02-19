@@ -39,10 +39,11 @@ public class Biglietto {
         this.codeQR = new QrCode();
     }
     
-    public Biglietto(QrCode codeQR) {
+    public Biglietto(String codeQR) {
         this.creatoreBiglietto= null;
         this.evento=null;
-        this.codeQR = codeQR;
+        QrCode code=new QrCode(codeQR);
+        this.codeQR = code;
     }
     
     public Biglietto(String codeQR, boolean accessoEffettuato) {

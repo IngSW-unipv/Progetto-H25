@@ -34,15 +34,6 @@ public class PersistenceFacade {
 		iPersonaDAO=new PersonaDAO();
 		iEventoDAO=new EventoDAO();
 		iBancoDAO=new BancoDAO();
-		/*conn=DBConnection.startConnection(conn);
-		iMovieDao = new MovieRdbDao(connection);
-		iRoomDao = new RoomRdbDao(connection);
-		iProjectionDao = new ProjectionRdbDao(connection);
-		iCouponDao = new CouponRdbDao(connection);
-		iDiscountDao = new DiscountRdbDao(connection);
-		iOccupiedSeatDao = new OccupiedSeatRdbDao(connection);
-		iReservationDao = new ReservationRdbDao(connection);
-		iCinemaDao = new CinemaRdbDao(connection);*/
 	}///noi la connessione la facciamo singola 
 	
 	//SET STATO DEL BIGLIETTO (STRING E BOOL)
@@ -55,12 +46,25 @@ public class PersistenceFacade {
 		}		
 	}
 	
+	//GET STATO DEL BIGLIETTO (STRING E BOOL)
+	public int getStatoBiglietto (String codeQR) {
+		int result=2;
+		try {
+			Biglietto biglietto=new Biglietto(codeQR);
+			result=iBigliettoDAO.getStatoBiglietto(biglietto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+		
+	
 	//VERIFICA LOGIN
 	public int login (String email, String password){
-		int result=0;
-		//RETURN 1=STAFFER
-		//RETURN 2=ORGANIZZATORE
-		//RETURN NULL=ERRORE
+		int result=2;
+		//RETURN 0=STAFFER
+		//RETURN 1=ORGANIZZATORE
+		//RETURN 2=ERRORE
 		try {
 			Persona persona=new Persona(email);
 			Persona personaDB;
@@ -68,27 +72,34 @@ public class PersistenceFacade {
 			try {
 				personaDB=(Organizzatore)iPersonaDAO.login(persona);
 				if(personaDB.getPassword().equals(password)) 
-					result=2;//E' UN ORGANIZZATORE LOGIN GIUSTO
+					result=1;//E' UN ORGANIZZATORE LOGIN GIUSTO
 			}catch(Exception e) {
 				personaDB=(Staffer)iPersonaDAO.login(persona);
 				if(personaDB.getPassword().equals(password)) 
-					result=1;//E' UNO STAFFER LOGIN GIUSTO
-			}
-			
+					result=0;//E' UNO STAFFER LOGIN GIUSTO
+			}			
 		}catch(Exception e) {
 			//e.printStackTrace(); 
-			result=0;//LOGIN CON CREDENZIALI VUOTE
+			result=2;//LOGIN CON CREDENZIALI VUOTE
 		}
 		return result;//=0 NON E' STAFFER/ORGANIZZATORE/CREDENZIALI SBAGLIATE	
 	}
 	
-	//REGISTRAZIONE ? COSA REGISTRO CON REGISTAZIONE STAFF O ORGANIZZATORE
+	//REGISTRAZIONE ORGANIZZATORE
+	public void registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password) {
+		try {
+			Organizzatore organizzatore=new Organizzatore(codiceFiscale, nome, cognome, email, password);
+			iPersonaDAO.addOrganizzatore(organizzatore);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
 	
 	
 	
 	public static void main(String []args) {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
-		//System.out.println(a.login("alice@", "w"));
+		//System.out.println(a.getStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084"));
 	}
 }
