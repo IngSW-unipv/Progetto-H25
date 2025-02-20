@@ -273,8 +273,8 @@ public class Controller implements EventSelectionListener {
         cloakroomPage.getDeliverButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
-                boolean isValid = BancoGuardarobaFactory.getInstance(0).consegnaCapo(code);
-                JOptionPane.showMessageDialog(null, "Oggetto consegnato: " + code);
+                String message = BancoGuardarobaFactory.getInstance(0).consegnaCapo(code);
+                JOptionPane.showMessageDialog(null, message);
             }
         });
 
@@ -295,6 +295,18 @@ public class Controller implements EventSelectionListener {
                 // TODO: Logica per aggiungere lo staff al modello
                 JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
                 cardLayout.show(containerPanel, "main");
+            }
+        });
+
+        registerPage.getSubmitButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String email = registerPage.getEmail();
+                String password = registerPage.getPassword();
+                String nome = registerPage.getName();
+                String cognome = registerPage.getSurname();
+                //TODO: logica DB
+
+                cardLayout.show(containerPanel, "events");
             }
         });
 

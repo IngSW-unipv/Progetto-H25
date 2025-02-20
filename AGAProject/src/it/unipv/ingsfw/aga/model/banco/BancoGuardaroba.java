@@ -53,14 +53,24 @@ public class BancoGuardaroba extends Banco {
         }
     }
 
-    public boolean consegnaCapo(String code) {
+    public String consegnaCapo(String code) {
         QrCode qr = readQR(code);
-        this. grucceAssegnate += 1;
         if (this.grucceAssegnate < this.maxGrucce) {
-            return assegnaGruccia(qr, this.grucceAssegnate);
+            if(restituzioneCapo(code) == -1)//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
+                {
+            this.grucceAssegnate += 1;
+            if (assegnaGruccia(qr, this.grucceAssegnate)){
+            return "Oggetto inserito sulla gruccia: " + this.grucceAssegnate ;}
+            else {
+                return "Errore nell'assegnazione della gruccia";
+            }
+        }else{
+                System.out.println("Gruccia già assegnata");
+                return "Gruccia già assegnata";
+            }
         }else {
             System.out.println("Grucce terminate");
-            return false;
+            return "Grucce terminate";
         }
     }
 
