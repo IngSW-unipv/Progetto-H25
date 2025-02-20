@@ -50,6 +50,9 @@ public class PersistenceFacade {
 				}
 			}
 		}
+		else {
+			System.out.println("RRR");//ERRORE DI OGGI POMERIGGIO
+		}
 		return instance;
 	}
 
@@ -168,6 +171,7 @@ public class PersistenceFacade {
 			result=iBigliettoDAO.setGruccia(biglietto);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("fff");
 		}	
 		return result;
 	}
@@ -181,6 +185,7 @@ public class PersistenceFacade {
 			result=iBigliettoDAO.getGruccia(biglietto);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("f");
 		}	
 		return result;
 	}
@@ -194,16 +199,17 @@ public class PersistenceFacade {
 			result=iBancoDAO.getMaxGrucce(evento);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ff");
 		}	
 		return result;
 	}
 	
 	
 	//GET NUMERO GRUCCE ASSEGNATE
-	public int getNumeroGrucceAssegnate(String data) {
+	public int getNumeroGrucceAssegnate(Evento evento) {
 		int result=-1;
 		try {
-			Evento evento=new Evento(data);
+			
 			result=iBancoDAO.getMaxGrucce(evento);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -15,5 +15,5 @@ public interface IBigliettoDAO {
 	public int getStatoBiglietto(Biglietto biglietto);
 	public boolean setGruccia(Biglietto biglietto);
 	public int getGruccia(Biglietto biglietto);
-	public int getNumeroGrucciaAssegnate (Evento evento);
+	public int getNumeroGrucceAssegnate (Evento evento);
 }

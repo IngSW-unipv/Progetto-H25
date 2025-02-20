@@ -273,7 +273,7 @@ public class Controller implements EventSelectionListener {
         cloakroomPage.getDeliverButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
-                boolean isValid = BancoGuardarobaFactory.getInstance(0).consegnaCapo(code);
+                boolean isValid = BancoGuardarobaFactory.getInstance(0,evento).consegnaCapo(code);
                 JOptionPane.showMessageDialog(null, "Oggetto consegnato: " + code);
             }
         });
@@ -282,7 +282,7 @@ public class Controller implements EventSelectionListener {
         cloakroomPage.getReturnButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
-                int gruccia = BancoGuardarobaFactory.getInstance(0).restituzioneCapo(code);
+                int gruccia = BancoGuardarobaFactory.getInstance(0,evento).restituzioneCapo(code);
                 JOptionPane.showMessageDialog(null, "Numero grcuccia: " + gruccia);
             }
         });

@@ -10,7 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import connection.DBConnection;
 
@@ -185,7 +188,7 @@ public class BigliettoDAO implements IBigliettoDAO {
     
 	 
 	//GET NUMERO GRUCCE ASSEGNATE
-	 public int getNumeroGrucciaAssegnate (Evento evento) {
+	 public int getNumeroGrucceAssegnate (Evento evento) {
 	    	
 	    	conn=DBConnection.startConnection(conn);
 			Statement st1;
@@ -193,12 +196,15 @@ public class BigliettoDAO implements IBigliettoDAO {
 			int result=-1;
 			try{
 				st1 = conn.createStatement();
-				String query="SELECT MAX(GRUCCIA) FROM BIGLIETTO WHERE DATA_EVENTO='"+evento.getData()+";";
+				System.out.println(""+evento.getData());
+				String query="SELECT MAX(GRUCCIA) FROM BIGLIETTO WHERE DATA_EVENTO='"+evento.getData()+"';";
 				rs1=st1.executeQuery(query);
 				
 				rs1.next();
-				result=rs1.getInt(0);
-			}catch (Exception e){
+				result=rs1.getInt(1);
+				
+			}
+			catch (Exception e){
 				e.printStackTrace();
 			}
 			DBConnection.closeConnection(conn);			
@@ -206,14 +212,21 @@ public class BigliettoDAO implements IBigliettoDAO {
 		}
 	 
     
-    public static void main(String []args) {
+    public static void main(String []args) throws ParseException {
 		BigliettoDAO b=new BigliettoDAO();
 		Persona a;
-		String code="1b4b76e0-3c14-46b9-9685-e11b6c12e084";
-		Biglietto i=new Biglietto(code,false);
-		b.setStatoBiglietto(i);
+		//String code="1b4b76e0-3c14-46b9-9685-e11b6c12e084";
+		///Biglietto i=new Biglietto(code,false);
+		//b.setStatoBiglietto(i);
 		//a=b.getCreatoreBiglietto(i);
-		//System.out.println(a.toString());
+		String c="9bde25f5-c9c1-40dc-98ea-7f5eb300a272";
+		String dataName="1998-07-13";
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());
+		Evento evento=new Evento(data);
+		
+		System.out.println(""+b.getNumeroGrucceAssegnate(evento));
 	}
 	
 
