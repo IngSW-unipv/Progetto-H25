@@ -42,7 +42,7 @@ public class Banco {
     }
 
     public boolean validateQr(QrCode qr){return false;};
-    
+
     public QrCode readQR() {
         if (qrStrategy == null) {
             throw new IllegalStateException("QR Strategy non impostata.");
@@ -59,6 +59,11 @@ public class Banco {
         QrCode qr = qrStrategy.readQR(code);
         System.out.println("Reading QR code at entrance banco: " + getNumeroBanco());
         return qr;
+    }
+
+    public boolean qrCodeinvalido(){
+        System.out.println("Biglietto già convalidato");
+        return false;
     }
     
     public String printEvento() {

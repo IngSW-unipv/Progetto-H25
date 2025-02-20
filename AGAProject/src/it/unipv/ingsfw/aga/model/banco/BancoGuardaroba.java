@@ -1,6 +1,7 @@
 package it.unipv.ingsfw.aga.model.banco;
-import java.sql.*;
+
 import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
 
 public class BancoGuardaroba extends Banco {
@@ -63,84 +64,39 @@ public class BancoGuardaroba extends Banco {
         }
     }
 
-    public boolean restituzioneCapo(){
+    public int restituzioneCapo(){
         QrCode qr = readQR();
-        return validateQr(qr);
+         if(validateQr(qr)) {
+             return PersistenceFacade.getInstance().getGruccia(qr.getId());
+         } else {
+            return -1;
+         }
     }
 
-    public boolean restituzioneCapo(String code){
+    public int restituzioneCapo(String code){
         QrCode qr = readQR(code);
-        return validateQr(qr);
+        if(validateQr(qr)) {
+            return PersistenceFacade.getInstance().getGruccia(qr.getId());
+        } else {
+            return -1;
+        }
+    }
+
     }
 
     public boolean assegnaGruccia(QrCode qr, int gruccia){
-        String url = "jdbc:mysql://localhost:3306/nome_database";
-        String username = "utente";
-        String password = "password";
-        String updateQuery = "UPDATE biglietti SET Gruccia = ?, NBanco = ? WHERE id = ?";
-
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             PreparedStatement stmt = conn.prepareStatement(updateQuery)) {
-
-            // Imposta i parametri della query
-            stmt.setInt(1, gruccia);
-            stmt.setInt(2, this.getNumeroBanco());// Imposta il valore del booleano a false
-            stmt.setString(3, readQR().getId());
-
-            // Esegue l'aggiornamento
-            int rowsUpdated = stmt.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Il valore booleano è stato aggiornato con successo.");
-            } else {
-                System.out.println("Nessuna tupla è stata trovata con l'ID specificato e colonna_bool = true.");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Errore SQL: " + e.getMessage());
-            e.printStackTrace();
-        }
-        catch (Exception e) {
-            System.err.println("Errore: " + e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-             //chiusura connessione
-        }
-        return true;
+        return PersistenceFacade.getInstance().setGruccia(qr.getId(),gruccia);
     }
     
-    @Override
+
     public boolean validateQr(QrCode qr){
-        String url = "jdbc:mysql://localhost:3306/nome_database"; // Cambia "nome_database"
-        String username = "utente"; // Cambia "utente"
-        String password = "password"; // Cambia "password"
-        String query = "SELECT * FROM biglietti WHERE id = ?";  //migliora per SQL INJECTIONS
-
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            // Imposta il valore del parametro nella query
-            stmt.setString(1, readQR().getId());
-
-            // Esegue la query
-            ResultSet rs = stmt.executeQuery();
-
-            // Elabora i risultati
-            while (rs.next()) {
-                if (rs.getInt("Gruccia") != 0) {System.out.println("Gruccia n°" + rs.getInt("Gruccia") ); break;} else { System.out.println("Nessuna gruccia è stata assegnata");};
+            if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1){
+                System.out.println("Biglietto valido");
+                return true;}
+            else {
+                return qrCodeinvalido();
             }
-
-        } catch (SQLException e) {
-            System.err.println("Errore SQL: " + e.getMessage());
-            e.printStackTrace();
         }
-        catch (Exception e) {
-            System.err.println("Errore: " + e.getMessage());
-            e.printStackTrace();
-        }finally {
-            //chiusura connessione
-            }
-        System.out.println("Reading QR code at entrance banco guardaroba: " + getNumeroBanco());
-        return true;
     }
     
     @Override
