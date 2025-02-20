@@ -197,6 +197,20 @@ public class PersistenceFacade {
 		}	
 		return result;
 	}
+	
+	
+	//GET NUMERO GRUCCE ASSEGNATE
+	public int getNumeroGrucceAssegnate(String data) {
+		int result=-1;
+		try {
+			Evento evento=new Evento(data);
+			result=iBancoDAO.getMaxGrucce(evento);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+		
+	}
 
 	
 	

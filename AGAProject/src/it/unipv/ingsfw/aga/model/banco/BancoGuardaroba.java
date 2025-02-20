@@ -82,7 +82,7 @@ public class BancoGuardaroba extends Banco {
         }
     }
 
-    }
+    
 
     public boolean assegnaGruccia(QrCode qr, int gruccia){
         return PersistenceFacade.getInstance().setGruccia(qr.getId(),gruccia);
@@ -97,7 +97,7 @@ public class BancoGuardaroba extends Banco {
                 return qrCodeinvalido();
             }
         }
-    }
+    
     
     @Override
     public String toString() {

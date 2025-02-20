@@ -282,8 +282,8 @@ public class Controller implements EventSelectionListener {
         cloakroomPage.getReturnButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
-                boolean isValid = BancoGuardarobaFactory.getInstance(0).restituzioneCapo(code);
-                JOptionPane.showMessageDialog(null, "Oggetto restituito: " + code);
+                int gruccia = BancoGuardarobaFactory.getInstance(0).restituzioneCapo(code);
+                JOptionPane.showMessageDialog(null, "Numero grcuccia: " + gruccia);
             }
         });
 

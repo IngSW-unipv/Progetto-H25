@@ -183,6 +183,28 @@ public class BigliettoDAO implements IBigliettoDAO {
 		return result;
 	}
     
+	 
+	//GET NUMERO GRUCCE ASSEGNATE
+	 public int getNumeroGrucciaAssegnate (Evento evento) {
+	    	
+	    	conn=DBConnection.startConnection(conn);
+			Statement st1;
+			ResultSet rs1;
+			int result=-1;
+			try{
+				st1 = conn.createStatement();
+				String query="SELECT MAX(GRUCCIA) FROM BIGLIETTO WHERE DATA_EVENTO='"+evento.getData()+";";
+				rs1=st1.executeQuery(query);
+				
+				rs1.next();
+				result=rs1.getInt(0);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			DBConnection.closeConnection(conn);			
+			return result;
+		}
+	 
     
     public static void main(String []args) {
 		BigliettoDAO b=new BigliettoDAO();
