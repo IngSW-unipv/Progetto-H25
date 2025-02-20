@@ -32,10 +32,7 @@ public class BancoIngresso extends Banco {
         return PersistenceFacade.getInstance().setStatoBiglietto(qr.getId(),true);
     }
 
-    public boolean qrCodeinvalido(){
-        System.out.println("Biglietto già convalidato");
-        return false;
-    }
+
 
     public boolean accesso(){
         QrCode qr = readQR();
