@@ -115,54 +115,73 @@ public class BigliettoDAO implements IBigliettoDAO {
 	 //GET STATO BIGLIETTO
 	 public int getStatoBiglietto(Biglietto biglietto) {
 	    	
-	    	conn=DBConnection.startConnection(conn);
-			Statement st1;
-			ResultSet rs1;
-			int b=2;//nel db boolean =1 o 0
-			//B=0 NON EFFETTUATO
-			//B=1 EFFETTUATO
-			//B=2 ERRORE
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		int b=2;//nel db boolean =1 o 0
+		//B=0 NON EFFETTUATO
+		//B=1 EFFETTUATO
+		//B=2 ERRORE
+		
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * FROM BIGLIETTO WHERE ID=\""+biglietto.getQRCodeId()+"\";";
+			rs1=st1.executeQuery(query);
 			
-			try{
-				st1 = conn.createStatement();
-				String query="SELECT * FROM BIGLIETTO WHERE ID=\""+biglietto.getQRCodeId()+"\";";
-				rs1=st1.executeQuery(query);
-				
-				rs1.next();
-				if(rs1.getBoolean(2))
-					b=1;
-				else b=0;
-			
-			}catch (Exception e){
-				e.printStackTrace();
-			}
-			DBConnection.closeConnection(conn);			
-			return b;
+			rs1.next();
+			if(rs1.getBoolean(2))
+				b=1;
+			else b=0;
+		
+		}catch (Exception e){
+			e.printStackTrace();
 		}
+		DBConnection.closeConnection(conn);			
+		return b;
+	}
 	 
 	 
 	 //SET GRUCCIA
 	 public boolean setGruccia(Biglietto biglietto) {
-	    	boolean result=false;
-	    	conn=DBConnection.startConnection(conn);
-			Statement st1;
-			
-			try{
-				st1 = conn.createStatement();
-				String query="UPDATE BIGLIETTO SET GRUCCIA="+biglietto.getNumeroGruccia()+" WHERE ID=\""+biglietto.getQRCodeId()+"\";";
-				st1.executeUpdate(query);
-				result=true;
-			
-			}catch (Exception e){
-				e.printStackTrace();
-			}
-			DBConnection.closeConnection(conn);	
-			return result;
+    	boolean result=false;
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="UPDATE BIGLIETTO SET GRUCCIA="+biglietto.getNumeroGruccia()+" WHERE ID=\""+biglietto.getQRCodeId()+"\";";
+			st1.executeUpdate(query);
+			result=true;
+		
+		}catch (Exception e){
+			e.printStackTrace();
 		}
+		DBConnection.closeConnection(conn);	
+		return result;
+	}
 	 
 	 
 	 
 	 //GET GRUCCIA
+	 public int getGruccia(Biglietto biglietto) {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		int result=-1;
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * FROM BIGLIETTO WHERE ID=\""+biglietto.getQRCodeId()+"\";";
+			rs1=st1.executeQuery(query);
+			
+			rs1.next();
+			result=rs1.getInt(5);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);			
+		return result;
+	}
     
     
     public static void main(String []args) {

@@ -159,7 +159,35 @@ public class PersistenceFacade {
 	}
 
 	
-		//
+	//SET GRUCCIA
+	public boolean setGruccia (String codeQR, int numeroGruccia) {
+		boolean result=false;
+		try {
+			Biglietto biglietto=new Biglietto (codeQR);
+			biglietto.setNumeroGruccia(numeroGruccia);
+			result=iBigliettoDAO.setGruccia(biglietto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+	
+	
+	//GET GRUCCIA
+	public int getGruccia (String codeQR, int numeroGruccia) {
+		int result=-1;
+		try {
+			Biglietto biglietto=new Biglietto (codeQR);
+			biglietto.setNumeroGruccia(numeroGruccia);
+			result=iBigliettoDAO.getGruccia(biglietto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+	
+	
+	
 		// TODO: CAMBIO STATO VENDITA BIGLIETTI
 		// TODO: GETSTATOVENDITE
 		// TODO: GETGRUCCIA

@@ -12,4 +12,6 @@ public interface IBigliettoDAO {
 	public Persona getCreatoreBiglietto(Biglietto biglietto);
 	public void setStatoBiglietto(Biglietto biglietto);
 	public int getStatoBiglietto(Biglietto biglietto);
+	public boolean setGruccia(Biglietto biglietto);
+	public int getGruccia(Biglietto biglietto);
 }
