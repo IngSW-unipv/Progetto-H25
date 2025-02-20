@@ -186,6 +186,19 @@ public class PersistenceFacade {
 	}
 	
 	
+	//MAX GRUCCE EVENTO
+	public int getMaxGrucce (String data) {
+		int result=-1;
+		try {
+			Evento evento=new Evento(data);
+			result=iBancoDAO.getMaxGrucce(evento);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+
+	
 	
 		// TODO: CAMBIO STATO VENDITA BIGLIETTI
 		// TODO: GETSTATOVENDITE
