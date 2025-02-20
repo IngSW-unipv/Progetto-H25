@@ -11,6 +11,7 @@ public interface IEventoDAO {
 	public void addEvento (Evento evento);
 	public void setVenditeAperte (Evento evento);
 	public boolean getVenditeAperte (Evento evento);
+	public ArrayList<String> getAllDate ();
 	
 		
 	

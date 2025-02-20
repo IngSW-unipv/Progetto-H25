@@ -2,6 +2,10 @@ package persistence;
 
 import connection.DBConnection;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.ArrayList;
 
 import it.unipv.ingsfw.aga.database.IBigliettoDAO;
 import it.unipv.ingsfw.aga.database.IPersonaDAO;
@@ -36,6 +40,7 @@ public class PersistenceFacade {
 		iBancoDAO=new BancoDAO();
 	}///noi la connessione la facciamo singola 
 	
+	
 	//SET STATO DEL BIGLIETTO (STRING E BOOL)
 	public void setStatoBiglietto (String codeQR, boolean stato) {
 		try {
@@ -45,6 +50,7 @@ public class PersistenceFacade {
 			e.printStackTrace();
 		}		
 	}
+	
 	
 	//GET STATO DEL BIGLIETTO (STRING E BOOL)
 	public int getStatoBiglietto (String codeQR) {
@@ -85,6 +91,7 @@ public class PersistenceFacade {
 		return result;//=0 NON E' STAFFER/ORGANIZZATORE/CREDENZIALI SBAGLIATE	
 	}
 	
+	
 	//REGISTRAZIONE ORGANIZZATORE
 	public void registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password) {
 		try {
@@ -93,20 +100,51 @@ public class PersistenceFacade {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// TODO: CAMBIO STATO VENDITA BIGLIETTI
-		// TODO: GETSTATOVENDITE
-		// TODO:GETGRUCCIA
-		// TODO: SETGRUCCIA
-		// TODO:
-		// TODO:
+	}
+		
+	
+	//GET EVENTI
+	public ArrayList<String> getEventi() {
+		ArrayList<String> result;
+		try {
+			result=iEventoDAO.getAllDate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result=null;
+		}
+		return result;
 	}
 	
 	
+	//SET STATO DEL EVENTO 
+	public void setStatoEvento (Date Data, boolean stato) {
+		try {
+			Evento evento=new Evento(Data,stato);
+			iEventoDAO.setVenditeAperte(evento);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
+		
+		// TODO: CAMBIO STATO VENDITA BIGLIETTI
+		// TODO: GETSTATOVENDITE
+		// TODO: GETGRUCCIA
+		// TODO: SETGRUCCIA
+		// TODO:
+		// TODO:
 	
-	public static void main(String []args) {
+	
+	
+	
+	public static void main(String []args) throws ParseException {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
 		//System.out.println(a.getStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084"));
+		String dataName="2024-01-13";
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());
+		a.setStatoEvento(data, false);
 	}
 }

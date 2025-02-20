@@ -52,6 +52,34 @@ public class EventoDAO implements IEventoDAO {
 	}
 	
 	
+	//PRENDI TUTTE LE DATE
+	public ArrayList<String> getAllDate (){
+			
+		ArrayList<String> result = new ArrayList<>();
+		
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		String ev;
+
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * from evento ";
+			rs1=st1.executeQuery(query);
+	
+			while(rs1.next()){
+				ev=""+rs1.getDate(1);
+	
+				result.add(ev);
+			}
+		}catch (Exception e){
+			e.printStackTrace();}
+	
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+	
+	
 	//PRINT BY LUOGO
 	public ArrayList<Evento> selectByLuogo (String luogo){
 		
@@ -161,7 +189,7 @@ public class EventoDAO implements IEventoDAO {
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
 		int b;//nel db boolean =1 o 0
-		if(evento.getVenditeAperte())b=1;
+		if(evento.getVenditeAperte()==true)b=1;
 		else b=0;
 	
 		try{

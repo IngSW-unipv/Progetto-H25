@@ -7,6 +7,8 @@ import it.unipv.ingsfw.aga.model.persone.*;
 import it.unipv.ingsfw.aga.model.persone.PersonaFactory;
 import it.unipv.ingsfw.aga.database.EventoDAO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -32,6 +34,30 @@ public class Evento {
     	this.location=location;
     	this.maxPartecipanti=maxPartecipanti;
     	this.venditeAperte=venditeAperte;
+    }
+    
+    public Evento(String dataName) throws ParseException  {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());
+    	this.data=data;
+    	this.location=null;
+    	this.maxPartecipanti=0;
+    	this.venditeAperte=false;
+    }
+    
+    public Evento(Date data)  {
+    	this.data=data;
+    	this.location=null;
+    	this.maxPartecipanti=0;
+    	this.venditeAperte=false;
+    }
+    
+    public Evento(Date data,boolean stato)  {
+    	this.data=data;
+    	this.location=null;
+    	this.maxPartecipanti=0;
+    	this.venditeAperte=stato;
     }
     
     public Evento(Evento evento) {

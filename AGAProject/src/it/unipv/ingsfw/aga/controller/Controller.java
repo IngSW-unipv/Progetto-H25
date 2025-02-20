@@ -4,13 +4,20 @@ import persistence.PersistenceFacade;
 import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
 import it.unipv.ingsfw.aga.model.banco.*;
+import it.unipv.ingsfw.aga.model.evento.Evento;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 
 public class Controller implements EventSelectionListener {
-
+	private Evento evento;//USATO PER TENER TRACCIA DELL'EVENTO
 	private PersistenceFacade persistence;
     private Model model;
     private LoginPage loginPage;
@@ -94,9 +101,16 @@ public class Controller implements EventSelectionListener {
     }
 
     // Metodo per caricare gli eventi e aggiungerli alla EventsPage
-    private void loadEvents() {
+    /*private void loadEvents() {
         String[] eventNames = {"Evento 1", "Evento 2", "Evento 3"}; // Eventi fittizi
         for (String eventName : eventNames) {
+            eventsPage.addEventButton(eventName);
+        }
+    }*/
+    
+    private void loadEvents() {
+    	ArrayList<String> result=persistence.getEventi();
+        for (String eventName : result) {
             eventsPage.addEventButton(eventName);
         }
     }
@@ -107,6 +121,15 @@ public class Controller implements EventSelectionListener {
         System.out.println("Hai selezionato: " + eventName);
         // Mostra la pagina principale
         cardLayout.show(containerPanel, "main");
+        try {
+    		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    		Date parsed = format.parse(eventName);
+    		java.sql.Date data= new java.sql.Date(parsed.getTime());
+			evento= new Evento(data);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Evento non riuscito");
+		}
         loginPage.getLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
@@ -118,7 +141,7 @@ public class Controller implements EventSelectionListener {
                 else if(persistence.login(username, password)==1) {
                 	cardLayout.show(containerPanel, "main");
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
-                	}
+                }
                 else JOptionPane.showMessageDialog(null, "Login fallito!");
                 	
                 /*if (model.checkLogin(username, password)) {
@@ -194,6 +217,7 @@ public class Controller implements EventSelectionListener {
         // Listener per il pulsante "Modifica Vendite"
         mainPage.getModificaVenditeButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	persistence.setStatoEvento(evento.getData(),false);//true o false solo per prova
                 // Azioni per modificare le vendite //TODO: collega con DB
                 cardLayout.show(containerPanel, "modificaVendite"); // Esempio: mostra il pannello dedicato
             }
@@ -269,6 +293,9 @@ public class Controller implements EventSelectionListener {
         // Ad esempio, mostrare una pagina di dettagli dell'evento
     }
 
+    
+    	// TODO: REGISTRATI 
+ 		
     public JPanel getContainerPanel() {
         return containerPanel;
     }
