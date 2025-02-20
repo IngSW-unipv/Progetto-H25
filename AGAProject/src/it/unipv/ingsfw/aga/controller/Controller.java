@@ -1,6 +1,6 @@
 package it.unipv.ingsfw.aga.controller;
 
-import persistence.PersistenceFacade;
+import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
 import it.unipv.ingsfw.aga.model.banco.*;

@@ -142,6 +142,26 @@ public class BigliettoDAO implements IBigliettoDAO {
 	 
 	 
 	 //SET GRUCCIA
+	 public boolean setGruccia(Biglietto biglietto) {
+	    	boolean result=false;
+	    	conn=DBConnection.startConnection(conn);
+			Statement st1;
+			
+			try{
+				st1 = conn.createStatement();
+				String query="UPDATE BIGLIETTO SET GRUCCIA="+biglietto.getNumeroGruccia()+" WHERE ID=\""+biglietto.getQRCodeId()+"\";";
+				st1.executeUpdate(query);
+				result=true;
+			
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			DBConnection.closeConnection(conn);	
+			return result;
+		}
+	 
+	 
+	 
 	 //GET GRUCCIA
     
     

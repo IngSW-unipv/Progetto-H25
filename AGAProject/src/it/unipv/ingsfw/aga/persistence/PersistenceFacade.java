@@ -1,4 +1,4 @@
-package persistence;
+package it.unipv.ingsfw.aga.persistence;
 
 import connection.DBConnection;
 import java.sql.Connection;
@@ -144,21 +144,22 @@ public class PersistenceFacade {
 	
 	
 	//SEARCH BY DATA EVENTO 
-		public int searchEventoByData (Date Data) {
-			int result=2;
-			Evento eventoData;
-			try {
-				Evento evento=new Evento(Data);
-				eventoData=iEventoDAO.searchByData(evento);
-				if(eventoData.getVenditeAperte()==true)result=1;
-				else result=0;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
-			return result;
-		}
+	public int searchEventoByData (Date Data) {
+		int result=2;
+		Evento eventoData;
+		try {
+			Evento evento=new Evento(Data);
+			eventoData=iEventoDAO.searchByData(evento);
+			if(eventoData.getVenditeAperte()==true)result=1;
+			else result=0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
 
-		
+	
+		//
 		// TODO: CAMBIO STATO VENDITA BIGLIETTI
 		// TODO: GETSTATOVENDITE
 		// TODO: GETGRUCCIA

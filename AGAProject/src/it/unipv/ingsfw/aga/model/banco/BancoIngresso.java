@@ -1,7 +1,7 @@
 package it.unipv.ingsfw.aga.model.banco;
 
 
-import persistence.PersistenceFacade;
+import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
 import it.unipv.ingsfw.aga.model.evento.Evento;
 
