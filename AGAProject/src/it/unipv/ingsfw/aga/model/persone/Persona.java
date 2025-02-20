@@ -36,8 +36,8 @@ public class Persona {
         this.email = p.getEmail();
     }
     
-    public Persona(String email) {
-        this.codiceFiscale =null;
+    public Persona(String codiceFiscale, String email) {
+        this.codiceFiscale =codiceFiscale;
         this.nome= null;
         this.cognome = null;
         this.email = email;
@@ -81,6 +81,7 @@ public class Persona {
     public String toString() {
         return "[Persona]\n" +
                 "Tipo: Nessuno\n" +
+        		"Codice Fiscale: "+codiceFiscale+"\n"+
                 "Nome: " + nome+" Cognome: " + cognome + "\n" +
                 "Email: " + email + "\n";
     }

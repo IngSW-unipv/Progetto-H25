@@ -5,6 +5,7 @@ import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
 import it.unipv.ingsfw.aga.model.banco.*;
 import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.model.persone.Persona;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ import java.util.Date;
 
 public class Controller implements EventSelectionListener {
 	private Evento evento;//USATO PER TENER TRACCIA DELL'EVENTO
+	private Persona persona;//USATO PER TENER TRACCAI DI CHI CREA IL BIGLIETTO
 	private PersistenceFacade persistence;
     private Model model;
     private LoginPage loginPage;
@@ -90,10 +92,12 @@ public class Controller implements EventSelectionListener {
             }*/
             if(persistence.login(username, password)==0) {
             	cardLayout.show(containerPanel, "events");
+            	persona=persistence.getCodiceFiscaleByEmail(username);
             	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
             	}
             else if(persistence.login(username, password)==1) {
             	cardLayout.show(containerPanel, "events");
+            	persona=persistence.getCodiceFiscaleByEmail(username);
             	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
             	}
             else JOptionPane.showMessageDialog(null, "Login fallito!");
@@ -160,6 +164,7 @@ public class Controller implements EventSelectionListener {
                 String username = loginPage.getUsername();
                 String password = loginPage.getPassword();
                 //TODO: registra utente
+                //boolean= registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password)
                 cardLayout.show(containerPanel, "register");
             }
         });

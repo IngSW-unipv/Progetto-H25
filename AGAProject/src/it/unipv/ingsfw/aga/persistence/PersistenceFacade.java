@@ -90,7 +90,7 @@ public class PersistenceFacade {
 		//RETURN 1=ORGANIZZATORE
 		//RETURN 2=ERRORE
 		try {
-			Persona persona=new Persona(email);
+			Persona persona=new Persona(null,email);
 			Persona personaDB;
 			
 			try {
@@ -111,16 +111,17 @@ public class PersistenceFacade {
 	
 	
 	//REGISTRAZIONE ORGANIZZATORE
-	public void registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password) {
+	public boolean registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password) {
+		boolean result=false;
 		try {
 			Organizzatore organizzatore=new Organizzatore(codiceFiscale, nome, cognome, email, password);
-			iPersonaDAO.addOrganizzatore(organizzatore);
+			result=iPersonaDAO.addOrganizzatore(organizzatore);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 
-		
 	
 	//GET EVENTI
 	public ArrayList<String> getEventi() {
@@ -215,10 +216,23 @@ public class PersistenceFacade {
 			e.printStackTrace();
 		}	
 		return result;
-		
 	}
 
 	
+	//GET CF BY EMAIL
+	public Persona getCodiceFiscaleByEmail(String email) {
+		Persona persona;
+		try {
+			Persona personaEmail=new Persona(null,email);
+			persona=iPersonaDAO.getCodiceFiscaleByEmail(personaEmail);
+		} catch (Exception e) {
+			e.printStackTrace();
+			persona= new Persona();
+		}	
+		return persona;
+	}
+	
+		//TODO: AGGIUNGI INVITATO
 	
 		// TODO: CAMBIO STATO VENDITA BIGLIETTI
 		// TODO: GETSTATOVENDITE
@@ -234,10 +248,11 @@ public class PersistenceFacade {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
 		//System.out.println(a.getStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084"));
-		String dataName="2024-01-13";
+		/*String dataName="2024-01-13";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date parsed = format.parse(dataName);
 		java.sql.Date data= new java.sql.Date(parsed.getTime());
-		a.setStatoEvento(data, false);
+		a.setStatoEvento(data, false);*/
+		//System.out.println(a.getCodiceFiscaleByEmail("alice@"));
 	}
 }

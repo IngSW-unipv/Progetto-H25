@@ -154,10 +154,11 @@ public class PersonaDAO implements IPersonaDAO {
 	
 	
 	//AGGIUNGI ORGANIZZATORE
-	public void addOrganizzatore (Organizzatore persona){
+	public boolean addOrganizzatore (Organizzatore persona){
 			
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
+		boolean result=false;
 		
 		try{
 			st1 = conn.createStatement();
@@ -165,12 +166,14 @@ public class PersonaDAO implements IPersonaDAO {
 					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
 					+"'"+1+"');";
 			st1.executeUpdate(query);
+			result=true;
 
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 
 		DBConnection.closeConnection(conn);
+		return result;
 	}
 	
 	
@@ -193,7 +196,6 @@ public class PersonaDAO implements IPersonaDAO {
 	
 		DBConnection.closeConnection(conn);
 	}
-
 	
 	
 	//SEARCH BY CF (SIA ORGANIZZATORI CHE STAFFER)
@@ -256,9 +258,35 @@ public class PersonaDAO implements IPersonaDAO {
 	}
 	
 	
+	//GET CF BY EMAIL -> PER LA CREAZIONE DEL BIGLIETTO
+	public Persona getCodiceFiscaleByEmail (Persona persona){
+		
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		Persona p;
+
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * from persona where EMAIL=\""+persona.getEmail()+"\";";
+			rs1=st1.executeQuery(query);
+	
+			rs1.next();
+			p=new Persona(rs1.getString(1),null);
+							
+		}catch (Exception e){
+			//e.printStackTrace(); 
+			p=new Persona();//nessun cf corrispondente trovato	
+		}	
+		DBConnection.closeConnection(conn);
+		return p;
+	}
+	
+	
+	
 	public static void main(String []args) {
 		PersonaDAO persona=new PersonaDAO();
-		ArrayList<Persona> result = persona.selectOrganizzatoreCFNomeCognome();
+		/*ArrayList<Persona> result = persona.selectOrganizzatoreCFNomeCognome();
 		for(int i=0;i<result.size();i++)
 			System.out.println(result.get(i));
 		Persona p=new Persona("292-71-9542",null,null,null);
@@ -269,7 +297,8 @@ public class PersonaDAO implements IPersonaDAO {
 		catch(Exception e) {
 			a=(Staffer)persona.searchByCF(p);
 		}
-		System.out.println(a.toString());
+		System.out.println(a.toString());*/
+		
 	}
 	
 }

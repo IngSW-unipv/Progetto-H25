@@ -11,8 +11,9 @@ public interface IPersonaDAO {
 	public ArrayList<Persona> selectStaffCFNomeCognome();
 	public ArrayList<Persona> selectOrganizzatoreCFNomeCognome();
 	public Persona searchByCF(Persona persona);
-	public void addOrganizzatore(Organizzatore persona);
+	public boolean addOrganizzatore(Organizzatore persona);
 	public void addStaffer(Staffer persona);
 	public Persona login (Persona persona);
+	public Persona getCodiceFiscaleByEmail (Persona persona);
 	
 }
