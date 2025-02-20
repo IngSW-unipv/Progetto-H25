@@ -72,7 +72,6 @@ public class BancoDAO implements IBancoDAO{
 			rs1=st1.executeQuery(query);
 			result=rs1.getInt(5);
 	
-			
 		}catch (Exception e){e.printStackTrace();}
 	
 		DBConnection.closeConnection(conn);
