@@ -6,7 +6,7 @@ import it.unipv.ingsfw.aga.view.Navbar;
 
 
 public class RegisterPage extends JPanel {
-    private JTextField usernameField, emailField;
+    private JTextField emailField,nameField,surnameField;
     private JPasswordField passwordField;
     private JButton submitButton;
     private Navbar navbar;
@@ -19,11 +19,11 @@ public class RegisterPage extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 2, 10, 10));
 
-        JLabel usernameLabel = new JLabel("Username:");
-        usernameField = new JTextField();
-        usernameField.setFont(new Font("Arial", Font.PLAIN, 14));
-        // usernameField.setPreferredSize(textFieldSize);
-        usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel emailLabel = new JLabel("Email:");
+        emailField = new JTextField();
+        emailField.setFont(new Font("Arial", Font.PLAIN, 14));
+        // emailField.setPreferredSize(textFieldSize);
+        emailField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JLabel passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField();
@@ -31,40 +31,49 @@ public class RegisterPage extends JPanel {
         // passwordField.setPreferredSize(textFieldSize);
         passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        JLabel emailLabel = new JLabel("Email:");
-        emailField = new JTextField();
-        emailField.setFont(new Font("Arial", Font.PLAIN, 14));
-        // emailField.setPreferredSize(textFieldSize);
-        emailField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel nameLabel = new JLabel("Nome:");
+        nameField = new JTextField();
+        nameField.setFont(new Font("Arial", Font.PLAIN, 14));
+        // usernameField.setPreferredSize(textFieldSize);
+        nameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        JLabel surnameLabel = new JLabel("Cognome:");
+        surnameField = new JTextField();
+        surnameField.setFont(new Font("Arial", Font.PLAIN, 14));
+        // usernameField.setPreferredSize(textFieldSize);
+        surnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 
         submitButton = new JButton("Registrati");
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
         submitButton.setBackground(Color.lightGray);
         submitButton.setForeground(Color.BLACK);
 
-
-        panel.add(usernameLabel);
-        panel.add(usernameField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
         panel.add(emailLabel);
         panel.add(emailField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(surnameLabel);
+        panel.add(surnameField);
         panel.add(new JLabel()); // Empty space
         panel.add(submitButton);
 
         add(panel, BorderLayout.CENTER);
 
     }
-    public String getUsername() {
-        return usernameField.getText();
+    public String getEmail() {
+        return emailField.getText();
     }
-
     public String getPassword() {
         return new String(passwordField.getPassword());
     }
-
-    public String getEmail() {
-        return emailField.getText();
+    public String getName() {
+        return nameField.getText();
+    }
+    public String getSurname() {
+        return surnameField.getText();
     }
 
     public JButton getSubmitButton() {

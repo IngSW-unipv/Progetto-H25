@@ -153,8 +153,8 @@ public class PersistenceFacade {
 		try {
 			Evento evento=new Evento(Data);
 			eventoData=iEventoDAO.searchByData(evento);
-			if(eventoData.getVenditeAperte()==true)result=1;
-			else result=0;
+			if(eventoData.getVenditeAperte()==true) {result=1;}
+			else {result=0;}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
