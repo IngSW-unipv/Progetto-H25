@@ -174,11 +174,10 @@ public class PersistenceFacade {
 	
 	
 	//GET GRUCCIA
-	public int getGruccia (String codeQR, int numeroGruccia) {
+	public int getGruccia (String codeQR) {
 		int result=-1;
 		try {
 			Biglietto biglietto=new Biglietto (codeQR);
-			biglietto.setNumeroGruccia(numeroGruccia);
 			result=iBigliettoDAO.getGruccia(biglietto);
 		} catch (Exception e) {
 			e.printStackTrace();
