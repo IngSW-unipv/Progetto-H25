@@ -19,7 +19,7 @@ public class BancoIngresso extends Banco {
 
     @Override
 	public boolean validateQr(QrCode qr){
-	       if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1){
+	       if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 0){
                invalidateQr(qr);
                System.out.println("Biglietto valido");
            return true;}
@@ -29,7 +29,7 @@ public class BancoIngresso extends Banco {
 	}
 
     public boolean invalidateQr(QrCode qr){
-        return PersistenceFacade.getInstance().setStatoBiglietto(qr.getId(),false);
+        return PersistenceFacade.getInstance().setStatoBiglietto(qr.getId(),true);
     }
 
     public boolean qrCodeinvalido(){

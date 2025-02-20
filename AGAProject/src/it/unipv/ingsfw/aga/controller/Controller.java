@@ -218,7 +218,22 @@ public class Controller implements EventSelectionListener {
         // Listener per il pulsante "Modifica Vendite"
         mainPage.getModificaVenditeButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	persistence.setStatoEvento(evento.getData(),false);//true o false solo per prova //TODO: direi di invertire semplicemente lo stato
+            	int result=2;
+            	try {
+            		result=persistence.searchEventoByData(evento.getData());
+            	}
+            	catch(Exception e1){
+            		e1.printStackTrace();
+            	}
+            	if(result==0) {
+            		persistence.setStatoEvento(evento.getData(),true);
+            		JOptionPane.showMessageDialog(null, "Vendite Modificate: aperte");
+            	}
+            	else if(result==1) {
+            		persistence.setStatoEvento(evento.getData(),false);
+            		JOptionPane.showMessageDialog(null, "Vendite Modificate: chiuse");
+            	}
+            	else JOptionPane.showMessageDialog(null, "Errore: stato vendite non modificate");
                 cardLayout.show(containerPanel, "modificaVendite"); // Esempio: mostra il pannello dedicato
             }
         });

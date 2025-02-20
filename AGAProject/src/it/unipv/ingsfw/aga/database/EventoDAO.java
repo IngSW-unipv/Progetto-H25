@@ -159,29 +159,6 @@ public class EventoDAO implements IEventoDAO {
 		DBConnection.closeConnection(conn);
 	}
 	
-	//NON APPLICABILE PER CHIAVE ESTERNA -> FINAL
-	/*public void changeData (Evento evento, Evento nuovaData){
-		
-		conn=DBConnection.startConnection(conn);
-		Statement st1;
-		ResultSet rs1;
-	
-		try{
-			st1 = conn.createStatement();
-			String query="UPDATE evento SET data='"+nuovaData.getData()+"' where data='"+evento.getData()+"';";
-			//FOREIGN KEY PROBLEM
-			st1.executeUpdate(query);
-	
-		}catch (Exception e){
-			e.printStackTrace();
-			System.out.println(evento.getData());
-			System.out.println(nuovaData.getData());
-			System.out.println("Impossibile aggiungerlo data già occupata");
-		}
-	
-		DBConnection.closeConnection(conn);
-	}*/
-	
 	
 	//SET VENDITE APERTE BY DATA
 	public void setVenditeAperte (Evento evento){

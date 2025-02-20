@@ -37,7 +37,7 @@ public class BancoDAO implements IBancoDAO{
 	
 		try{
 			st1 = conn.createStatement();
-			String query="SELECT * from banco ";
+			String query="SELECT * from banco;";
 			rs1=st1.executeQuery(query);
 	
 			while(rs1.next()){
@@ -55,6 +55,12 @@ public class BancoDAO implements IBancoDAO{
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+	
+	
+	//MAX GRUCCE DALLA DATA
+	
+	
+	
 	
 	
 	public static void main(String []args)  {
