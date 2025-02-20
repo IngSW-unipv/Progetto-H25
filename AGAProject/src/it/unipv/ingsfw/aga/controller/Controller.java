@@ -37,7 +37,7 @@ public class Controller implements EventSelectionListener {
     private JFrame frame;
 
     public Controller() {
-    	persistence= new PersistenceFacade();
+    	persistence= PersistenceFacade.getInstance();
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -159,6 +159,7 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
                 String password = loginPage.getPassword();
+                //TODO: registra utente
                 cardLayout.show(containerPanel, "register");
             }
         });
@@ -217,8 +218,7 @@ public class Controller implements EventSelectionListener {
         // Listener per il pulsante "Modifica Vendite"
         mainPage.getModificaVenditeButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	persistence.setStatoEvento(evento.getData(),false);//true o false solo per prova
-                // Azioni per modificare le vendite //TODO: collega con DB
+            	persistence.setStatoEvento(evento.getData(),false);//true o false solo per prova //TODO: direi di invertire semplicemente lo stato
                 cardLayout.show(containerPanel, "modificaVendite"); // Esempio: mostra il pannello dedicato
             }
         });
@@ -246,13 +246,7 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 // Recupera il codice inserito dall'utente
                 String code = entrancePage.getVerificationCode();
-                
-
-                // Supponendo che il model abbia già un'istanza di BancoIngresso,
-                // chiama il metodo accesso() passando il codice
-                boolean isValid = true; // BancoIngressoFactory.getInstance(0).accesso(code);  //TODO: G. ha modificato il factory
-
-                if (isValid) {
+                if (BancoIngressoFactory.getInstance(0).accesso(code)) { //todo: così è associato ad evento o devo modificare qualcosa altro?
                     JOptionPane.showMessageDialog(null, "Biglietto valido!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Biglietto non valido o già convalidato!");
