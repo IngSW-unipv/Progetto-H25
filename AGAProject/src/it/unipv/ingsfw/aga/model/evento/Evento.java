@@ -67,6 +67,13 @@ public class Evento {
     	this.venditeAperte=evento.getVenditeAperte();
     }
     
+    public Date changeStringToDate(String dataName) throws ParseException {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());
+		return data;
+    }
+    
     
     /*public Evento(String organizzatore, Date data, String location, int maxPartecipanti) throws MaxExeededException {
         this.organizzatore = organizzatore;

@@ -4,6 +4,7 @@ import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
 import it.unipv.ingsfw.aga.model.banco.*;
+import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Persona;
 
@@ -76,11 +77,18 @@ public class Controller implements EventSelectionListener {
         eventsPage.getCreateEventButton().addActionListener(e -> {
             // Logica per andare alla pagina per creare un evento
             cardLayout.show(containerPanel, "addEvent");
+            
+            /*String date = addEventPage.getEventDate();
+            String location = addEventPage.getEventLocation();
+            String capacity = addEventPage.getEventCapacity();
+            boolean result=persistence.addEvento(date, location, capacity);
+            if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
+            else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
         });
 
         // Settiamo il controller come listener della EventsPage
         eventsPage.setEventSelectionListener(this);
-
+        
         // ActionListener per il login
         loginPage.getLoginButton().addActionListener(e -> {
             String username = loginPage.getUsername();
@@ -258,6 +266,10 @@ public class Controller implements EventSelectionListener {
         mainPage.getVediInvitatiButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Azioni per visualizzare gli invitati
+            	ArrayList<Biglietto> invitati;
+            	invitati=persistence.getInvitati(evento);
+            	for (Biglietto i: invitati)
+            		System.out.println(i.toString());
                 cardLayout.show(containerPanel, "listaInvitati"); // Esempio: mostra il pannello con la lista degli invitati
             }
         });
