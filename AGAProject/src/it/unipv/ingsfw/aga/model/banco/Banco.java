@@ -4,7 +4,7 @@ import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import java.util.Date;
 
-public class Banco {
+public abstract class Banco {
     private int numeroBanco;
     private Evento evento;
     private IQrReadingStrategy qrStrategy; // Aggiunta strategia

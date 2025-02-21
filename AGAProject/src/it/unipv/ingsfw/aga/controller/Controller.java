@@ -278,13 +278,9 @@ public class Controller implements EventSelectionListener {
         cloakroomPage.getDeliverButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = cloakroomPage.getItemCode();
-//<<<<<<< HEAD
-                boolean isValid = BancoGuardarobaFactory.getInstance(0,evento).consegnaCapo(code);
-                JOptionPane.showMessageDialog(null, "Oggetto consegnato: " + code);
-//=======
-                String message = BancoGuardarobaFactory.getInstance(0).consegnaCapo(code);
+                String message = BancoGuardarobaFactory.getInstance(0, evento).consegnaCapo(code);
                 JOptionPane.showMessageDialog(null, message);
-//>>>>>>> 1d6a9181178d7bd7e2cf18e4768e79af0af21544
+
             }
         });
 
