@@ -15,6 +15,7 @@ import it.unipv.ingsfw.aga.database.IBancoDAO;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.persone.Persona;
 import it.unipv.ingsfw.aga.model.persone.Staffer;
+//import it.unipv.ingsfw.pattern.singleton.Singleton;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.banco.Banco;
@@ -47,9 +48,6 @@ public class PersistenceFacade {
 					instance = new PersistenceFacade();
 					System.out.println("WLF");
 		
-		}
-		else {
-			System.out.println("RRR");//ERRORE DI OGGI POMERIGGIO
 		}
 		return instance;
 	}
@@ -195,6 +193,7 @@ public class PersistenceFacade {
 		int result=-1;
 		try {
 			result=iBancoDAO.getMaxGrucce(evento);
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ff");
@@ -207,8 +206,7 @@ public class PersistenceFacade {
 	public int getNumeroGrucceAssegnate(Evento evento) {
 		int result=-1;
 		try {
-			
-			result=iBancoDAO.getMaxGrucce(evento);
+			result=iBigliettoDAO.getNumeroGrucceAssegnate(evento);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	

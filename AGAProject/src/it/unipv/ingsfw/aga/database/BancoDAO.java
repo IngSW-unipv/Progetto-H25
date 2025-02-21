@@ -70,9 +70,12 @@ public class BancoDAO implements IBancoDAO{
 			st1 = conn.createStatement();
 			String query="SELECT * FROM BANCO WHERE DATA_EVENTO='"+evento.getData()+"';";
 			rs1=st1.executeQuery(query);
+			rs1.next();
 			result=rs1.getInt(5);
 	
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	
 		DBConnection.closeConnection(conn);
 		return result;
