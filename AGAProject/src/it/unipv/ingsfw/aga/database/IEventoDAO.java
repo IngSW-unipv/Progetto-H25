@@ -12,6 +12,7 @@ public interface IEventoDAO {
 	public void setVenditeAperte (Evento evento);
 	public boolean getVenditeAperte (Evento evento);
 	public ArrayList<String> getAllDate ();
+	public int getCapacitaByEvento (Evento data);
 	
 		
 	

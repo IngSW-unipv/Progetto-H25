@@ -30,6 +30,16 @@ public class Biglietto {
         this.email=email;
     }
     
+    public Biglietto(Persona creatoreBiglietto,String QR, String nome, String cognome, String email, Evento evento) {
+        this.creatoreBiglietto = creatoreBiglietto;
+        this.nome=nome;
+        this.cognome=cognome;
+        this.email=email;
+        this.evento=evento;
+        QrCode code=new QrCode(QR);
+        this.codeQR = code;
+    }//CREAZIONE A SCOPO DI ERRORE DI PROVA
+    
     public Biglietto(Persona creatoreBiglietto, String nome, String cognome, String email, Evento evento) {
         this.creatoreBiglietto = creatoreBiglietto;
         this.nome=nome;
@@ -52,6 +62,10 @@ public class Biglietto {
         this.accessoEffettuato=accessoEffettuato;
         QrCode code=new QrCode(codeQR);
         this.codeQR = code;
+    }
+    
+    public void changeQRCode() {
+    	this.codeQR=new QrCode();
     }
     
     public Persona getCreatoreBiglietto() {

@@ -93,10 +93,61 @@ public class BigliettoDAO implements IBigliettoDAO {
 			st1.executeUpdate(query);
 			result=true;
 		}catch (Exception e){
+			System.out.println("Errore: potrebbe esserci un errore nei dati selezionati");
 			e.printStackTrace();
 		}
 		DBConnection.closeConnection(conn);	
 		return result;
+	}
+	 
+	 
+	//BIGLIETTI TOTALI NELL'EVENTO
+	 public int getBigliettiTotoaliByEvento(Evento evento) {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		int result=-1;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT COUNT(*) FROM BIGLIETTO WHERE DATA_EVENTO='"+evento.getData()+"'";
+			rs1=st1.executeQuery(query);
+			
+			rs1.next();
+			result=rs1.getInt(1);
+		}catch (Exception e){
+			System.out.println("Errore: potrebbe esserci un errore nei dati selezionati");
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);	
+		return result;
+	}
+	 
+	 
+	//GET TUTTI I QRCODE -> CONTROLLO CREAZIONE EVENTO
+	 public ArrayList<String> getTuttiQRBiglietti() {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		ArrayList <String> bigliettiQR= new ArrayList<>();
+		
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * FROM BIGLIETTO ;";
+			rs1=st1.executeQuery(query);
+			
+			while(rs1.next()){
+				String biglietto=rs1.getString(1);
+				bigliettiQR.add(biglietto);
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);	
+		return bigliettiQR;
 	}
 	 
 	 

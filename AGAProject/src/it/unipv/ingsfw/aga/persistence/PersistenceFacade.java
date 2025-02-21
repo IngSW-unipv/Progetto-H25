@@ -18,7 +18,7 @@ import it.unipv.ingsfw.aga.model.persone.Staffer;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.banco.Banco;
-
+import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.database.BigliettoDAO;
 import it.unipv.ingsfw.aga.database.PersonaDAO;
 import it.unipv.ingsfw.aga.database.EventoDAO;
@@ -232,16 +232,51 @@ public class PersistenceFacade {
 	
 	
 	//AGGIUNGI INVITATO
-	public boolean aggiungiInvitato(Persona persona, Evento evento, String nome, String cognome, String email) {
-		boolean result=false;
+	public int aggiungiInvitato(Persona persona, Evento evento, String nome, String cognome, String email) {
+		int result=2;
+		//RESULT=2 ERRORE NELL'INSERIMENTO
+		//RESULT=1 BIGLIETTO AGGIUNTO CORRETTAMENTE
+		//RESULT=0 MASSIMO BIGLIETTI RAGGIUNTI PER IL CREATORE
+		//RESULT=-1 MASSIMA CAPACITA' DELL'EVENTO RAGGIUNTA
 		Biglietto biglietto;
+		int numeroBiglietti=-1;
+		int capacitaEvento=-1;
+		ArrayList <String> bigliettiQR= new ArrayList<>();
+		QrCode code=new QrCode("9bde25f5-c9c1-40dc-98ea-7f5eb300a272");
+		boolean rs; 
+		
 		try {
-			int numero= iBigliettoDAO.getNumeroBigliettiByCodiceFiscale(persona,evento);
-			if(numero>4)
-				result=false;
+			numeroBiglietti=iBigliettoDAO.getBigliettiTotoaliByEvento(evento);
+			capacitaEvento=iEventoDAO.getCapacitaByEvento(evento);
+			//controllo massima capacita'
+			if(numeroBiglietti>=capacitaEvento)
+				result=-1;
 			else {
-				biglietto= new Biglietto(persona, nome, cognome, email, evento);
-				result=iBigliettoDAO.creaBiglietto(biglietto);
+				int numero= iBigliettoDAO.getNumeroBigliettiByCodiceFiscale(persona,evento);
+				//controllo massimo biglietto per creatore
+				if(numero>4) 
+					result=0;
+				else {
+					
+					//biglietto= new Biglietto(persona, nome, cognome, email, evento);
+					bigliettiQR=iBigliettoDAO.getTuttiQRBiglietti();
+					
+					//controllo che i biglietti abbiano QR diversi
+					bigliettiQR.add("");//ciclo in piu per eventuali catastrofi
+					for (String n: bigliettiQR) 
+						for (String i: bigliettiQR) {
+				           if((code.getId()).equals(i)){
+				        	   code=new QrCode();
+				        	   break;			        	   
+				           }
+				        }
+					//creazione biglietto
+					biglietto= new Biglietto(persona,code.getId(), nome, cognome, email, evento);
+					rs=iBigliettoDAO.creaBiglietto(biglietto);				
+					
+					if(rs==true) result=1;
+					else result=2;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,14 +295,14 @@ public class PersistenceFacade {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
 		//System.out.println(a.getStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084"));
-		String dataName="1198-07-13";
+		String dataName="1998-07-13";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date parsed = format.parse(dataName);
 		java.sql.Date data= new java.sql.Date(parsed.getTime());
-		//a.setStatoEvento(data, false);*/
+		//a.setStatoEvento(data, false);
 		//System.out.println(a.getCodiceFiscaleByEmail("alice@"));
 		Persona persona=new Persona("001-51-9829", null);
 		Evento evento=new Evento(data);
-		System.out.println(a.aggiungiInvitato(persona, evento, "Mattia","Rossi","mattia.rossi@unipv.it"));
+		System.out.println(a.aggiungiInvitato(persona, evento, "Andrea","Esposito","andrea.esposito@unipv.it"));
 	}
 }

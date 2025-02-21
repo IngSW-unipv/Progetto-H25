@@ -134,10 +134,32 @@ public class EventoDAO implements IEventoDAO {
 			DBConnection.closeConnection(conn);
 			return evento;			
 		}
-	
 	}
 	
 	
+	//GET CAPACITA BY EVENTO
+	public int getCapacitaByEvento (Evento data){
+					
+		conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		int capacita=-1;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * from evento where data= '"+data.getData()+"'";
+			rs1=st1.executeQuery(query);
+		
+			rs1.next();
+			capacita=rs1.getInt(3);	
+			
+		}catch (Exception e){
+			//e.printStackTrace();			
+		}
+		DBConnection.closeConnection(conn);
+		return capacita;
+	}
+
 	//AGGIUNGI EVENTO 
 	public void addEvento (Evento evento){
 				
