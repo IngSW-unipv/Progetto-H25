@@ -8,7 +8,8 @@ import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.evento.EventoFactory;
 
-import java.util.Date;
+import javax.naming.AuthenticationException;
+import java.text.ParseException;
 
 public class Organizzatore extends Persona{
     private String password;
@@ -17,26 +18,24 @@ public class Organizzatore extends Persona{
         super(codiceFiscale, nome, cognome, email);
         this.password = password;
     }
-   
     @Override
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    /*public Evento creaEvento(String organizzatoreCF, String tipoEvento, Date data, String location, int maxPartecipanti) throws MaxExeededException {
-        if(maxPartecipanti < 0){
-            throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
-        }else if(maxPartecipanti > 1500){
-            throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + data + " è stato superato");
+    public void changePassword(String oldPassword, String newPassword) throws AuthenticationException {
+        if(oldPassword.equals(password)){
+            password = newPassword;
         }else{
-            return EventoFactory.creaEvento(tipoEvento, getCodiceFiscale(), data, location, maxPartecipanti);
+            throw new AuthenticationException();
         }
-    }*/
-    
+    }
+    public Evento creaEvento(String tipoEvento, String data, String location, int maxPartecipanti) throws MaxExeededException, ParseException {
+        return EventoFactory.creaEvento(tipoEvento, getCodiceFiscale(), data, location, maxPartecipanti);
+    }
+
     @Override
     public void checkIngresso(Type type, QrCode qrCode){
         IQrReadingStrategy readingStrategy = QrReadingStrategyFactory.getQrReadingStrategy(type);

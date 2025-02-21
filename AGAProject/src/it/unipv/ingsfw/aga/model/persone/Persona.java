@@ -16,10 +16,10 @@ public class Persona {
     private String email;
     
     public Persona() {
-    	nome=null;
-    	codiceFiscale="nullo";
-    	cognome=null;
-    	email=null;
+    	this.nome = null;
+    	this.codiceFiscale = "nullo";
+    	this.cognome = null;
+    	this.email = null;
     }
     
     public Persona(String codiceFiscale, String nome, String cognome, String email) {
@@ -37,8 +37,8 @@ public class Persona {
     }
     
     public Persona(String codiceFiscale, String email) {
-        this.codiceFiscale =codiceFiscale;
-        this.nome= null;
+        this.codiceFiscale = codiceFiscale;
+        this.nome = null;
         this.cognome = null;
         this.email = email;
     }
