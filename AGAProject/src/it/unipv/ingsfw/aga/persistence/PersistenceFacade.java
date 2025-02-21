@@ -15,7 +15,6 @@ import it.unipv.ingsfw.aga.database.IBancoDAO;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.persone.Persona;
 import it.unipv.ingsfw.aga.model.persone.Staffer;
-//import it.unipv.ingsfw.pattern.singleton.Singleton;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.banco.Banco;
@@ -82,9 +81,9 @@ public class PersistenceFacade {
 	//VERIFICA LOGIN
 	public int login (String email, String password){
 		int result=2;
-		//RETURN 0=STAFFER
-		//RETURN 1=ORGANIZZATORE
-		//RETURN 2=ERRORE
+		//RETURN=0 STAFFER
+		//RETURN=1 ORGANIZZATORE
+		//RETURN=2 ERRORE
 		try {
 			Persona persona=new Persona(null,email);
 			Persona personaDB;
@@ -239,7 +238,7 @@ public class PersistenceFacade {
 		int numeroBiglietti=-1;
 		int capacitaEvento=-1;
 		ArrayList <String> bigliettiQR= new ArrayList<>();
-		QrCode code=new QrCode("9bde25f5-c9c1-40dc-98ea-7f5eb300a272");
+		QrCode code=new QrCode();
 		boolean rs; 
 		
 		try {
@@ -260,13 +259,14 @@ public class PersistenceFacade {
 					
 					//controllo che i biglietti abbiano QR diversi
 					bigliettiQR.add("");//ciclo in piu per eventuali catastrofi
-					for (String n: bigliettiQR) 
+					for (String n: bigliettiQR) {
 						for (String i: bigliettiQR) {
 				           if((code.getId()).equals(i)){
 				        	   code=new QrCode();
 				        	   break;			        	   
 				           }
 				        }
+					}
 					//creazione biglietto
 					biglietto= new Biglietto(persona,code.getId(), nome, cognome, email, evento);
 					rs=iBigliettoDAO.creaBiglietto(biglietto);				

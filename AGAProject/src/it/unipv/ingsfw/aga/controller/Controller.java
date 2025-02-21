@@ -201,6 +201,11 @@ public class Controller implements EventSelectionListener {
                 String name = addGuestPage.getGuestName();
                 String email = addGuestPage.getGuestEmail();
                 String surname = addGuestPage.getGuestSurname();
+                int result=persistence.aggiungiInvitato(persona, evento ,name, surname, email);
+                if(result==1)JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
+                else if(result==-1)JOptionPane.showMessageDialog(null, "E' stata raggiunta la massima capacita' dell'evento");
+                else if(result==0)JOptionPane.showMessageDialog(null, "Hai raggiunto il massimo degli inviti");
+                else JOptionPane.showMessageDialog(null, "Errore nell'inserimento dei dati");
                 JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
             }
         });
