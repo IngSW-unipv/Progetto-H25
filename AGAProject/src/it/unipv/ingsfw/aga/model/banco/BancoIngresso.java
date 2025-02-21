@@ -53,7 +53,3 @@ public class BancoIngresso extends Banco {
     }
 
 }
-
-
-
-

@@ -16,6 +16,16 @@ public class Biglietto {
     private boolean accessoEffettuato = false;
     private int numeroGruccia=0;
     private String descrizioneGruccia = "";
+
+    public Biglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
+        this.creatoreBiglietto = creatoreBiglietto;
+        this.evento = evento;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.codeQR = new QrCode();
+        this.accessoEffettuato = false;
+    }
     
     public Biglietto(Persona creatoreBiglietto, String nome, String cognome, String email, QrCode codeQR, Evento evento, boolean accessoEffettuato, int numeroGruccia) {
         this.creatoreBiglietto = creatoreBiglietto;
