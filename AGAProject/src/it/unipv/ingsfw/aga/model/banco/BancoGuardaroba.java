@@ -19,7 +19,7 @@ public class BancoGuardaroba extends Banco {
         this.maxGrucce = maxGrucce;
         this.grucceAssegnate = 0;
     }
-    
+
     public BancoGuardaroba(int numeroBanco) {
         super(numeroBanco, null);
         this.maxGrucce = maxGrucce;
@@ -34,6 +34,10 @@ public class BancoGuardaroba extends Banco {
         this.maxGrucce = maxGrucce;
     }
 
+    public void updateMaxGrucce(Evento evento) {
+        setMaxGrucce(PersistenceFacade.getInstance().getMaxGrucce(evento));
+    }
+
     public int getGrucceAssegnate() {
         return grucceAssegnate;
     }
@@ -42,72 +46,88 @@ public class BancoGuardaroba extends Banco {
         this.grucceAssegnate = grucceAssegnate;
     }
 
-    public boolean consegnaCapo() {
-        QrCode qr = readQR();
-        this. grucceAssegnate += 1;
-        if (this.grucceAssegnate < this.maxGrucce) {
-           return assegnaGruccia(qr, this.grucceAssegnate);
-        }else {
-            System.out.println("Grucce terminate");
-            return false;
-        }
+    public void updateGrucceAssegnate(Evento evento) {
+        setGrucceAssegnate(PersistenceFacade.getInstance().getNumeroGrucceAssegnate(evento));
     }
 
-    public String consegnaCapo(String code) {
-        QrCode qr = readQR(code);
+
+
+    public String consegnaCapo() {
+        QrCode qr = readQR();
         if (this.grucceAssegnate < this.maxGrucce) {
-            if(restituzioneCapo(code) == 0)//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
-                {
-            this.grucceAssegnate += 1;
-            if (assegnaGruccia(qr, this.grucceAssegnate)){
-            return "Oggetto inserito sulla gruccia: " + this.grucceAssegnate ;}
-            else {
-                return "Errore nell'assegnazione della gruccia";
-            }
-        }else{
+            if (restituzioneCapo(qr.getId()) == 0){//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
+                this.grucceAssegnate += 1;
+                if (assegnaGruccia(qr, this.grucceAssegnate)) {
+                    return "Oggetto inserito sulla gruccia: " + this.grucceAssegnate;
+                } else {
+                    return "Errore nell'assegnazione della gruccia";
+                }
+            } else {
                 System.out.println("Gruccia già assegnata");
                 return "Gruccia già assegnata";
             }
-        }else {
+        } else {
             System.out.println("Grucce terminate");
             return "Grucce terminate";
         }
     }
 
-    public int restituzioneCapo(){
-        QrCode qr = readQR();
-         if(validateQr(qr)) {
-             return PersistenceFacade.getInstance().getGruccia(qr.getId());
-         } else {
-            return -1;
-         }
+
+    public String consegnaCapo(String code) {
+        QrCode qr = readQR(code);
+        if (this.grucceAssegnate < this.maxGrucce) {
+            if (restituzioneCapo(code) == 0){//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
+                this.grucceAssegnate += 1;
+                if (assegnaGruccia(qr, this.grucceAssegnate)) {
+                    return "Oggetto inserito sulla gruccia: " + this.grucceAssegnate;
+                } else {
+                    return "Errore nell'assegnazione della gruccia";
+                }
+            } else {
+                System.out.println("Gruccia già assegnata");
+                return "Gruccia già assegnata";
+            }
+        } else {
+            System.out.println("Grucce terminate");
+            return "Grucce terminate";
+        }
     }
 
-    public int restituzioneCapo(String code){
-        QrCode qr = readQR(code);
-        if(validateQr(qr)) {
+    public int restituzioneCapo() {
+        QrCode qr = readQR();
+        if (validateQr(qr)) {
             return PersistenceFacade.getInstance().getGruccia(qr.getId());
         } else {
             return -1;
         }
     }
 
-    
-
-    public boolean assegnaGruccia(QrCode qr, int gruccia){
-        return PersistenceFacade.getInstance().setGruccia(qr.getId(),gruccia);
-    }
-    
-
-    public boolean validateQr(QrCode qr){
-            if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1){
-                System.out.println("Biglietto valido");
-                return true;}
-            else {
-                return qrCodeinvalido();
-            }
+    public int restituzioneCapo(String code) {
+        QrCode qr = readQR(code);
+        if (validateQr(qr)) {
+            return PersistenceFacade.getInstance().getGruccia(qr.getId());
+        } else {
+            return -1;
         }
-    
+    }
+
+
+    public boolean assegnaGruccia(QrCode qr, int gruccia) {
+        return PersistenceFacade.getInstance().setGruccia(qr.getId(), gruccia);
+    }
+
+
+    public boolean validateQr(QrCode qr) {
+        if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1) {
+            System.out.println("Biglietto valido");
+            return true;
+        } else {
+            return qrCodeinvalido();
+        }
+    }
+
+
+
     
     @Override
     public String toString() {

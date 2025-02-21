@@ -265,7 +265,7 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 // Recupera il codice inserito dall'utente
                 String code = entrancePage.getVerificationCode();
-                if (BancoIngressoFactory.getInstance(0).accesso(code)) { //todo: così è associato ad evento o devo modificare qualcosa altro?
+                if (BancoIngressoFactory.getInstance(0).accesso(code)) { //todo: così è associato ad evento o devo modificare qualcosa altro? Perchè su guardaroba passo evento come parametro
                     JOptionPane.showMessageDialog(null, "Biglietto valido!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Biglietto non valido o già convalidato!");
@@ -294,9 +294,9 @@ public class Controller implements EventSelectionListener {
 
         aggiungiStaffPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = aggiungiStaffPage.getUsername();
-                String password = aggiungiStaffPage.getPassword();
+                String codiceFiscale = aggiungiStaffPage.getCf();
                 String email = aggiungiStaffPage.getEmail();
+                String password = aggiungiStaffPage.getPassword();
                 // TODO: Logica per aggiungere lo staff al modello
                 JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
                 cardLayout.show(containerPanel, "main");
@@ -305,11 +305,12 @@ public class Controller implements EventSelectionListener {
 
         registerPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String codiceFiscale = registerPage.getCf();
                 String email = registerPage.getEmail();
                 String password = registerPage.getPassword();
                 String nome = registerPage.getName();
-                String cognome = registerPage.getSurname(); //TODO: aggiugni codice fiscale
-               // boolean result=persistence.registazioneOrganizzatore(String codiceFiscale, String nome, String cognome, String email, String password);
+                String cognome = registerPage.getSurname();
+                boolean result=persistence.registazioneOrganizzatore(codiceFiscale,  nome,  cognome,  email,  password);
 
                 cardLayout.show(containerPanel, "events");
             }
@@ -319,9 +320,7 @@ public class Controller implements EventSelectionListener {
         // Ad esempio, mostrare una pagina di dettagli dell'evento
     }
 
-    
-    	// TODO: REGISTRATI 
- 		
+
     public JPanel getContainerPanel() {
         return containerPanel;
     }

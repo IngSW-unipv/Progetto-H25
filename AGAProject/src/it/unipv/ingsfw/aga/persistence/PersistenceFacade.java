@@ -191,10 +191,9 @@ public class PersistenceFacade {
 	
 	
 	//MAX GRUCCE EVENTO
-	public int getMaxGrucce (String data) {
+	public int getMaxGrucce (Evento evento) {
 		int result=-1;
 		try {
-			Evento evento=new Evento(data);
 			result=iBancoDAO.getMaxGrucce(evento);
 		} catch (Exception e) {
 			e.printStackTrace();

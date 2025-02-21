@@ -5,7 +5,7 @@ import javax.swing.*;
         import it.unipv.ingsfw.aga.view.Navbar;
 
 public class AggiungiStaffPage extends JPanel {
-    private JTextField usernameField, emailField;
+    private JTextField cfField, emailField;
     private JPasswordField passwordField;
     private JButton submitButton;
     private Navbar navbar;
@@ -18,10 +18,10 @@ public class AggiungiStaffPage extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 2, 10, 10));
 
-        JLabel usernameLabel = new JLabel("Username:");
-        usernameField = new JTextField();
-        usernameField.setFont(new Font("Arial", Font.PLAIN, 14));
-        usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel cfLabel = new JLabel("Codice Fiscale:");
+        cfField = new JTextField();
+        cfField.setFont(new Font("Arial", Font.PLAIN, 14));
+        cfField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JLabel passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField();
@@ -40,8 +40,8 @@ public class AggiungiStaffPage extends JPanel {
         submitButton.setForeground(Color.BLACK);
         buttonPanel.add(submitButton);
 
-        panel.add(usernameLabel);
-        panel.add(usernameField);
+        panel.add(cfLabel);
+        panel.add(cfField);
         panel.add(passwordLabel);
         panel.add(passwordField);
         panel.add(emailLabel);
@@ -52,8 +52,8 @@ public class AggiungiStaffPage extends JPanel {
         add(panel, BorderLayout.CENTER);
     }
 
-    public String getUsername() {
-        return usernameField.getText();
+    public String getCf() {
+        return cfField.getText();
     }
 
     public String getPassword() {

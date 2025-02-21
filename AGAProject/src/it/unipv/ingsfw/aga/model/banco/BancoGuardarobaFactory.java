@@ -8,7 +8,8 @@ public class BancoGuardarobaFactory {
     public static BancoGuardaroba getInstance(int numeroBanco, Evento evento) {
         if (instance == null) {
             instance = new BancoGuardaroba(numeroBanco);
-            instance.setGrucceAssegnate(PersistenceFacade.getInstance().getNumeroGrucceAssegnate(evento));
+            instance.updateGrucceAssegnate(evento);
+            instance.updateMaxGrucce(evento);
         }
         return instance;
     }
