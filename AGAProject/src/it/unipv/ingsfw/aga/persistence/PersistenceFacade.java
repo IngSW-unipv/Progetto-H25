@@ -281,7 +281,7 @@ public class PersistenceFacade {
 	}
 	
 	
-	//STAMPA INVITATI
+	//GET INVITATI
 	public ArrayList <Biglietto> getInvitati(Evento evento) {
 		ArrayList<Biglietto> biglietto;
 		try {
@@ -302,6 +302,23 @@ public class PersistenceFacade {
 		try {
 			staffer=new Staffer(codiceFiscale, nome, cognome, email, password);
 			result=iPersonaDAO.addStaffer(staffer);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+	
+	
+	//AGGIUNGI EVENTO
+	public boolean addEvento(String data, String luogo, String capacita) {
+		boolean result=false;
+		Evento evento=null;
+		try {
+			int capacitaMax= Integer.parseInt(capacita);
+			Date dataEvento= evento.changeStringToDate(data);
+			evento=new Evento(dataEvento,luogo,capacitaMax);
+			result=iEventoDAO.addEvento(evento);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

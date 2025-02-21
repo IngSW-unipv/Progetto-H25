@@ -71,9 +71,41 @@ public class Evento {
     	this.maxPartecipanti = evento.getMaxPartecipanti();
     	this.venditeAperte = evento.getVenditeAperte();
     }
+    
+    public Date changeStringToDate(String dataName) throws ParseException {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());
+		return data;
+    }
+
+
+    /*public Evento(String organizzatore, Date data, String location, int maxPartecipanti) throws MaxExeededException {
+        this.organizzatore = organizzatore;
+        this.data = data;
+        this.location = location;
+        if (maxPartecipanti < 0) {
+            throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
+        } else if (maxPartecipanti > 1500) {
+            throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + data + " è stato superato");
+        } else {
+            this.maxPartecipanti = maxPartecipanti;
+        }
+        this.idEvento = UUID.randomUUID().toString();  //idee su alternative per avere un identificatore univoco?
+        this.venditeAperte = false;
+    }
+    
+    public Organizzatore getOrganizzatore() {
+        return organizzatore;
+    }*/
 
     public Date getData() {
         return data;
+    }
+    
+    public void setData(Evento nuovaData) {//NON SI PUO FARE PER CHIAVE ESTERNA
+    	//EventoDAO d=new EventoDAO();
+    	//d.changeData(this, nuovaData);    	
     }
 
     public String getLocation() {

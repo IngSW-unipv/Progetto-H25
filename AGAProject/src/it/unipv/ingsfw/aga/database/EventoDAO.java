@@ -160,25 +160,28 @@ public class EventoDAO implements IEventoDAO {
 		return capacita;
 	}
 
+	
 	//AGGIUNGI EVENTO 
-	public void addEvento (Evento evento){
+	public boolean addEvento (Evento evento){
 				
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
+		boolean result=false;
 	
 		try{
 			st1 = conn.createStatement();
 			String query="INSERT INTO EVENTO VALUES('"+evento.getData()+"',\""+evento.getLocation()+"\","+evento.getMaxPartecipanti()+",'"
 			+evento.getVenditeAperte()+"');";
 			st1.executeUpdate(query);
+			result=true;
 	
 		}catch (Exception e){
 			//e.printStackTrace();
 			System.out.println("Impossibile aggiungerlo data già occupata");
 			DBConnection.closeConnection(conn);
 		}
-	
 		DBConnection.closeConnection(conn);
+		return result;
 	}
 	
 	
