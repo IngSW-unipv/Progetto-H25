@@ -6,7 +6,7 @@ import it.unipv.ingsfw.aga.view.Navbar;
 
 
 public class RegisterPage extends JPanel {
-    private JTextField emailField,nameField,surnameField;
+    private JTextField cfField, emailField,nameField,surnameField;
     private JPasswordField passwordField;
     private JButton submitButton;
     private Navbar navbar;
@@ -18,6 +18,11 @@ public class RegisterPage extends JPanel {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 2, 10, 10));
+
+        JLabel cfLabel = new JLabel("Codice Fiscale:");
+        cfField = new JTextField();
+        cfField.setFont(new Font("Arial", Font.PLAIN, 14));
+        cfField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JLabel emailLabel = new JLabel("Email:");
         emailField = new JTextField();
@@ -49,6 +54,8 @@ public class RegisterPage extends JPanel {
         submitButton.setBackground(Color.lightGray);
         submitButton.setForeground(Color.BLACK);
 
+        panel.add(cfLabel);
+        panel.add(cfField);
         panel.add(emailLabel);
         panel.add(emailField);
         panel.add(passwordLabel);
@@ -62,6 +69,10 @@ public class RegisterPage extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
+    }
+
+    public String getCf() {
+        return cfField.getText();
     }
     public String getEmail() {
         return emailField.getText();
