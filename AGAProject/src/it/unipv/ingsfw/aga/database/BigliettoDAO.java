@@ -75,23 +75,28 @@ public class BigliettoDAO implements IBigliettoDAO {
     
     
     //CREA BIGLIETTO
-	 public void creaBiglietto(Biglietto biglietto) {
+	 public boolean creaBiglietto(Biglietto biglietto) {
 	    	
     	conn=DBConnection.startConnection(conn);
 		Statement st1;
+		boolean result=false;
+		int b;//nel db boolean =1 o 0
+		if(biglietto.getAccessoEffettuato())b=1;
+		else b=0;
 		
 		try{
 			st1 = conn.createStatement();
-			String query="INSERT INTO BIGLIETTO VALUES(\""+biglietto.getQRCodeId()+"\", '"+biglietto.getAccessoEffettuato()+
+			String query="INSERT INTO BIGLIETTO VALUES(\""+biglietto.getQRCodeId()+"\", '"+b+
 					"', \""+biglietto.getCodiceFiscaleCreatore()+"\", '"+biglietto.getDataEvento()+"' ,"+biglietto.getNumeroGruccia()+
 					", \""+biglietto.getDescrizioneGruccia()+"\", \""+biglietto.getNome()+"\", \""+	biglietto.getCognome()+
 					"\", \""+biglietto.getEmail()+"\");";
 			st1.executeUpdate(query);
-		
+			result=true;
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		DBConnection.closeConnection(conn);			
+		DBConnection.closeConnection(conn);	
+		return result;
 	}
 	 
 	 
@@ -114,6 +119,7 @@ public class BigliettoDAO implements IBigliettoDAO {
 		}
 		DBConnection.closeConnection(conn);			
 	}
+	 
 	 
 	 //GET STATO BIGLIETTO
 	 public int getStatoBiglietto(Biglietto biglietto) {
@@ -164,7 +170,6 @@ public class BigliettoDAO implements IBigliettoDAO {
 	}
 	 
 	 
-	 
 	 //GET GRUCCIA
 	 public int getGruccia(Biglietto biglietto) {
 	    	
@@ -210,6 +215,29 @@ public class BigliettoDAO implements IBigliettoDAO {
 			DBConnection.closeConnection(conn);			
 			return result;
 		}
+	 
+	 
+	//GET NUMERO DI BIGLIETTI CREATI DALLO STESSO CREATORE (BY CF)
+	 public int getNumeroBigliettiByCodiceFiscale(Persona persona,Evento evento) {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		int result=-1;
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT COUNT(*) FROM BIGLIETTO WHERE DATA_EVENTO='"+evento.getData()+"' AND CF_PERSONA=\""+
+			persona.getCodiceFiscale()+"\";";
+			rs1=st1.executeQuery(query);
+			
+			rs1.next();
+			result=rs1.getInt(1);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);			
+		return result;
+	}
 	 
     
     public static void main(String []args) throws ParseException {

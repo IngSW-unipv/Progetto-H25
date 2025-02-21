@@ -230,6 +230,25 @@ public class PersistenceFacade {
 		return persona;
 	}
 	
+	
+	//AGGIUNGI INVITATO
+	public boolean aggiungiInvitato(Persona persona, Evento evento, String nome, String cognome, String email) {
+		boolean result=false;
+		Biglietto biglietto;
+		try {
+			int numero= iBigliettoDAO.getNumeroBigliettiByCodiceFiscale(persona,evento);
+			if(numero>4)
+				result=false;
+			else {
+				biglietto= new Biglietto(persona, nome, cognome, email, evento);
+				result=iBigliettoDAO.creaBiglietto(biglietto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+	
 		//TODO: AGGIUNGI INVITATO
 		//TODO: AGGIUNGI STAFF
 		//TODO: LISTA INVITATI
@@ -241,11 +260,14 @@ public class PersistenceFacade {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
 		//System.out.println(a.getStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084"));
-		/*String dataName="2024-01-13";
+		String dataName="1198-07-13";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date parsed = format.parse(dataName);
 		java.sql.Date data= new java.sql.Date(parsed.getTime());
-		a.setStatoEvento(data, false);*/
+		//a.setStatoEvento(data, false);*/
 		//System.out.println(a.getCodiceFiscaleByEmail("alice@"));
+		Persona persona=new Persona("001-51-9829", null);
+		Evento evento=new Evento(data);
+		System.out.println(a.aggiungiInvitato(persona, evento, "Mattia","Rossi","mattia.rossi@unipv.it"));
 	}
 }

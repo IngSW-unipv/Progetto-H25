@@ -9,11 +9,12 @@ import java.sql.SQLException;
 public interface IBigliettoDAO {
    // void aggiungiBiglietto(Biglietto biglietto) throws SQLException;
 	
-	public void creaBiglietto(Biglietto biglietto);
+	public boolean creaBiglietto(Biglietto biglietto);
 	public Persona getCreatoreBiglietto(Biglietto biglietto);
 	public void setStatoBiglietto(Biglietto biglietto);
 	public int getStatoBiglietto(Biglietto biglietto);
 	public boolean setGruccia(Biglietto biglietto);
 	public int getGruccia(Biglietto biglietto);
 	public int getNumeroGrucceAssegnate (Evento evento);
+	public int getNumeroBigliettiByCodiceFiscale(Persona persona,Evento evento);
 }
