@@ -171,17 +171,17 @@ public class PersonaDAO implements IPersonaDAO {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-
 		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
 	
 	//AGGIUNGI STAFFER
-	public void addStaffer (Staffer persona){
+	public boolean addStaffer (Staffer persona){
 		
 		conn=DBConnection.startConnection(conn);
 		Statement st1;
+		boolean result=false;
 		
 		try{
 			st1 = conn.createStatement();
@@ -189,12 +189,12 @@ public class PersonaDAO implements IPersonaDAO {
 					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
 					+"'"+0+"');";
 			st1.executeUpdate(query);
-	
+			result=true;	
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	
 		DBConnection.closeConnection(conn);
+		return result;
 	}
 	
 	

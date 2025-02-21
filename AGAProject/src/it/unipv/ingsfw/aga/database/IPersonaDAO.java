@@ -12,7 +12,7 @@ public interface IPersonaDAO {
 	public ArrayList<Persona> selectOrganizzatoreCFNomeCognome();
 	public Persona searchByCF(Persona persona);
 	public boolean addOrganizzatore(Organizzatore persona);
-	public void addStaffer(Staffer persona);
+	public boolean addStaffer(Staffer persona);
 	public Persona login (Persona persona);
 	public Persona getCodiceFiscaleByEmail (Persona persona);
 	

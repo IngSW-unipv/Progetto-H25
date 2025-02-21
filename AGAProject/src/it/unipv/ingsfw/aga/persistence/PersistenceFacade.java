@@ -253,7 +253,6 @@ public class PersistenceFacade {
 				if(numero>4) 
 					result=0;
 				else {
-					
 					//biglietto= new Biglietto(persona, nome, cognome, email, evento);
 					bigliettiQR=iBigliettoDAO.getTuttiQRBiglietti();
 					
@@ -296,13 +295,21 @@ public class PersistenceFacade {
 	}
 	
 	
+	//AGGIUNGI STAFFER
+	public boolean addStaffer(String codiceFiscale, String nome, String cognome, String email, String password) {
+		boolean result=false;
+		Staffer staffer;
+		try {
+			staffer=new Staffer(codiceFiscale, nome, cognome, email, password);
+			result=iPersonaDAO.addStaffer(staffer);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
 	
-	
-	
-		//TODO: AGGIUNGI STAFF
-		//TODO: LISTA INVITATI
-	
-	
+
 	
 	
 	public static void main(String []args) throws ParseException {
