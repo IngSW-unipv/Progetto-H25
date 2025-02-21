@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class Controller implements EventSelectionListener {
 	private Evento evento;//USATO PER TENER TRACCIA DELL'EVENTO
-	private Persona persona;//USATO PER TENER TRACCAI DI CHI CREA IL BIGLIETTO
+	private Persona persona;//USATO PER TENER TRACCIA DI CHI CREA IL BIGLIETTO
 	private PersistenceFacade persistence;
     private Model model;
     private LoginPage loginPage;
@@ -161,8 +161,7 @@ public class Controller implements EventSelectionListener {
             }
         }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = loginPage.getUsername();
-                String password = loginPage.getPassword();
+            
                 //TODO: registra utente
                 //boolean= registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password)
                 cardLayout.show(containerPanel, "register");
@@ -309,8 +308,8 @@ public class Controller implements EventSelectionListener {
                 String email = registerPage.getEmail();
                 String password = registerPage.getPassword();
                 String nome = registerPage.getName();
-                String cognome = registerPage.getSurname();
-                //TODO: logica DB
+                String cognome = registerPage.getSurname(); //TODO: aggiugni codice fiscale
+               // boolean result=persistence.registazioneOrganizzatore(String codiceFiscale, String nome, String cognome, String email, String password);
 
                 cardLayout.show(containerPanel, "events");
             }

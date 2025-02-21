@@ -56,7 +56,7 @@ public class BancoGuardaroba extends Banco {
     public String consegnaCapo(String code) {
         QrCode qr = readQR(code);
         if (this.grucceAssegnate < this.maxGrucce) {
-            if(restituzioneCapo(code) == -1)//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
+            if(restituzioneCapo(code) == 0)//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
                 {
             this.grucceAssegnate += 1;
             if (assegnaGruccia(qr, this.grucceAssegnate)){

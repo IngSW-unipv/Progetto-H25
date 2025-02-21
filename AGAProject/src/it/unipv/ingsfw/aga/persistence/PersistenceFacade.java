@@ -44,11 +44,9 @@ public class PersistenceFacade {
 	// Public static method to get the instance of the Singleton
 	public static PersistenceFacade getInstance() {
 		if (instance == null) {
-			synchronized (PersistenceFacade.class) {
-				if (instance == null) {
 					instance = new PersistenceFacade();
-				}
-			}
+					System.out.println("WLF");
+		
 		}
 		else {
 			System.out.println("RRR");//ERRORE DI OGGI POMERIGGIO
@@ -233,13 +231,8 @@ public class PersistenceFacade {
 	}
 	
 		//TODO: AGGIUNGI INVITATO
-	
-		// TODO: CAMBIO STATO VENDITA BIGLIETTI
-		// TODO: GETSTATOVENDITE
-		// TODO: GETGRUCCIA
-		// TODO: SETGRUCCIA
-		// TODO:
-		// TODO:
+		//TODO: AGGIUNGI STAFF
+		//TODO: LISTA INVITATI
 	
 	
 	
