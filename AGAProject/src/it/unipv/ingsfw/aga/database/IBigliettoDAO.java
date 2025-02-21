@@ -20,4 +20,5 @@ public interface IBigliettoDAO {
 	public int getNumeroBigliettiByCodiceFiscale(Persona persona,Evento evento);
 	public int getBigliettiTotoaliByEvento(Evento evento);
 	public ArrayList<String> getTuttiQRBiglietti();
+	public ArrayList<Biglietto> getInvitati(Evento eventoData);
 }

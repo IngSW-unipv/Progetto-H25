@@ -281,7 +281,24 @@ public class PersistenceFacade {
 		return result;
 	}
 	
-		//TODO: AGGIUNGI INVITATO
+	
+	//STAMPA INVITATI
+	public ArrayList <Biglietto> getInvitati(Evento evento) {
+		ArrayList<Biglietto> biglietto;
+		try {
+			biglietto=iBigliettoDAO.getInvitati(evento);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			biglietto=null;
+		}	
+		return biglietto;
+	}
+	
+	
+	
+	
+	
 		//TODO: AGGIUNGI STAFF
 		//TODO: LISTA INVITATI
 	

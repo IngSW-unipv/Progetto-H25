@@ -290,6 +290,37 @@ public class BigliettoDAO implements IBigliettoDAO {
 		return result;
 	}
 	 
+	 
+	 //GET TUTTI I BIGLIETTI
+	 public ArrayList<Biglietto> getInvitati(Evento eventoData) {
+	    	
+	    	conn=DBConnection.startConnection(conn);
+			Statement st1;
+			ResultSet rs1;
+			ArrayList<Biglietto> biglietti=new ArrayList <>();
+			Biglietto b;
+			Persona persona;
+			Evento evento;
+			
+			try{
+				st1 = conn.createStatement();
+				String query="SELECT * FROM BIGLIETTO WHERE DATA_EVENTO='"+eventoData.getData()+"';";
+				rs1=st1.executeQuery(query);
+				
+				while(rs1.next()) {
+					persona=new Persona(rs1.getString(3),null);
+					evento=new Evento(rs1.getDate(4));
+					b=new Biglietto(persona,rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(1),evento);
+					biglietti.add(b);
+				}
+				
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			DBConnection.closeConnection(conn);			
+			return biglietti;
+		}
+	 
     
     public static void main(String []args) throws ParseException {
 		BigliettoDAO b=new BigliettoDAO();

@@ -30,6 +30,7 @@ public class Biglietto {
         this.email=email;
     }
     
+    //COSTRUTTORE PER BIGLIETTO CON LO STESSO QR E PER LA LISTA DEGLI INVITATI    
     public Biglietto(Persona creatoreBiglietto,String QR, String nome, String cognome, String email, Evento evento) {
         this.creatoreBiglietto = creatoreBiglietto;
         this.nome=nome;
@@ -38,7 +39,7 @@ public class Biglietto {
         this.evento=evento;
         QrCode code=new QrCode(QR);
         this.codeQR = code;
-    }//CREAZIONE A SCOPO DI ERRORE DI PROVA
+    }
     
     public Biglietto(Persona creatoreBiglietto, String nome, String cognome, String email, Evento evento) {
         this.creatoreBiglietto = creatoreBiglietto;
