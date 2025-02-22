@@ -28,7 +28,7 @@ public class StafferTest {
     }
 
     @Test
-    public void changePasswordScorrettamente() {
+    public void changePasswordScorrettamente()throws AuthenticationException{
         Staffer staffer = new Staffer("ALIVER123", "Alice", "Verdi", "aliceverdi@gmail.com", "password123");
         assertThrows(AuthenticationException.class, () -> staffer.changePassword("wrongpassword", "newpassword456"));
     }

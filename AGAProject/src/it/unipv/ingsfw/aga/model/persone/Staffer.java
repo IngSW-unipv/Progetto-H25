@@ -6,7 +6,7 @@ import it.unipv.ingsfw.aga.model.banco.QrReadingStrategyFactory;
 import it.unipv.ingsfw.aga.model.banco.Type;
 import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 
-import javax.naming.AuthenticationException;
+import it.unipv.ingsfw.aga.exceptions.AuthenticationException;
 
 public class Staffer extends Persona{
     private String password;
@@ -40,6 +40,7 @@ public class Staffer extends Persona{
             throw new AuthenticationException("Vecchia Password errata!");
         }
     }
+    
     @Override
     public String getPassword(){
         return password;
