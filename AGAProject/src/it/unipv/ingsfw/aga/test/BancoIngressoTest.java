@@ -1,25 +1,27 @@
 package it.unipv.ingsfw.aga.test;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class BancoIngressoTest {
+	
     @Test
-    void validateQr() {
+    public void validateQr() {
     }
 
     @Test
-    void invalidateQr() {
+    public void invalidateQr() {
     }
 
     @Test
-    void accesso() {
+    public void accesso() {
     }
 
     @Test
-    void testAccesso() {
+    public void testAccesso() {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
     }
 }

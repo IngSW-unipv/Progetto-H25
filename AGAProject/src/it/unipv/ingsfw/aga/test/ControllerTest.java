@@ -1,8 +1,10 @@
 package it.unipv.ingsfw.aga.test;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+
 import it.unipv.ingsfw.aga.controller.Controller;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
 import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
@@ -28,7 +30,7 @@ public class ControllerTest {
 
     private Controller controller;
 
-    @BeforeEach
+    @Before
     void setUp() {
         controller = new Controller();
     }

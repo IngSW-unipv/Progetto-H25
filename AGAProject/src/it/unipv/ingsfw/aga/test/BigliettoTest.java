@@ -1,73 +1,75 @@
 package it.unipv.ingsfw.aga.test;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class BigliettoTest {
+	
     @Test
-    void changeQRCode() {
+    public void changeQRCode() {
     }
 
     @Test
-    void getCreatoreBiglietto() {
+    public void getCreatoreBiglietto() {
     }
 
     @Test
-    void getNomeCreatore() {
+    public void getNomeCreatore() {
     }
 
     @Test
-    void getCognomeCreatore() {
+    public void getCognomeCreatore() {
     }
 
     @Test
-    void getEmailCreatore() {
+    public void getEmailCreatore() {
     }
 
     @Test
-    void getNome() {
+    public void getNome() {
     }
 
     @Test
-    void getCognome() {
+    public void getCognome() {
     }
 
     @Test
-    void getEmail() {
+    public void getEmail() {
     }
 
     @Test
-    void getDataEvento() {
+    public void getDataEvento() {
     }
 
     @Test
-    void getQRCodeId() {
+    public void getQRCodeId() {
     }
 
     @Test
-    void getAccessoEffettuato() {
+    public void getAccessoEffettuato() {
     }
 
     @Test
-    void getCodiceFiscaleCreatore() {
+    public void getCodiceFiscaleCreatore() {
     }
 
     @Test
-    void setAccessoEffettuato() {
+    public void setAccessoEffettuato() {
     }
 
     @Test
-    void getNumeroGruccia() {
+    public void getNumeroGruccia() {
     }
 
     @Test
-    void setNumeroGruccia() {
+    public void setNumeroGruccia() {
     }
 
     @Test
-    void getDescrizioneGruccia() {
+    public void getDescrizioneGruccia() {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
     }
 }

@@ -1,11 +1,11 @@
 package it.unipv.ingsfw.aga.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
 import it.unipv.ingsfw.aga.model.persone.Staffer;
-import org.junit.jupiter.api.Test;
 import it.unipv.ingsfw.aga.exceptions.AuthenticationException;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
@@ -17,7 +17,7 @@ import java.util.Date;
 public class OrganizzatoreTest {
 
     @Test
-    void constructorWithAllFields() {
+    public void constructorWithAllFields() {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         assertEquals("FRABIA123", organizzatore.getCodiceFiscale());
         assertEquals("Francesco", organizzatore.getNome());
@@ -26,7 +26,7 @@ public class OrganizzatoreTest {
         assertEquals("password123", organizzatore.getPassword());
     }
     @Test
-    void changePasswordCorretto() throws javax.naming.AuthenticationException {
+    public void changePasswordCorretto() throws javax.naming.AuthenticationException {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         organizzatore.changePassword("password123", "newpassword456");
         assertEquals("newpassword456", organizzatore.getPassword());
@@ -39,23 +39,24 @@ public class OrganizzatoreTest {
     }
 */
     @Test
-    void creaEventoCorretto() throws MaxExeededException, ParseException {
+    public void creaEventoCorretto() throws MaxExeededException, ParseException {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         Evento evento = organizzatore.creaEvento("TIPO", "2023-12-31", "MEDA", 1000);
         assertNotNull(evento);
     }
+    
     @Test
-    void creaEventoPartecipantiNegativi() {
+    public void creaEventoPartecipantiNegativi() {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         assertThrows(IllegalArgumentException.class, () -> organizzatore.creaEvento("TIPO", "2023-12-31", "MEDA", -1));
     }
     @Test
-    void creaEventoEccessoPartecipanti() {
+    public void creaEventoEccessoPartecipanti() {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         assertThrows(MaxExeededException.class, () -> organizzatore.creaEvento("TIPO", "2023-12-31", "MEDA", 2000));
     }
     @Test
-    void creaEventoDataNonValida() {
+    public void creaEventoDataNonValida() {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         assertThrows(ParseException.class, () -> organizzatore.creaEvento("TIPO", "invalid-date", "MEDA", 1000));
     }
@@ -76,7 +77,7 @@ public class OrganizzatoreTest {
     }
 */
     @Test
-    void toStringMethod() {
+    public void toStringMethod() {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         String expected = "[Persona]\nTipo: Organizzatore\nNome: Francesco Cognome: Bianchi\nEmail: frabianchi@gmail.com\n";
         assertEquals(expected, organizzatore.toString());

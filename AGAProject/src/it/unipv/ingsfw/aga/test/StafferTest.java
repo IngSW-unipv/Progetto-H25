@@ -11,7 +11,7 @@ import it.unipv.ingsfw.aga.model.banco.Type;
 public class StafferTest {
 
     @Test
-    void constructorAllFields() {
+    public void constructorAllFields() {
         Staffer staffer = new Staffer("ALIVER123", "Alice", "Verdi", "aliceverdi@gmail.com", "password123");
         assertEquals("ALIVER123", staffer.getCodiceFiscale());
         assertEquals("Alice", staffer.getNome());
@@ -21,14 +21,14 @@ public class StafferTest {
     }
 
     @Test
-    void changePasswordCorrettamente() throws javax.naming.AuthenticationException {
+    public void changePasswordCorrettamente() throws javax.naming.AuthenticationException {
         Staffer staffer = new Staffer("ALIVER123", "Alice", "Verdi", "aliceverdi@gmail.com", "password123");
         staffer.changePassword("password123", "newpassword456");
         assertEquals("newpassword456", staffer.getPassword());
     }
 
     @Test
-    void changePasswordScorrettamente() {
+    public void changePasswordScorrettamente() {
         Staffer staffer = new Staffer("ALIVER123", "Alice", "Verdi", "aliceverdi@gmail.com", "password123");
         assertThrows(AuthenticationException.class, () -> staffer.changePassword("wrongpassword", "newpassword456"));
     }
@@ -50,7 +50,7 @@ public class StafferTest {
 */
 
     @Test
-    void toStringTest() {
+    public void toStringTest() {
         Staffer staffer = new Staffer("ALIVER123", "Alice", "Verdi", "aliceverdi@gmail.com", "password123");
         String expected = "[Persona]\nTipo: Staffer\nNome: Alice Cognome: Verdi\nEmail: aliceverdi@gmail.com\n";
         assertEquals(expected, staffer.toString());

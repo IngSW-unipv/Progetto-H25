@@ -1,60 +1,59 @@
 package it.unipv.ingsfw.aga.test;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 class BancoGuardarobaTest {
 
     @Test
-    void getMaxGrucce() {
+    public void getMaxGrucce() {
     }
 
     @Test
-    void setMaxGrucce() {
+    public void setMaxGrucce() {
     }
 
     @Test
-    void updateMaxGrucce() {
+    public void updateMaxGrucce() {
     }
 
     @Test
-    void getGrucceAssegnate() {
+    public void getGrucceAssegnate() {
     }
 
     @Test
-    void setGrucceAssegnate() {
+    public void setGrucceAssegnate() {
     }
 
     @Test
-    void updateGrucceAssegnate() {
+    public void updateGrucceAssegnate() {
     }
 
     @Test
-    void consegnaCapo() {
+    public void consegnaCapo() {
     }
 
     @Test
-    void testConsegnaCapo() {
+    public void testConsegnaCapo() {
     }
 
     @Test
-    void restituzioneCapo() {
+    public void restituzioneCapo() {
     }
 
     @Test
-    void testRestituzioneCapo() {
+    public void testRestituzioneCapo() {
     }
 
     @Test
-    void assegnaGruccia() {
+    public void assegnaGruccia() {
     }
 
     @Test
-    void validateQr() {
+    public void validateQr() {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
     }
 }
