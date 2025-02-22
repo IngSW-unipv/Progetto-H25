@@ -32,4 +32,21 @@ public class ListaInvitatiPage extends JPanel {
     public void updateGuestsList() {
         // Metodo per aggiungere gli invitati al pannello scrollabile //TODO
     }
+    /*public void addEventButton(String eventName) {
+        JPanel eventButton = new JButton(eventName);
+        eventButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        // Quando l'utente clicca sul bottone evento, il listener si occupa della logica
+        eventButton.addActionListener(e -> {
+            if (eventSelectionListener != null) {
+                eventSelectionListener.onEventSelected(eventName); // Invoca il listener
+            }
+        });
+
+        buttonsPanel.add(eventButton);
+        buttonsPanel.revalidate();
+        buttonsPanel.repaint();
+    }*/
+
+	
 }

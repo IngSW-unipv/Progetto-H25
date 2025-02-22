@@ -77,7 +77,6 @@ public class Controller implements EventSelectionListener {
         eventsPage.getCreateEventButton().addActionListener(e -> {
             // Logica per andare alla pagina per creare un evento
             cardLayout.show(containerPanel, "addEvent");
-            
             /*String date = addEventPage.getEventDate();
             String location = addEventPage.getEventLocation();
             String capacity = addEventPage.getEventCapacity();
@@ -171,7 +170,6 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
             
                 //TODO: registra utente
-                //boolean= registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password)
                 cardLayout.show(containerPanel, "register");
             }
         });
@@ -270,6 +268,7 @@ public class Controller implements EventSelectionListener {
             	invitati=persistence.getInvitati(evento);
             	for (Biglietto i: invitati)
             		System.out.println(i.toString());
+            		 //listaInvitatiPage(containerPanel, i);
                 cardLayout.show(containerPanel, "listaInvitati"); // Esempio: mostra il pannello con la lista degli invitati
             }
         });
