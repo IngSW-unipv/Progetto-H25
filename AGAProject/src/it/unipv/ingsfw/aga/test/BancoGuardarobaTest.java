@@ -3,7 +3,7 @@ package it.unipv.ingsfw.aga.test;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-class BancoGuardarobaTest {
+public class BancoGuardarobaTest {
 
     @Test
     public void getMaxGrucce() {

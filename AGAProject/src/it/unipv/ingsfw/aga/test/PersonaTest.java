@@ -59,7 +59,7 @@ public class PersonaTest {
     }
 
     @Test
-    void checkIngressoNonAutorizzato() {
+    public void checkIngressoNonAutorizzato() {
         Persona persona = new Persona();
         assertThrows(PermissionDeniedException.class, () -> {
             persona.checkIngresso(Type.GUI, new QrCode());
