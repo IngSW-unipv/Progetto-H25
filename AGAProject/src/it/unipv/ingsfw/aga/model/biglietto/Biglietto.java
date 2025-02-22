@@ -120,10 +120,10 @@ public class Biglietto {
 
     @Override
     public String toString() {
-        return "[Biglietto]\n" +
-                "Tipo: Standard\n" +
-                "Nome: " + getNome() + " Cognome: " + getCognome() + " Email: " + getEmail() + "\n" +
-                "QrCode: " + getQRCodeId() + "\n"+
-                "Proprietario: " +getNomeCreatore() + " Cognome: " + getCognomeCreatore() + " Email: " + getEmailCreatore() + "\n" ;
+        return "   [Biglietto]\n" +
+                "   Tipo: Standard\n" +
+                "   Nome: " + getNome() + " Cognome: " + getCognome() + "\n   Email: " + getEmail() + "\n" +
+                "   QrCode: " + getQRCodeId() + "\n"+
+                "   Proprietario: " +getNomeCreatore() + " Cognome: " + getCognomeCreatore() + " Email: " + getEmailCreatore() + "\n" ;
     }
 }

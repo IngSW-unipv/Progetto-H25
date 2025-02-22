@@ -77,17 +77,12 @@ public class Controller implements EventSelectionListener {
         eventsPage.getCreateEventButton().addActionListener(e -> {
             // Logica per andare alla pagina per creare un evento
             cardLayout.show(containerPanel, "addEvent");
-//<<<<<<< HEAD
             /*String date = addEventPage.getEventDate();
             String location = addEventPage.getEventLocation();
             String capacity = addEventPage.getEventCapacity();
             boolean result=persistence.addEvento(date, location, capacity);
             if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
-//=======
-            
-
-//>>>>>>> d5098d650c5c787e1b0a37ea14fceff65648811c
         });
 
         // Settiamo il controller come listener della EventsPage
@@ -173,11 +168,7 @@ public class Controller implements EventSelectionListener {
             }
         }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//<<<<<<< HEAD
-            
                 //TODO: registra utente
-//=======
-//>>>>>>> d5098d650c5c787e1b0a37ea14fceff65648811c
                 cardLayout.show(containerPanel, "register");
             }
         });
@@ -265,12 +256,9 @@ public class Controller implements EventSelectionListener {
         // Listener per il pulsante "Vedi Invitati"
         mainPage.getVediInvitatiButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Azioni per visualizzare gli invitati
             	ArrayList<Biglietto> invitati;
             	invitati=persistence.getInvitati(evento);
-            	for (Biglietto i: invitati)
-            		System.out.println(i.toString());
-            		 //listaInvitatiPage(containerPanel, i);
+        		listaInvitatiPage.updateGuestsList(invitati);
                 cardLayout.show(containerPanel, "listaInvitati"); // Esempio: mostra il pannello con la lista degli invitati
             }
         });

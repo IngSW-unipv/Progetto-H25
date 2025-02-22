@@ -1,11 +1,16 @@
 package it.unipv.ingsfw.aga.view;
 
 import javax.swing.*;
+
+import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ListaInvitatiPage extends JPanel {
     private JPanel guestsPanel;
     private Navbar navbar;
+    private JTextArea area;
 
     public ListaInvitatiPage(CardLayout cardLayout, JPanel containerPanel) {
         setLayout(new BorderLayout());
@@ -29,24 +34,13 @@ public class ListaInvitatiPage extends JPanel {
     }
 
     // Metodo vuoto per aggiornare la lista degli invitati
-    public void updateGuestsList() {
-        // Metodo per aggiungere gli invitati al pannello scrollabile //TODO
-    }
-    /*public void addEventButton(String eventName) {
-        JPanel eventButton = new JButton(eventName);
-        eventButton.setFont(new Font("Arial", Font.PLAIN, 16));
-
-        // Quando l'utente clicca sul bottone evento, il listener si occupa della logica
-        eventButton.addActionListener(e -> {
-            if (eventSelectionListener != null) {
-                eventSelectionListener.onEventSelected(eventName); // Invoca il listener
-            }
-        });
-
-        buttonsPanel.add(eventButton);
-        buttonsPanel.revalidate();
-        buttonsPanel.repaint();
-    }*/
-
-	
+    public void updateGuestsList(ArrayList<Biglietto> invitati){
+    	area=new JTextArea();
+    	setFont(area.getFont().deriveFont(12f)); 
+    	guestsPanel.add(area);
+		String s="";
+    	for (Biglietto i: invitati)
+    		s=s+i.toString()+"\n";
+    	area.append(s);
+    }	
 }
