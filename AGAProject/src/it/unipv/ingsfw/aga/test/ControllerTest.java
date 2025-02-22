@@ -31,32 +31,32 @@ public class ControllerTest {
     private Controller controller;
 
     @Before
-    void setUp() {
+    public void setUp() {
         controller = new Controller();
     }
 
     @Test
-    void loginCredenzialiCorrette() {
+    public void loginCredenzialiCorrette() {
         // TODO: implementare i test per il login con credenziali valide
     }
 
     @Test
-    void loginCredezialiSbagliate() {
+    public void loginCredezialiSbagliate() {
         //TODO: implementare i test per il login con credenziali non valide
     }
 
     @Test
-    void caricamentoCorrettoEvento() {
+    public void caricamentoCorrettoEvento() {
         //TODO: implementare i test per il caricamento degli eventi
     }
 
     @Test
-    void aggiuntaInvitatoCorretto() {
+    public void aggiuntaInvitatoCorretto() {
         //TODO: implementare i test per l'aggiunta di un invitato
     }
 
     @Test
-    void aggiuntaInvitatoScorretta() {
+    public void aggiuntaInvitatoScorretta() {
         //TODO: implementare i test per l'aggiunta di un invitato quando la capienza massima è stata raggiunta
     }
 }
