@@ -4,12 +4,10 @@ package it.unipv.ingsfw.aga.model.evento;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 
 
-import java.util.Date;
+import java.text.ParseException;
 
 public class EventoFactory {
-    public static Evento creaEvento(String tipoEvento, String organizzatore, Date data, String location, int maxPartecipanti, boolean venditeAperte) throws MaxExeededException {
-//        Evento evento = new Evento(data, location, maxPartecipanti);
-//        EventoDAO.addEvento(Evento evento);
-        return new Evento(data, location, maxPartecipanti,venditeAperte);
+    public static Evento creaEvento(String tipoEvento, String organizzatore, String dataString, String location, int maxPartecipanti) throws MaxExeededException, ParseException {
+        return new Evento(dataString, location, maxPartecipanti);
     }
 }

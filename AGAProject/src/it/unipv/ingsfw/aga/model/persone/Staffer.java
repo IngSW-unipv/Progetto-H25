@@ -6,6 +6,8 @@ import it.unipv.ingsfw.aga.model.banco.QrReadingStrategyFactory;
 import it.unipv.ingsfw.aga.model.banco.Type;
 import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 
+import javax.naming.AuthenticationException;
+
 public class Staffer extends Persona{
     private String password;
     //private int limiteInviti;
@@ -31,6 +33,13 @@ public class Staffer extends Persona{
         this.password = password;
     }
 
+    public void changePassword(String oldPassword, String newPassword) throws AuthenticationException {
+        if(oldPassword.equals(password)){
+            password = newPassword;
+        }else{
+            throw new AuthenticationException("Vecchia Password errata!");
+        }
+    }
     @Override
     public String getPassword(){
         return password;

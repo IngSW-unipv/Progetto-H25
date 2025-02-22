@@ -13,72 +13,15 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Evento {
-    //private final String organizzatore;
-	//private Organizzatore organizzatore;
     private final Date data;
     private String location;
     private int maxPartecipanti;
-    //private String idEvento;
-    //private int numBiglietto = 0;
-    private boolean venditeAperte; 
+    private boolean venditeAperte;
 
-    public Evento(Date data, String location, int maxPartecipanti)  {
-    	this.data=data;
-    	this.location=location;
-    	this.maxPartecipanti=maxPartecipanti;
-    }
-    
-    //COSTRUTTORE UTILE PER IL DAO
-    public Evento(Date data, String location, int maxPartecipanti, boolean venditeAperte)  {
-    	this.data=data;
-    	this.location=location;
-    	this.maxPartecipanti=maxPartecipanti;
-    	this.venditeAperte=venditeAperte;
-    }
-    
-    public Evento(String dataName) throws ParseException  {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date parsed = format.parse(dataName);
-		java.sql.Date data= new java.sql.Date(parsed.getTime());
-    	this.data=data;
-    	this.location=null;
-    	this.maxPartecipanti=0;
-    	this.venditeAperte=false;
-    }
-    
-    public Evento(Date data)  {
-    	this.data=data;
-    	this.location=null;
-    	this.maxPartecipanti=0;
-    	this.venditeAperte=false;
-    }
-    
-    public Evento(Date data,boolean stato)  {
-    	this.data=data;
-    	this.location=null;
-    	this.maxPartecipanti=0;
-    	this.venditeAperte=stato;
-    }
-    
-    public Evento(Evento evento) {
-    	this.data=evento.getData();
-    	this.location=evento.getLocation();
-    	this.maxPartecipanti=evento.getMaxPartecipanti();
-    	this.venditeAperte=evento.getVenditeAperte();
-    }
-    
-    public Date changeStringToDate(String dataName) throws ParseException {
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date parsed = format.parse(dataName);
-		java.sql.Date data= new java.sql.Date(parsed.getTime());
-		return data;
-    }
-    
-    
-    /*public Evento(String organizzatore, Date data, String location, int maxPartecipanti) throws MaxExeededException {
-        this.organizzatore = organizzatore;
-        this.data = data;
-        this.location = location;
+    //Costruttore Standard
+    public Evento(String dataString, String location, int maxPartecipanti) throws ParseException, MaxExeededException {
+        this.data = changeStringToDate(dataString);
+    	this.location = location;
         if (maxPartecipanti < 0) {
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
         } else if (maxPartecipanti > 1500) {
@@ -86,20 +29,66 @@ public class Evento {
         } else {
             this.maxPartecipanti = maxPartecipanti;
         }
-        this.idEvento = UUID.randomUUID().toString();  //idee su alternative per avere un identificatore univoco?
         this.venditeAperte = false;
     }
-    
-    public Organizzatore getOrganizzatore() {
-        return organizzatore;
-    }*/
-    public Date getData() {
-        return data;
+
+    //Serve per la persistenza(?) SORRY SE HO FATTO CASINO :'(
+    public Evento(Date data, String location, int capacita){
+        this.data = data;
+		this.location = location;
+		this.maxPartecipanti = capacita;
+		this.venditeAperte = false;
     }
     
-    public void setData(Evento nuovaData) {//NON SI PUO FARE PER CHIAVE ESTERNA
-    	//EventoDAO d=new EventoDAO();
-    	//d.changeData(this, nuovaData);    	
+    //COSTRUTTORE UTILE PER IL DAO
+    public Evento(Date data, String location, int maxPartecipanti, boolean venditeAperte)  {
+    	this.data = data;
+    	this.location = location;
+    	this.maxPartecipanti = maxPartecipanti;
+    	this.venditeAperte = venditeAperte;
+    }
+    
+    public Evento(String dataName) throws ParseException  {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data = new java.sql.Date(parsed.getTime());
+    	this.data = data;
+    	this.location = null;
+    	this.maxPartecipanti = 0;
+    	this.venditeAperte = false;
+    }
+    
+    public Evento(Date data)  {
+    	this.data = data;
+    	this.location = null;
+    	this.maxPartecipanti = 0;
+    	this.venditeAperte = false;
+    }
+    
+    public Evento(Date data, boolean stato)  {
+    	this.data = data;
+    	this.location = null;
+    	this.maxPartecipanti = 0;
+    	this.venditeAperte = stato;
+    }
+    
+    public Evento(Evento evento) {
+    	this.data = evento.getData();
+    	this.location = evento.getLocation();
+    	this.maxPartecipanti = evento.getMaxPartecipanti();
+    	this.venditeAperte = evento.getVenditeAperte();
+    }
+
+    //Questo metodo probabilmente dovrebbe essere in una classe di utility? Perchè non appartiene a un evento e potrebbe essere utili anche in altre classi
+    public Date changeStringToDate(String dataName) throws ParseException {
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());
+		return data;
+    }
+
+    public Date getData() {
+        return data;
     }
 
     public String getLocation() {
@@ -119,33 +108,6 @@ public class Evento {
     	return venditeAperte;
     }
 
-    /*public int getNumBiglietto() {
-        return numBiglietto;
-    }
-
-    public void setNumBiglietto(int numBiglietto) {
-        this.numBiglietto = numBiglietto;
-    }
-    public String getIdEvento() {
-        return idEvento;
-    }
-
-    public void setIdEvento(String idEvento) {
-        this.idEvento = idEvento;
-    }
-
-    public boolean isVenditeAperte() {
-        return venditeAperte;
-    }*/
-
-    /*public void apriVendite() {
-        venditeAperte = true;
-    }
-
-    public void chiudiVendite() {
-        venditeAperte = false;
-    }*/
-
     public void setMaxPartecipanti(int maxPartecipanti) throws MaxExeededException {
         if (maxPartecipanti < 0) {
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
@@ -156,26 +118,16 @@ public class Evento {
         }
     }
 
-   /* public Biglietto aggiungiBiglietto(String codiceFiscale, String nome, String cognome, String email, Date data, boolean staffer) {
-        if (staffer) {
-            numBiglietto++;
-            PersonaFactory.creaPersona("staffer", codiceFiscale, nome, cognome, email, null);
-            return BigliettoFactory.creaBiglietto(nome, cognome, email, numBiglietto, getData());
-        } else {
-            numBiglietto++;
-            return BigliettoFactory.creaBiglietto(nome, cognome, email, numBiglietto, getData());
-        }
-    }*/
+    public Biglietto aggiugiBiglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email){
+        return BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
+    }
     
     public String toString() {
         String s= "[Evento]\n" +
                 "Tipo: Standard\n" +
                 "Data: " + getData() + "\n" +
                 "Location: " + getLocation() + "\n";
-        if(venditeAperte) return s+"Vendite aperte\n";
-        else return s+"Vendite chiuse\n";        	
-                //"Organizzatore: " + getOrganizzatore() + "\n";
+        		if(venditeAperte) return s + "Vendite aperte\n";
+        		else return s + "Vendite chiuse\n";
     }
-    
-    
 }

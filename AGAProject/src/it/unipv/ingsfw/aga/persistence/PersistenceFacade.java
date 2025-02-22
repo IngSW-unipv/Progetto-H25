@@ -310,7 +310,9 @@ public class PersistenceFacade {
 	}
 	
 	
+
 	//AGGIUNGI EVENTO
+	// MI SA CHE HO GENERATO UN ERRORE NELLA CREAZIONE LAVORANDO SULLA CLASSE EVENTO SORRY :'( che credo di aver sistemato, FAMMI SAPERE
 	public boolean addEvento(String data, String luogo, String capacita) {
 		boolean result=false;
 		Evento evento=null;

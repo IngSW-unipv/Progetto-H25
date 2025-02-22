@@ -77,12 +77,17 @@ public class Controller implements EventSelectionListener {
         eventsPage.getCreateEventButton().addActionListener(e -> {
             // Logica per andare alla pagina per creare un evento
             cardLayout.show(containerPanel, "addEvent");
+//<<<<<<< HEAD
             /*String date = addEventPage.getEventDate();
             String location = addEventPage.getEventLocation();
             String capacity = addEventPage.getEventCapacity();
             boolean result=persistence.addEvento(date, location, capacity);
             if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
+//=======
+            
+
+//>>>>>>> d5098d650c5c787e1b0a37ea14fceff65648811c
         });
 
         // Settiamo il controller come listener della EventsPage
@@ -168,8 +173,11 @@ public class Controller implements EventSelectionListener {
             }
         }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+//<<<<<<< HEAD
             
                 //TODO: registra utente
+//=======
+//>>>>>>> d5098d650c5c787e1b0a37ea14fceff65648811c
                 cardLayout.show(containerPanel, "register");
             }
         });
@@ -187,17 +195,11 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 String date = addEventPage.getEventDate();
                 String location = addEventPage.getEventLocation();
-                String capacityStr = addEventPage.getEventCapacity();
+                String capacity = addEventPage.getEventCapacity();
+            boolean result=persistence.addEvento(date, location, capacity);
+            if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
+            else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
 
-                try {
-                    int capacity = Integer.parseInt(capacityStr); // Converte la capienza in int
-                    // Fai qualcosa con i dati (ad esempio salva l'evento nel modello)
-                    JOptionPane.showMessageDialog(null, "Evento aggiunto con successo!");
-                    // Torna alla pagina principale dopo aver aggiunto l'evento
-                    cardLayout.show(containerPanel, "main");
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Capienza non valida. Inserisci un numero intero.");
-                }
             }
         });
 
@@ -273,8 +275,6 @@ public class Controller implements EventSelectionListener {
             }
         });
 
-
-        // TODO: aggiungere la navigazione alle pagine "ListaInvitatiPage" "AggiungiStaff"
 
         // ActionListener per il bottone "Verifica" nella pagina Entrata
         entrancePage.getVerifyButton().addActionListener(new ActionListener() {
