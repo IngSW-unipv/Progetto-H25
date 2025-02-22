@@ -1,9 +1,9 @@
 package it.unipv.ingsfw.aga.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import it.unipv.ingsfw.aga.model.persone.Staffer;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import it.unipv.ingsfw.aga.exceptions.AuthenticationException;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.banco.Type;

@@ -17,7 +17,6 @@ import it.unipv.ingsfw.aga.model.persone.Persona;
 import it.unipv.ingsfw.aga.model.persone.Staffer;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
 import it.unipv.ingsfw.aga.model.evento.Evento;
-import it.unipv.ingsfw.aga.model.banco.Banco;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.database.BigliettoDAO;
 import it.unipv.ingsfw.aga.database.PersonaDAO;
