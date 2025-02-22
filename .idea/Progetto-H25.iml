@@ -17,5 +17,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="junit.jupiter.engine" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Java/JUNIT/junit-4.13.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
