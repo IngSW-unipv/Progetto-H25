@@ -187,7 +187,7 @@ public class Controller implements EventSelectionListener {
                 String date = addEventPage.getEventDate();
                 String location = addEventPage.getEventLocation();
                 String capacity = addEventPage.getEventCapacity();
-            boolean result=persistence.addEvento(date, location, capacity);
+            boolean result = persistence.addEvento(date, location, capacity);
             if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
 

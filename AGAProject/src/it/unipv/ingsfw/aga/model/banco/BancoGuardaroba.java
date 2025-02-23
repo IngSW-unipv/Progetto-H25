@@ -23,7 +23,7 @@ public class BancoGuardaroba extends Banco {
     public BancoGuardaroba(int numeroBanco) {
         super(numeroBanco, null);
         this.maxGrucce = maxGrucce;
-        //this.grucceAssegnate = 0;??
+        this.grucceAssegnate = 0;
     }
 
     public int getMaxGrucce() {
@@ -55,7 +55,7 @@ public class BancoGuardaroba extends Banco {
     public String consegnaCapo() {
         QrCode qr = readQR();
         if (this.grucceAssegnate < this.maxGrucce) {
-            if (restituzioneCapo(qr.getId()) == 0){//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
+            if (restituzioneCapo(qr.getId()) == 0){
                 this.grucceAssegnate += 1;
                 if (assegnaGruccia(qr, this.grucceAssegnate)) {
                     return "Oggetto inserito sulla gruccia: " + this.grucceAssegnate;
@@ -76,7 +76,7 @@ public class BancoGuardaroba extends Banco {
     public String consegnaCapo(String code) {
         QrCode qr = readQR(code);
         if (this.grucceAssegnate < this.maxGrucce) {
-            if (restituzioneCapo(code) == 0){//TODO: non so se giusto come metodo per verificare che una gruccia non sia già staa assegbata)
+            if (restituzioneCapo(code) == 0){
                 this.grucceAssegnate += 1;
                 if (assegnaGruccia(qr, this.grucceAssegnate)) {
                     return "Oggetto inserito sulla gruccia: " + this.grucceAssegnate;
@@ -118,7 +118,7 @@ public class BancoGuardaroba extends Banco {
 
 
     public boolean validateQr(QrCode qr) {
-        if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1) {
+        if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1 && evento.getData().equals(PersistenceFacade.getInstance().getDataByBiglietto(qr.getId()))) {
             System.out.println("Biglietto valido");
             return true;
         } else {
@@ -134,7 +134,7 @@ public class BancoGuardaroba extends Banco {
     	return "[Banco]\n" +
                 "Tipo: Guardaroba\n" +
                 "Numero banco: " + getNumeroBanco() +"\n" +
-                "Evento: " + getDataEvento() + "\n";
+                "Evento: " + evento.getData() + "\n";
     }
     
     
