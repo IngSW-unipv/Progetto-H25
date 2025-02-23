@@ -72,34 +72,14 @@ public class Controller implements EventSelectionListener {
 
         // Aggiungi l'ActionListener per il bottone "Crea Evento"
         eventsPage.getCreateEventButton().addActionListener(e -> {
-
-            // Logica per andare alla pagina per creare un evento
         	cardLayout.show(containerPanel, "addEvent");
-            /*String date = addEventPage.getEventDate();
-            String location = addEventPage.getEventLocation();
-            String capacity = addEventPage.getEventCapacity();
-            boolean result=persistence.addEvento(date, location, capacity);
-            if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
-            else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
-            
-            cardLayout.show(containerPanel, "addEvent");
-
         });
 
-        // Settiamo il controller come listener della EventsPage
-        eventsPage.setEventSelectionListener(this);
-        
         // ActionListener per il login
         loginPage.getLoginButton().addActionListener(e -> {
             String username = loginPage.getUsername();
             int intPassword = loginPage.getPassword().hashCode();
             String password=Integer.toString(intPassword);
-            //String passworda= (String)password;
-            /*if (model.checkLogin(username, password)) {
-                cardLayout.show(containerPanel, "events");
-            } else {
-                JOptionPane.showMessageDialog(null, "Login fallito!");
-            }*/
             if(persistence.login(username, password)==0) {
             	cardLayout.show(containerPanel, "events");
             	persona=persistence.getCodiceFiscaleByEmail(username);
@@ -112,30 +92,7 @@ public class Controller implements EventSelectionListener {
             	}
             else JOptionPane.showMessageDialog(null, "Login fallito!");
         });
-    }
-    
-    private void loadEvents() {
-    	ArrayList<String> result=persistence.getEventi();
-        for (String eventName : result) {
-            eventsPage.addEventButton(eventName);
-        }
-    }
 
-    // Metodo per gestire la selezione di un evento
-    @Override
-    public void onEventSelected(String eventName) {
-        System.out.println("Hai selezionato: " + eventName);
-        // Mostra la pagina principale
-        cardLayout.show(containerPanel, "main");
-        try {
-    		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    		Date parsed = format.parse(eventName);
-    		java.sql.Date data= new java.sql.Date(parsed.getTime());
-			evento= new Evento(data);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Evento non riuscito");
-		}
         loginPage.getLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
@@ -151,12 +108,15 @@ public class Controller implements EventSelectionListener {
                 }
                 else JOptionPane.showMessageDialog(null, "Login fallito!");
             }
-        }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
+        });
+        loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                  cardLayout.show(containerPanel, "register");
             }
         });
 
+        eventsPage.setEventSelectionListener(this);
+        loadEvents();
 
         // ActionListener per il bottone "Aggiungi Invitato"
         mainPage.getAddGuestButton().addActionListener(new ActionListener() {
@@ -178,9 +138,6 @@ public class Controller implements EventSelectionListener {
 
             }
         });
-        
-   
-      
 
         // ActionListener per il bottone "Invia" nella pagina AddGuest
         addGuestPage.getSubmitButton().addActionListener(new ActionListener() {
@@ -314,9 +271,37 @@ public class Controller implements EventSelectionListener {
                 cardLayout.show(containerPanel, "events");
             }
         });
-        loadEvents();
-        
+
+
+
+
+
+
+
+
     }
+
+    public void loadEvents() {
+        ArrayList<String> result=persistence.getEventi();
+        for (String eventName : result) {
+            eventsPage.addEventButton(eventName);
+        }
+    }
+
+
+    public void onEventSelected(String eventName) {
+        System.out.println("Hai selezionato: " + eventName);
+        // Mostra la pagina principale
+        cardLayout.show(containerPanel, "main");
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsed = format.parse(eventName);
+            java.sql.Date data= new java.sql.Date(parsed.getTime());
+            evento= new Evento(data);
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Evento non riuscito");
+        };}
 
 
     public JPanel getContainerPanel() {
