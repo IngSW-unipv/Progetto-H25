@@ -118,6 +118,8 @@ public class Controller implements EventSelectionListener {
         eventsPage.setEventSelectionListener(this);
         loadEvents();
 
+
+
         // ActionListener per il bottone "Aggiungi Invitato"
         mainPage.getAddGuestButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -125,15 +127,14 @@ public class Controller implements EventSelectionListener {
             }
         });
 
-        // ActionListener per il bottone "Invia" nella pagina AddEvent
+      
         addEventPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	System.out.println("BellaStronza!!");
                 String date = addEventPage.getEventDate();
                 String location = addEventPage.getEventLocation();
                 String capacity = addEventPage.getEventCapacity();
             boolean result = persistence.addEvento(date, location, capacity);
-            if(result==true)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
+            if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
 
             }

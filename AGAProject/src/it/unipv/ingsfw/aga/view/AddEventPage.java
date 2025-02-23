@@ -51,25 +51,7 @@ public class AddEventPage extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
-        // Aggiungi l'ActionListener direttamente alla view
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Ottieni i dati dai campi di testo
-                String date = getEventDate();
-                String location = getEventLocation();
-                String capacity = getEventCapacity();
 
-                // Utilizza PersistenceFacade per salvare l'evento
-                persistence = PersistenceFacade.getInstance();
-                boolean result = persistence.addEvento(date, location, capacity);
-                if (result) {
-                    JOptionPane.showMessageDialog(null, "Evento aggiunto con successo!");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
-                }
-            }
-        });
     }
 
     public JButton getSubmitButton() {
