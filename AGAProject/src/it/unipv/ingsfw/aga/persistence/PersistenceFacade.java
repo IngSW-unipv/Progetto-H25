@@ -51,7 +51,7 @@ public class PersistenceFacade {
 	}
 
 
-	/**SET STATO DEL BIGLIETTO (STRING E BOOL)
+	/**SET STATO DEL BIGLIETTO**
 	 * Esegue il cambiamento dello stato del biglietto, cioè se l'accesso alla festa è stato effettuato.
 	 * 
 	 * @param codeQR: identificativo del biglietto sui cui si vogliono ottenere le informazioni.
@@ -70,16 +70,19 @@ public class PersistenceFacade {
 	}
 	
 	
-	/**GET STATO DEL BIGLIETTO (STRING E BOOL)
-	 * Esegue il cambiamento dello stato del biglietto, cioè se l'accesso alla festa è stato effettuato.
+	/**GET STATO DEL BIGLIETTO**
+	 * Mi permette di vedere lo stato del biglietto.
 	 * 
 	 * @param codeQR: identificativo del biglietto sui cui si vogliono ottenere le informazioni.
 	 * @param stato: identificativo che si usa per cambiare l'accesso di un biglietto.
-	 * @return boolean: se l'accesso alla festa è già stato effettuato mi da un 'false' altrimenti 'true'.
+	 * @return int: se l'accesso alla festa è già stato effettuato mi da un '1' altrimenti '0' e se è presente 
+	 * 				un errore mi rida '2'.
 	 */
-	//GET STATO DEL BIGLIETTO (STRING E BOOL)
 	public int getStatoBiglietto (String codeQR) {
 		int result=2;
+		//RESULT=1 ACCESSO EFFETTUATO
+		//RESULT=0 ACCESSO NON EFFETTUATO
+		//RESULT=2 ERRORE 
 		try {
 			Biglietto biglietto=new Biglietto(codeQR);
 			result=iBigliettoDAO.getStatoBiglietto(biglietto);
@@ -88,9 +91,17 @@ public class PersistenceFacade {
 		}	
 		return result;
 	}
-		
 	
-	//VERIFICA LOGIN
+	
+	/**VERIFICA LOGIN**
+	 * Mi permette di effettuare il login attraverso email e password, permettendo di sapere se l'accesso è 
+	 * effettuato da uno staffer o un organizzatore.
+	 * 
+	 * @param email: attributo di persona che permette di effetuare l'accesso.
+	 * @param password: attributo di staffer/organizzatore per accedere.
+	 * @return int: se l'accesso alla festa è stato effettuato da uno staffer ricevo '0', da un organizzatore 
+	 * 				ricevo '1' se è presente un errore ricevo '2'.
+	 */
 	public int login (String email, String password){
 		int result=2;
 		//RETURN=0 STAFFER
@@ -110,14 +121,23 @@ public class PersistenceFacade {
 					result=0;//E' UNO STAFFER LOGIN GIUSTO
 			}			
 		}catch(Exception e) {
-			//e.printStackTrace(); 
-			result=2;//LOGIN CON CREDENZIALI VUOTE
+			e.printStackTrace(); 
+			result=2;
 		}
-		return result;//=0 NON E' STAFFER/ORGANIZZATORE/CREDENZIALI SBAGLIATE	
+		return result;	
 	}
 	
 	
-	//REGISTRAZIONE ORGANIZZATORE
+	/**REGISTRAZIONE ORGANIZZATORE**
+	 * Mi permette di registrare un organizzatore.
+	 * 
+	 * @param codiceFiscale: identificativo della persona che si vuole aggiungere.
+	 * @param nome: attributo della persona che si vuole aggiungere.
+	 * @param cognome: attributo della persona che si vuole aggiungere.
+	 * @param email: attributo della persona che si vuole aggiungere.
+	 * @param password: attributo dell'organizzatore per accedere.
+	 * @return boolean: se la registazione è stata effettuata con sucesso riceerò 'true' altrimenti 'false'.
+	 */
 	public boolean registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password) {
 		boolean result=false;
 		try {
@@ -130,7 +150,11 @@ public class PersistenceFacade {
 	}
 
 	
-	//GET EVENTI
+	/**GET EVENTI**
+	 * Mi permette di visualizzare tutti gli eventi indifferentemente dalla data.
+	 * 
+	 * @return Array<String>: ritorna la lista di tutti gli eventi.
+	 */
 	public ArrayList<String> getEventi() {
 		ArrayList<String> result;
 		try {
@@ -143,10 +167,16 @@ public class PersistenceFacade {
 	}
 	
 	
-	//SET STATO DEL EVENTO 
-	public void setStatoEvento (Date Data, boolean stato) {
+	/**SET STATO DELL'EVENTO **
+	 * Mi permette cambiare le vendite dell'evento da aperte a chiuse e viceversa.
+	 * 
+	 * @param data: identificativo dell'evento.
+	 * @param stato: attributo dell'evento che mi identifica se è possibile comprare un biglietto dell'evento.
+	 * @return void
+	 */
+	public void setStatoEvento (Date data, boolean stato) {
 		try {
-			Evento evento=new Evento(Data,stato);
+			Evento evento=new Evento(data,stato);
 			iEventoDAO.setVenditeAperte(evento);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,15 +184,24 @@ public class PersistenceFacade {
 	}
 	
 	
-	//SEARCH BY DATA EVENTO 
-	public int searchEventoByData (Date Data) {
+	/**SEARCH BY DATA EVENTO PER VENDITE APERTE**
+	 * Mi permette di cercare l'evento data la sua data e controllare se le vendite sono aperte o chiuse.
+	 * 
+	 * @param data: identificativo dell'evento.
+	 * @return int: se ho errori nell'operzione ricevero '2', se le vendite sono apete ritorna '1' altrimenti '0'. 
+	 */
+	public int searchEventoByData (Date data) {
 		int result=2;
+		//RESULT=2 ERRORE
+		//RESULT=1 VENDITE APERTE
+		//RESULT=0 VENDITE CHIUSE
 		Evento eventoData;
 		try {
-			Evento evento=new Evento(Data);
+			Evento evento=new Evento(data);
 			eventoData=iEventoDAO.searchByData(evento);
-			if(eventoData.getVenditeAperte()==true) {result=1;}
-			else {result=0;}
+			if(eventoData.getVenditeAperte()==true) 
+				result=1;
+			else result=0;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -170,7 +209,13 @@ public class PersistenceFacade {
 	}
 
 	
-	//SET GRUCCIA
+	/**SET GRUCCIA **
+	 * Mi permette di aggiungere al biglietto una gruccia./
+	 * 
+	 * @param data: identificativo dell'evento.
+	 * @param stato: attributo dell'evento che mi identifica se è possibile comprare un biglietto dell'evento.
+	 * @return void
+	 */
 	public boolean setGruccia (String codeQR, int numeroGruccia) {
 		boolean result=false;
 		try {
@@ -358,7 +403,7 @@ public class PersistenceFacade {
 		return result;
 	}
 	
-
+	//TODO RIGA 213
 	
 	
 	public static void main(String []args) throws ParseException {
