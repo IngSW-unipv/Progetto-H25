@@ -76,13 +76,13 @@ public class Controller implements EventSelectionListener {
         // Aggiungi l'ActionListener per il bottone "Crea Evento"
         eventsPage.getCreateEventButton().addActionListener(e -> {
             // Logica per andare alla pagina per creare un evento
-            cardLayout.show(containerPanel, "addEvent");
             /*String date = addEventPage.getEventDate();
             String location = addEventPage.getEventLocation();
             String capacity = addEventPage.getEventCapacity();
             boolean result=persistence.addEvento(date, location, capacity);
             if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
+            cardLayout.show(containerPanel, "addEvent");
         });
 
         // Settiamo il controller come listener della EventsPage
@@ -205,7 +205,7 @@ public class Controller implements EventSelectionListener {
                 else if(result==-1)JOptionPane.showMessageDialog(null, "E' stata raggiunta la massima capacita' dell'evento");
                 else if(result==0)JOptionPane.showMessageDialog(null, "Hai raggiunto il massimo degli inviti");
                 else JOptionPane.showMessageDialog(null, "Errore nell'inserimento dei dati");
-                JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
+                //JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
             }
         });
 
@@ -301,8 +301,9 @@ public class Controller implements EventSelectionListener {
                 String codiceFiscale = aggiungiStaffPage.getCf();
                 String email = aggiungiStaffPage.getEmail();
                 String password = aggiungiStaffPage.getPassword();
-                // TODO: Logica per aggiungere lo staff al modello
-                JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
+                boolean result=persistence.addStaffer(codiceFiscale,null, null, email, password);
+                if(result)JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
+                else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dello staffer");
                 cardLayout.show(containerPanel, "main");
             }
         });
