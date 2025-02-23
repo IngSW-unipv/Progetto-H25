@@ -1,6 +1,6 @@
-package organizzazioneEventi.model.test;
+//package organizzazioneEventi.model.test;
 
-
+package it.unipv.ingsfw.aga.test;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
@@ -9,12 +9,13 @@ import it.unipv.ingsfw.aga.model.persone.Persona;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class BigliettoTest {
 
@@ -114,7 +115,10 @@ public class BigliettoTest {
 
     @Test
     public void getDataEvento() throws MaxExeededException, ParseException {
-        Date date = new Date(2023-12-31);
+        Date date = new Date(2023-12-31);//non si crea cosi la data
+        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse(dataName);
+		java.sql.Date data= new java.sql.Date(parsed.getTime());*/
         Persona persona = new Persona("LUCROS123", "Luca", "Rossi", "lucarossi@gmail.com");
         Evento evento = new Evento("2023-12-31", "MEDA", 1000);
         Biglietto biglietto = new Biglietto(persona, evento, "Alice", "Verdi", "aliceverdi@gmail.com");
