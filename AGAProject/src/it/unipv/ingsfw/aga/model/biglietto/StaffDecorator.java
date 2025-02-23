@@ -1,12 +1,11 @@
 package it.unipv.ingsfw.aga.model.biglietto;
 
-public class StaffDecorator extends AbstractDecorator {
+public class StaffDecorator extends BigliettoDecorator {
     public StaffDecorator(Stampabile biglietto) {
         super(biglietto);
     }
-
-    public String stampaBiglietto() {
-        return super.stampaBiglietto() + " (Staff)";
+    @Override
+    protected String stringaDecorator() {
+        return "Staff";
     }
-
 }
