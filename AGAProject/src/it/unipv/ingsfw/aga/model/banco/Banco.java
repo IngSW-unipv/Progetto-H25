@@ -6,7 +6,7 @@ import java.util.Date;
 
 public abstract class Banco {
     private int numeroBanco;
-    private Evento evento;
+    protected Evento evento;
     private IQrReadingStrategy qrStrategy; // Aggiunta strategia
 
     public Banco(int numeroBanco, Evento evento) {
@@ -24,10 +24,6 @@ public abstract class Banco {
     // Getter per numeroBanco
     public int getNumeroBanco() {
         return numeroBanco;
-    }
-    
-    public Date getDataEvento() {
-    	return evento.getData();
     }
 
     public void setNumeroBanco(int numeroBanco) {
@@ -73,7 +69,7 @@ public abstract class Banco {
     public String toString() {
     	return "[Banco]\n" +
                 "Numero banco " + getNumeroBanco() +"\n" +
-                "Evento: " + getDataEvento() + "\n";
+                "Evento: " + evento.getData() + "\n";
     }
 
 }

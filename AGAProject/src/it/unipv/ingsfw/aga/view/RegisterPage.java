@@ -47,7 +47,7 @@ public class RegisterPage extends JPanel {
         surnameField.setFont(new Font("Arial", Font.PLAIN, 14));
         // usernameField.setPreferredSize(textFieldSize);
         surnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JLabel gpdrLabel = new JLabel("ndando avanti, accetti la gestione dei tuoi dati personali secondo la normativa GDPR.");
+        JLabel gpdrLabel = new JLabel("Andando avanti, accetti la gestione dei tuoi dati personali secondo la normativa GDPR.");
 
         submitButton = new JButton("Registrati");
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
