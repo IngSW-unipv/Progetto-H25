@@ -5,7 +5,7 @@ import javax.swing.*;
         import it.unipv.ingsfw.aga.view.Navbar;
 
 public class AggiungiStaffPage extends JPanel {
-    private JTextField cfField, emailField;
+    private JTextField cfField, emailField, nameField, surnameField;
     private JPasswordField passwordField;
     private JButton submitButton;
     private Navbar navbar;
@@ -33,6 +33,18 @@ public class AggiungiStaffPage extends JPanel {
         emailField.setFont(new Font("Arial", Font.PLAIN, 14));
         emailField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        JLabel nameLabel = new JLabel("Nome:");
+        nameField = new JTextField();
+        nameField.setFont(new Font("Arial", Font.PLAIN, 14));
+        // usernameField.setPreferredSize(textFieldSize);
+        nameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        JLabel surnameLabel = new JLabel("Cognome:");
+        surnameField = new JTextField();
+        surnameField.setFont(new Font("Arial", Font.PLAIN, 14));
+        // usernameField.setPreferredSize(textFieldSize);
+        surnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         submitButton = new JButton("Invia");
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -46,6 +58,10 @@ public class AggiungiStaffPage extends JPanel {
         panel.add(passwordField);
         panel.add(emailLabel);
         panel.add(emailField);
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(surnameLabel);
+        panel.add(surnameField);
         panel.add(new JLabel()); // Empty space
         panel.add(submitButton);
 
@@ -62,6 +78,13 @@ public class AggiungiStaffPage extends JPanel {
 
     public String getEmail() {
         return emailField.getText();
+    }
+    public String getName() {
+        return nameField.getText();
+    }
+
+    public String getSurname() {
+        return surnameField.getText();
     }
 
     public JButton getSubmitButton() {

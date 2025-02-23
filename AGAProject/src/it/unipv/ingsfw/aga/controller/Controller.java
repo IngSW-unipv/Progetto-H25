@@ -70,11 +70,9 @@ public class Controller implements EventSelectionListener {
         containerPanel.add(eventsPage, "events");
         containerPanel.add(aggiungiStaffPage, "aggiungiStaff");
 
-        // Carica gli eventi fittizi o veri dal modello
-        loadEvents();
-
         // Aggiungi l'ActionListener per il bottone "Crea Evento"
         eventsPage.getCreateEventButton().addActionListener(e -> {
+
             // Logica per andare alla pagina per creare un evento
         	cardLayout.show(containerPanel, "addEvent");
             /*String date = addEventPage.getEventDate();
@@ -84,6 +82,8 @@ public class Controller implements EventSelectionListener {
             if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
             
+            cardLayout.show(containerPanel, "addEvent");
+
         });
 
         // Settiamo il controller come listener della EventsPage
@@ -113,14 +113,6 @@ public class Controller implements EventSelectionListener {
             else JOptionPane.showMessageDialog(null, "Login fallito!");
         });
     }
-
-    // Metodo per caricare gli eventi e aggiungerli alla EventsPage
-    /*private void loadEvents() {
-        String[] eventNames = {"Evento 1", "Evento 2", "Evento 3"}; // Eventi fittizi
-        for (String eventName : eventNames) {
-            eventsPage.addEventButton(eventName);
-        }
-    }*/
     
     private void loadEvents() {
     	ArrayList<String> result=persistence.getEventi();
@@ -298,7 +290,10 @@ public class Controller implements EventSelectionListener {
                 String email = aggiungiStaffPage.getEmail();
                 int intPassword = aggiungiStaffPage.getPassword().hashCode();
                 String password=Integer.toString(intPassword);
-                boolean result=persistence.addStaffer(codiceFiscale,null, null, email, password);
+                String name = aggiungiStaffPage.getName();
+                String surname = aggiungiStaffPage.getSurname();
+                boolean result=persistence.addStaffer(codiceFiscale,name, surname, email, password);
+
                 if(result)JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
                 else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dello staffer");
                 cardLayout.show(containerPanel, "main");
@@ -319,9 +314,8 @@ public class Controller implements EventSelectionListener {
                 cardLayout.show(containerPanel, "events");
             }
         });
-
-        // Puoi fare altre azioni specifiche per ciascun evento
-        // Ad esempio, mostrare una pagina di dettagli dell'evento
+        loadEvents();
+        
     }
 
 
