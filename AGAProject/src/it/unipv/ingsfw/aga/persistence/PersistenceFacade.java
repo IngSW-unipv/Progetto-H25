@@ -28,10 +28,10 @@ public class PersistenceFacade {
 	
 	private static PersistenceFacade instance;
 	
-	IBigliettoDAO iBigliettoDAO;
-	IPersonaDAO iPersonaDAO;
-	IEventoDAO iEventoDAO;
-	IBancoDAO iBancoDAO;
+	IBigliettoDAO iBigliettoDAO;	//Interfaccia con la persistenza del biglietto
+	IPersonaDAO iPersonaDAO;		//Interfaccia con la persistenza della persona
+	IEventoDAO iEventoDAO;			//Interfaccia con la persistenza dell'evento
+	IBancoDAO iBancoDAO;			//Interfaccia con la persistenza di banco
 	
 	private PersistenceFacade()  {
 		iBigliettoDAO=new BigliettoDAO();
@@ -51,7 +51,13 @@ public class PersistenceFacade {
 	}
 
 
-	//SET STATO DEL BIGLIETTO (STRING E BOOL)
+	/**SET STATO DEL BIGLIETTO (STRING E BOOL)
+	 * Esegue il cambiamento dello stato del biglietto, cioè se l'accesso alla festa è stato effettuato.
+	 * 
+	 * @param codeQR: identificativo del biglietto sui cui si vogliono ottenere le informazioni.
+	 * @param stato: identificativo che si usa per cambiare l'accesso di un biglietto.
+	 * @return boolean: se l'accesso alla festa è già stato effettuato mi da un 'false' altrimenti 'true'.
+	 */
 	public boolean setStatoBiglietto (String codeQR, boolean stato) {
 		try {
 			Biglietto biglietto=new Biglietto(codeQR, stato);
