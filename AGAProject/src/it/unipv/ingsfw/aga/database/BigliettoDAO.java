@@ -77,28 +77,33 @@ public class BigliettoDAO implements IBigliettoDAO {
     //CREA BIGLIETTO
 	 public boolean creaBiglietto(Biglietto biglietto) {
 	    	
-    	conn=DBConnection.startConnection(conn);
-		Statement st1;
-		boolean result=false;
-		int b;//nel db boolean =1 o 0
-		if(biglietto.getAccessoEffettuato())b=1;
-		else b=0;
-		
-		try{
-			st1 = conn.createStatement();
-			String query="INSERT INTO BIGLIETTO VALUES(\""+biglietto.getQRCodeId()+"\", '"+b+
-					"', \""+biglietto.getCodiceFiscaleCreatore()+"\", '"+biglietto.getDataEvento()+"' ,"+biglietto.getNumeroGruccia()+
-					", \""+biglietto.getDescrizioneGruccia()+"\", \""+biglietto.getNome()+"\", \""+	biglietto.getCognome()+
-					"\", \""+biglietto.getEmail()+"\");";
-			st1.executeUpdate(query);
-			result=true;
-		}catch (Exception e){
-			System.out.println("Errore: potrebbe esserci un errore nei dati selezionati");
-			e.printStackTrace();
-		}
-		DBConnection.closeConnection(conn);	
-		return result;
-	}
+		 conn=DBConnection.startConnection(conn);
+			PreparedStatement st1;
+			boolean result=false;
+			String data=""+biglietto.getDataEvento();
+			
+			try{
+				String query="INSERT INTO BIGLIETTO VALUES(?, ?, ?, ? ,?, ?, ?, ?, ?);";
+				st1 = conn.prepareStatement(query);
+				st1.setString(1, biglietto.getQRCodeId());
+				st1.setBoolean(2, biglietto.getAccessoEffettuato());
+				st1.setString(3,biglietto.getCodiceFiscaleCreatore());
+				st1.setString(4, data);
+				st1.setInt(5,biglietto.getNumeroGruccia());
+				st1.setString(6,biglietto.getDescrizioneGruccia());
+				st1.setString(7,biglietto.getNome());
+				st1.setString(8,biglietto.getCognome());
+				st1.setString(9,biglietto.getEmail());
+				
+				st1.executeUpdate();
+				result=true;
+			}catch (Exception e){
+				System.out.println("Errore: potrebbe esserci un errore nei dati selezionati");
+				e.printStackTrace();
+			}
+			DBConnection.closeConnection(conn);	
+			return result;
+	 }
 	 
 	 
 	//BIGLIETTI TOTALI NELL'EVENTO

@@ -1,6 +1,7 @@
 package it.unipv.ingsfw.aga.database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -112,7 +113,6 @@ public class PersonaDAO implements IPersonaDAO {
 						rs1.getString(5));
 
 				result.add(p);
-				//System.out.println(p.toString());
 			}
 		}catch (Exception e){
 			e.printStackTrace();
@@ -157,17 +157,20 @@ public class PersonaDAO implements IPersonaDAO {
 	public boolean addOrganizzatore (Organizzatore persona){
 			
 		conn=DBConnection.startConnection(conn);
-		Statement st1;
+		PreparedStatement st1;
 		boolean result=false;
 		
 		try{
-			st1 = conn.createStatement();
-			String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
-					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
-					+"'"+1+"');";
-			st1.executeUpdate(query);
-			result=true;
-
+			String query="INSERT INTO PERSONA VALUES(?,?,?,?,?,?);";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, persona.getCodiceFiscale());
+			st1.setString(2, persona.getNome());
+			st1.setString(3, persona.getCognome());
+			st1.setString(4, persona.getEmail());
+			st1.setString(5, persona.getPassword());
+			st1.setBoolean(6, true);
+			st1.executeUpdate();
+			result=true;	
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -180,15 +183,20 @@ public class PersonaDAO implements IPersonaDAO {
 	public boolean addStaffer (Staffer persona){
 		
 		conn=DBConnection.startConnection(conn);
-		Statement st1;
+		PreparedStatement st1;
 		boolean result=false;
 		
 		try{
-			st1 = conn.createStatement();
-			String query="INSERT INTO PERSONA VALUES(\""+persona.getCodiceFiscale()+"\","+"\""+persona.getNome()+"\","+
-					"\""+persona.getCognome()+"\","+"\""+persona.getEmail()+"\","+"\""+persona.getPassword()+"\","
-					+"'"+0+"');";
-			st1.executeUpdate(query);
+			
+			String query="INSERT INTO PERSONA VALUES(?,?,?,?,?,?);";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, persona.getCodiceFiscale());
+			st1.setString(2, persona.getNome());
+			st1.setString(3, persona.getCognome());
+			st1.setString(4, persona.getEmail());
+			st1.setString(5, persona.getPassword());
+			st1.setBoolean(6, false);
+			st1.executeUpdate();
 			result=true;	
 		}catch (Exception e){
 			e.printStackTrace();
@@ -232,14 +240,17 @@ public class PersonaDAO implements IPersonaDAO {
 	public Persona login (Persona persona){
 			
 		conn=DBConnection.startConnection(conn);
-		Statement st1;
+		PreparedStatement st1;
 		ResultSet rs1;
 		Persona p;
 
 		try{
-			st1 = conn.createStatement();
-			String query="SELECT * from persona where EMAIL=\""+persona.getEmail()+"\";";
-			rs1=st1.executeQuery(query);
+			
+			String query="SELECT * from persona where email=?;";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, persona.getEmail());
+
+			rs1=st1.executeQuery();
 	
 			rs1.next();
 			if(rs1.getBoolean(6))
@@ -251,7 +262,7 @@ public class PersonaDAO implements IPersonaDAO {
 			return p;
 							
 		}catch (Exception e){
-			//e.printStackTrace(); 
+			e.printStackTrace(); 					
 			DBConnection.closeConnection(conn);
 			return p=new Persona();//nessun cf corrispondente trovato	
 		}		

@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.PreparedStatement;
 
 import connection.DBConnection;
 import it.unipv.ingsfw.aga.model.evento.Evento;
@@ -165,18 +166,23 @@ public class EventoDAO implements IEventoDAO {
 	public boolean addEvento (Evento evento){
 				
 		conn=DBConnection.startConnection(conn);
-		Statement st1;
+		PreparedStatement st1;
 		boolean result=false;
-	
+		
 		try{
-			st1 = conn.createStatement();
-			String query="INSERT INTO EVENTO VALUES('"+evento.getData()+"',\""+evento.getLocation()+"\","+evento.getMaxPartecipanti()+",'"
-			+evento.getVenditeAperte()+"');";
-			st1.executeUpdate(query);
+			
+			String query="INSERT INTO EVENTO VALUES(?,?,?,?);";
+			st1 = conn.prepareStatement(query);
+			st1.setDate(1,(java.sql.Date) evento.getData());
+			st1.setString(2, evento.getLocation());
+			st1.setInt(3, evento.getMaxPartecipanti());
+			st1.setBoolean(4, evento.getVenditeAperte());
+			
+			st1.executeUpdate();
 			result=true;
 	
 		}catch (Exception e){
-			//e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("Impossibile aggiungerlo data già occupata");
 			DBConnection.closeConnection(conn);
 		}

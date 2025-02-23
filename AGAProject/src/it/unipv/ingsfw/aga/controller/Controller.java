@@ -76,13 +76,14 @@ public class Controller implements EventSelectionListener {
         // Aggiungi l'ActionListener per il bottone "Crea Evento"
         eventsPage.getCreateEventButton().addActionListener(e -> {
             // Logica per andare alla pagina per creare un evento
+        	cardLayout.show(containerPanel, "addEvent");
             /*String date = addEventPage.getEventDate();
             String location = addEventPage.getEventLocation();
             String capacity = addEventPage.getEventCapacity();
             boolean result=persistence.addEvento(date, location, capacity);
             if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");*/
-            cardLayout.show(containerPanel, "addEvent");
+            
         });
 
         // Settiamo il controller come listener della EventsPage
@@ -91,7 +92,9 @@ public class Controller implements EventSelectionListener {
         // ActionListener per il login
         loginPage.getLoginButton().addActionListener(e -> {
             String username = loginPage.getUsername();
-            String password = loginPage.getPassword();
+            int intPassword = loginPage.getPassword().hashCode();
+            String password=Integer.toString(intPassword);
+            //String passworda= (String)password;
             /*if (model.checkLogin(username, password)) {
                 cardLayout.show(containerPanel, "events");
             } else {
@@ -144,7 +147,8 @@ public class Controller implements EventSelectionListener {
         loginPage.getLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String username = loginPage.getUsername();
-                String password = loginPage.getPassword();
+                int intPassword = loginPage.getPassword().hashCode();
+                String password=Integer.toString(intPassword);
                 if(persistence.login(username, password)==0) {
                 	cardLayout.show(containerPanel, "main");
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 1));
@@ -154,22 +158,10 @@ public class Controller implements EventSelectionListener {
                 	mainPage.setRolePermissions((model.getStaffFlag(username) == 0));
                 }
                 else JOptionPane.showMessageDialog(null, "Login fallito!");
-                	
-                /*if (model.checkLogin(username, password)) {
-                    if (model.getStaffFlag(username) == 1) {
-                        cardLayout.show(containerPanel, "main");
-                        mainPage.setRolePermissions((model.getStaffFlag(username) == 1)); //TODO: TO BE ADAPTED true if organizer false if staff
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Non sei autorizzato ad accedere come staff.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Login fallito!");
-                }*/
             }
         }); loginPage.getRegisterButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //TODO: registra utente
-                cardLayout.show(containerPanel, "register");
+                 cardLayout.show(containerPanel, "register");
             }
         });
 
@@ -184,15 +176,19 @@ public class Controller implements EventSelectionListener {
         // ActionListener per il bottone "Invia" nella pagina AddEvent
         addEventPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	System.out.println("BellaStronza!!");
                 String date = addEventPage.getEventDate();
                 String location = addEventPage.getEventLocation();
                 String capacity = addEventPage.getEventCapacity();
             boolean result = persistence.addEvento(date, location, capacity);
-            if(result)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
+            if(result==true)JOptionPane.showMessageDialog(null, "Evvento aggiunto");
             else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
 
             }
         });
+        
+   
+      
 
         // ActionListener per il bottone "Invia" nella pagina AddGuest
         addGuestPage.getSubmitButton().addActionListener(new ActionListener() {
@@ -300,7 +296,8 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 String codiceFiscale = aggiungiStaffPage.getCf();
                 String email = aggiungiStaffPage.getEmail();
-                String password = aggiungiStaffPage.getPassword();
+                int intPassword = aggiungiStaffPage.getPassword().hashCode();
+                String password=Integer.toString(intPassword);
                 boolean result=persistence.addStaffer(codiceFiscale,null, null, email, password);
                 if(result)JOptionPane.showMessageDialog(null, "Staff aggiunto con successo!");
                 else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dello staffer");
@@ -312,11 +309,13 @@ public class Controller implements EventSelectionListener {
             public void actionPerformed(ActionEvent e) {
                 String codiceFiscale = registerPage.getCf();
                 String email = registerPage.getEmail();
-                String password = registerPage.getPassword();
+                int intPassword = registerPage.getPassword().hashCode();
+                String password=Integer.toString(intPassword);
                 String nome = registerPage.getName();
                 String cognome = registerPage.getSurname();
                 boolean result=persistence.registazioneOrganizzatore(codiceFiscale,  nome,  cognome,  email,  password);
-
+                if(result)JOptionPane.showMessageDialog(null, "Aggiunto con successo!");
+                else JOptionPane.showMessageDialog(null, "Errore nell'aggiunta ");
                 cardLayout.show(containerPanel, "events");
             }
         });

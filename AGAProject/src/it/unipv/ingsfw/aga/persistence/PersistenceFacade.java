@@ -70,6 +70,13 @@ public class PersistenceFacade {
 	}
 	
 	
+	/**GET STATO DEL BIGLIETTO (STRING E BOOL)
+	 * Esegue il cambiamento dello stato del biglietto, cioè se l'accesso alla festa è stato effettuato.
+	 * 
+	 * @param codeQR: identificativo del biglietto sui cui si vogliono ottenere le informazioni.
+	 * @param stato: identificativo che si usa per cambiare l'accesso di un biglietto.
+	 * @return boolean: se l'accesso alla festa è già stato effettuato mi da un 'false' altrimenti 'true'.
+	 */
 	//GET STATO DEL BIGLIETTO (STRING E BOOL)
 	public int getStatoBiglietto (String codeQR) {
 		int result=2;
@@ -317,13 +324,14 @@ public class PersistenceFacade {
 	
 
 	//AGGIUNGI EVENTO
-	// MI SA CHE HO GENERATO UN ERRORE NELLA CREAZIONE LAVORANDO SULLA CLASSE EVENTO SORRY :'( che credo di aver sistemato, FAMMI SAPERE
 	public boolean addEvento(String data, String luogo, String capacita) {
 		boolean result=false;
-		Evento evento=null;
+		Evento evento;
 		try {
-			int capacitaMax= Integer.parseInt(capacita);
-			Date dataEvento= evento.changeStringToDate(data);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsed = format.parse(data);
+			java.sql.Date dataEvento = new java.sql.Date(parsed.getTime());
+			int capacitaMax= Integer.parseInt(capacita);			
 			evento=new Evento(dataEvento,luogo,capacitaMax);
 			result=iEventoDAO.addEvento(evento);
 			
@@ -357,14 +365,15 @@ public class PersistenceFacade {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
 		//System.out.println(a.getStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084"));
-		String dataName="1998-07-13";
+		/*String dataName="1998-07-13";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date parsed = format.parse(dataName);
 		java.sql.Date data= new java.sql.Date(parsed.getTime());
 		//a.setStatoEvento(data, false);
 		//System.out.println(a.getCodiceFiscaleByEmail("alice@"));
 		Persona persona=new Persona("001-51-9829", null);
-		Evento evento=new Evento(data);
-		System.out.println(a.aggiungiInvitato(persona, evento, "Andrea","Esposito","andrea.esposito@unipv.it"));
+		Evento evento=new Evento(data);*/
+		//System.out.println("torta".hashCode());
+		//System.out.println(a.aggiungiInvitato(persona, evento, "Andrea","Esposito","andrea.esposito@unipv.it"));
 	}
 }

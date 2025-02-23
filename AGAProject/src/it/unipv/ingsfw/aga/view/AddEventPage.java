@@ -1,14 +1,16 @@
-
 package it.unipv.ingsfw.aga.view;
 
 import javax.swing.*;
-        import java.awt.*;
-        import it.unipv.ingsfw.aga.view.Navbar;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
 public class AddEventPage extends JPanel {
     private JTextField eventDateField, eventLocationField, eventCapacityField;
     private JButton submitButton;
     private Navbar navbar;
+    private PersistenceFacade persistence;
 
     public AddEventPage(CardLayout cardLayout, JPanel containerPanel) {
         setLayout(new BorderLayout());
@@ -48,6 +50,26 @@ public class AddEventPage extends JPanel {
         panel.add(buttonPanel);
 
         add(panel, BorderLayout.CENTER);
+
+        // Aggiungi l'ActionListener direttamente alla view
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Ottieni i dati dai campi di testo
+                String date = getEventDate();
+                String location = getEventLocation();
+                String capacity = getEventCapacity();
+
+                // Utilizza PersistenceFacade per salvare l'evento
+                persistence = PersistenceFacade.getInstance();
+                boolean result = persistence.addEvento(date, location, capacity);
+                if (result) {
+                    JOptionPane.showMessageDialog(null, "Evento aggiunto con successo!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
+                }
+            }
+        });
     }
 
     public JButton getSubmitButton() {
