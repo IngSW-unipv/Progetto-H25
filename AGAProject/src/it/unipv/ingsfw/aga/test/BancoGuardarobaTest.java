@@ -1,59 +1,39 @@
 package it.unipv.ingsfw.aga.test;
 
-import static org.junit.Assert.*;
+import it.unipv.ingsfw.aga.model.banco.BancoGuardaroba;
+import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BancoGuardarobaTest {
 
-    @Test
-    public void getMaxGrucce() {
+    private BancoGuardaroba bancoGuardaroba;
+
+    @Before
+    public void setUp() {
+        bancoGuardaroba = new BancoGuardaroba(1);
     }
 
     @Test
-    public void setMaxGrucce() {
+    public void getMaxGrucceReturnsCorrectValue() {
+        assertEquals(1000, bancoGuardaroba.getMaxGrucce());
     }
 
     @Test
-    public void updateMaxGrucce() {
+    public void setMaxGrucceUpdatesValue() {
+        bancoGuardaroba.setMaxGrucce(500);
+        assertEquals(500, bancoGuardaroba.getMaxGrucce());
     }
 
     @Test
-    public void getGrucceAssegnate() {
+    public void getGrucceAssegnateReturnsCorrectValue() {
+        assertEquals(0, bancoGuardaroba.getGrucceAssegnate());
     }
 
     @Test
-    public void setGrucceAssegnate() {
-    }
-
-    @Test
-    public void updateGrucceAssegnate() {
-    }
-
-    @Test
-    public void consegnaCapo() {
-    }
-
-    @Test
-    public void testConsegnaCapo() {
-    }
-
-    @Test
-    public void restituzioneCapo() {
-    }
-
-    @Test
-    public void testRestituzioneCapo() {
-    }
-
-    @Test
-    public void assegnaGruccia() {
-    }
-
-    @Test
-    public void validateQr() {
-    }
-
-    @Test
-    public void testToString() {
+    public void setGrucceAssegnateUpdatesValue() {
+        bancoGuardaroba.setGrucceAssegnate(300);
+        assertEquals(300, bancoGuardaroba.getGrucceAssegnate());
     }
 }
