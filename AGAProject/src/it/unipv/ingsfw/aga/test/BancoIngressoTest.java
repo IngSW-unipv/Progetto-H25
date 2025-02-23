@@ -3,6 +3,8 @@ package it.unipv.ingsfw.aga.test;
 import connection.DBConnection;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.BancoIngresso;
+import it.unipv.ingsfw.aga.model.banco.QrCode;
+import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 import org.junit.After;
@@ -12,43 +14,98 @@ import org.junit.Test;
 import java.sql.*;
 import java.text.ParseException;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import it.unipv.ingsfw.aga.database.BigliettoDAO;
+
 public class BancoIngressoTest {
     private BancoIngresso bancoTest;
     private Evento eventoTest;
+    private QrCode qrCode;
     private Connection connection;
-    private PersistenceFacade persistenceFacade;
+    private PersistenceFacade persistenceFacadeTest;
+    private BigliettoDAO bigliettoDAO;
+    private Biglietto biglietto;
 
-    // Considero: 	28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
     @Before
     public void setUp() throws MaxExeededException, ParseException {
         eventoTest = new Evento("2021-12-31", "MEDA", 1000);
         bancoTest = new BancoIngresso(1, eventoTest);
-        persistenceFacade = PersistenceFacade.getInstance();
-        connection = DBConnection.startConnection(connection); //Apertura connessione inizio test
+        persistenceFacadeTest = PersistenceFacade.getInstance();
+        connection = DBConnection.startConnection(connection); // Apertura connessione inizio test
+        bigliettoDAO = new BigliettoDAO();
+        biglietto = bigliettoDAO.getBigliettoByQR(new Biglietto("28ff59e6-d76f-472f-aee9-2fb4c13dde0a"));
+        qrCode = new QrCode(biglietto.getQRCodeId());
     }
-//
-//    @Test
-//    public void validateQr() {
-//        assert(bancoTest.validateQr(persistenceFacade.getStatoBiglietto("28ff59e6-d76f-472f-aee9-2fb4c13dde0a")));
-//    }
+    // Considero: 	28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
+    @Test
+    public void testValidateQr() {
+        assertTrue(bancoTest.validateQr(qrCode));
+    }
 
     @Test
-    public void invalidateQr() {
-    }
-
-    @Test
-    public void accesso() {
+    public void testInvalidateQr() {
+        assertTrue(bancoTest.invalidateQr(qrCode));
     }
 
     @Test
     public void testAccesso() {
+        assertTrue(bancoTest.accesso(qrCode.getId()));
     }
 
     @Test
     public void testToString() {
+        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2021-12-31\n";
+        assertEquals(expected, bancoTest.toString());
     }
+
     @After
     public void tearDown() {
-        connection = DBConnection.closeConnection(connection); //Chiusura connessione fine test
+        connection = DBConnection.closeConnection(connection); // Chiusura connessione fine test
     }
 }
+
+
+
+//public class BancoIngressoTest {
+//    private BancoIngresso bancoTest;
+//    private Evento eventoTest;
+//    private QrCode qrCode;
+//    private Connection connection;
+//    private PersistenceFacade persistenceFacadeTest;
+//
+//
+//    // Considero: 	28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
+//    @Before
+//    public void setUp() throws MaxExeededException, ParseException {
+//        eventoTest = new Evento("2021-12-31", "MEDA", 1000);
+//        bancoTest = new BancoIngresso(1, eventoTest);
+//        persistenceFacadeTest = PersistenceFacade.getInstance();
+//        connection = DBConnection.startConnection(connection); //Apertura connessione inizio test
+//        qrCode = new QrCode("28ff59e6-d76f-472f-aee9-2fb4c13dde0a");
+//    }
+//
+//    @Test
+//    public void testValidateQr() {
+//        assertTrue(bancoTest.validateQr(qrCode));
+//    }
+//
+//    @Test
+//    public void testInvalidateQr() {
+//        assertTrue(bancoTest.invalidateQr(qrCode));
+//    }
+//
+//    @Test
+//    public void testAccesso() {
+//        assertTrue(bancoTest.accesso(qrCode.getId()));
+//    }
+//
+//    @Test
+//    public void testToString() {
+//    }
+//    @After
+//    public void tearDown() {
+//        connection = DBConnection.closeConnection(connection); //Chiusura connessione fine test
+//    }
+//}
