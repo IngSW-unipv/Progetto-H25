@@ -6,7 +6,7 @@ import it.unipv.ingsfw.aga.model.evento.Evento;
 
 import java.util.Date;
 
-public class Biglietto {
+public class Biglietto implements Stampabile {
     private final Persona creatoreBiglietto;
     private final Evento evento;
     private String nome;
@@ -125,5 +125,10 @@ public class Biglietto {
                 "   Nome: " + getNome() + " Cognome: " + getCognome() + "\n   Email: " + getEmail() + "\n" +
                 "   QrCode: " + getQRCodeId() + "\n"+
                 "   Proprietario: " +getNomeCreatore() + " Cognome: " + getCognomeCreatore() + " Email: " + getEmailCreatore() + "\n" ;
+    }
+
+    @Override
+    public String stampaBiglietto() {
+        return toString();
     }
 }
