@@ -115,10 +115,9 @@ public class BigliettoTest {
 
     @Test
     public void getDataEvento() throws MaxExeededException, ParseException {
-        Date date = new Date(2023-12-31);//non si crea cosi la data
-        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date parsed = format.parse(dataName);
-		java.sql.Date data= new java.sql.Date(parsed.getTime());*/
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date parsed = format.parse("2023-12-31");
+		java.sql.Date date= new java.sql.Date(parsed.getTime());
         Persona persona = new Persona("LUCROS123", "Luca", "Rossi", "lucarossi@gmail.com");
         Evento evento = new Evento("2023-12-31", "MEDA", 1000);
         Biglietto biglietto = new Biglietto(persona, evento, "Alice", "Verdi", "aliceverdi@gmail.com");
@@ -182,11 +181,7 @@ public class BigliettoTest {
         Evento evento = new Evento("2023-12-31", "MEDA", 1000);
         Biglietto biglietto = new Biglietto(persona, evento, "Alice", "Verdi", "aliceverdi@gmail.com");
 
-        String expected = "   [Biglietto]\n" +
-                "   Tipo: Standard\n" +
-                "   Nome: Jane Cognome: Doe\n   Email: jane.doe@example.com\n" +
-                "   QrCode: " + biglietto.getQRCodeId() + "\n" +
-                "   Proprietario: John Cognome: Doe Email: john.doe@example.com\n";
+        String expected = "[Biglietto]\nTipo: Standard\nNome: Alice\nCognome: Verdi\nEmail: aliceverdi@gmail.com\nQrCode: " + biglietto.getQRCodeId() + "\nCreatore: Luca Rossi - Email: lucarossi@gmail.com\n";
 
         assertEquals(expected, biglietto.toString());
     }

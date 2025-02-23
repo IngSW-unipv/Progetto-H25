@@ -3,16 +3,15 @@ package it.unipv.ingsfw.aga.test;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
-import it.unipv.ingsfw.aga.model.persone.Staffer;
 import it.unipv.ingsfw.aga.exceptions.AuthenticationException;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
-import it.unipv.ingsfw.aga.model.banco.QrCode;
-import it.unipv.ingsfw.aga.model.banco.Type;
+
+
 
 import java.text.ParseException;
-import java.util.Date;
 
 public class OrganizzatoreTest {
 
@@ -26,18 +25,17 @@ public class OrganizzatoreTest {
         assertEquals("password123", organizzatore.getPassword());
     }
     @Test
-    public void changePasswordCorretto() throws javax.naming.AuthenticationException {
+    public void changePasswordCorretto() throws AuthenticationException {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
         organizzatore.changePassword("password123", "newpassword456");
         assertEquals("newpassword456", organizzatore.getPassword());
     }
-    //Genera un eccezzione sbagliata .-.
-/*    @Test
-    void changePasswordScorrettamente() {
-        Staffer staffer = new Staffer("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
-        assertThrows(AuthenticationException.class, () -> staffer.changePassword("wrongpassword", "newpassword456"));
+    @Test
+    public void changePasswordScorrettamente() throws AuthenticationException{
+        Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");
+        assertThrows(AuthenticationException.class, () -> organizzatore.changePassword("password456", "newpassword456"));
     }
-*/
+
     @Test
     public void creaEventoCorretto() throws MaxExeededException, ParseException {
         Organizzatore organizzatore = new Organizzatore("FRABIA123", "Francesco", "Bianchi", "frabianchi@gmail.com", "password123");

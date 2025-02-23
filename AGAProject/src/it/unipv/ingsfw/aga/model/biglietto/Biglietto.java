@@ -120,11 +120,13 @@ public class Biglietto implements Stampabile {
 
     @Override
     public String toString() {
-        return "   [Biglietto]\n" +
-                "   Tipo: Standard\n" +
-                "   Nome: " + getNome() + " Cognome: " + getCognome() + "\n   Email: " + getEmail() + "\n" +
-                "   QrCode: " + getQRCodeId() + "\n"+
-                "   Proprietario: " +getNomeCreatore() + " Cognome: " + getCognomeCreatore() + " Email: " + getEmailCreatore() + "\n" ;
+        return "[Biglietto]\n" +
+                "Tipo: Standard\n" +
+                "Nome: " + getNome() + "\n" +
+                "Cognome: " + getCognome() + "\n" +
+                "Email: " + getEmail() + "\n" +
+                "QrCode: " + getQRCodeId() + "\n" +
+                "Creatore: " +getNomeCreatore() + " " + getCognomeCreatore() + " - Email: " + getEmailCreatore() + "\n" ;
     }
 
     @Override

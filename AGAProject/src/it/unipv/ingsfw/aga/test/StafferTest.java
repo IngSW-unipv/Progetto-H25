@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import it.unipv.ingsfw.aga.model.persone.Staffer;
 import org.junit.Test;
 import it.unipv.ingsfw.aga.exceptions.AuthenticationException;
-import it.unipv.ingsfw.aga.model.banco.QrCode;
-import it.unipv.ingsfw.aga.model.banco.Type;
 
 public class StafferTest {
 
@@ -21,7 +19,7 @@ public class StafferTest {
     }
 
     @Test
-    public void changePasswordCorrettamente() throws javax.naming.AuthenticationException {
+    public void changePasswordCorrettamente() throws AuthenticationException {
         Staffer staffer = new Staffer("ALIVER123", "Alice", "Verdi", "aliceverdi@gmail.com", "password123");
         staffer.changePassword("password123", "newpassword456");
         assertEquals("newpassword456", staffer.getPassword());

@@ -1,5 +1,6 @@
 package it.unipv.ingsfw.aga.model.persone;
 
+import it.unipv.ingsfw.aga.exceptions.AuthenticationException;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.banco.QrReadingStrategyFactory;
@@ -8,7 +9,6 @@ import it.unipv.ingsfw.aga.model.banco.qrReadingStrategy.IQrReadingStrategy;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.evento.EventoFactory;
 
-import javax.naming.AuthenticationException;
 import java.text.ParseException;
 
 public class Organizzatore extends Persona{
@@ -29,7 +29,7 @@ public class Organizzatore extends Persona{
         if(oldPassword.equals(password)){
             password = newPassword;
         }else{
-            throw new AuthenticationException();
+            throw new AuthenticationException("Vecchia Password errata!");
         }
     }
     public Evento creaEvento(String tipoEvento, String data, String location, int maxPartecipanti) throws MaxExeededException, ParseException {
