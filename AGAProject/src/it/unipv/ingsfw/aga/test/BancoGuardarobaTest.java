@@ -4,7 +4,7 @@ import it.unipv.ingsfw.aga.model.banco.BancoGuardaroba;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class BancoGuardarobaTest {
 
@@ -17,7 +17,7 @@ public class BancoGuardarobaTest {
 
     @Test
     public void getMaxGrucceReturnsCorrectValue() {
-        assertEquals(1000, bancoGuardaroba.getMaxGrucce());
+        assertEquals(1000, bancoGuardaroba.getMaxGrucce());//lo prendo dal db 
     }
 
     @Test
