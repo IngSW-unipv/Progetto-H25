@@ -21,4 +21,5 @@ public interface IBigliettoDAO {
 	public int getBigliettiTotoaliByEvento(Evento evento);
 	public ArrayList<String> getTuttiQRBiglietti();
 	public ArrayList<Biglietto> getInvitati(Evento eventoData);
+	public Biglietto getBigliettoByQR(Biglietto biglietto);
 }

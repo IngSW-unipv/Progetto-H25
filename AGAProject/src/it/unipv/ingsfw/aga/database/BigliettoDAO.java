@@ -1,4 +1,4 @@
-package it.unipv.ingsfw.aga.database;
+	package it.unipv.ingsfw.aga.database;
 
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
@@ -119,6 +119,35 @@ public class BigliettoDAO implements IBigliettoDAO {
 		}catch (Exception e){
 			System.out.println("Errore: potrebbe esserci un errore nei dati selezionati");
 			e.printStackTrace();
+		}
+		DBConnection.closeConnection(conn);	
+		return result;
+	}
+	 
+	 
+	//GET BIGLIETTO DA QR
+	 public Biglietto getBigliettoByQR(Biglietto biglietto) {
+	    	
+    	conn=DBConnection.startConnection(conn);
+		Statement st1;
+		ResultSet rs1;
+		Biglietto result;
+		Persona persona;
+		Evento evento;
+		
+		try{
+			st1 = conn.createStatement();
+			String query="SELECT * FROM BIGLIETTO WHERE ID=\""+biglietto.getQRCodeId()+"\";";
+			rs1=st1.executeQuery(query);
+			
+			rs1.next();
+			persona=new Persona(rs1.getString(3),null);
+			evento=new Evento(rs1.getDate(4));
+			result=new Biglietto(persona,rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(1),evento);
+			
+		}catch (Exception e){
+			e.printStackTrace();
+			result=null;
 		}
 		DBConnection.closeConnection(conn);	
 		return result;

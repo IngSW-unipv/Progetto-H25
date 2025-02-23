@@ -25,7 +25,7 @@ import it.unipv.ingsfw.aga.database.BancoDAO;
 
 
 public class PersistenceFacade {
-	//private Connection conn;
+	
 	private static PersistenceFacade instance;
 	
 	IBigliettoDAO iBigliettoDAO;
@@ -38,7 +38,7 @@ public class PersistenceFacade {
 		iPersonaDAO=new PersonaDAO();
 		iEventoDAO=new EventoDAO();
 		iBancoDAO=new BancoDAO();
-	}///noi la connessione la facciamo singola 
+	}
 
 	// Public static method to get the instance of the Singleton
 	public static PersistenceFacade getInstance() {
@@ -323,6 +323,23 @@ public class PersistenceFacade {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}	
+		return result;
+	}
+	
+	
+	//GET DATA BY QR
+	public Date getDataByBiglietto(String QR) {
+		Biglietto data;
+		Date result;
+		
+		try { 
+			Biglietto bigliettoQR=new Biglietto(QR);
+			data=iBigliettoDAO.getBigliettoByQR(bigliettoQR);
+			result=data.getDataEvento();			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result=null;
 		}	
 		return result;
 	}
