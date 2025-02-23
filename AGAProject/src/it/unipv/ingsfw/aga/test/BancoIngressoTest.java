@@ -14,10 +14,10 @@ import org.junit.Test;
 import java.sql.*;
 import java.text.ParseException;
 
+import it.unipv.ingsfw.aga.database.BigliettoDAO;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import it.unipv.ingsfw.aga.database.BigliettoDAO;
 
 public class BancoIngressoTest {
     private BancoIngresso bancoTest;
@@ -65,47 +65,3 @@ public class BancoIngressoTest {
         connection = DBConnection.closeConnection(connection); // Chiusura connessione fine test
     }
 }
-
-
-
-//public class BancoIngressoTest {
-//    private BancoIngresso bancoTest;
-//    private Evento eventoTest;
-//    private QrCode qrCode;
-//    private Connection connection;
-//    private PersistenceFacade persistenceFacadeTest;
-//
-//
-//    // Considero: 	28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
-//    @Before
-//    public void setUp() throws MaxExeededException, ParseException {
-//        eventoTest = new Evento("2021-12-31", "MEDA", 1000);
-//        bancoTest = new BancoIngresso(1, eventoTest);
-//        persistenceFacadeTest = PersistenceFacade.getInstance();
-//        connection = DBConnection.startConnection(connection); //Apertura connessione inizio test
-//        qrCode = new QrCode("28ff59e6-d76f-472f-aee9-2fb4c13dde0a");
-//    }
-//
-//    @Test
-//    public void testValidateQr() {
-//        assertTrue(bancoTest.validateQr(qrCode));
-//    }
-//
-//    @Test
-//    public void testInvalidateQr() {
-//        assertTrue(bancoTest.invalidateQr(qrCode));
-//    }
-//
-//    @Test
-//    public void testAccesso() {
-//        assertTrue(bancoTest.accesso(qrCode.getId()));
-//    }
-//
-//    @Test
-//    public void testToString() {
-//    }
-//    @After
-//    public void tearDown() {
-//        connection = DBConnection.closeConnection(connection); //Chiusura connessione fine test
-//    }
-//}
