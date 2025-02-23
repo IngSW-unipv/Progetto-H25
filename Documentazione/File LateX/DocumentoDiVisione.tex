@@ -8,13 +8,12 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
-\geometry{a4paper, margin=1in}
+\geometry{a4paper, margin=1.5in}
 
 % Definizione di colori personalizzati
 \definecolor{titlecolor}{RGB}{13, 82, 149}  % Blu scuro
 \definecolor{sectioncolor}{RGB}{28, 69, 136} % Blu scuro più chiaro 
 \definecolor{textcolor}{RGB}{0, 0, 0}    
-
 
 
 \setstretch{1.5}
@@ -41,34 +40,80 @@
 
 \maketitle
 
-\section*{\textcolor{sectioncolor}{Introduzione}}
+\section{Software per Gestione Eventi Privati su Invito}
 \textcolor{textcolor}{
-Questo documento definisce la visione per lo sviluppo di un software scalabile per la gestione di eventi privati su invito, progettato per ottimizzare e automatizzare tutti i processi correlati all'organizzazione di eventi. Il sistema mira a fornire un'interfaccia intuitiva e user-friendly per gli organizzatori, il personale operativo e i clienti, garantendo al contempo sicurezza, affidabilità e scalabilità per eventi con una capacità massima di 1.500 partecipanti.
+
+AGA è una piattaforma software progettata per supportare gli organizzatori di eventi privati nella pianificazione e gestione delle proprie manifestazioni in modo efficiente e scalabile. Il sistema consente la creazione di eventi attraverso un'interfaccia intuitiva, semplice e con una bassa soglia d’ingresso, permettendo di inserire informazioni essenziali quali nome, data, location e numero massimo di partecipanti, fino ad un massimo di circa qualche migliaio di persone.
+
+Oltre alla configurazione iniziale, l’applicazione offre strumenti avanzati per la gestione operativa, tra cui l’assegnazione e il monitoraggio dei biglietti, il controllo degli accessi e l’organizzazione di servizi aggiuntivi come il guardaroba e il catering. Gli organizzatori possono inoltre assegnare e coordinare il personale operativo direttamente dalla piattaforma, assicurando un’esperienza fluida sia per lo staff, sia per l’organizzatore e soprattutto per il partecipante.
+
+Per supportare queste operazioni, il sistema si articola in otto funzionalità principali, che regolano le interazioni tra gli utenti e la piattaforma. Queste comprendono la creazione e gestione degli eventi, l’amministrazione dei biglietti, l’apertura e chiusura delle vendite, l’assegnazione dei biglietti da parte di chi ne ha diritto, il controllo degli accessi, la gestione del guardaroba, il monitoraggio delle scorte e la supervisione della timeline dei servizi. L’applicazione garantisce un flusso di lavoro organizzato ed efficiente, adattandosi alle esigenze di ogni evento.
+
+AGA offre una soluzione sicura, affidabile ed efficiente, semplificando la gestione di eventi di media scala con un approccio professionale ma non per questo complesso.
+
+Inoltre, l’adozione di un’architettura scalabile e modulare, basata sui principi dell’ingegneria del software, garantisce la possibilità di integrare nuove funzionalità in futuro senza compromettere le prestazioni e soprattutto la stabilità del sistema.
 }
 
-\section*{\textcolor{sectioncolor}{Organizzatore}}
+\section{Organizzatore}
 \textcolor{textcolor}{
-Il sistema permette agli organizzatori di accedere tramite un’interfaccia di login sicura utilizzando email e password criptate. Una volta autenticato, l’organizzatore ha la possibilità di creare nuovi eventi inserendo dettagli specifici come nome, data, orari e luogo, assicurandosi che non vi siano altri eventi programmati nello stesso mese. Inoltre, l’organizzatore può aggiungere una lista di invitanti che non pagano il biglietto e che a loro volta possono invitare un numero massimo di persone. Il sistema verifica la validità dei dati inseriti e notifica l’organizzatore in caso di errori.
+AGA è una piattaforma pensata per supportare gli organizzatori di eventi privati nella gestione completa delle proprie manifestazioni. Per accedere ai servizi offerti, è richiesta una registrazione, al termine della quale gli utenti potranno autenticarsi attraverso un’interfaccia di login sicura, utilizzando credenziali protette da crittografia avanzata.
+
+Una volta effettuato l’accesso, l’organizzatore ha la possibilità di creare nuovi eventi inserendo informazioni fondamentali quali nome, data, orari e luogo. Il sistema garantisce che non vi siano sovrapposizioni, impedendo la programmazione di più eventi nella stessa data.
+
+Dopo la creazione, il sistema verifica automaticamente la correttezza e la completezza dei dati forniti. Se la validazione ha esito positivo, l’evento viene memorizzato in un database centralizzato basato su MySQL e reso disponibile per la successiva gestione dei biglietti e degli accessi.
+
+L’organizzatore può quindi procedere all’inserimento manuale degli invitati e dello staff coinvolto nell’evento. Inoltre, il personale autorizzato (lo staff) ha la facoltà di aggiungere un numero limitato di partecipanti alla lista degli invitati. In caso di errori o incongruenze nei dati inseriti, il sistema notificherà tempestivamente l’organizzatore, assicurando un’esperienza d’uso fluida e intuitiva.
 }
 
-\section*{\textcolor{sectioncolor}{Invitante}}
+\section{Staff}
 \textcolor{textcolor}{
-Sotto invito dell’organizzatore, l'invitante può richiedere il proprio biglietto attraverso un’interfaccia di login basata sul proprio codice fiscale. Il sistema permette di aggiungere un numero massimo di inviti su concessione dell’organizzatore, con inviti pagati dall’invitante e nominali. Gli inviti possono essere stampati o inviati via email, garantendo che ogni invito sia unico.
+Lo staff può essere aggiunto dall’organizzatore, ma la sua presenza non è obbligatoria, poiché, per eventi di piccole dimensioni, tutte le operazioni possono essere gestite direttamente dall’organizzatore stesso. Tuttavia, quando previsto, lo staff fornisce supporto in diverse attività, tra cui la gestione della lista degli invitati, il controllo degli accessi e l’erogazione di servizi aggiuntivi come il guardaroba e la gestione delle scorte alimentari.
+
+Ogni membro dello staff ha la possibilità di aggiungere un numero limitato di persone alla lista degli invitati, in base ai permessi assegnati. Lo staff dedicato al controllo degli accessi si occupa della verifica della validità dei biglietti, garantendo un ingresso ordinato e sicuro all’evento.
+
+Per il servizio di guardaroba, il personale addetto verifica i biglietti degli invitati e prende in custodia un capo di abbigliamento per persona associando al biglietto il numero della gruccia utilizzata, fino al raggiungimento della capacità massima determinata dal numero di grucce disponibili.
+
+Infine, lo staff responsabile della gestione delle scorte alimentari avrà accesso al database delle forniture, monitorandone lo stato e garantendo un approvvigionamento adeguato. È inoltre possibile affidare la gestione del catering a un ente terzo, che potrà occuparsi interamente di questa funzione, integrandosi con il sistema dell’evento.
 }
 
-\section*{\textcolor{sectioncolor}{Banco}}
+\section{Biglietto}
 \textcolor{textcolor}{
-Esistono due tipi di banco: ingresso e guardaroba. All'ingresso, lo staff utilizza il sistema per leggere i QR code e accertare l'identità dei partecipanti. Una volta verificata l’identità, il sistema registra la presenza nel database e invalida il QR code per prevenire usi ripetuti. Al guardaroba, gli oggetti personali vengono registrati con un posto unico e incrementale. La registrazione include descrizioni per evitare errori e rispetta limiti di spazio.
+L’organizzatore e il personale dello staff sono responsabili dell’aggiunta degli invitati all’evento. Ogni invitato riceverà una notifica via email con l’invito all’acquisto del biglietto, necessario per accedere all’evento. Una volta completato l’acquisto, il biglietto verrà registrato nel database centralizzato della piattaforma.
+
+Ogni biglietto è nominale, personale e non cedibile, garantendo che l’accesso sia riservato esclusivamente all’intestatario. L’ingresso all’evento avviene tramite la scansione di un QR code univoco generato dal sistema, che ne certifica l’autenticità e ne evita utilizzi multipli.
+
+Oltre all’accesso, il biglietto consente di usufruire dei servizi aggiuntivi previsti dall’evento, previa verifica da parte dell’organizzatore o dello staff autorizzato. La modalità di acquisto e la definizione del prezzo dei biglietti sono a totale discrezione dell’organizzatore, il quale può avvalersi di soluzioni di pagamento gestite da software di terze parti.
 }
 
-\section*{\textcolor{sectioncolor}{Gestione Scorte}}
+\section{Banco}
 \textcolor{textcolor}{
-Il sistema consente agli organizzatori di monitorare e gestire le scorte per ogni evento. Lo staff può aggiornare il magazzino e consultare le quantità disponibili di cibo, ghiaccio e alcol. Le scorte sono visualizzabili in tempo reale, garantendo un monitoraggio preciso e aggiornamenti tempestivi. Inoltre, il sistema consente di impostare una timeline del servizio per coordinare le attività.
+Il sistema prevede la gestione di due tipologie di banchi operativi: il banco di ingresso e il banco guardaroba, entrambi fondamentali per garantire un accesso controllato e un servizio efficiente agli invitati.
+
+Il banco di ingresso è dedicato al controllo dei biglietti da parte dello staff autorizzato o dell’organizzatore che scansionano il QR code associato a ciascun biglietto e verificano l’identità dell’invitato.
+
+Completata la verifica il sistema convalida l’ingresso, registra la presenza dell’invitato nel nostro database MySQL centralizzato e il QR code viene immediatamente invalidato, prevenendo tentativi di utilizzo multiplo dello stesso biglietto.
+
+Il banco guardaroba è pensato per la gestione degli effetti personali degli invitati che hanno richiesto il servizio al momento dell’acquisto del biglietto. Lo staff autorizzato o l’organizzatore verificano l’idoneità dell’utente tramite scansione del QR code e procedono con la registrazione dell’oggetto nel sistema. Ogni articolo depositato può essere accompagnato da una descrizione per facilitarne il riconoscimento ed evitare errori. Il sistema assegna a ciascun oggetto un identificativo unico e incrementale, memorizzandolo all’interno del database MySQL centralizzato.
+
+L’applicazione AGA per l’organizzazione di eventi garantisce un’esperienza fluida, sicura ed efficiente, assicurando agli invitati la tutela dei propri beni e un accesso regolamentato all’evento.
 }
 
-\section*{\textcolor{sectioncolor}{Ulteriori Specifiche}}
+\section{Gestione Scorte}
 \textcolor{textcolor}{
-Il sistema deve gestire almeno 100 accessi simultanei al minuto durante i picchi, garantendo stabilità e sicurezza. Le password sono criptate e i pagamenti avvengono tramite protocolli sicuri. I QR code sono generati in modo univoco per prevenire frodi. La scalabilità del sistema supporta eventi fino a 1.500 partecipanti, con un database MySQL centralizzato. La documentazione tecnica è fornita in italiano o inglese, con aggiornamenti programmati comunicati agli utenti almeno 48 ore prima.
+Il software AGA offre agli organizzatori uno strumento per la gestione dell'inventario legato alle scorte alimentari dell'evento. Attraverso il sistema, l’organizzatore e lo staff autorizzato possono monitorare e aggiornare le disponibilità di prodotti come cibo, bevande e altri rifornimenti necessari.
+
+Un modulo dedicato consente di visualizzare le quantità disponibili e di apportare eventuali aggiornamenti in base alle necessità dell’evento. Inoltre, l’organizzatore ha la possibilità di definire una timeline orientativa per la distribuzione delle risorse, seguendo l’andamento dell’evento con il supporto delle informazioni fornite dallo staff.
+
+La gestione delle scorte può essere delegata a un ente terzo, che si occuperà del monitoraggio dell'inventario e dell'approvvigionamento dei beni alimentari necessari per l'evento. Questa soluzione consente agli organizzatori di esternalizzare il processo, garantendo un flusso costante di risorse senza dover gestire direttamente le forniture.
+}
+
+\section{Ulteriori specifiche}
+\textcolor{textcolor}{
+Ogni funzionalità è supportata da requisiti dettagliati che assicurano che il sistema possa gestire efficacemente tutte le operazioni necessarie, garantendo al contempo sicurezza e conformità alle normative vigenti (GPDR).
+
+Dal punto di vista tecnico, il sistema deve essere eseguibile su qualsiasi dispositivo dotato di Java Virtual Machine (JVM) e presentare un’interfaccia responsiva che si adatta a schermi di diverse dimensioni, inclusi dispositivi mobili e desktop. Le operazioni principali come l'autenticazione, l'acquisto dei biglietti e la verifica degli accessi devono essere eseguite in tempi accettabili per garantire una buona esperienza utente. Il sistema deve inoltre essere in grado di gestire almeno 100 accessi simultanei al minuto durante eventi di picco, assicurando stabilità e affidabilità anche sotto carico elevato grazie all’alta stabilità del sistema. La sicurezza dei dati è garantita tramite la criptazione delle password e l'utilizzo di protocolli sicuri per i pagamenti, mentre i QR code devono essere generati in modo univoco per prevenire frodi e usi impropri. La scalabilità del sistema è fondamentale per supportare eventi senza perdita di performance, e il sistema deve supportare connessioni con un database MySQL centralizzato per una gestione uniforme dei dati.
+
+Dal punto di vista organizzativo, il sistema deve essere completato entro il 28 febbraio 2025, utilizzando i linguaggi di programmazione Java e SQL per garantire compatibilità e integrazione tra le diverse componenti del sistema. La documentazione tecnica, comprensiva di manuali utente e guide per sviluppatori e amministratori, deve essere redatta in italiano o in inglese per garantire accessibilità e comprensibilità. Le operazioni di manutenzione programmata devono essere comunicate agli utenti con almeno 48 ore di anticipo e non devono coincidere con le date degli eventi per evitare interruzioni del servizio. Inoltre, al momento della registrazione, l’organizzatore deve autorizzare il sistema a salvare i propri dati personali su un database esterno, in conformità con le normative GDPR per il trattamento dei dati personali, assicurando che il trattamento avvenga solo con il consenso esplicito degli utenti.
 }
 
 \end{document}

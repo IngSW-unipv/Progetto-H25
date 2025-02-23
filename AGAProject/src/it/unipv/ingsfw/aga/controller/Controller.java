@@ -127,7 +127,7 @@ public class Controller implements EventSelectionListener {
             }
         });
 
-      
+
         addEventPage.getSubmitButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String date = addEventPage.getEventDate();
