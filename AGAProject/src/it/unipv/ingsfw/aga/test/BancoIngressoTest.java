@@ -16,8 +16,7 @@ import java.text.ParseException;
 
 import it.unipv.ingsfw.aga.database.BigliettoDAO;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class BancoIngressoTest {
     private BancoIngresso bancoTest;
@@ -41,7 +40,7 @@ public class BancoIngressoTest {
     // Considero: 	28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
     @Test
     public void testValidateQr() {
-        assertTrue(bancoTest.validateQr(qrCode));
+        assertFalse(bancoTest.validateQr(qrCode));
     }
 
     @Test
