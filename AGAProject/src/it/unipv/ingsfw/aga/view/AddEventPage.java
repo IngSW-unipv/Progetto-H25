@@ -11,7 +11,7 @@ import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
  * Fornisce un'interfaccia grafica per inserire la data, il luogo e la capienza dell'evento.
  */
 public class AddEventPage extends JPanel {
-    private JTextField eventDateField, eventLocationField, eventCapacityField;
+    private JTextField eventDateField, eventLocationField, eventCapacityField, maxGrucceField;
     private JButton submitButton;
     private Navbar navbar;
     private PersistenceFacade persistence;
@@ -27,33 +27,45 @@ public class AddEventPage extends JPanel {
         add(navbar, BorderLayout.NORTH);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2, 10, 10)); // Spaziatura tra i componenti
+        panel.setLayout(new GridLayout(5, 2, 10, 10)); // Spaziatura tra i componenti
 
         eventDateField = new JTextField();
         eventDateField.setFont(new Font("Arial", Font.BOLD, 14));
         eventDateField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panel.add(new JLabel("Data:"));
-        panel.add(eventDateField);
+
 
         eventLocationField = new JTextField();
         eventLocationField.setFont(new Font("Arial", Font.BOLD, 14));
         eventLocationField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panel.add(new JLabel("Luogo:"));
-        panel.add(eventLocationField);
+
 
         eventCapacityField = new JTextField();
         eventCapacityField.setFont(new Font("Arial", Font.BOLD, 14));
         eventCapacityField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        panel.add(new JLabel("Capienza:"));
-        panel.add(eventCapacityField);
+
+
+        maxGrucceField = new JTextField();
+        maxGrucceField.setFont(new Font("Arial", Font.BOLD, 14));
+        maxGrucceField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         submitButton = new JButton("Invia");
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
         submitButton.setBackground(Color.lightGray);
         submitButton.setForeground(Color.BLACK);
-        buttonPanel.add(submitButton);
 
+
+        panel.add(new JLabel("Data:"));
+        panel.add(eventDateField);
+        panel.add(new JLabel("Luogo:"));
+        panel.add(eventLocationField);
+        panel.add(new JLabel("Capienza:"));
+        panel.add(eventCapacityField);
+        panel.add(new JLabel("Max Grucce:"));
+        panel.add(maxGrucceField);
+        buttonPanel.add(submitButton);
         panel.add(new JLabel());
         panel.add(buttonPanel);
 
@@ -94,5 +106,9 @@ public class AddEventPage extends JPanel {
      */
     public String getEventCapacity() {
         return eventCapacityField.getText();
+    }
+
+    public String getMaxGrucce() {
+        return maxGrucceField.getText();
     }
 }
