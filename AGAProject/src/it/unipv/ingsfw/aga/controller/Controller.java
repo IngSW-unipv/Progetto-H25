@@ -202,20 +202,19 @@ public class Controller implements EventSelectionListener {
                 String date = addEventPage.getEventDate();
                 String location = addEventPage.getEventLocation();
                 String capacity = addEventPage.getEventCapacity();
-<<<<<<< Updated upstream
+
                 boolean result = persistence.addEvento(date, location, capacity);
                 if (result) {
-                	loadEvents();
-=======
-                String maxGrucce = addEventPage.getMaxGrucce();
-                boolean result = persistence.addEvento(date, location, capacity,maxGrucce);
-                if (result)
->>>>>>> Stashed changes
-                    JOptionPane.showMessageDialog(null, "Evento aggiunto");
+	                String maxGrucce = addEventPage.getMaxGrucce();
+	                boolean resultBanco=persistence.addBanco(date,maxGrucce);
+	                containerPanel.revalidate();
+	                
+	                if (resultBanco)
+	                    JOptionPane.showMessageDialog(null, "Evento aggiunto");
+                	
                 }else {
                     JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
                 }
-        
                 cardLayout.show(containerPanel,"events");
             }
         });

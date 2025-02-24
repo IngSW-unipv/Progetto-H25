@@ -168,12 +168,13 @@ public class EventoDAO implements IEventoDAO {
 		conn=DBConnection.startConnection(conn);
 		PreparedStatement st1;
 		boolean result=false;
+		String data;
 		
 		try{
-			
+			data=""+evento.getData();
 			String query="INSERT INTO EVENTO VALUES(?,?,?,?);";
 			st1 = conn.prepareStatement(query);
-			st1.setDate(1,(java.sql.Date) evento.getData());
+			st1.setString(1, data);
 			st1.setString(2, evento.getLocation());
 			st1.setInt(3, evento.getMaxPartecipanti());
 			st1.setBoolean(4, evento.getVenditeAperte());

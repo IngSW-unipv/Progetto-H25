@@ -263,10 +263,6 @@ public class PersistenceFacade {
 			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 		}	
 		return result;
 	}
@@ -314,7 +310,9 @@ public class PersistenceFacade {
 	 * 
 	 * @param persona: oggetto Persona (contente il codiceFiscale del creatore dell'evento).
 	 * @param evento: oggetto evento (contenete la data dell'evento).
-	 * @param nome: attributo del biglietto.
+	 * @param nome: attributo dell'invitato di biglietto.
+	 * @param cognome: attributo dell'invitato di biglietto
+	 * @param email: attributo dell'invitato di biglietto.
 	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
 	 */
 	public int aggiungiInvitato(Persona persona, Evento evento, String nome, String cognome, String email) {
@@ -437,13 +435,17 @@ public class PersistenceFacade {
 	
 	
 	//CREA BANCO
-	public boolean addBanco(Evento evento, int maxGrucce) {
+	public boolean addBanco(String data, String maxGrucce) {
 		boolean result=false;
 		int id;
+		int grucce;
+		Evento evento;
 		
 		try { 
+			evento=new Evento(data);
+			grucce=Integer.valueOf(maxGrucce);
 			id=iBancoDAO.getMaxtIdentificativoBanco();
-			BancoGuardaroba banco=new BancoGuardaroba(id,maxGrucce, evento);
+			BancoGuardaroba banco=new BancoGuardaroba(id, grucce, evento);
 			result=	iBancoDAO.addBanco(evento, banco);	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -453,7 +455,7 @@ public class PersistenceFacade {
 	
 	
 	
-	//TODO RIGA 213
+	//TODO RIGA 321
 	
 	
 	public static void main(String []args) throws ParseException {
