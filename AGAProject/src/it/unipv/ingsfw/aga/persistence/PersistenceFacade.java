@@ -17,6 +17,7 @@ import it.unipv.ingsfw.aga.model.persone.Persona;
 import it.unipv.ingsfw.aga.model.persone.Staffer;
 import it.unipv.ingsfw.aga.model.persone.Organizzatore;
 import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.model.banco.BancoGuardaroba;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.database.BigliettoDAO;
 import it.unipv.ingsfw.aga.database.PersonaDAO;
@@ -210,11 +211,11 @@ public class PersistenceFacade {
 
 	
 	/**SET GRUCCIA **
-	 * Mi permette di aggiungere al biglietto una gruccia./
+	 * Mi permette di aggiungere al biglietto una gruccia.
 	 * 
-	 * @param data: identificativo dell'evento.
-	 * @param stato: attributo dell'evento che mi identifica se è possibile comprare un biglietto dell'evento.
-	 * @return void
+	 * @param codeQR: identificativo del biglietto.
+	 * @param numeroGruccia: attributo dei bancoGuardaroba corrispondente al numero di gruccia.
+	 * @return boolean: se la gruccia è stata assegnata correttamente è uguale a 'true' altrimenti è 'false'.
 	 */
 	public boolean setGruccia (String codeQR, int numeroGruccia) {
 		boolean result=false;
@@ -230,7 +231,12 @@ public class PersistenceFacade {
 	}
 	
 	
-	//GET GRUCCIA
+	/**GET GRUCCIA**
+	 * Mi permette di avere il numero della gruccia del biglietto.
+	 * 
+	 * @param codeQR: identificativo del biglietto.
+	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
+	 */
 	public int getGruccia (String codeQR) {
 		int result=-1;
 		try {
@@ -244,7 +250,12 @@ public class PersistenceFacade {
 	}
 	
 	
-	//MAX GRUCCE EVENTO
+	/**MAX GRUCCE EVENTO**
+	 * Mi permette di avere il numero massimo di grucce di quell'evento.
+	 * 
+	 * @param evento: oggetto evento.
+	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
+	 */
 	public int getMaxGrucce (Evento evento) {
 		int result=-1;
 		try {
@@ -257,7 +268,12 @@ public class PersistenceFacade {
 	}
 	
 	
-	//GET NUMERO GRUCCE ASSEGNATE
+	/**GET NUMERO GRUCCE ASSEGNATE**
+	 * Mi permette di avere il numero dell'ultima gruccia assegnata a quell'evento.
+	 * 
+	 * @param evento: oggetto Evento.
+	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
+	 */
 	public int getNumeroGrucceAssegnate(Evento evento) {
 		int result=-1;
 		try {
@@ -269,7 +285,13 @@ public class PersistenceFacade {
 	}
 
 	
-	//GET CF BY EMAIL
+	/**GET CF BY EMAIL**
+	 * Mi permette di avere il codiceFiscale dall'email. E' usata durante il login per tener conto del 
+	 * codiceFiscale di chi si è loggato.
+	 * 
+	 * @param email: attributo della persona usato durante il login.
+	 * @return Persona: oggetto Persona .
+	 */
 	public Persona getCodiceFiscaleByEmail(String email) {
 		Persona persona;
 		try {
@@ -283,7 +305,14 @@ public class PersistenceFacade {
 	}
 	
 	
-	//AGGIUNGI INVITATO
+	/**AGGIUNGI INVITATO**
+	 * Mi permette di aggiungere un invitato all'evento.
+	 * 
+	 * @param persona: oggetto Persona (contente il codiceFiscale del creatore dell'evento).
+	 * @param evento: oggetto evento (contenete la data dell'evento).
+	 * @param nome: attributo del biglietto.
+	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
+	 */
 	public int aggiungiInvitato(Persona persona, Evento evento, String nome, String cognome, String email) {
 		int result=2;
 		//RESULT=2 ERRORE NELL'INSERIMENTO
@@ -401,6 +430,24 @@ public class PersistenceFacade {
 		}	
 		return result;
 	}
+	
+	
+	//CREA BANCO
+	public boolean addBanco(Evento evento, int maxGrucce) {
+		boolean result=false;
+		int id;
+		
+		try { 
+			id=iBancoDAO.getMaxtIdentificativoBanco();
+			BancoGuardaroba banco=new BancoGuardaroba(id,maxGrucce, evento);
+			result=	iBancoDAO.addBanco(evento, banco);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return result;
+	}
+	
+	
 	
 	//TODO RIGA 213
 	
