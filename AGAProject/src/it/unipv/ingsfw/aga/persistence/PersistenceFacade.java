@@ -263,6 +263,10 @@ public class PersistenceFacade {
 			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 		}	
 		return result;
 	}
