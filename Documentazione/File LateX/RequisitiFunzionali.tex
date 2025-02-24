@@ -8,17 +8,14 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
-\geometry{a4paper, margin=1in}
+\geometry{a4paper, margin=1.5in}
 
 % Definizione di colori personalizzati
 \definecolor{titlecolor}{RGB}{13, 82, 149}  % Blu scuro
 \definecolor{sectioncolor}{RGB}{28, 69, 136} % Blu scuro pi\`u chiaro 
 \definecolor{textcolor}{RGB}{0, 0, 0}    % Grigio scuro
-
-% Aumento dell'interlinea
 \setstretch{1.5}
 
-% Personalizzazione dell'intestazione
 \pagestyle{fancy}
 \fancyhf{} % Cancella intestazioni e pi\`e di pagina predefiniti
 \fancyhead[L]{} % Lascia vuota la parte sinistra dell'intestazione
@@ -45,8 +42,8 @@
 \textcolor{textcolor}{
 \begin{itemize}
     \item Il sistema deve permettere all’organizzatore di creare un nuovo evento.
-    \item Il sistema deve permettere l'inserimento di dettagli come nome, data, orari e luogo dell'evento.
-    \item Il sistema deve verificare la validità dei dati inseriti (data, orari, luogo) e assicurarsi che non ci siano eventi programmati nello stesso mese con trigger sul DB o sul metodo di inserimento.
+    \item Il sistema deve permettere l'inserimento di dettagli come data e luogo dell'evento.
+    \item Il sistema deve verificare la validità dei dati inseriti (data e luogo) e assicurarsi che non ci siano eventi programmati nella stessa data.
     \item Se i dati sono validi, il sistema deve salvare l'evento nel database e renderlo disponibile per la gestione dei biglietti.
     \item Il sistema deve notificare l’organizzatore in caso di errori nei dati inseriti.
     \item L’organizzatore aggiunge la lista di invitanti che hanno accesso alla pagina aggiunta biglietti.
@@ -57,9 +54,9 @@
 \textcolor{textcolor}{
 \begin{itemize}
     \item Il sistema deve permettere all’organizzatore e agli invitanti di aggiungere biglietti per un evento le cui vendite sono aperte.
-    \item Il sistema deve permettere l'inserimento di dettagli per ogni biglietto, come nome, cognome, email e quantità.
+    \item Il sistema deve permettere l'inserimento di dettagli per ogni biglietto, come nome, cognome, email.
     \item Il sistema deve verificare che le vendite per l'evento siano aperte prima di consentire l'aggiunta dei biglietti.
-    \item Il sistema deve generare un codice identificativo univoco per ciascun biglietto, salvarlo nel database ed inviare via mail il codice all’invitato.
+    \item Il sistema deve generare un codice identificativo univoco per ciascun biglietto, salvarlo nel database.
     \item Il sistema deve impedire ad un invitante di aggiungere più del numero di biglietti consentito.
     \item Il sistema deve impedire l'aggiunta di biglietti se le vendite per l'evento sono chiuse e informare l’organizzatore.
 \end{itemize}
@@ -70,9 +67,8 @@
 \begin{itemize}
     \item Il sistema deve permettere all’organizzatore di modificare lo stato delle vendite (aperto/chiuso) per ogni evento attivo.
     \item Il sistema deve aggiornare il database con il nuovo stato delle vendite.
-    \item Il sistema deve chiudere automaticamente le vendite due settimane prima della data dell'evento.
-\end{itemize}
-}
+    \end{itemize}
+
 
 \section*{\textcolor{sectioncolor}{Verifica Accesso Evento}}
 \textcolor{textcolor}{
