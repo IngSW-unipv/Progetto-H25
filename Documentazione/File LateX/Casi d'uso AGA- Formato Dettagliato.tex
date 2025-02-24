@@ -10,7 +10,7 @@
 \usepackage{fancyhdr}
 \geometry{a4paper, margin=1.5in}
 
-% Definizione di colori personalizzati
+
 \definecolor{titlecolor}{RGB}{13, 82, 149}  % Blu scuro
 \definecolor{sectioncolor}{RGB}{28, 69, 136} % Blu scuro pi\`u chiaro 
 \definecolor{textcolor}{RGB}{0, 0, 0}    % Grigio scuro
@@ -18,21 +18,20 @@
 
 \setstretch{1.5}
 
-% Impostazione della dimensione del font
+
 \renewcommand{\normalsize}{\fontsize{13pt}{16pt}\selectfont}
 \renewcommand{\large}{\fontsize{15pt}{18pt}\selectfont}
 \renewcommand{\Large}{\fontsize{17pt}{20pt}\selectfont}
 \renewcommand{\LARGE}{\fontsize{20pt}{24pt}\selectfont}
 \renewcommand{\Huge}{\fontsize{24pt}{28pt}\selectfont}
 
-% Personalizzazione dell'intestazione
-\pagestyle{fancy}
-\fancyhf{} % Cancella intestazioni e pi\`e di pagina predefiniti
-\fancyhead[L]{} % Lascia vuota la parte sinistra dell'intestazione
-\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} % Logo in alto a destra
-\fancyfoot[R]{\thepage} % Aggiunge il numero di pagina al centro del pi\`e di pagina
 
-% Personalizzazione dello stile del titolo e delle sezioni
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[L]{} 
+\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} 
+\fancyfoot[R]{\thepage} 
+
 \title{\textcolor{titlecolor}{\Huge Casi d'Uso - AGA \\ \text{Formato Dettagliato}}}
 \author{}
 \date{}

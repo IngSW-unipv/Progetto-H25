@@ -2,13 +2,23 @@ package it.unipv.ingsfw.aga.view;
 
 import javax.swing.*;
 import java.awt.*;
-
+import it.unipv.ingsfw.aga.view.Navbar;
+/**
+ * Classe che rappresenta la pagina degli eventi.
+ * Fornisce un'interfaccia grafica per visualizzare e selezionare gli eventi esistenti,
+ * nonché per creare un nuovo evento.
+ */
 public class EventsPage extends JPanel {
     private JPanel buttonsPanel;
     private Navbar navbar;
     private JButton createEventButton;
-    private EventSelectionListener eventSelectionListener; // Aggiungi il listener
+    private EventSelectionListener eventSelectionListener; // Listener per la selezione degli eventi
 
+    /**
+     *
+     * @param cardLayout     il CardLayout utilizzato per il cambio delle pagine
+     * @param containerPanel il pannello contenitore in cui risiedono le pagine
+     */
     public EventsPage(CardLayout cardLayout, JPanel containerPanel) {
         setLayout(new BorderLayout());
 
@@ -25,7 +35,7 @@ public class EventsPage extends JPanel {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        // Panello scorrevole per i bottoni degli eventi
+        // Pannello scorrevole per i bottoni degli eventi
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS)); // Layout verticale
         JScrollPane scrollPane = new JScrollPane(buttonsPanel);
@@ -40,15 +50,20 @@ public class EventsPage extends JPanel {
         add(panel, BorderLayout.CENTER);
     }
 
-    // Metodo per aggiungere un bottone per ogni evento (delegato al controller)
+    /**
+     * Aggiunge un bottone per un evento specifico.
+     * Quando il bottone viene cliccato, viene invocato il listener per la selezione dell'evento.
+     *
+     * @param eventName il nome dell'evento da visualizzare sul bottone
+     */
     public void addEventButton(String eventName) {
         JButton eventButton = new JButton(eventName);
         eventButton.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        // Quando l'utente clicca sul bottone evento, il listener si occupa della logica
+        // Quando l'utente clicca sul bottone, il listener gestisce la logica
         eventButton.addActionListener(e -> {
             if (eventSelectionListener != null) {
-                eventSelectionListener.onEventSelected(eventName); // Invoca il listener
+                eventSelectionListener.onEventSelected(eventName);
             }
         });
 
@@ -57,12 +72,20 @@ public class EventsPage extends JPanel {
         buttonsPanel.repaint();
     }
 
-    // Setter per il listener
+    /**
+     * Imposta il listener per la selezione degli eventi.
+     *
+     * @param listener l'istanza di EventSelectionListener da utilizzare
+     */
     public void setEventSelectionListener(EventSelectionListener listener) {
         this.eventSelectionListener = listener;
     }
 
-    // Getter per il bottone "Crea Evento"
+    /**
+     * Restituisce il bottone "Crea Evento".
+     *
+     * @return il bottone utilizzato per la creazione di un nuovo evento
+     */
     public JButton getCreateEventButton() {
         return createEventButton;
     }

@@ -6,12 +6,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
+/**
+ * Classe che rappresenta la pagina per l'aggiunta di un evento.
+ * Fornisce un'interfaccia grafica per inserire la data, il luogo e la capienza dell'evento.
+ */
 public class AddEventPage extends JPanel {
     private JTextField eventDateField, eventLocationField, eventCapacityField;
     private JButton submitButton;
     private Navbar navbar;
     private PersistenceFacade persistence;
 
+    /**
+     * @param cardLayout     il CardLayout utilizzato per il cambio delle pagine
+     * @param containerPanel il pannello contenitore in cui risiedono le pagine
+     */
     public AddEventPage(CardLayout cardLayout, JPanel containerPanel) {
         setLayout(new BorderLayout());
 
@@ -50,22 +58,40 @@ public class AddEventPage extends JPanel {
         panel.add(buttonPanel);
 
         add(panel, BorderLayout.CENTER);
-
-
     }
 
+    /**
+     * Restituisce il bottone per l'invio dei dati dell'evento.
+     *
+     * @return il bottone submit
+     */
     public JButton getSubmitButton() {
         return submitButton;
     }
 
+    /**
+     * Restituisce la data dell'evento inserita.
+     *
+     * @return la data dell'evento come stringa
+     */
     public String getEventDate() {
         return eventDateField.getText();
     }
 
+    /**
+     * Restituisce il luogo dell'evento inserito.
+     *
+     * @return il luogo dell'evento come stringa
+     */
     public String getEventLocation() {
         return eventLocationField.getText();
     }
 
+    /**
+     * Restituisce la capienza dell'evento inserita.
+     *
+     * @return la capienza dell'evento come stringa
+     */
     public String getEventCapacity() {
         return eventCapacityField.getText();
     }
