@@ -6,7 +6,6 @@ import org.junit.Test;
 import it.unipv.ingsfw.aga.controller.Controller;
 import org.junit.Before;
 import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
-import it.unipv.ingsfw.aga.model.Model;
 import it.unipv.ingsfw.aga.view.*;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Persona;
@@ -16,7 +15,6 @@ public class ControllerTest {
     private Evento eventoTest;
     private Persona personaTest;
     private PersistenceFacade persistenceTest;
-    private Model modelTest;
     private LoginPage loginPageTest;
     private MainPage mainPageTest;
     private AddGuestPage addGuestPageTest;
