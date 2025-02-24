@@ -252,7 +252,6 @@ public class PersistenceFacade {
 			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("ff");
 		}	
 		return result;
 	}

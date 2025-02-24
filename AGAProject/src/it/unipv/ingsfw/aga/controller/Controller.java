@@ -178,8 +178,8 @@ public class Controller implements EventSelectionListener {
         });
 
 
-        // Listener per il bottone "Register" nella pagina di login
-        loginPage.getRegisterButton().addActionListener(new ActionListener() {
+        // Listener per il bottone "AggiungiOrganizzatore" nella pagina di main
+        mainPage.getAggiungiOrganizzatore().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(containerPanel, "register");
             }
@@ -203,10 +203,14 @@ public class Controller implements EventSelectionListener {
                 String location = addEventPage.getEventLocation();
                 String capacity = addEventPage.getEventCapacity();
                 boolean result = persistence.addEvento(date, location, capacity);
-                if (result)
+                if (result) {
+                	loadEvents();
                     JOptionPane.showMessageDialog(null, "Evento aggiunto");
-                else
+                }else {
                     JOptionPane.showMessageDialog(null, "Errore nell'aggiunta dell'evento");
+                }
+        
+                cardLayout.show(containerPanel,"events");
             }
         });
 
@@ -285,7 +289,7 @@ public class Controller implements EventSelectionListener {
         entrancePage.getVerifyButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String code = entrancePage.getVerificationCode();
-                if (BancoIngressoFactory.getInstance(0).accesso(code)) {
+                if (BancoIngressoFactory.getInstance(0,evento).accesso(code)) {
                     JOptionPane.showMessageDialog(null, "Biglietto valido!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Biglietto non valido o già convalidato!");
@@ -344,7 +348,7 @@ public class Controller implements EventSelectionListener {
                     JOptionPane.showMessageDialog(null, "Aggiunto con successo!");
                 else
                     JOptionPane.showMessageDialog(null, "Errore nell'aggiunta ");
-                cardLayout.show(containerPanel, "events");
+                cardLayout.show(containerPanel, "main");
             }
         });
     }

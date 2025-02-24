@@ -26,7 +26,7 @@ public class AggiungiStaffPage extends JPanel {
         add(navbar, BorderLayout.NORTH);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2, 10, 10));
+        panel.setLayout(new GridLayout(6, 2, 10, 10));
 
         JLabel cfLabel = new JLabel("Codice Fiscale:");
         cfField = new JTextField();
@@ -61,11 +61,11 @@ public class AggiungiStaffPage extends JPanel {
         buttonPanel.add(submitButton);
 
         panel.add(cfLabel);
-        panel.add(cfField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
+        panel.add(cfField);      
         panel.add(emailLabel);
         panel.add(emailField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
         panel.add(nameLabel);
         panel.add(nameField);
         panel.add(surnameLabel);

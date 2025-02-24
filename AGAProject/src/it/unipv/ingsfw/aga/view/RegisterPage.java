@@ -24,7 +24,7 @@ public class RegisterPage extends JPanel {
         add(navbar, BorderLayout.NORTH);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2, 10, 10));
+        panel.setLayout(new GridLayout(7, 2, 10, 10));
 
         // Creazione e impostazione dei componenti per il Codice Fiscale
         JLabel cfLabel = new JLabel("Codice Fiscale:");
@@ -57,8 +57,8 @@ public class RegisterPage extends JPanel {
         surnameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // Etichetta per il GDPR (informativa gestione dati)
-        JLabel gpdrLabel = new JLabel("Andando avanti, accetti la gestione dei tuoi dati");
-        gpdrLabel.setFont(new Font("Arial", Font.PLAIN, 6));
+        JLabel gpdrLabel = new JLabel("Andando avanti, accetti la gestione dei tuoi dati secondo il GPDR.");
+        gpdrLabel.setFont(new Font("Arial", Font.PLAIN, 10));
 
         // Creazione e impostazione del bottone di invio della registrazione
         submitButton = new JButton("Registrati");
@@ -77,7 +77,7 @@ public class RegisterPage extends JPanel {
         panel.add(nameField);
         panel.add(surnameLabel);
         panel.add(surnameField);
-        panel.add(new JLabel()); // Linea vuota per padding
+        //panel.add(new JLabel()); // Linea vuota per padding
         panel.add(gpdrLabel);
         panel.add(submitButton);
 

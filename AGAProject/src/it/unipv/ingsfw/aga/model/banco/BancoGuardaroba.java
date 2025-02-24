@@ -1,5 +1,7 @@
 package it.unipv.ingsfw.aga.model.banco;
 
+import java.lang.classfile.Superclass;
+
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
@@ -200,9 +202,12 @@ public class BancoGuardaroba extends Banco {
      * @param qr il codice QR da validare
      * @return true se il biglietto è valido, false altrimenti
      */
+    
     public boolean validateQr(QrCode qr) {
+    	String data="" + evento.getData();
+    	String dataBiglietto=""+PersistenceFacade.getInstance().getDataByBiglietto(qr.getId());
         if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 1 &&
-            evento.getData().equals(PersistenceFacade.getInstance().getDataByBiglietto(qr.getId()))) {
+            (data).equals(dataBiglietto)) {
             System.out.println("Biglietto valido");
             return true;
         } else {

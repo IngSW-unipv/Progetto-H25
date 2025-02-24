@@ -54,12 +54,7 @@ public class LoginPage extends JPanel {
         loginButton.setForeground(Color.BLACK);
         buttonPanel.add(loginButton);
 
-        // Bottone "Registrati"
-        registerButton = new JButton("Registrati");
-        registerButton.setFont(new Font("Arial", Font.BOLD, 14));
-        registerButton.setBackground(Color.LIGHT_GRAY);
-        registerButton.setForeground(Color.BLACK);
-        buttonPanel.add(registerButton);
+        
 
         // Aggiunge un elemento vuoto e il pannello dei bottoni
         panel.add(new JLabel());

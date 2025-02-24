@@ -36,8 +36,10 @@ public class BancoIngresso extends Banco {
      */
     @Override
     public boolean validateQr(QrCode qr) {
+    	String data=""+evento.getData();
+    	String dataBiglietto=""+PersistenceFacade.getInstance().getDataByBiglietto(qr.getId());
         if (PersistenceFacade.getInstance().getStatoBiglietto(qr.getId()) == 0 &&
-            evento.getData().equals(PersistenceFacade.getInstance().getDataByBiglietto(qr.getId()))) {
+            (data).equals(dataBiglietto)) {
             System.out.println("Biglietto valido");
             return invalidateQr(qr);
         } else {
@@ -52,6 +54,7 @@ public class BancoIngresso extends Banco {
      * @return true se l'aggiornamento dello stato ha avuto successo, false altrimenti
      */
     public boolean invalidateQr(QrCode qr) {
+    	System.out.println("InvalidateQrcode");
         return PersistenceFacade.getInstance().setStatoBiglietto(qr.getId(), true);
     }
 

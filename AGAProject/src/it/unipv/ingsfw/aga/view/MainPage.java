@@ -12,12 +12,14 @@ import java.awt.*;
  * - Modifica Vendite
  * - Aggiungi Staff
  * - Vedi Invitati
+ * - Aggiungi Organizzatore
  * 
  */
 public class MainPage extends JPanel {
     private JButton addGuestButton, entranceButton, cloakroomButton;
-    private JButton modificaVenditeButton, aggiungiStaffButton, vediInvitatiButton;
+    private JButton modificaVenditeButton, aggiungiStaffButton, vediInvitatiButton,aggiungiOrganizzatoreButton;
     private Navbar navbar;
+    
 
     /**
 
@@ -33,7 +35,7 @@ public class MainPage extends JPanel {
 
         // Pannello centrale contenente i pulsanti delle varie funzionalità
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1));
+        panel.setLayout(new GridLayout(7, 1));
 
         addGuestButton = new JButton("Aggiungi invitato");
         entranceButton = new JButton("Ingresso");
@@ -41,6 +43,8 @@ public class MainPage extends JPanel {
         modificaVenditeButton = new JButton("Modifica Vendite");
         aggiungiStaffButton = new JButton("Aggiungi Staff");
         vediInvitatiButton = new JButton("Vedi Invitati");
+        aggiungiOrganizzatoreButton = new JButton("Aggiungi Organizzatore");
+        
 
         panel.add(addGuestButton);
         panel.add(entranceButton);
@@ -48,6 +52,7 @@ public class MainPage extends JPanel {
         panel.add(modificaVenditeButton);
         panel.add(aggiungiStaffButton);
         panel.add(vediInvitatiButton);
+        panel.add(aggiungiOrganizzatoreButton);
 
         add(panel, BorderLayout.CENTER);
     }
@@ -105,6 +110,10 @@ public class MainPage extends JPanel {
     public JButton getVediInvitatiButton() {
         return vediInvitatiButton;
     }
+    
+    public JButton getAggiungiOrganizzatore() {
+    	return aggiungiOrganizzatoreButton;
+    }
 
     /**
      * Imposta i permessi relativi al ruolo dell'utente.
@@ -116,5 +125,6 @@ public class MainPage extends JPanel {
         modificaVenditeButton.setVisible(isOrganizer);
         aggiungiStaffButton.setVisible(isOrganizer);
         vediInvitatiButton.setVisible(isOrganizer);
+        aggiungiOrganizzatoreButton.setVisible(isOrganizer);
     }
 }

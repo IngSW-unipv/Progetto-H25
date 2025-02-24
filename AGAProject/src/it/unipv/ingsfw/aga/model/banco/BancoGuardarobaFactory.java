@@ -7,7 +7,7 @@ public class BancoGuardarobaFactory {
 
     public static BancoGuardaroba getInstance(int numeroBanco, Evento evento) {
         if (instance == null) {
-            instance = new BancoGuardaroba(numeroBanco);
+            instance = new BancoGuardaroba(numeroBanco,evento);
             instance.updateGrucceAssegnate(evento);
             instance.updateMaxGrucce(evento);
         }
