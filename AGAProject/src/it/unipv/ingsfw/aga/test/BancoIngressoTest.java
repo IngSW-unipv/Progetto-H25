@@ -29,7 +29,7 @@ public class BancoIngressoTest {
 
     @Before
     public void setUp() throws MaxExeededException, ParseException {
-        eventoTest = new Evento("2021-12-31", "MEDA", 1000);
+        eventoTest = new Evento("2025-06-15", "Roma", 500);
         bancoTest = new BancoIngresso(1, eventoTest);
         persistenceFacadeTest = PersistenceFacade.getInstance();
         connection = DBConnection.startConnection(connection); // Apertura connessione inizio test
