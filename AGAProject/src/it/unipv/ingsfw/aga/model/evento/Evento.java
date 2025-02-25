@@ -4,13 +4,10 @@ import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.biglietto.BigliettoFactory;
 import it.unipv.ingsfw.aga.model.persone.*;
-import it.unipv.ingsfw.aga.model.persone.PersonaFactory;
-import it.unipv.ingsfw.aga.database.EventoDAO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 public class Evento {
     private final Date data;
@@ -24,7 +21,7 @@ public class Evento {
     	this.location = location;
         if (maxPartecipanti < 0) {
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
-        } else if (maxPartecipanti > 1500) {
+        } else if (maxPartecipanti > 10000) {
             throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + data + " è stato superato");
         } else {
             this.maxPartecipanti = maxPartecipanti;
@@ -32,7 +29,6 @@ public class Evento {
         this.venditeAperte = false;
     }
 
-    //Serve per la persistenza(?) SORRY SE HO FATTO CASINO :'(
     public Evento(Date data, String location, int capacita){
         this.data = data;
 		this.location = location;
@@ -111,7 +107,7 @@ public class Evento {
     public void setMaxPartecipanti(int maxPartecipanti) throws MaxExeededException {
         if (maxPartecipanti < 0) {
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
-        } else if (maxPartecipanti > 1500) {
+        } else if (maxPartecipanti > 10000) {
             throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + this.getData() + " è stato superato");
         } else {
             this.maxPartecipanti = maxPartecipanti;

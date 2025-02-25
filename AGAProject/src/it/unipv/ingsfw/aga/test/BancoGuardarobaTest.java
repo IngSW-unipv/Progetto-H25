@@ -19,8 +19,6 @@ import java.text.ParseException;
 import static org.junit.Assert.assertEquals;
 
 public class BancoGuardarobaTest {
-
-
     private BancoGuardaroba bancoTest;
     private Evento eventoTest;
     private QrCode qrCode;
