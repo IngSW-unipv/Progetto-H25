@@ -13,7 +13,7 @@ public class MainEvento {
             // Creazione di un organizzatore
             Organizzatore organizzatore = new Organizzatore("FRAPA123", "Francesco", "Dj", "fradj@gmail.com", "psw123");
             // Creazione dell'evento (Serve per aprire e chiudere le vendite)
-            Evento evento = new Evento ("2025-09-12", "Firenze", 500);
+            Evento evento = new Evento ("2025-09-12", "Firenze", 50);
 
             // Creazione di un evento
             String tipoEvento = "TipoEvento";
