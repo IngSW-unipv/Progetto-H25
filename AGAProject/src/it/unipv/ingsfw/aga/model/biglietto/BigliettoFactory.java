@@ -17,7 +17,7 @@ public class BigliettoFactory {
      * @param email email del partecipante
      * @return Biglietto
      */
-    public static Biglietto creaBiglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
+    public static Stampabile creaBiglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
         return new Biglietto(creatoreBiglietto, nome, cognome, email, evento);
     }
 }
