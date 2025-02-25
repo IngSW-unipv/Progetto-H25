@@ -138,7 +138,7 @@ public class Evento {
         return BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
     }
     //Permette di aggiungere un biglietto al database tramite la logica di biglietto
-    public Biglietto aggiugiTicket(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
+    public Biglietto aggiungiTicket(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
         Biglietto biglietto = BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
         boolean added = PersistenceFacade.getInstance().getBigliettoDAO().addBiglietto(biglietto);
         if (added) {
