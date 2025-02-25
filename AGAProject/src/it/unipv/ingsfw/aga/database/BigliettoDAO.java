@@ -24,25 +24,7 @@ public class BigliettoDAO implements IBigliettoDAO {
     public BigliettoDAO() {
         super();
     }
-
-    /*private static final String INSERISCI_BIGLIETTO_SQL =
-            "INSERT INTO biglietti (nome, cognome, email, numBiglietto, dataEvento)) VALUES (?, ?, ?, ?, ?)";
-
-    @Override
-    public void aggiungiBiglietto(Biglietto biglietto) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(INSERISCI_BIGLIETTO_SQL)) {
-
-            stmt.setString(1, biglietto.getEmail());
-            stmt.setString(2, biglietto.getNome());
-            stmt.setString(3, biglietto.getCognome());
-            stmt.setString(4, String.valueOf(biglietto.getDataEvento()));
-            stmt.setString(5, biglietto.getQRCodeId());
-
-            stmt.executeUpdate();
-        }
-    }*/
-    
-    
+   
     //TROVA CREATORE DAL BIGLIETTO
     public Persona getCreatoreBiglietto(Biglietto biglietto) {
     	
@@ -213,9 +195,9 @@ public class BigliettoDAO implements IBigliettoDAO {
 		Statement st1;
 		ResultSet rs1;
 		int b=2;//nel db boolean =1 o 0
-		//B=0 NON EFFETTUATO
-		//B=1 EFFETTUATO
-		//B=2 ERRORE
+		//b=0 NON EFFETTUATO
+		//b=1 EFFETTUATO
+		//b=2 ERRORE
 		
 		try{
 			st1 = conn.createStatement();

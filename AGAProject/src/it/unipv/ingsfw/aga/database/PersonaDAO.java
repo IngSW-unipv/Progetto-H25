@@ -20,7 +20,7 @@ public class PersonaDAO implements IPersonaDAO {
 	}
 	
 	
-	//SELECT DI TUTTE LE PERSONE CON TUTTI I DATI
+	//GET DI TUTTE LE PERSONE CON TUTTI I DATI
 	public ArrayList<Persona> selectAll (){
 		
 		ArrayList<Persona> result = new ArrayList<>();
@@ -56,7 +56,7 @@ public class PersonaDAO implements IPersonaDAO {
 	}
 	
 	
-	//SELECT CF NOME E COGNOME E TIPO
+	//GET CF NOME E COGNOME E TIPO
 	public ArrayList<Persona> selectCFNomeCognome (){
 			
 			ArrayList<Persona> result = new ArrayList<>();
@@ -94,7 +94,7 @@ public class PersonaDAO implements IPersonaDAO {
 	}
 	
 	
-	//SELECT LO STAFF CF NOME COGNOME 
+	//GET LO STAFF CF NOME COGNOME 
 	public ArrayList<Persona> selectStaffCFNomeCognome (){
 		
 		ArrayList<Persona> result = new ArrayList<>();
@@ -123,7 +123,7 @@ public class PersonaDAO implements IPersonaDAO {
 	}
 	
 	
-	//SELECT GLI ORGANIZZATORI CF NOME COGNOME 
+	//GET GLI ORGANIZZATORI CF NOME COGNOME 
 	public ArrayList<Persona> selectOrganizzatoreCFNomeCognome (){
 		
 		ArrayList<Persona> result = new ArrayList<>();
@@ -286,7 +286,7 @@ public class PersonaDAO implements IPersonaDAO {
 			p=new Persona(rs1.getString(1),null);
 							
 		}catch (Exception e){
-			//e.printStackTrace(); 
+			e.printStackTrace(); 
 			p=new Persona();//nessun cf corrispondente trovato	
 		}	
 		DBConnection.closeConnection(conn);

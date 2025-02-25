@@ -56,7 +56,6 @@ public class DBConnection {
 			//APERTURA CONNESSIONE
 			conn = DriverManager.getConnection(dbURL, username, password);
 			System.out.println("Connessione riuscita!");
-			//System.out.println("Connessione al DB: "+dbURL);
 
 		}
 		catch (Exception e) 

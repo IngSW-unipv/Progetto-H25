@@ -55,8 +55,8 @@ public class PersistenceFacade {
 	/**SET STATO DEL BIGLIETTO**
 	 * Esegue il cambiamento dello stato del biglietto, cioè se l'accesso alla festa è stato effettuato.
 	 * 
-	 * @param codeQR: identificativo del biglietto sui cui si vogliono ottenere le informazioni.
-	 * @param stato: identificativo che si usa per cambiare l'accesso di un biglietto.
+	 * @param codeQR: identificativo del Biglietto sui cui si vogliono ottenere le informazioni.
+	 * @param stato: identificativo che si usa per cambiare l'accesso di un Biglietto.
 	 * @return boolean: se l'accesso alla festa è già stato effettuato mi da un 'false' altrimenti 'true'.
 	 */
 	public boolean setStatoBiglietto (String codeQR, boolean stato) {
@@ -74,8 +74,8 @@ public class PersistenceFacade {
 	/**GET STATO DEL BIGLIETTO**
 	 * Mi permette di vedere lo stato del biglietto.
 	 * 
-	 * @param codeQR: identificativo del biglietto sui cui si vogliono ottenere le informazioni.
-	 * @param stato: identificativo che si usa per cambiare l'accesso di un biglietto.
+	 * @param codeQR: identificativo del Biglietto sui cui si vogliono ottenere le informazioni.
+	 * @param stato: identificativo che si usa per cambiare l'accesso di un Biglietto.
 	 * @return int: se l'accesso alla festa è già stato effettuato mi da un '1' altrimenti '0' e se è presente 
 	 * 				un errore mi rida '2'.
 	 */
@@ -98,8 +98,8 @@ public class PersistenceFacade {
 	 * Mi permette di effettuare il login attraverso email e password, permettendo di sapere se l'accesso è 
 	 * effettuato da uno staffer o un organizzatore.
 	 * 
-	 * @param email: attributo di persona che permette di effetuare l'accesso.
-	 * @param password: attributo di staffer/organizzatore per accedere.
+	 * @param email: attributo di Persona che permette di effetuare l'accesso.
+	 * @param password: attributo di Staffer/Organizzatore per accedere.
 	 * @return int: se l'accesso alla festa è stato effettuato da uno staffer ricevo '0', da un organizzatore 
 	 * 				ricevo '1' se è presente un errore ricevo '2'.
 	 */
@@ -132,11 +132,11 @@ public class PersistenceFacade {
 	/**REGISTRAZIONE ORGANIZZATORE**
 	 * Mi permette di registrare un organizzatore.
 	 * 
-	 * @param codiceFiscale: identificativo della persona che si vuole aggiungere.
-	 * @param nome: attributo della persona che si vuole aggiungere.
-	 * @param cognome: attributo della persona che si vuole aggiungere.
-	 * @param email: attributo della persona che si vuole aggiungere.
-	 * @param password: attributo dell'organizzatore per accedere.
+	 * @param codiceFiscale: identificativo della Persona che si vuole aggiungere.
+	 * @param nome: attributo della Persona che si vuole aggiungere.
+	 * @param cognome: attributo della Persona che si vuole aggiungere.
+	 * @param email: attributo della Persona che si vuole aggiungere.
+	 * @param password: attributo dell'Organizzatore per accedere.
 	 * @return boolean: se la registazione è stata effettuata con sucesso riceerò 'true' altrimenti 'false'.
 	 */
 	public boolean registazioneOrganizzatore (String codiceFiscale, String nome, String cognome, String email, String password) {
@@ -171,8 +171,8 @@ public class PersistenceFacade {
 	/**SET STATO DELL'EVENTO **
 	 * Mi permette cambiare le vendite dell'evento da aperte a chiuse e viceversa.
 	 * 
-	 * @param data: identificativo dell'evento.
-	 * @param stato: attributo dell'evento che mi identifica se è possibile comprare un biglietto dell'evento.
+	 * @param data: identificativo dell'Evento.
+	 * @param stato: attributo dell'Evento che mi identifica se è possibile comprare un biglietto dell'evento.
 	 * @return void
 	 */
 	public void setStatoEvento (Date data, boolean stato) {
@@ -188,7 +188,7 @@ public class PersistenceFacade {
 	/**SEARCH BY DATA EVENTO PER VENDITE APERTE**
 	 * Mi permette di cercare l'evento data la sua data e controllare se le vendite sono aperte o chiuse.
 	 * 
-	 * @param data: identificativo dell'evento.
+	 * @param data: identificativo dell'Evento.
 	 * @return int: se ho errori nell'operzione ricevero '2', se le vendite sono apete ritorna '1' altrimenti '0'. 
 	 */
 	public int searchEventoByData (Date data) {
@@ -213,7 +213,7 @@ public class PersistenceFacade {
 	/**SET GRUCCIA **
 	 * Mi permette di aggiungere al biglietto una gruccia.
 	 * 
-	 * @param codeQR: identificativo del biglietto.
+	 * @param codeQR: identificativo del Biglietto.
 	 * @param numeroGruccia: attributo dei bancoGuardaroba corrispondente al numero di gruccia.
 	 * @return boolean: se la gruccia è stata assegnata correttamente è uguale a 'true' altrimenti è 'false'.
 	 */
@@ -234,7 +234,7 @@ public class PersistenceFacade {
 	/**GET GRUCCIA**
 	 * Mi permette di avere il numero della gruccia del biglietto.
 	 * 
-	 * @param codeQR: identificativo del biglietto.
+	 * @param codeQR: identificativo del Biglietto.
 	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
 	 */
 	public int getGruccia (String codeQR) {
@@ -253,7 +253,7 @@ public class PersistenceFacade {
 	/**MAX GRUCCE EVENTO**
 	 * Mi permette di avere il numero massimo di grucce di quell'evento.
 	 * 
-	 * @param evento: oggetto evento.
+	 * @param evento: oggetto fittizio di Evento.
 	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
 	 */
 	public int getMaxGrucce (Evento evento) {
@@ -271,7 +271,7 @@ public class PersistenceFacade {
 	/**GET NUMERO GRUCCE ASSEGNATE**
 	 * Mi permette di avere il numero dell'ultima gruccia assegnata a quell'evento.
 	 * 
-	 * @param evento: oggetto Evento.
+	 * @param evento: oggetto fittizio di Evento.
 	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
 	 */
 	public int getNumeroGrucceAssegnate(Evento evento) {
@@ -289,7 +289,7 @@ public class PersistenceFacade {
 	 * Mi permette di avere il codiceFiscale dall'email. E' usata durante il login per tener conto del 
 	 * codiceFiscale di chi si è loggato.
 	 * 
-	 * @param email: attributo della persona usato durante il login.
+	 * @param email: attributo della Persona usato durante il login.
 	 * @return Persona: oggetto Persona .
 	 */
 	public Persona getCodiceFiscaleByEmail(String email) {
@@ -306,14 +306,17 @@ public class PersistenceFacade {
 	
 	
 	/**AGGIUNGI INVITATO**
-	 * Mi permette di aggiungere un invitato all'evento.
+	 * Mi permette di aggiungere un invitato all'evento, controllando: la massima capacità dell'evento, il 
+	 * massimo dei biglietti per creatore e il duplicaggio del Qr.
 	 * 
-	 * @param persona: oggetto Persona (contente il codiceFiscale del creatore dell'evento).
-	 * @param evento: oggetto evento (contenete la data dell'evento).
-	 * @param nome: attributo dell'invitato di biglietto.
-	 * @param cognome: attributo dell'invitato di biglietto
-	 * @param email: attributo dell'invitato di biglietto.
-	 * @return int: è il numero di gruccia, se è presente qualche errore è uguale a '-1'.
+	 * @param persona: oggetto fittizio di Persona (contente il codiceFiscale del creatore dell'evento).
+	 * @param evento: oggetto fittizio di Evento (contenete la data dell'evento).
+	 * @param nome: attributo dell'invitato di Biglietto.
+	 * @param cognome: attributo dell'invitato di Biglietto
+	 * @param email: attributo dell'invitato di Biglietto.
+	 * @return int: se il bilietto è stato aggiunto correttamente ritornera' '1', se il creatore del biglietto
+	 * 			ha gia creato 5 biglietti ritornerà '0', se la massima capacita' dell'evento è già stata 
+	 * 			raggiunta ritornerà '-1' e se è presente un errore nell'operazione ritornera '2'.
 	 */
 	public int aggiungiInvitato(Persona persona, Evento evento, String nome, String cognome, String email) {
 		int result=2;
@@ -368,7 +371,12 @@ public class PersistenceFacade {
 	}
 	
 	
-	//GET INVITATI
+	/**GET INVITATI**
+	 * Mi permette di avere il biglietto degli invitati a quell'evento.
+	 * 
+	 * @param evento: oggetto fittizio che mi passa la data.
+	 * @return ArrayList <Biglietto>: array di Biglietto.
+	 */
 	public ArrayList <Biglietto> getInvitati(Evento evento) {
 		ArrayList<Biglietto> biglietto;
 		try {
@@ -382,7 +390,16 @@ public class PersistenceFacade {
 	}
 	
 	
-	//AGGIUNGI STAFFER
+	/**AGGIUNGI STAFFER**
+	 * Mi permette di aggiungere uno staffer.
+	 * 
+	 * @param codiceFiscale: identificativo di Persona.
+	 * @param nome: attributo della Persona.
+	 * @param cognome: attributo della Persona.
+	 * @param email: attributo della Persona.
+	 * @param password: attributo dello Staffer.
+	 * @return boolean: se l'operazione è andata a buon fine avrò 'true', altrimenti 'false'.
+	 */
 	public boolean addStaffer(String codiceFiscale, String nome, String cognome, String email, String password) {
 		boolean result=false;
 		Staffer staffer;
@@ -398,7 +415,14 @@ public class PersistenceFacade {
 	
 	
 
-	//AGGIUNGI EVENTO
+	/**AGGIUNGI EVENTO**
+	 * Mi permette di aggiungere un evento.
+	 * 
+	 * @param data: identificativo di Evento.
+	 * @param luogo: attributo di Evento.
+	 * @param capacita: attributo di Evento.
+	 * @return boolean: se ci sono stati problemi nell'operazione mi ritornerà 'false' altrimenti 'true'.
+	 */
 	public boolean addEvento(String data, String luogo, String capacita) {
 		boolean result=false;
 		Evento evento;
@@ -417,7 +441,12 @@ public class PersistenceFacade {
 	}
 	
 	
-	//GET DATA BY QR
+	/**GET DATA BY QR**
+	 * Mi permette di avere la data dell'evento attraverso il Qr del biglietto (usato in bancoGuardaroba).
+	 * 
+	 * @param QR: identificativo di Biglietto.
+	 * @return Date: mi ritorna la data del biglietto, se ci sono stati problemi mi ritorna null.
+	 */
 	public Date getDataByBiglietto(String QR) {
 		Biglietto data;
 		Date result;
@@ -434,7 +463,13 @@ public class PersistenceFacade {
 	}
 	
 	
-	//CREA BANCO
+	/**CREA BANCO**
+	 * Mi permette di creare un banco per la data dell'evento.
+	 * 
+	 * @param data: attributo di bancoGuardaroba.
+	 * @param maxGrucce: attributo di bancoGuardaroba.
+	 * @return boolean: se ci sono stati problemi nell'operazione mi ritornerà 'false' altrimenti 'true'
+	 */
 	public boolean addBanco(String data, String maxGrucce) {
 		boolean result=false;
 		int id;
@@ -453,9 +488,6 @@ public class PersistenceFacade {
 		return result;
 	}
 	
-	
-	
-	//TODO RIGA 321
 	
 	
 	public static void main(String []args) throws ParseException {

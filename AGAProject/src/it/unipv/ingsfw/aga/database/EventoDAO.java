@@ -24,7 +24,7 @@ public class EventoDAO implements IEventoDAO {
 	}
 	
 	
-	//PRINT TUTTI I DATI DELL'EVENTO
+	//GET TUTTI I DATI DELL'EVENTO
 	public ArrayList<Evento> selectAll (){
 			
 		ArrayList<Evento> result = new ArrayList<>();
@@ -43,17 +43,17 @@ public class EventoDAO implements IEventoDAO {
 				ev=new Evento(rs1.getDate(1), rs1.getString(2),rs1.getInt(3),rs1.getBoolean(4));
 	
 				result.add(ev);
-					//System.out.println(ev.toString());
 			}
 		}catch (Exception e){
-			e.printStackTrace();}
+			e.printStackTrace();
+		}
 	
 		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
 	
-	//PRENDI TUTTE LE DATE
+	//GET TUTTE LE DATE
 	public ArrayList<String> getAllDate (){
 			
 		ArrayList<String> result = new ArrayList<>();
@@ -74,14 +74,15 @@ public class EventoDAO implements IEventoDAO {
 				result.add(ev);
 			}
 		}catch (Exception e){
-			e.printStackTrace();}
+			e.printStackTrace();
+		}
 	
 		DBConnection.closeConnection(conn);
 		return result;
 	}
 	
 	
-	//PRINT BY LUOGO
+	//GET BY LUOGO -> INUTILIZZATO
 	public ArrayList<Evento> selectByLuogo (String luogo){
 		
 		ArrayList<Evento> result = new ArrayList<>();
@@ -91,7 +92,6 @@ public class EventoDAO implements IEventoDAO {
 		ResultSet rs1;
 		Evento ev;
 		
-	
 		try{
 			st1 = conn.createStatement();
 			String query="SELECT * from evento where luogo= '"+luogo+"'";
@@ -101,7 +101,6 @@ public class EventoDAO implements IEventoDAO {
 				ev=new Evento(rs1.getDate(1), rs1.getString(2),rs1.getInt(3),rs1.getBoolean(4));
 	
 				result.add(ev);
-				//System.out.println(ev.toString());
 			}
 		}catch (Exception e){
 			e.printStackTrace();}
@@ -130,7 +129,7 @@ public class EventoDAO implements IEventoDAO {
 			return ev;
 		
 		}catch (Exception e){
-			//e.printStackTrace();
+			e.printStackTrace();
 			Evento evento=new Evento(null,null,0,false);
 			DBConnection.closeConnection(conn);
 			return evento;			
@@ -155,7 +154,7 @@ public class EventoDAO implements IEventoDAO {
 			capacita=rs1.getInt(3);	
 			
 		}catch (Exception e){
-			//e.printStackTrace();			
+			e.printStackTrace();			
 		}
 		DBConnection.closeConnection(conn);
 		return capacita;

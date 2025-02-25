@@ -44,7 +44,7 @@ public class BancoDAO implements IBancoDAO{
 			rs1=st1.executeQuery(query);
 	
 			while(rs1.next()){
-				dataEvento=new Evento(rs1.getDate(4), null,0,false);//farlo col search by data
+				dataEvento=new Evento(rs1.getDate(4), null,0,false);
 				boolean ing=rs1.getBoolean(2);
 				if(ing)
 					b=new BancoIngresso(rs1.getInt(1),dataEvento);
