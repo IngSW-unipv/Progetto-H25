@@ -65,7 +65,7 @@ public class BancoIngressoTest {
 
     @Test
     public void testToString() {
-        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2021-12-31\n";
+        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2025-06-15\n";
         assertEquals(expected, bancoTest.toString());
     }
 
