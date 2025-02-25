@@ -487,7 +487,14 @@ public class PersistenceFacade {
 		}	
 		return result;
 	}
-	
+	//Per aggiungere evento tramite il Model (Ale)
+	public EventoDAO getEventoDAO() {
+		return (EventoDAO) iEventoDAO;
+	}
+	//Per aggiungere biglietto tramite il Model (Ale)
+	public BigliettoDAO getBigliettoDAO() {
+		return (BigliettoDAO) iBigliettoDAO;
+	}
 	
 	
 	public static void main(String []args) throws ParseException {

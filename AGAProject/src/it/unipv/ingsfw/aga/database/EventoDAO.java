@@ -1,14 +1,11 @@
 package it.unipv.ingsfw.aga.database;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.sql.PreparedStatement;
 
 import connection.DBConnection;
 import it.unipv.ingsfw.aga.model.evento.Evento;
@@ -238,9 +235,41 @@ public class EventoDAO implements IEventoDAO {
 			return false;
 		}
 	}
-	
-	
-	
+	//Metodo che usa la logica di evento per aggiungere un evento al DB (Ale)
+	public boolean addEventoAlDB(Evento evento) {
+		conn = DBConnection.startConnection(conn);
+		boolean result = false;
+		String query = "INSERT INTO EVENTO (DATA, LUOGO, CAPACITA, VENDITEAPERTE) VALUES (?, ?, ?, ?)";
+
+		try (PreparedStatement stmt = conn.prepareStatement(query)) {
+			stmt.setDate(1, new java.sql.Date(evento.getData().getTime()));
+			stmt.setString(2, evento.getLocation());
+			stmt.setInt(3, evento.getMaxPartecipanti());
+			stmt.setBoolean(4, evento.getVenditeAperte());
+			stmt.executeUpdate();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
+		}
+		return result;
+	}
+	//Metodo che usa il Model per modificare lo stato delle vendite al DB (Ale)
+	public void modifcaStatoVendita(Evento evento) {
+		conn = DBConnection.startConnection(conn);
+		String query = "UPDATE EVENTO SET VENDITEAPERTE = ? WHERE DATA = ? AND LUOGO = ?";
+		try (PreparedStatement stmt = conn.prepareStatement(query)) {
+			stmt.setBoolean(1, evento.getVenditeAperte());
+			stmt.setDate(2, new java.sql.Date(evento.getData().getTime()));
+			stmt.setString(3, evento.getLocation());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
+		}
+	}
 	public static void main(String []args) throws ParseException {
 		EventoDAO persona=new EventoDAO();
 		//persona.selectAll();
@@ -263,5 +292,4 @@ public class EventoDAO implements IEventoDAO {
 		
 		
 	}
-
 }

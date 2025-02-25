@@ -3,7 +3,9 @@ package it.unipv.ingsfw.aga.model.evento;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.biglietto.BigliettoFactory;
+import it.unipv.ingsfw.aga.model.biglietto.Stampabile;
 import it.unipv.ingsfw.aga.model.persone.*;
+import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -103,8 +105,11 @@ public class Evento {
     public int getMaxPartecipanti() {
         return maxPartecipanti;
     }
-    
-    //DAL DAO
+
+    public void setVenditeAperte(boolean venditeAperte) {
+        this.venditeAperte = venditeAperte;
+    }
+
     public boolean getVenditeAperte() {
     	return venditeAperte;
     }
@@ -131,6 +136,16 @@ public class Evento {
      */
     public Biglietto aggiugiBiglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email){
         return BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
+    }
+    //Permette di aggiungere un biglietto al database tramite la logica di biglietto
+    public Biglietto aggiugiTicket(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
+        Biglietto biglietto = BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
+        boolean added = PersistenceFacade.getInstance().getBigliettoDAO().addBiglietto(biglietto);
+        if (added) {
+            return biglietto;
+        } else {
+            throw new RuntimeException("Failed to add the ticket to the database");
+        }
     }
     
     public String toString() {
