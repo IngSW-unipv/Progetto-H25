@@ -55,6 +55,7 @@ public class DBConnection {
 			
 			//APERTURA CONNESSIONE
 			conn = DriverManager.getConnection(dbURL, username, password);
+			System.out.println("Connessione riuscita!");
 			//System.out.println("Connessione al DB: "+dbURL);
 
 		}
@@ -84,8 +85,10 @@ public class DBConnection {
 		try {
 			conn.close();
 			conn = null;
+			System.out.println("Chiusura connessione riuscita!");
 		} 
 		catch (SQLException e) {
+			System.out.println("Errore nella chiusura della connessione!");
 			e.printStackTrace();
 			return null;
 		}
