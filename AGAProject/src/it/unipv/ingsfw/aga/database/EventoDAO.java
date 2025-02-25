@@ -256,7 +256,7 @@ public class EventoDAO implements IEventoDAO {
 		return result;
 	}
 	//Metodo che usa il Model per modificare lo stato delle vendite al DB (Ale)
-	public void modifcaStatoVendita(Evento evento) {
+	public void modificaStatoVendita(Evento evento) {
 		conn = DBConnection.startConnection(conn);
 		String query = "UPDATE EVENTO SET VENDITEAPERTE = ? WHERE DATA = ? AND LUOGO = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {

@@ -50,7 +50,7 @@ public class Organizzatore extends Persona{
     }
     public void setVenditeAperte(Evento evento, boolean stato) {
         evento.setVenditeAperte(stato);
-        PersistenceFacade.getInstance().getEventoDAO().modifcaStatoVendita(evento);
+        PersistenceFacade.getInstance().getEventoDAO().modificaStatoVendita(evento);
     }
 
     @Override
