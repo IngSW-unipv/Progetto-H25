@@ -1,5 +1,7 @@
 package it.unipv.ingsfw.aga.model.persone;
-
+/**
+ * Classe per la creazione di persone.
+ */
 public class PersonaFactory {
     public static Persona creaPersona(String tipo, String codiceFiscale, String nome, String cognome, String email, String password) {
         return switch (tipo.toLowerCase()) {

@@ -9,6 +9,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Classe che rappresenta un evento.
+ * Un evento è caratterizzato da una data, una location e un numero massimo di partecipanti.
+ * Un evento può essere creato solo se il numero massimo di partecipanti è minore di 10000.
+ */
 public class Evento {
     private final Date data;
     private String location;
@@ -114,6 +119,16 @@ public class Evento {
         }
     }
 
+    /**
+     * Metodo per aggiungere biglietti all'evento.
+     * @see it.unipv.ingsfw.aga.model.biglietto.BigliettoFactory
+     * @param creatoreBiglietto persona che crea il biglietto
+     * @param evento evento a cui si vuole aggiungere il biglietto
+     * @param nome nome del partecipante
+     * @param cognome cognome del partecipante
+     * @param email email del partecipante
+     * @return Biglietto
+     */
     public Biglietto aggiugiBiglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email){
         return BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
     }

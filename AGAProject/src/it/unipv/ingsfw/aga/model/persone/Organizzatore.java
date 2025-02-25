@@ -11,6 +11,11 @@ import it.unipv.ingsfw.aga.model.evento.EventoFactory;
 
 import java.text.ParseException;
 
+/**
+ * Classe che rappresenta un organizzatore.
+ * Estende la classe Persona.
+ * Si occupa di creare eventi e della loro gestione
+ */
 public class Organizzatore extends Persona{
     private String password;
 
