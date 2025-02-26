@@ -62,7 +62,7 @@ public class ListaInvitatiPage extends JPanel {
         // Costruisce la stringa da visualizzare
         StringBuilder s = new StringBuilder();
         for (Biglietto i : invitati) {
-            s.append(i.toString()).append("\n");
+            s.append(i.stampaBiglietto()).append("\n");
         }
         area.setText(s.toString());
 

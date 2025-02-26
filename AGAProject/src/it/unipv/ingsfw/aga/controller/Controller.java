@@ -176,8 +176,8 @@ public class Controller implements EventSelectionListener {
                 JOptionPane.showMessageDialog(null, "Login fallito!");
             }
         });
-
-
+        
+        
         // Listener per il bottone "AggiungiOrganizzatore" nella pagina di main
         mainPage.getAggiungiOrganizzatore().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

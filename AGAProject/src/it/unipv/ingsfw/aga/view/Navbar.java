@@ -50,7 +50,7 @@ public class Navbar extends JPanel {
         logoLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 20));
         add(logoLabel, BorderLayout.EAST);
 
-        // ActionListener per il pulsante "Home"
+     // ActionListener per il pulsante "Home"
         getHomeButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(containerPanel, "main");
