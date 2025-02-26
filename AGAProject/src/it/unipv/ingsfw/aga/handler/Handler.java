@@ -13,6 +13,14 @@ public class Handler {
 		
 	}
 	
+	/**REPORT DEI BIGLIETTI**
+	 * Mi permette di avere un file txt con tutti i biglietti di quell'evento.
+	 * 
+	 * @param evento: oggetto Evento.
+	 * @param biglietti: array di Biglietto.
+	 * @param dir: percorso dove salvare il file.
+	 * @return boolean: 'true' se l'operazione è andata a buon fine 'false' altrimenti.
+	 */
 	public boolean report(Evento evento, ArrayList<Biglietto> biglietti,String dir) {
 		boolean result=false;
 		try {
@@ -32,6 +40,14 @@ public class Handler {
 	}
 	
 	
+	/**	WRITE I BIGLIETTI**
+	 * Mi permette di scrivere nel file txt i biglietti.
+	 * 
+	 * @param evento: oggetto Evento.
+	 * @param biglietti: array di Biglietto.
+	 * @param myObj: percorso dove salvare il file.
+	 * @return boolean: 'true' se l'operazione è andata a buon fine 'false' altrimenti.
+	 */
 	public boolean write(Evento evento,File myObj,ArrayList<Biglietto> biglietti) {
 		boolean result=false;
 		try {

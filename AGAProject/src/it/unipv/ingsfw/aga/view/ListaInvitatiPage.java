@@ -85,6 +85,13 @@ public class ListaInvitatiPage extends JPanel {
     	return createFile;
     }
     
+    /**	CREA FILE**
+     * Mi permette di avere un file con tutti i biglietti di quell'evento.
+     * 
+     * @param evento: oggetto Evento.
+	 * @param biglietti: array di Biglietto.
+     * @return boolean: 'true' se l'operazione è andata a buon fine 'false' altrimenti.
+     */
     public boolean createFile(Evento evento, ArrayList<Biglietto> biglietti) {
     	chooser = new JFileChooser(); 
         chooser.setCurrentDirectory(new java.io.File("desktop"));
