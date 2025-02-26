@@ -122,7 +122,7 @@ public class Biglietto implements Stampabile {
     	return descrizioneGruccia;
     }
 
-    @Override
+    
     public String toString() {
         return "[Biglietto]\n" +
                 "Tipo: Standard\n" +

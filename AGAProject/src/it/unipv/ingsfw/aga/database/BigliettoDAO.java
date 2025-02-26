@@ -325,7 +325,7 @@ public class BigliettoDAO implements IBigliettoDAO {
 				while(rs1.next()) {
 					persona=new Persona(rs1.getString(3),null);
 					evento=new Evento(rs1.getDate(4));
-					b=new Biglietto(persona,rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(1),evento);
+					b=new Biglietto(persona,rs1.getString(1),rs1.getString(7),rs1.getString(8),rs1.getString(9),evento);
 					biglietti.add(b);
 				}
 				

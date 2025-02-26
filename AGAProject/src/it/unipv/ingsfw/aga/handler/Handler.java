@@ -9,14 +9,6 @@ import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 
 public class Handler {
 	
-	/*private Evento evento;//se riesco stampo le cose dell'evento
-	private ArrayList<Biglietto> biglietti;//lista biglietti
-	
-	public Handler(Evento evento, ArrayList<Biglietto> biglietti) {
-		this.evento=evento;
-		this.biglietti=biglietti;
-	}
-	*/
 	public Handler(){
 		
 	}
@@ -46,7 +38,7 @@ public class Handler {
 		      FileWriter myWriter = new FileWriter(myObj);
 		      myWriter.write(evento.toString()+"\n\n\n");
 		      for (Biglietto i : biglietti) {
-		    	  myWriter.write(i.toString()+"\n\n");
+		    	  myWriter.write(i.stampaBiglietto()+"\n\n");
 		        }
 		      myWriter.close();
 		      System.out.println("Successfully wrote to the file.");

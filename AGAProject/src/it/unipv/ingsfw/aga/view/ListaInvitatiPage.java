@@ -88,15 +88,12 @@ public class ListaInvitatiPage extends JPanel {
     public boolean createFile(Evento evento, ArrayList<Biglietto> biglietti) {
     	chooser = new JFileChooser(); 
         chooser.setCurrentDirectory(new java.io.File("desktop"));
-        chooser.setDialogTitle("titolo");
+        chooser.setDialogTitle("Seleziona Cartella");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         handler=new Handler();
         boolean result=false;
-        //
-        // disable the "All files" option.
-        //
         chooser.setAcceptAllFileFilterUsed(false);
-        //    
+           
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
         	System.out.println("getCurrentDirectory(): "+  chooser.getCurrentDirectory());
         	System.out.println("getSelectedFile() : "+  chooser.getSelectedFile());
