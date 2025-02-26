@@ -10,7 +10,7 @@
 \usepackage{fancyhdr}
 \geometry{a4paper, margin=1.5in}
 
-
+% Definizione di colori personalizzati
 \definecolor{titlecolor}{RGB}{13, 82, 149}  % Blu scuro
 \definecolor{sectioncolor}{RGB}{28, 69, 136} % Blu scuro pi\`u chiaro 
 \definecolor{textcolor}{RGB}{0, 0, 0}    % Grigio scuro
@@ -18,20 +18,21 @@
 
 \setstretch{1.5}
 
-
+% Impostazione della dimensione del font
 \renewcommand{\normalsize}{\fontsize{13pt}{16pt}\selectfont}
 \renewcommand{\large}{\fontsize{15pt}{18pt}\selectfont}
 \renewcommand{\Large}{\fontsize{17pt}{20pt}\selectfont}
 \renewcommand{\LARGE}{\fontsize{20pt}{24pt}\selectfont}
 \renewcommand{\Huge}{\fontsize{24pt}{28pt}\selectfont}
 
-
+% Personalizzazione dell'intestazione
 \pagestyle{fancy}
-\fancyhf{} 
-\fancyhead[L]{} 
-\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} 
-\fancyfoot[R]{\thepage} 
+\fancyhf{} % Cancella intestazioni e pi\`e di pagina predefiniti
+\fancyhead[L]{} % Lascia vuota la parte sinistra dell'intestazione
+\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} % Logo in alto a destra
+\fancyfoot[R]{\thepage} % Aggiunge il numero di pagina al centro del pi\`e di pagina
 
+% Personalizzazione dello stile del titolo e delle sezioni
 \title{\textcolor{titlecolor}{\Huge Casi d'Uso - AGA \\ \text{Formato Dettagliato}}}
 \author{}
 \date{}
@@ -71,29 +72,30 @@
 \textbf{Requisiti speciali:} Il sistema deve garantire un'interfaccia user-friendly per l'inserimento dei dati.
 }
 
-\section*{\textcolor{sectioncolor}{Caso d'Uso 2: Aggiunta Staff}}
+\section*{\textcolor{sectioncolor}{Caso d'Uso 2: Aggiunta biglietti}}
 \textcolor{textcolor}{
-\textbf{Nome:} Aggiunta Staff\\
+\textbf{Nome:} Aggiunta biglietti\\
 \textbf{Portata:} Sistema di gestione eventi\\
 \textbf{Livello:} Obiettivo utente\\
-\textbf{Attore primario:} Organizzatore\\
+\textbf{Attore primario:} Organizzatore, staff\\
 \textbf{Parti interessate:} Organizzatore, Staff\\
 \textbf{Precondizioni:} Deve esistere un evento attivo.\\
-\textbf{Garanzia di successo:} Lo staff è aggiunto correttamente al database associato all'evento.\\
+\textbf{Garanzia di successo:} I biglietti sono stati aggiunti al database associato all'evento.\\
 \textbf{Scenario principale di successo:}
 \begin{enumerate}
     \item L'organizzatore seleziona un evento attivo.
-    \item Accede alla sezione "Aggiungi staff".
-    \item Inserisce i dati richiesti per ogni staff (nome, cognome,email...).
+    \item Accede alla sezione "Aggiungi Biglietto".
+    \item Inserisce i dati richiesti per ogni biglietto (nome, cognome).
     \item Conferma l'operazione.
-    \item Il sistema lo salva nel database.
+    \item Il sistema genera un codice identificativo univoco per ciascun biglietto e lo salva nel database.
 \end{enumerate}
 \textbf{Estensioni:}
 \begin{itemize}
     \item Se i dati sono incompleti, il sistema mostra un messaggio d'errore.
+    \item Se le vendite per l'evento sono chiuse, il sistema blocca l'operazione.
 \end{itemize}
+\textbf{Requisiti speciali:} Ogni biglietto deve avere un QR code generato automaticamente e univoco.
 }
-
 
 \section*{\textcolor{sectioncolor}{Caso d'Uso 3: Apertura/chiusura vendite biglietti}}
 \textcolor{textcolor}{
@@ -117,53 +119,8 @@
 \end{itemize}
 \textbf{Requisiti speciali:} Il sistema deve chiudere automaticamente le vendite due settimane prima della data dell'evento.
 }
-\section*{\textcolor{sectioncolor}{Caso d'Uso 4: Aggiunta biglietti}}
-\textcolor{textcolor}{
-\textbf{Nome:} Aggiunta biglietti\\
-\textbf{Portata:} Sistema di gestione eventi\\
-\textbf{Livello:} Obiettivo utente\\
-\textbf{Attore primario:} Organizzatore, staff\\
-\textbf{Parti interessate:} Organizzatore, Staff\\
-\textbf{Precondizioni:} Deve esistere un evento attivo.\\
-\textbf{Garanzia di successo:} I biglietti sono stati aggiunti al database associato all'evento.\\
-\textbf{Scenario principale di successo:}
-\begin{enumerate}
-    \item L'organizzatore seleziona un evento attivo.
-    \item Accede alla sezione "Aggiungi Biglietto".
-    \item Inserisce i dati richiesti per ogni biglietto (nome, cognome).
-    \item Conferma l'operazione.
-    \item Il sistema genera un codice identificativo univoco per ciascun biglietto e lo salva nel database.
-\end{enumerate}
-\textbf{Estensioni:}
-\begin{itemize}
-    \item Se i dati sono incompleti, il sistema mostra un messaggio d'errore.
-    \item Se le vendite per l'evento sono chiuse, il sistema blocca l'operazione.
-\end{itemize}
-\textbf{Requisiti speciali:} Ogni biglietto deve avere un QR code generato automaticamente e univoco.
 
-
-\section*{\textcolor{sectioncolor}{Caso d'Uso 4: Acquisto biglietto}}
-\textcolor{textcolor}{
-\textbf{Nome:} Acquisto biglietto\\
-\textbf{Portata:} Sistema di gestione eventi\\
-\textbf{Livello:} Obiettivo utente\\
-\textbf{Attore primario:} Cliente\\
-\textbf{Parti interessate:} Cliente, Organizzatore\\
-\textbf{Precondizioni:} Le vendite per l'evento devono essere aperte.\\
-\textbf{Garanzia di successo:} Il cliente riceve un biglietto valido con QR code associato.\\
-\textbf{Scenario principale di successo:}
-\begin{enumerate}
-    \item Il sistema verifica il pagamento, genera il QR code e lo invia al cliente via email.
-\end{enumerate}
-\textbf{Estensioni:}
-\begin{itemize}
-    \item  Se il pagamento fallisce, il sistema annulla l'operazione e avvisa il cliente.
-    \item  L'organizzatore può aggiungere, modificare ed eliminare un biglietto.
-\end{itemize}
-\textbf{Requisiti speciali:} Il sistema deve garantire pagamenti sicuri e generare QR code unici per ogni biglietto.
-}
-
-\section*{\textcolor{sectioncolor}{Caso d'Uso 5: Verifica accesso evento}}
+\section*{\textcolor{sectioncolor}{Caso d'Uso 4: Verifica accesso evento}}
 \textcolor{textcolor}{
 \textbf{Nome:} Verifica accesso evento\\
 \textbf{Portata:} Sistema di gestione eventi\\
@@ -188,10 +145,10 @@
 \begin{itemize}
     \item Se il QR code non è valido (già utilizzato o inesistente), il sistema notifica l'errore.
 \end{itemize}
-\textbf{Requisiti speciali:} La verifica deve essere completata in meno di 2 secondi per gestire un alto volume di ingressi.
+\textbf{Requisiti speciali:} La verifica deve essere completata in breve tempo per gestire un alto volume di ingressi.
 }
 
-\section*{\textcolor{sectioncolor}{Caso d'Uso 6: Gestione guardaroba}}
+\section*{\textcolor{sectioncolor}{Caso d'Uso 5: Gestione guardaroba}}
 \textcolor{textcolor}{
 \textbf{Nome:} Gestione guardaroba\\
 \textbf{Portata:} Sistema di gestione guardaroba\\
@@ -220,7 +177,7 @@
 \textbf{Requisiti speciali:} L'assegnazione del numero di gruppo deve essere unica e incrementale.
 }
 
-\section*{\textcolor{sectioncolor}{Caso d'Uso 7: Monitoraggio scorte}}
+\section*{\textcolor{sectioncolor}{Caso d'Uso 6: Monitoraggio scorte}}
 \textcolor{textcolor}{
 \textbf{Nome:} Monitoraggio scorte\\
 \textbf{Portata:} Sistema di gestione scorte\\
@@ -246,7 +203,7 @@
 \textbf{Requisiti speciali:} Il monitoraggio deve essere in tempo reale per fornire dati aggiornati.
 }
 
-\section*{\textcolor{sectioncolor}{Caso d'Uso 8: Visualizzazione timeline servizio}}
+\section*{\textcolor{sectioncolor}{Caso d'Uso 7: Visualizzazione timeline servizio}}
 \textcolor{textcolor}{
 \textbf{Nome:} Visualizzazione timeline servizio\\
 \textbf{Portata:} Sistema di gestione eventi\\

@@ -11,7 +11,7 @@
 \geometry{a4paper, margin=1.5in}
 
 
-
+% Definizione di colori personalizzati
 \definecolor{titlecolor}{RGB}{13, 82, 149}  % Blu scuro
 \definecolor{sectioncolor}{RGB}{28, 69, 136} % Blu scuro più chiaro 
 \definecolor{textcolor}{RGB}{0, 0, 0}    
@@ -25,13 +25,14 @@
 
 \setstretch{1.5}
 
+% Personalizzazione dell'intestazione
 \pagestyle{fancy}
-\fancyhf{} 
-\fancyhead[L]{} 
-\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} 
-\fancyfoot[R]{\thepage}
+\fancyhf{} % Cancella intestazioni e piè di pagina predefiniti
+\fancyhead[L]{} % Lascia vuota la parte sinistra dell'intestazione
+\fancyhead[R]{\includegraphics[width=1cm]{LogoAGA.jpeg}} % Logo in alto a destra
+\fancyfoot[R]{\thepage} % Aggiunge il numero di pagina al centro del piè di pagina
 
-
+% Personalizzazione dello stile del titolo e delle sezioni
 \title{\textcolor{titlecolor}{\Huge Casi d'Uso - AGA \\ \text{Formato Breve}}}
 \author{}
 \date{}
@@ -43,7 +44,7 @@
 \section*{\textcolor{sectioncolor}{Introduzione}}
 \textcolor{textcolor}{
 
-Casi d’uso per un sistema di gestione eventi pensato per semplificare e automatizzare i processi legati all'organizzazione, all'assegnazione dei biglietti, alla gestione degli accessi e dei servizi durante l'evento. \\ Il sistema è destinato agli organizzatori, al personale operativo e ai clienti.
+Casi d’uso per un sistema di gestione eventi pensato per semplificare e automatizzare i processi legati all'organizzazione, all'assegnazione dei biglietti, alla gestione degli accessi e dei servizi durante l'evento. \\ Il sistema è destinato agli organizzatori e al personale operativo.
 I casi d'uso descrivono le interazioni principali tra gli utenti e il sistema, includendo la creazione dell'evento, la gestione dei biglietti, l'acquisto, la verifica degli accessi, la gestione delle scorte e la visualizzazione della timeline dei servizi.
 
 }
@@ -55,7 +56,7 @@ Un organizzatore accede al sistema e seleziona l'opzione per creare un nuovo eve
 
 \section{\textcolor{sectioncolor}{Aggiunta Biglietti}}
 \textcolor{textcolor}{
-Un organizzatore seleziona un evento attivo nel sistema e accede alla sezione di gestione dei biglietti. Inserisce i dettagli richiesti per ogni biglietto, come nome, cognome. Una volta confermati i dati, il sistema verifica che le vendite per l’evento siano aperte. Se tutto è corretto, genera un codice identificativo univoco per ciascun biglietto e salva le informazioni nel database. In caso di eventi con vendite chiuse, il sistema impedisce l’operazione e informa l’organizzatore. \textbf{è invia mail??}
+Un organizzatore seleziona un evento attivo nel sistema e accede alla sezione di gestione dei biglietti. Inserisce i dettagli richiesti per ogni biglietto, come nome, cognome. Una volta confermati i dati, il sistema verifica che le vendite per l’evento siano aperte. Se tutto è corretto, genera un codice identificativo univoco per ciascun biglietto e salva le informazioni nel database. In caso di eventi con vendite chiuse, il sistema impedisce l’operazione e informa l’organizzatore. 
 }
 
 \section{\textcolor{sectioncolor}{Apertura/Chiusura Vendite Biglietti}}
@@ -63,10 +64,6 @@ Un organizzatore seleziona un evento attivo nel sistema e accede alla sezione di
 Un organizzatore seleziona un evento attivo e accede alla sezione dedicata alla gestione delle vendite. Modifica lo stato delle vendite, scegliendo tra aperto o chiuso. Il sistema aggiorna il database con il nuovo stato e, se necessario, invia notifiche agli utenti interessati. Se i dati dell’evento sono incompleti, il sistema segnala un errore. Il sistema chiude automaticamente le vendite due settimane prima della data dell’evento.
 }
 
-\section{\textcolor{sectioncolor}{Acquisto Biglietti}}
-\textcolor{textcolor}{
-Un cliente accede alla piattaforma, seleziona un evento con vendite aperte e specifica il numero di biglietti desiderati. Inserisce i dati personali e procede al pagamento. Il sistema verifica il pagamento, genera un biglietto unico con QR code e lo invia via email al cliente. Se il pagamento non va a buon fine, l’operazione viene annullata. L’organizzatore, se necessario, può intervenire per aggiungere, modificare o eliminare un biglietto.
-}
 
 \section{\textcolor{sectioncolor}{Verifica Accesso Evento}}
 \textcolor{textcolor}{
@@ -75,7 +72,7 @@ Lo staff all'ingresso scansiona il QR code del cliente utilizzando il sistema. I
 
 \section{\textcolor{sectioncolor}{Gestione Guardaroba}}
 \textcolor{textcolor}{
-Lo staff del guardaroba scansiona il QR code del cliente tramite il sistema. Il sistema verifica la validità del codice e che non gli sia già assegnata alcuna gruccia. Se valido, assegna un numero unico, lo registra nel database e lo mostra allo staff. Se il QR code è invalido, il sistema invia un messaggio di errore allo staff. La generazione del numero deve seguire un ordine incrementale.
+Lo staff del guardaroba scansiona il QR code del cliente tramite il sistema. Il sistema verifica la validità del codice e che non gli sia già assegnata alcuna gruccia. Se valido, assegna un numero unico, lo registra nel database e lo mostra allo staff. Se il QR code è invalido, il sistema invia un messaggio di errore allo staff. La generazione del numero deve seguire un ordine incrementale basata sulle grucce già assegnate.
 }
 
 \section{\textcolor{sectioncolor}{Monitoraggio Scorte}}
