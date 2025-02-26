@@ -16,7 +16,7 @@ import java.util.Date;
  * Un evento è caratterizzato da una data, una location e un numero massimo di partecipanti.
  * Un evento può essere creato solo se il numero massimo di partecipanti è minore di 10000.
  */
-public class Evento {
+public class Evento implements Organizzabile{
     private final Date data;
     private String location;
     private int maxPartecipanti;
