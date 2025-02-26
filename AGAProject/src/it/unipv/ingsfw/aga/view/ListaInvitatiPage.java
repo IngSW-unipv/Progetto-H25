@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
+import it.unipv.ingsfw.aga.handler.*;
 
 /**
  * Classe che rappresenta la pagina per la visualizzazione della lista degli invitati.
@@ -14,6 +15,9 @@ public class ListaInvitatiPage extends JPanel {
     private JPanel guestsPanel;
     private Navbar navbar;
     private JTextArea area;
+    private Handler handler;
+    private JButton createFile;
+    
 
     /**
      * @param cardLayout     il CardLayout utilizzato per il cambio delle pagine
@@ -29,6 +33,7 @@ public class ListaInvitatiPage extends JPanel {
         // Pannello principale contenente il titolo e il pannello scorrevole degli invitati
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
+        panel.setLayout(new GridLayout(3, 20));//ALBY MODIFICA TUUUU
 
         // Titolo della pagina
         JLabel titleLabel = new JLabel("Lista invitati");
@@ -41,6 +46,9 @@ public class ListaInvitatiPage extends JPanel {
         guestsPanel.setLayout(new BoxLayout(guestsPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(guestsPanel);
         panel.add(scrollPane, BorderLayout.CENTER);
+        
+        createFile=new JButton("Crea file");
+        panel.add(createFile);
 
         add(panel, BorderLayout.CENTER);
     }
@@ -69,5 +77,9 @@ public class ListaInvitatiPage extends JPanel {
         // Aggiorna il pannello per riflettere i cambiamenti
         guestsPanel.revalidate();
         guestsPanel.repaint();
+    }
+    
+    public void createFile(ArrayList<Biglietto> invitati) {
+    	
     }
 }
