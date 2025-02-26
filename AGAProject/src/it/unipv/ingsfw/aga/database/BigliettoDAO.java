@@ -1,6 +1,5 @@
 	package it.unipv.ingsfw.aga.database;
 
-import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.*;
@@ -24,25 +23,7 @@ public class BigliettoDAO implements IBigliettoDAO {
     public BigliettoDAO() {
         super();
     }
-
-    /*private static final String INSERISCI_BIGLIETTO_SQL =
-            "INSERT INTO biglietti (nome, cognome, email, numBiglietto, dataEvento)) VALUES (?, ?, ?, ?, ?)";
-
-    @Override
-    public void aggiungiBiglietto(Biglietto biglietto) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(INSERISCI_BIGLIETTO_SQL)) {
-
-            stmt.setString(1, biglietto.getEmail());
-            stmt.setString(2, biglietto.getNome());
-            stmt.setString(3, biglietto.getCognome());
-            stmt.setString(4, String.valueOf(biglietto.getDataEvento()));
-            stmt.setString(5, biglietto.getQRCodeId());
-
-            stmt.executeUpdate();
-        }
-    }*/
-    
-    
+   
     //TROVA CREATORE DAL BIGLIETTO
     public Persona getCreatoreBiglietto(Biglietto biglietto) {
     	
@@ -213,9 +194,9 @@ public class BigliettoDAO implements IBigliettoDAO {
 		Statement st1;
 		ResultSet rs1;
 		int b=2;//nel db boolean =1 o 0
-		//B=0 NON EFFETTUATO
-		//B=1 EFFETTUATO
-		//B=2 ERRORE
+		//b=0 NON EFFETTUATO
+		//b=1 EFFETTUATO
+		//b=2 ERRORE
 		
 		try{
 			st1 = conn.createStatement();
@@ -344,7 +325,7 @@ public class BigliettoDAO implements IBigliettoDAO {
 				while(rs1.next()) {
 					persona=new Persona(rs1.getString(3),null);
 					evento=new Evento(rs1.getDate(4));
-					b=new Biglietto(persona,rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(1),evento);
+					b=new Biglietto(persona,rs1.getString(1),rs1.getString(7),rs1.getString(8),rs1.getString(9),evento);
 					biglietti.add(b);
 				}
 				
@@ -353,9 +334,33 @@ public class BigliettoDAO implements IBigliettoDAO {
 			}
 			DBConnection.closeConnection(conn);			
 			return biglietti;
+	}
+	//Metodo per aggiungere un biglietto al database tramite il Model (Ale)
+	public boolean addBiglietto(Biglietto biglietto) {
+		conn = DBConnection.startConnection(conn);
+		boolean result = false;
+		String query = "INSERT INTO BIGLIETTO (ID, STATO, CF_PERSONA, DATA_EVENTO, GRUCCIA, DESCRIZIONEGRUCCIA, NOME, COGNOME, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try (PreparedStatement stmt = conn.prepareStatement(query)) {
+			stmt.setString(1, biglietto.getQRCodeId());
+			stmt.setBoolean(2, biglietto.getAccessoEffettuato());
+			stmt.setString(3, biglietto.getCodiceFiscaleCreatore());
+			stmt.setDate(4, new java.sql.Date(biglietto.getDataEvento().getTime()));
+			stmt.setInt(5, biglietto.getNumeroGruccia());
+			stmt.setString(6, biglietto.getDescrizioneGruccia());
+			stmt.setString(7, biglietto.getNome());
+			stmt.setString(8, biglietto.getCognome());
+			stmt.setString(9, biglietto.getEmail());
+			stmt.executeUpdate();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection(conn);
 		}
-	 
-    
+		return result;
+	}
+
     public static void main(String []args) throws ParseException {
 		BigliettoDAO b=new BigliettoDAO();
 		Persona a;

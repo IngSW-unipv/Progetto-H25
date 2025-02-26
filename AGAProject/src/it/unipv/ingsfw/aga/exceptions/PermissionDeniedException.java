@@ -1,5 +1,8 @@
 package it.unipv.ingsfw.aga.exceptions;
 
+/**
+ * Eccezione lanciata quando un utente non dispone delle autorizzazioni necessarie per eseguire un'operazione.
+ */
 public class PermissionDeniedException extends RuntimeException {
 
     public PermissionDeniedException() {

@@ -1,5 +1,7 @@
 package it.unipv.ingsfw.aga.exceptions;
-
+/**
+ * Eccezione lanciata in caso di errore di autenticazione.
+ */
 public class AuthenticationException extends RuntimeException {
 
   public AuthenticationException() {

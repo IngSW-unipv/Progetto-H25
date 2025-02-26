@@ -1,5 +1,7 @@
 package it.unipv.ingsfw.aga.model.biglietto;
-
+/**
+ * Decoratore per personalizzare la stampa del biglietto.
+ */
 public abstract class BigliettoDecorator implements Stampabile {
     protected Stampabile biglietto;
     public BigliettoDecorator(Stampabile biglietto) {

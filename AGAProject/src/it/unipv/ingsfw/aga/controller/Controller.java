@@ -6,6 +6,7 @@ import it.unipv.ingsfw.aga.model.banco.*;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Persona;
+import it.unipv.ingsfw.aga.handler.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -176,8 +177,8 @@ public class Controller implements EventSelectionListener {
                 JOptionPane.showMessageDialog(null, "Login fallito!");
             }
         });
-
-
+        
+        
         // Listener per il bottone "AggiungiOrganizzatore" nella pagina di main
         mainPage.getAggiungiOrganizzatore().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -225,15 +226,21 @@ public class Controller implements EventSelectionListener {
                 String name = addGuestPage.getGuestName();
                 String email = addGuestPage.getGuestEmail();
                 String surname = addGuestPage.getGuestSurname();
-                int result = persistence.aggiungiInvitato(persona, evento, name, surname, email);
-                if (result == 1)
-                    JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
-                else if (result == -1)
-                    JOptionPane.showMessageDialog(null, "E' stata raggiunta la massima capacita' dell'evento");
-                else if (result == 0)
-                    JOptionPane.showMessageDialog(null, "Hai raggiunto il massimo degli inviti");
-                else
-                    JOptionPane.showMessageDialog(null, "Errore nell'inserimento dei dati");
+                int resultData = persistence.searchEventoByData(evento.getData());
+                int result;
+                if(resultData!=1) 
+                	JOptionPane.showMessageDialog(null, "Errore: vendite chiuse");
+                else {
+                	result = persistence.aggiungiInvitato(persona, evento, name, surname, email);
+	                if (result == 1)
+	                    JOptionPane.showMessageDialog(null, "Invitato aggiunto con successo!");
+	                else if (result == -1)
+	                    JOptionPane.showMessageDialog(null, "E' stata raggiunta la massima capacita' dell'evento");
+	                else if (result == 0)
+	                    JOptionPane.showMessageDialog(null, "Hai raggiunto il massimo degli inviti");
+	                else
+	                    JOptionPane.showMessageDialog(null, "Errore nell'inserimento dei dati");
+	                }
             }
         });
 
@@ -356,7 +363,20 @@ public class Controller implements EventSelectionListener {
                 cardLayout.show(containerPanel, "main");
             }
         });
+        
+        //action listener per il bottono "crea file" in ListaInvitati        
+        listaInvitatiPage.getSubmitButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Evento eventoTotale;
+            	eventoTotale=new Evento(persistence.getEventoByData(evento));
+            	ArrayList<Biglietto> invitati;
+                invitati = persistence.getInvitati(evento);
+            	boolean result=listaInvitatiPage.createFile(eventoTotale,invitati);
+            	if(result)JOptionPane.showMessageDialog(null, "File creato");
+            	else JOptionPane.showMessageDialog(null, "Errore nella creazione del file");
+            }});
     }
+    
 
     /**
      * Carica gli eventi dal database e aggiunge un pulsante per ciascun evento nella pagina degli eventi.

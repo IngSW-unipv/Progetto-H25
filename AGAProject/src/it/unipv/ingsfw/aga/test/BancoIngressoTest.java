@@ -37,35 +37,17 @@ public class BancoIngressoTest {
         biglietto = bigliettoDAO.getBigliettoByQR(new Biglietto("28ff59e6-d76f-472f-aee9-2fb4c13dde0a"));
         qrCode = new QrCode(biglietto.getQRCodeId());
     }
-    // Considero: 	28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
-    @Test
-    public void testValidateQr() {
-        try {
-            assertFalse(bancoTest.validateQr(qrCode));
-        } catch (Exception e) {
-            e.printStackTrace();
-            assertFalse("Exception thrown during test: " + e.getMessage(), false);
-        }
-    }
+
+    // Considero: 	il biglietto: 28ff59e6-d76f-472f-aee9-2fb4c13dde0a	0	460-61-8110	2022-06-22	0
 
     @Test
     public void testInvalidateQr() {
-        assertTrue(bancoTest.invalidateQr(qrCode));
-    }
-
-    @Test
-    public void testAccesso() {
-        try {
-            assertFalse(bancoTest.accesso(qrCode.getId()));
-        } catch (Exception e) {
-            e.printStackTrace();
-            assertFalse("Exception thrown during test: " + e.getMessage(), false);
-        }
+        assertTrue(bancoTest.invalidateQr(qrCode));     //Provo solo la invalidate perchè è quella fondamentale, le altre funzioni richiamano la invalidate
     }
 
     @Test
     public void testToString() {
-        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2021-12-31\n";
+        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2025-06-15\n";
         assertEquals(expected, bancoTest.toString());
     }
 

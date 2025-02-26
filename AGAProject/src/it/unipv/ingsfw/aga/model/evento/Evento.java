@@ -3,15 +3,19 @@ package it.unipv.ingsfw.aga.model.evento;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.biglietto.BigliettoFactory;
+import it.unipv.ingsfw.aga.model.biglietto.Stampabile;
 import it.unipv.ingsfw.aga.model.persone.*;
-import it.unipv.ingsfw.aga.model.persone.PersonaFactory;
-import it.unipv.ingsfw.aga.database.EventoDAO;
+import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
+/**
+ * Classe che rappresenta un evento.
+ * Un evento è caratterizzato da una data, una location e un numero massimo di partecipanti.
+ * Un evento può essere creato solo se il numero massimo di partecipanti è minore di 10000.
+ */
 public class Evento {
     private final Date data;
     private String location;
@@ -24,7 +28,7 @@ public class Evento {
     	this.location = location;
         if (maxPartecipanti < 0) {
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
-        } else if (maxPartecipanti > 1500) {
+        } else if (maxPartecipanti > 10000) {
             throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + data + " è stato superato");
         } else {
             this.maxPartecipanti = maxPartecipanti;
@@ -32,7 +36,6 @@ public class Evento {
         this.venditeAperte = false;
     }
 
-    //Serve per la persistenza(?) SORRY SE HO FATTO CASINO :'(
     public Evento(Date data, String location, int capacita){
         this.data = data;
 		this.location = location;
@@ -102,8 +105,11 @@ public class Evento {
     public int getMaxPartecipanti() {
         return maxPartecipanti;
     }
-    
-    //DAL DAO
+
+    public void setVenditeAperte(boolean venditeAperte) {
+        this.venditeAperte = venditeAperte;
+    }
+
     public boolean getVenditeAperte() {
     	return venditeAperte;
     }
@@ -111,15 +117,35 @@ public class Evento {
     public void setMaxPartecipanti(int maxPartecipanti) throws MaxExeededException {
         if (maxPartecipanti < 0) {
             throw new IllegalArgumentException("Il numero massimo di partecipanti non può essere negativo");
-        } else if (maxPartecipanti > 1500) {
+        } else if (maxPartecipanti > 10000) {
             throw new MaxExeededException("Il numero massimo di partecipanti per l'evento in data " + this.getData() + " è stato superato");
         } else {
             this.maxPartecipanti = maxPartecipanti;
         }
     }
 
+    /**
+     * Metodo per aggiungere biglietti all'evento.
+     * @see it.unipv.ingsfw.aga.model.biglietto.BigliettoFactory
+     * @param creatoreBiglietto persona che crea il biglietto
+     * @param evento evento a cui si vuole aggiungere il biglietto
+     * @param nome nome del partecipante
+     * @param cognome cognome del partecipante
+     * @param email email del partecipante
+     * @return Biglietto
+     */
     public Biglietto aggiugiBiglietto(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email){
         return BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
+    }
+    //Permette di aggiungere un biglietto al database tramite la logica di biglietto
+    public Biglietto aggiungiTicket(Persona creatoreBiglietto, Evento evento, String nome, String cognome, String email) {
+        Biglietto biglietto = BigliettoFactory.creaBiglietto(creatoreBiglietto, evento, nome, cognome, email);
+        boolean added = PersistenceFacade.getInstance().getBigliettoDAO().addBiglietto(biglietto);
+        if (added) {
+            return biglietto;
+        } else {
+            throw new RuntimeException("Failed to add the ticket to the database");
+        }
     }
     
     public String toString() {

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
+import it.unipv.ingsfw.aga.model.evento.Evento;
+import it.unipv.ingsfw.aga.handler.*;
 
 /**
  * Classe che rappresenta la pagina per la visualizzazione della lista degli invitati.
@@ -14,6 +16,10 @@ public class ListaInvitatiPage extends JPanel {
     private JPanel guestsPanel;
     private Navbar navbar;
     private JTextArea area;
+    private Handler handler;
+    private JButton createFile;
+    private JFileChooser chooser;
+    
 
     /**
      * @param cardLayout     il CardLayout utilizzato per il cambio delle pagine
@@ -29,6 +35,7 @@ public class ListaInvitatiPage extends JPanel {
         // Pannello principale contenente il titolo e il pannello scorrevole degli invitati
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
+        panel.setLayout(new GridLayout(3, 20));//ALBY MODIFICA TUUUU
 
         // Titolo della pagina
         JLabel titleLabel = new JLabel("Lista invitati");
@@ -41,6 +48,9 @@ public class ListaInvitatiPage extends JPanel {
         guestsPanel.setLayout(new BoxLayout(guestsPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(guestsPanel);
         panel.add(scrollPane, BorderLayout.CENTER);
+        
+        createFile=new JButton("Crea file");
+        panel.add(createFile);
 
         add(panel, BorderLayout.CENTER);
     }
@@ -62,12 +72,44 @@ public class ListaInvitatiPage extends JPanel {
         // Costruisce la stringa da visualizzare
         StringBuilder s = new StringBuilder();
         for (Biglietto i : invitati) {
-            s.append(i.toString()).append("\n");
+            s.append(i.stampaBiglietto()).append("\n");
         }
         area.setText(s.toString());
 
         // Aggiorna il pannello per riflettere i cambiamenti
         guestsPanel.revalidate();
         guestsPanel.repaint();
+    }
+    
+    public JButton getSubmitButton() {
+    	return createFile;
+    }
+    
+    /**	CREA FILE**
+     * Mi permette di avere un file con tutti i biglietti di quell'evento.
+     * 
+     * @param evento: oggetto Evento.
+	 * @param biglietti: array di Biglietto.
+     * @return boolean: 'true' se l'operazione è andata a buon fine 'false' altrimenti.
+     */
+    public boolean createFile(Evento evento, ArrayList<Biglietto> biglietti) {
+    	chooser = new JFileChooser(); 
+        chooser.setCurrentDirectory(new java.io.File("desktop"));
+        chooser.setDialogTitle("Seleziona Cartella");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        handler=new Handler();
+        boolean result=false;
+        chooser.setAcceptAllFileFilterUsed(false);
+           
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
+        	System.out.println("getCurrentDirectory(): "+  chooser.getCurrentDirectory());
+        	System.out.println("getSelectedFile() : "+  chooser.getSelectedFile());
+        	String dir= ""+chooser.getSelectedFile();
+        	result =handler.report(evento,biglietti,dir);
+          }
+        else {
+          System.out.println("No Selection ");
+          }
+        return result;
     }
 }

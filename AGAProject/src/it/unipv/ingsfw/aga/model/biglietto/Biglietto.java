@@ -5,7 +5,11 @@ import it.unipv.ingsfw.aga.model.persone.Persona;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 
 import java.util.Date;
-
+/**
+ * Classe che rappresenta un biglietto.
+ * Implementa l'interfaccia Stampabile.
+ * @see Stampabile
+ */
 public class Biglietto implements Stampabile {
     private final Persona creatoreBiglietto;
     private final Evento evento;
@@ -118,7 +122,7 @@ public class Biglietto implements Stampabile {
     	return descrizioneGruccia;
     }
 
-    @Override
+    
     public String toString() {
         return "[Biglietto]\n" +
                 "Tipo: Standard\n" +

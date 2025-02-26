@@ -19,8 +19,6 @@ import java.text.ParseException;
 import static org.junit.Assert.assertEquals;
 
 public class BancoGuardarobaTest {
-
-
     private BancoGuardaroba bancoTest;
     private Evento eventoTest;
     private QrCode qrCode;
@@ -31,20 +29,14 @@ public class BancoGuardarobaTest {
 
     @Before
     public void setUp() throws MaxExeededException, ParseException {
-        eventoTest = new Evento("2021-12-31", "MEDA", 1000);
-        bancoTest = new BancoGuardaroba(1, eventoTest);
+        eventoTest = new Evento("1998-07-13", "pavia", 150);
+        bancoTest = new BancoGuardaroba(1, 20, eventoTest);
         persistenceFacadeTest = PersistenceFacade.getInstance();
         connection = DBConnection.startConnection(connection); // Apertura connessione inizio test
         bigliettoDAO = new BigliettoDAO();
-        biglietto = bigliettoDAO.getBigliettoByQR(new Biglietto("28ff59e6-d76f-472f-aee9-2fb4c13dde0a"));
+        biglietto = bigliettoDAO.getBigliettoByQR(new Biglietto("236d90de-b4df-420a-8a0c-270aaace7640"));
         qrCode = new QrCode(biglietto.getQRCodeId());
     }
-/*
-    @Test
-    public void getMaxGrucceReturnsCorrectValue() {
-        assertEquals(1000, bancoTest.getMaxGrucce());//lo prendo dal db
-    }
- */
 
     @Test
     public void modificaNumeroGrucce() {
@@ -62,6 +54,25 @@ public class BancoGuardarobaTest {
         bancoTest.setGrucceAssegnate(300);
         assertEquals(300, bancoTest.getGrucceAssegnate());
     }
+
+    @Test
+    public void updateMaxGrucceDaDB(){
+        bancoTest.updateMaxGrucce(eventoTest);
+        assertEquals(300, bancoTest.getMaxGrucce());
+    }
+    @Test
+    public void updateGrucceAssegnateDaDB(){
+        bancoTest.updateGrucceAssegnate(eventoTest);
+        assertEquals(8, bancoTest.getGrucceAssegnate());
+    }
+
+    @Test
+    public void consegnaCapoTest(){
+        bancoTest.consegnaCapo(biglietto.getQRCodeId());
+        assertEquals(0, bancoTest.getGrucceAssegnate());
+    }
+
+
     @After
     public void tearDown() {
         connection = DBConnection.closeConnection(connection); // Chiusura connessione fine test
