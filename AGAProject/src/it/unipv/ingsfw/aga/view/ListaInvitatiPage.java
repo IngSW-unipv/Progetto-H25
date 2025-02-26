@@ -16,9 +16,8 @@ public class ListaInvitatiPage extends JPanel {
     private JPanel guestsPanel;
     private Navbar navbar;
     private JTextArea area;
-    private Handler handler;
     private JButton createFile;
-    private JFileChooser chooser;
+
     
 
     /**
@@ -50,7 +49,10 @@ public class ListaInvitatiPage extends JPanel {
         panel.add(scrollPane, BorderLayout.CENTER);
         
         createFile=new JButton("Crea file");
-        panel.add(createFile);
+        createFile.setFont(new Font("Arial", Font.PLAIN, 16));
+        createFile.setPreferredSize(new Dimension(200, 40));
+        panel.add(createFile, BorderLayout.SOUTH);
+
 
         add(panel, BorderLayout.CENTER);
     }
@@ -81,35 +83,9 @@ public class ListaInvitatiPage extends JPanel {
         guestsPanel.repaint();
     }
     
-    public JButton getSubmitButton() {
+    public JButton getCreateFile() {
     	return createFile;
     }
     
-    /**	CREA FILE**
-     * Mi permette di avere un file con tutti i biglietti di quell'evento.
-     * 
-     * @param evento: oggetto Evento.
-	 * @param biglietti: array di Biglietto.
-     * @return boolean: 'true' se l'operazione è andata a buon fine 'false' altrimenti.
-     */
-    public boolean createFile(Evento evento, ArrayList<Biglietto> biglietti) {
-    	chooser = new JFileChooser(); 
-        chooser.setCurrentDirectory(new java.io.File("desktop"));
-        chooser.setDialogTitle("Seleziona Cartella");
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        handler=new Handler();
-        boolean result=false;
-        chooser.setAcceptAllFileFilterUsed(false);
-           
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
-        	System.out.println("getCurrentDirectory(): "+  chooser.getCurrentDirectory());
-        	System.out.println("getSelectedFile() : "+  chooser.getSelectedFile());
-        	String dir= ""+chooser.getSelectedFile();
-        	result =handler.report(evento,biglietti,dir);
-          }
-        else {
-          System.out.println("No Selection ");
-          }
-        return result;
-    }
+
 }

@@ -114,6 +114,14 @@ public class Controller implements EventSelectionListener {
      * Finestra principale dell'applicazione.
      */
     private JFrame frame;
+    /**
+     * Report Handler
+     */
+    private Handler handler;
+    /**
+     * File Chooser.
+     */
+    private JFileChooser chooser;
 
     /**
      * Costruttore del Controller.
@@ -130,6 +138,7 @@ public class Controller implements EventSelectionListener {
         cardLayout = new CardLayout();
         containerPanel = new JPanel(cardLayout);
         navbar = new Navbar(cardLayout, containerPanel);
+
 
         // Inizializzazione delle pagine dell'applicazione
         loginPage = new LoginPage();
@@ -365,13 +374,13 @@ public class Controller implements EventSelectionListener {
         });
         
         //action listener per il bottono "crea file" in ListaInvitati        
-        listaInvitatiPage.getSubmitButton().addActionListener(new ActionListener() {
+        listaInvitatiPage.getCreateFile().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	Evento eventoTotale;
             	eventoTotale=new Evento(persistence.getEventoByData(evento));
             	ArrayList<Biglietto> invitati;
                 invitati = persistence.getInvitati(evento);
-            	boolean result=listaInvitatiPage.createFile(eventoTotale,invitati);
+            	boolean result=createFile(eventoTotale,invitati);
             	if(result)JOptionPane.showMessageDialog(null, "File creato");
             	else JOptionPane.showMessageDialog(null, "Errore nella creazione del file");
             }});
@@ -410,6 +419,34 @@ public class Controller implements EventSelectionListener {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, "Evento non riuscito");
         }
+    }
+
+    /**	CREA FILE**
+     * Mi permette di avere un file con tutti i biglietti di quell'evento.
+     *
+     * @param evento: oggetto Evento.
+     * @param biglietti: array di Biglietto.
+     * @return boolean: 'true' se l'operazione è andata a buon fine 'false' altrimenti.
+     */
+    public boolean createFile(Evento evento, ArrayList<Biglietto> biglietti) {
+        chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("desktop"));
+        chooser.setDialogTitle("Seleziona Cartella");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        handler=new Handler();
+        boolean result=false;
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(getContainerPanel()) == JFileChooser.APPROVE_OPTION) {
+            System.out.println("getCurrentDirectory(): "+  chooser.getCurrentDirectory());
+            System.out.println("getSelectedFile() : "+  chooser.getSelectedFile());
+            String dir= ""+chooser.getSelectedFile();
+            result =handler.report(evento,biglietti,dir);
+        }
+        else {
+            System.out.println("No Selection ");
+        }
+        return result;
     }
 
     /**
