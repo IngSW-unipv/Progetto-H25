@@ -3,7 +3,7 @@
 Descrizione dei diagrammi di sequenza utilizzati nel progetto per illustrare il flusso delle operazioni principali tra gli oggetti. Ogni diagramma rappresenta un'interazione tra i componenti del sistema durante una determinata operazione o scenario.
 
 ## 1 Creazione Evento
-![Creazione Evento](Documentazione/Diagrammi/draw.io/images/6 - Diagramma di Sequenza - Creazione Evento)
+![Creazione Evento](Documentazione/Diagrammi/draw.io/images/creazioneEvento.png)
 
 ## 2 Aggiunta Invitato
 
