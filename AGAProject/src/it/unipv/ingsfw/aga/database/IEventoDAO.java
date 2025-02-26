@@ -6,7 +6,7 @@ import it.unipv.ingsfw.aga.model.evento.Evento;
 
 public interface IEventoDAO {
 	
-	/**GET TUTTI I DATI DELL'EVENTO**
+	/**GET TUTTI I DATI**
 	 * Mi permette di avere tutti i dati di tutti gli eventi.
 	 * 
 	 * @return ArrayList<Evento>: mi dà l'array di Evento.

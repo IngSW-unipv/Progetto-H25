@@ -6,6 +6,7 @@ import it.unipv.ingsfw.aga.model.banco.*;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.model.persone.Persona;
+import it.unipv.ingsfw.aga.handler.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -362,7 +363,20 @@ public class Controller implements EventSelectionListener {
                 cardLayout.show(containerPanel, "main");
             }
         });
+        
+        //action listener per il bottono "crea file" in ListaInvitati        
+        listaInvitatiPage.getSubmitButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	Evento eventoTotale;
+            	eventoTotale=new Evento(persistence.getEventoByData(evento));
+            	ArrayList<Biglietto> invitati;
+                invitati = persistence.getInvitati(evento);
+            	boolean result=listaInvitatiPage.createFile(eventoTotale,invitati);
+            	if(result)JOptionPane.showMessageDialog(null, "File creato");
+            	else JOptionPane.showMessageDialog(null, "Errore nella creazione del file");
+            }});
     }
+    
 
     /**
      * Carica gli eventi dal database e aggiunge un pulsante per ciascun evento nella pagina degli eventi.

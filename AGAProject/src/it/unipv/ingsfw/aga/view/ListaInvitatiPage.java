@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
+import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.handler.*;
 
 /**
@@ -17,6 +18,7 @@ public class ListaInvitatiPage extends JPanel {
     private JTextArea area;
     private Handler handler;
     private JButton createFile;
+    private JFileChooser chooser;
     
 
     /**
@@ -79,7 +81,31 @@ public class ListaInvitatiPage extends JPanel {
         guestsPanel.repaint();
     }
     
-    public void createFile(ArrayList<Biglietto> invitati) {
-    	
+    public JButton getSubmitButton() {
+    	return createFile;
+    }
+    
+    public boolean createFile(Evento evento, ArrayList<Biglietto> biglietti) {
+    	chooser = new JFileChooser(); 
+        chooser.setCurrentDirectory(new java.io.File("desktop"));
+        chooser.setDialogTitle("titolo");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        handler=new Handler();
+        boolean result=false;
+        //
+        // disable the "All files" option.
+        //
+        chooser.setAcceptAllFileFilterUsed(false);
+        //    
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
+        	System.out.println("getCurrentDirectory(): "+  chooser.getCurrentDirectory());
+        	System.out.println("getSelectedFile() : "+  chooser.getSelectedFile());
+        	String dir= ""+chooser.getSelectedFile();
+        	result =handler.report(evento,biglietti,dir);
+          }
+        else {
+          System.out.println("No Selection ");
+          }
+        return result;
     }
 }

@@ -497,6 +497,24 @@ public class PersistenceFacade {
 	}
 	
 	
+	/**GET EVENTO BY DATA**
+	 * Mi permette di avere un evento data la sua data.
+	 * 
+	 * @param data: oggetto fittizio di Evento contenente la data.
+	 * @return Evento: evento della data.
+	 */
+	public Evento getEventoByData(Evento data) {
+		Evento evento;
+		try {
+			evento=iEventoDAO.searchByData(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+			evento=null;
+		}	
+		return evento;
+	}
+	
+	
 	public static void main(String []args) throws ParseException {
 		PersistenceFacade a=new PersistenceFacade();
 		//a.setStatoBiglietto("1b4b76e0-3c14-46b9-9685-e11b6c12e084",true);
