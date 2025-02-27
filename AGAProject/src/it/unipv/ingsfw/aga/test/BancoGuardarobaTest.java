@@ -1,13 +1,10 @@
 package it.unipv.ingsfw.aga.test;
 
 import connection.DBConnection;
-import it.unipv.ingsfw.aga.database.BigliettoDAO;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.BancoGuardaroba;
-import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
-import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,21 +17,15 @@ import static org.junit.Assert.assertEquals;
 public class BancoGuardarobaTest {
     private BancoGuardaroba bancoTest;
     private Evento eventoTest;
-    private QrCode qrCode;
     private Connection connection;
-    private PersistenceFacade persistenceFacadeTest;
-    private BigliettoDAO bigliettoDAO;
     private Biglietto biglietto;
 
     @Before
     public void setUp() throws MaxExeededException, ParseException {
         eventoTest = new Evento("1998-07-13", "pavia", 150);
-        bancoTest = new BancoGuardaroba(1, 20, eventoTest);
-        persistenceFacadeTest = PersistenceFacade.getInstance();
+        bancoTest = new BancoGuardaroba(2, eventoTest);
         connection = DBConnection.startConnection(connection); // Apertura connessione inizio test
-        bigliettoDAO = new BigliettoDAO();
-        biglietto = bigliettoDAO.getBigliettoByQR(new Biglietto("236d90de-b4df-420a-8a0c-270aaace7640"));
-        qrCode = new QrCode(biglietto.getQRCodeId());
+        biglietto = new Biglietto("16c07d34-6bbc-4452-986e-885bb6364ba4");
     }
 
     @Test
@@ -66,9 +57,8 @@ public class BancoGuardarobaTest {
     }
 
     @Test
-    public void consegnaCapoTest(){
-        bancoTest.consegnaCapo(biglietto.getQRCodeId());
-        assertEquals(0, bancoTest.getGrucceAssegnate());
+    public void consegnaCapoAssegnatoTest(){
+        assertEquals("Gruccia già assegnata",  bancoTest.consegnaCapo(biglietto.getQRCodeId()));
     }
 
 
