@@ -1,7 +1,5 @@
 package it.unipv.ingsfw.aga.model.banco;
 
-import java.lang.classfile.Superclass;
-
 import it.unipv.ingsfw.aga.model.evento.Evento;
 import it.unipv.ingsfw.aga.persistence.PersistenceFacade;
 
