@@ -73,6 +73,9 @@ public class Biglietto implements Stampabile {
         this.accessoEffettuato=accessoEffettuato;
         this.codeQR = new QrCode(codeQR);
     }
+    public QrCode getQRcode() {
+    	return codeQR;
+    }
     public void changeQRCode() {
     	this.codeQR=new QrCode();
     }
