@@ -13,9 +13,7 @@ public class MainBiglietto {
         Biglietto biglietto = new Biglietto(persona, evento, "Tony", "Effe", "Tonyeffe@gmail.com");
 
         Stampabile vipBiglietto = new VipDecorator(biglietto);
-        Stampabile staffBiglietto = new StaffDecorator(biglietto);
 
         System.out.println(vipBiglietto.stampaBiglietto());
-        System.out.println(staffBiglietto.stampaBiglietto());
     }
 }
