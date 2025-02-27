@@ -1,6 +1,7 @@
 package it.unipv.ingsfw.aga.test;
 
 import connection.DBConnection;
+import it.unipv.ingsfw.aga.database.BigliettoDAO;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.BancoIngresso;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
@@ -11,12 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.*;
+import java.sql.Connection;
 import java.text.ParseException;
 
-import it.unipv.ingsfw.aga.database.BigliettoDAO;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BancoIngressoTest {
     private BancoIngresso bancoTest;
@@ -29,7 +29,7 @@ public class BancoIngressoTest {
 
     @Before
     public void setUp() throws MaxExeededException, ParseException {
-        eventoTest = new Evento("2025-06-15", "Roma", 500);
+        eventoTest = new Evento("2022-06-22", "pavia", 600);
         bancoTest = new BancoIngresso(1, eventoTest);
         persistenceFacadeTest = PersistenceFacade.getInstance();
         connection = DBConnection.startConnection(connection); // Apertura connessione inizio test
@@ -47,7 +47,7 @@ public class BancoIngressoTest {
 
     @Test
     public void testToString() {
-        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2025-06-15\n";
+        String expected = "[Banco]\nTipo: Ingresso\nNumero banco: 1\nEvento: 2022-06-22\n";
         assertEquals(expected, bancoTest.toString());
     }
 

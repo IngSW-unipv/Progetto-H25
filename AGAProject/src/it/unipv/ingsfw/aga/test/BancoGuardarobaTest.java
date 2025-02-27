@@ -4,7 +4,6 @@ import connection.DBConnection;
 import it.unipv.ingsfw.aga.database.BigliettoDAO;
 import it.unipv.ingsfw.aga.exceptions.MaxExeededException;
 import it.unipv.ingsfw.aga.model.banco.BancoGuardaroba;
-import it.unipv.ingsfw.aga.model.banco.BancoIngresso;
 import it.unipv.ingsfw.aga.model.banco.QrCode;
 import it.unipv.ingsfw.aga.model.biglietto.Biglietto;
 import it.unipv.ingsfw.aga.model.evento.Evento;
@@ -58,12 +57,12 @@ public class BancoGuardarobaTest {
     @Test
     public void updateMaxGrucceDaDB(){
         bancoTest.updateMaxGrucce(eventoTest);
-        assertEquals(300, bancoTest.getMaxGrucce());
+        assertEquals(1000, bancoTest.getMaxGrucce());
     }
     @Test
     public void updateGrucceAssegnateDaDB(){
         bancoTest.updateGrucceAssegnate(eventoTest);
-        assertEquals(8, bancoTest.getGrucceAssegnate());
+        assertEquals(13, bancoTest.getGrucceAssegnate());
     }
 
     @Test
